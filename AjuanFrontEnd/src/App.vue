@@ -9,6 +9,5 @@
     }
 </script>
 <style lang="scss">
-    @import "./assets/scss/reset";
     @import "./assets/scss/common";
 </style>

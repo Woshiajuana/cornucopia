@@ -22,7 +22,7 @@
         @extend %r0;
         @extend %b0;
         @extend %l0;
-        background: rgba(55,58,71,.9);
+        background-color: hsla(0,0%,100%,.9);
     }
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s

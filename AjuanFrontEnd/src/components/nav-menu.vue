@@ -71,6 +71,7 @@
         @extend %pr;
         @extend %c0;
         @extend %f14;
+        @include tst(all,.3s);
         letter-spacing: 1px;
         height: 30px;
         line-height: 30px;
@@ -84,6 +85,14 @@
             width: 4px;
             height: 4px;
         }
+        &:hover{
+            border-right: 2px solid #f3f3f3;
+            background-color: #f3f3f3;
+            color: #f15556;
+            &:after{
+                background-color: #f15556;
+            }
+        }
         &.active{
             border-right: 2px solid #f15556;
             background-color: #f3f3f3;
@@ -92,6 +101,5 @@
                 background-color: #f15556;
             }
         }
-
     }
 </style>

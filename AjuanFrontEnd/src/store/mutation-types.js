@@ -1,12 +1,6 @@
 /**
  * Created by Administrator on 2017/4/17.
  */
-const SET_TAB_INDEX = 'SET_TAB_INDEX';
-
-const INIT_LABEL = 'INIT_LABEL';
-
-const SET_LABEL_LOADING = 'SET_LABEL_LOADING';
-
 const OPEN_OR_HIDE_NAV_MENU = 'OPEN_OR_HIDE_NAV_MENU';
 
 const OPEN_OR_HIDE_SET_UP = 'OPEN_OR_HIDE_SET_UP';
@@ -15,9 +9,6 @@ const OPEN_OR_HIDE_MASK = 'OPEN_OR_HIDE_MASK';
 
 export default {
     OPEN_OR_HIDE_NAV_MENU,
-    SET_TAB_INDEX,
-    INIT_LABEL,
     OPEN_OR_HIDE_MASK,
-    OPEN_OR_HIDE_SET_UP,
-    SET_LABEL_LOADING
+    OPEN_OR_HIDE_SET_UP
 }

@@ -1,6 +1,6 @@
 <template>
     <header class="header-wrap">
-        <div class="nav-menu-btn" :class=" {'active':isOpenOrHideNavMenu} " @click="openOrHideNavMenu">
+        <div class="nav-menu-btn" title="菜单" :class=" { 'active':isOpenOrHideNavMenu } " @click=" openOrHideNavMenu ">
             <span></span>
             <span></span>
             <span></span>
@@ -10,9 +10,11 @@
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo-icon"></use>
             </svg>
         </a>
-        <svg class="directory-btn">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#directory-icon"></use>
-        </svg>
+        <div class="set-btn" title="设置" :class=" { 'active':isOpenOrHideSetUp } " @click=" openOrHideSetUp ">
+            <svg class="set-btn-icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#set-icon"></use>
+            </svg>
+        </div>
     </header>
 </template>
 <script>
@@ -22,11 +24,19 @@
         computed: {
             isOpenOrHideNavMenu () {
                 return this.$store.state.is_open_or_hide_nav_menu;
+            },
+            isOpenOrHideSetUp () {
+                return this.$store.state.is_open_or_hide_set_up;
             }
         },
         methods: {
             openOrHideNavMenu () {
                 this.$store.commit( types.OPEN_OR_HIDE_NAV_MENU, !this.$store.state.is_open_or_hide_nav_menu );
+                this.$store.commit( types.OPEN_OR_HIDE_MASK, this.$store.state.is_open_or_hide_nav_menu );
+            },
+            openOrHideSetUp () {
+                this.$store.commit( types.OPEN_OR_HIDE_SET_UP, !this.$store.state.is_open_or_hide_set_up );
+                this.$store.commit( types.OPEN_OR_HIDE_MASK, this.$store.state.is_open_or_hide_set_up );
             }
         }
     }
@@ -34,6 +44,7 @@
 <style lang="scss">
     @import "../assets/scss/define";
     .header-wrap{
+        z-index: 100;
         @extend %tac;
         @extend %pr;
         @extend %oh;
@@ -99,7 +110,7 @@
         @extend %h100;
         fill: #f15556;
     }
-    .directory-btn{
+    .set-btn{
         @extend %pa;
         @extend %cp;
         @extend %t50;
@@ -108,5 +119,10 @@
         width: 20px;
         height: 20px;
         fill: #ccc;
+    }
+    .set-btn-icon{
+        @extend %db;
+        @extend %w100;
+        @extend %h100;
     }
 </style>

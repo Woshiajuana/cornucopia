@@ -1,6 +1,6 @@
 <template>
     <!--首页-->
-    <div class="view-inner">
+    <div class="container-wrap">
         <router-view></router-view>
     </div>
     <!--/首页-->
@@ -14,7 +14,7 @@
 </script>
 <style lang="scss">
     @import "../../assets/scss/define";
-    .view-inner{
+    .container-wrap{
         @extend %wm;
         margin-top: 30px;
         background-color: #fff;

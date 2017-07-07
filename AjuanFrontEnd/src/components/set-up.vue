@@ -1,23 +1,22 @@
 <template>
-    <div class="nav-menu-wrap">
-1xaxasxasxasxax
+    <div class="set-up-wrap">
+        设置
     </div>
 </template>
 <script>
     export default {
-        name: 'nav-menu'
+        name: 'set-up'
     }
 </script>
 <style lang="scss">
     @import "../assets/scss/define";
-    .nav-menu-wrap{
-        z-index: 1;
+    .set-up-wrap{
         @extend %pa;
         @extend %t0;
         @extend %b0;
         @extend %oh;
-        left: -300px;
+        right: -300px;
         width: 300px;
-        background-color: #cccccc;
+        background-color: #ccc;
     }
 </style>

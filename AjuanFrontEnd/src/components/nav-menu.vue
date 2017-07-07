@@ -1,23 +1,25 @@
 <template>
     <div class="nav-menu-wrap">
         <h2 class="nav-menu-title">NAV-MENU</h2>
-        <dl class="nav-menu-inner">
-            <dt><a href="#/" class="nav-menu-inner-item active">全部</a></dt>
-            <dt><a href="#/" class="nav-menu-inner-item">WEB前端相关</a></dt>
-            <dd><a href="#/" class="nav-menu-inner-item">HTML</a></dd>
-            <dd><a href="#/" class="nav-menu-inner-item">JAVASCRIPT</a></dd>
-            <dd><a href="#/" class="nav-menu-inner-item">NODEJS</a></dd>
-            <dd><a href="#/" class="nav-menu-inner-item">VUE</a></dd>
-            <dd><a href="#/" class="nav-menu-inner-item">ANGULAR</a></dd>
-            <dd><a href="#/" class="nav-menu-inner-item">CSS</a></dd>
-            <dd><a href="#/" class="nav-menu-inner-item">CANVAS绘图</a></dd>
-            <dd><a href="#/" class="nav-menu-inner-item">SVG绘图</a></dd>
-            <dt><a href="#/" class="nav-menu-inner-item">后端开发相关</a></dt>
-            <dd><a href="#/" class="nav-menu-inner-item">JAVA</a></dd>
-            <dt><a href="#/" class="nav-menu-inner-item">数据库相关</a></dt>
-            <dd><a href="#/" class="nav-menu-inner-item">MONGODB</a></dd>
-            <dt><a href="#/" class="nav-menu-inner-item">其它</a></dt>
-        </dl>
+        <div class="nav-menu-inner">
+            <dl class="nav-menu-con">
+                <dt><a href="#/" class="nav-menu-item active">全部</a></dt>
+                <dt><a href="#/" class="nav-menu-item">WEB前端相关</a></dt>
+                <dd><a href="#/" class="nav-menu-item">HTML</a></dd>
+                <dd><a href="#/" class="nav-menu-item">JAVASCRIPT</a></dd>
+                <dd><a href="#/" class="nav-menu-item">NODEJS</a></dd>
+                <dd><a href="#/" class="nav-menu-item">VUE</a></dd>
+                <dd><a href="#/" class="nav-menu-item">ANGULAR</a></dd>
+                <dd><a href="#/" class="nav-menu-item">CSS</a></dd>
+                <dd><a href="#/" class="nav-menu-item">CANVAS绘图</a></dd>
+                <dd><a href="#/" class="nav-menu-item">SVG绘图</a></dd>
+                <dt><a href="#/" class="nav-menu-item">后端开发相关</a></dt>
+                <dd><a href="#/" class="nav-menu-item">JAVA</a></dd>
+                <dt><a href="#/" class="nav-menu-item">数据库相关</a></dt>
+                <dd><a href="#/" class="nav-menu-item">MONGODB</a></dd>
+                <dt><a href="#/" class="nav-menu-item">其它</a></dt>
+            </dl>
+        </div>
     </div>
 </template>
 <script>
@@ -39,6 +41,16 @@
         background-color: #fff;
         box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
     }
+    .nav-menu-inner{
+        @extend %pa;
+        @extend %l0;
+        @extend %b0;
+        @extend %oya;
+        padding-bottom: 30px;
+        right: -18px;
+        overflow-y: scroll;
+        top: 50px;
+    }
     .nav-menu-title{
         @extend %f16;
         @extend %c3;
@@ -47,10 +59,10 @@
         height: 50px;
         line-height: 50px;
     }
-    .nav-menu-inner{
+    .nav-menu-con{
         @extend %tar;
         dt{
-            .nav-menu-inner-item{
+            .nav-menu-item{
                 padding-right: 40px;
                 &:after{
                     right: 30px;
@@ -58,7 +70,7 @@
             }
         }
         dd{
-            .nav-menu-inner-item{
+            .nav-menu-item{
                 padding-right: 54px;
                 &:after{
                     right: 44px;
@@ -66,7 +78,7 @@
             }
         }
     }
-    .nav-menu-inner-item{
+    .nav-menu-item{
         @extend %db;
         @extend %pr;
         @extend %c0;

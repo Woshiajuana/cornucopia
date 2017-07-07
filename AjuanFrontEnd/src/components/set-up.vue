@@ -1,23 +1,17 @@
 <template>
     <div class="set-up-wrap">
         <h2 class="set-up-title">SET-UP</h2>
-        <dl class="nav-menu-inner">
-            <dt><a href="#/" class="nav-menu-inner-item active">全部</a></dt>
-            <dt><a href="#/" class="nav-menu-inner-item">WEB前端相关</a></dt>
-            <dd><a href="#/" class="nav-menu-inner-item">HTML</a></dd>
-            <dd><a href="#/" class="nav-menu-inner-item">JAVASCRIPT</a></dd>
-            <dd><a href="#/" class="nav-menu-inner-item">NODEJS</a></dd>
-            <dd><a href="#/" class="nav-menu-inner-item">VUE</a></dd>
-            <dd><a href="#/" class="nav-menu-inner-item">ANGULAR</a></dd>
-            <dd><a href="#/" class="nav-menu-inner-item">CSS</a></dd>
-            <dd><a href="#/" class="nav-menu-inner-item">CANVAS绘图</a></dd>
-            <dd><a href="#/" class="nav-menu-inner-item">SVG绘图</a></dd>
-            <dt><a href="#/" class="nav-menu-inner-item">后端开发相关</a></dt>
-            <dd><a href="#/" class="nav-menu-inner-item">JAVA</a></dd>
-            <dt><a href="#/" class="nav-menu-inner-item">数据库相关</a></dt>
-            <dd><a href="#/" class="nav-menu-inner-item">MONGODB</a></dd>
-            <dt><a href="#/" class="nav-menu-inner-item">其它</a></dt>
-        </dl>
+        <div class="set-up-inner">
+            <dl class="set-up-con">
+                <dt class="set-up-con-title">基础设置</dt>
+                <dd class="set-up-item">
+                    <span class="set-up-item"></span>
+                </dd>
+            </dl>
+            <div class="set-up-btn-con">
+
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -46,5 +40,14 @@
         height: 50px;
         line-height: 50px;
     }
-
+    .set-up-inner{
+        @extend %pa;
+        @extend %l0;
+        @extend %b0;
+        @extend %oya;
+        padding-bottom: 30px;
+        right: -18px;
+        overflow-y: scroll;
+        top: 50px;
+    }
 </style>

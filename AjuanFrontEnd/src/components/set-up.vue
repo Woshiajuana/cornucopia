@@ -5,7 +5,7 @@
             <dl class="set-up-con">
                 <dt class="set-up-con-title">基础设置</dt>
                 <dd class="set-up-item">
-                    <span class="set-up-item"></span>
+                    <span class="set-up-item">基础设置</span>
                 </dd>
             </dl>
             <div class="set-up-btn-con">
@@ -49,5 +49,33 @@
         right: -18px;
         overflow-y: scroll;
         top: 50px;
+    }
+    .set-up-con{
+        @extend %f14;
+        dt,dd{
+            @extend %pr;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 40px;
+            &:before{
+                @extend %pa;
+                @extend %t50;
+                left: 30px;
+                content: '';
+                margin-top: -2px;
+                background-color: #333;
+                width: 4px;
+                height: 4px;
+            }
+        }
+        dd{
+            padding-left: 54px;
+            &:before{
+                left: 44px;
+            }
+        }
+    }
+    .set-up-con-title{
+
     }
 </style>

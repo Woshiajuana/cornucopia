@@ -3,9 +3,13 @@
         <h2 class="set-up-title">SET-UP</h2>
         <div class="set-up-inner">
             <dl class="set-up-con">
-                <dt class="set-up-con-title">基础设置</dt>
+                <dt class="set-up-con-title">字体大小设置</dt>
                 <dd class="set-up-item">
-                    <span class="set-up-item">基础设置</span>
+                    <div class="set-up-font-size">
+                        <span class="set-up-font-size-btn">-</span>
+                        <span class="set-up-font-size-con"></span>
+                        <span class="set-up-font-size-btn">+</span>
+                    </div>
                 </dd>
             </dl>
             <div class="set-up-btn-con">
@@ -52,7 +56,7 @@
     }
     .set-up-con{
         @extend %f14;
-        dt,dd{
+        dt{
             @extend %pr;
             height: 30px;
             line-height: 30px;
@@ -70,12 +74,22 @@
         }
         dd{
             padding-left: 54px;
-            &:before{
-                left: 44px;
-            }
         }
     }
-    .set-up-con-title{
+    .set-up-font-size{
+        width: 80px;
+        height: 24px;
+        line-height: 24px;
+        border: 1px solid #ddd;
+        span{
+            @extend %fl;
+        }
+    }
+    .set-up-font-size-con{
 
+    }
+    .set-up-font-size-btn{
+        width: 20px;
+        background-color: #ddd;
     }
 </style>

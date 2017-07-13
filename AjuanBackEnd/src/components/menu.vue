@@ -2,24 +2,24 @@
     <div class="menu-wrap">
         <div class="menu-inner">
             <el-menu theme="dark" router unique-opened :default-active="tabIndex" class="el-menu-vertical-demo">
-                <el-submenu index="/article">
+                <el-submenu index="/list">
                     <template slot="title"><i class="el-icon-document"></i>文章管理</template>
                     <el-menu-item-group>
-                        <el-menu-item index="/article?tag=all">全部文章</el-menu-item>
-                        <el-menu-item index="/article?tag=html">HTML</el-menu-item>
-                        <el-menu-item index="/article?tag=javascript">JAVASCRIPT</el-menu-item>
-                        <el-menu-item index="/article?tag=nodejs">NODEJS</el-menu-item>
-                        <el-menu-item index="/article?tag=vue">VUE</el-menu-item>
-                        <el-menu-item index="/article?tag=angular">ANGULAR</el-menu-item>
-                        <el-menu-item index="/article?tag=css">CSS</el-menu-item>
-                        <el-menu-item index="/article?tag=canvas">CANVAS</el-menu-item>
-                        <el-menu-item index="/article?tag=svg">SVG</el-menu-item>
-                        <el-menu-item index="/article?tag=java">JAVA</el-menu-item>
-                        <el-menu-item index="/article?tag=mongodb">MONGODB</el-menu-item>
-                        <el-menu-item index="/article?tag=other">OTHER</el-menu-item>
+                        <el-menu-item index="/list?tag=all">全部文章</el-menu-item>
+                        <el-menu-item index="/list?tag=html">HTML</el-menu-item>
+                        <el-menu-item index="/list?tag=javascript">JAVASCRIPT</el-menu-item>
+                        <el-menu-item index="/list?tag=nodejs">NODEJS</el-menu-item>
+                        <el-menu-item index="/list?tag=vue">VUE</el-menu-item>
+                        <el-menu-item index="/list?tag=angular">ANGULAR</el-menu-item>
+                        <el-menu-item index="/list?tag=css">CSS</el-menu-item>
+                        <el-menu-item index="/list?tag=canvas">CANVAS</el-menu-item>
+                        <el-menu-item index="/list?tag=svg">SVG</el-menu-item>
+                        <el-menu-item index="/list?tag=java">JAVA</el-menu-item>
+                        <el-menu-item index="/list?tag=mongodb">MONGODB</el-menu-item>
+                        <el-menu-item index="/list?tag=other">OTHER</el-menu-item>
                     </el-menu-item-group>
                 </el-submenu>
-                <el-menu-item index="/add"><i class="el-icon-plus"></i>新增文章</el-menu-item>
+                <el-menu-item index="/editor"><i class="el-icon-plus"></i>新增文章</el-menu-item>
                 <el-menu-item index="/tag"><i class="el-icon-star-on"></i>标签管理</el-menu-item>
             </el-menu>
         </div>

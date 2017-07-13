@@ -1,36 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '../views/home/Home.vue'
-import Login from '../views/login/Login.vue'
 
 import Store from '../store/index'
 import types from '../store/mutation-types'
 
-/**权限管理*/
-import Permission from '../views/permission/Permission.vue'
-import PermissionRoleIndex from '../views/permission/children/PermissionRoleIndex.vue'
-import PermissionRoleAddOrEdit from '../views/permission/children/PermissionRoleAddOrEdit.vue'
-import PermissionRoleAddResource from '../views/permission/children/PermissionRoleAddResource.vue'
-import PermissionRoleDetails from '../views/permission/children/PermissionRoleDetails.vue'
-import PermissionResourceIndex from '../views/permission/children/PermissionResourceIndex.vue'
-import PermissionResourceAddOrEdit from '../views/permission/children/PermissionResourceAddOrEdit.vue'
-import PermissionAdminIndex from '../views/permission/children/PermissionAdminIndex.vue'
-import PermissionAdminAddOrEdit from '../views/permission/children/PermissionAdminAddOrEdit.vue'
-import PermissionLogIndex from '../views/permission/children/PermissionLogIndex.vue'
+/**登录页*/
+import Login from '../views/login/Login.vue'
 
-/**系统管理*/
-import System from '../views/system/System.vue'
-import SystemInstitutionIndex from '../views/system/children/SystemInstitutionIndex.vue'
-import SystemInstitutionAddOrEdit from '../views/system/children/SystemInstitutionAddOrEdit.vue'
-
-/**产品管理*/
-import Product from '../views/product/Product.vue'
-import ProductTypeIndex from '../views/product/children/ProductTypeIndex.vue'
-import ProductTypeAdd from '../views/product/children/ProductTypeAdd.vue'
-import ProductTypeEdit from '../views/product/children/ProductTypeEdit.vue'
+/**首页*/
+import Home from '../views/home/Home.vue'
 
 /**文章列表*/
 import List from '../views/list/List.vue'
+
+/**编辑列表*/
+import Editor from '../views/editor/Editor.vue'
 
 Vue.use(Router);
 
@@ -41,186 +25,32 @@ let router = new Router({
             path: '/',
             name: 'home',
             component: Home,
+            redirect: '/list?tag=all',
             children: [
-                /**文章列表*/
+                /**文章列表页*/
                 {
-                    path: 'article',
+                    path: 'list',
                     name: 'list',
                     component: List,
                     meta: {
-                        tab_index: '/article?tag=all',
+                        tab_index: '/list?tag=all',
                         crumb: [
-                            { path: '/article?tag=all', icon: 'el-icon-document', con: '文章管理' },
+                            { path: '/list?tag=all', icon: 'el-icon-document', con: '文章管理' },
                             { con: '全部文章' }
                         ]
-                    },
-                    children: [
-                        /**角色管理*/
-                        {
-                            path: 'role',
-                            name: 'permission-role-index',
-                            component: PermissionRoleIndex,
-                            meta: {
-                                tab_index: '/permission/role',
-                                crumb: [
-                                    { path: '/permission', icon: 'el-icon-message', con: '权限管理' },
-                                    { con: '角色管理' }
-                                ]
-                            }
-                        },
-                        /**添加角色*/
-                        {
-                            path: 'role/add',
-                            name: 'permission-role-add-or-edit',
-                            component: PermissionRoleAddOrEdit,
-                            meta: {
-                                tab_index: '/permission/role',
-                                crumb: [
-                                    { path: '/permission', icon: 'el-icon-message', con: '权限管理' },
-                                    { path: '/permission/role', con: '角色管理' },
-                                    { con: '添加系统角色' }
-                                ]
-                            }
-                        },
-                        /**编辑角色*/
-                        {
-                            path: 'role/edit/:role_id',
-                            name: 'permission-role-add-or-edit',
-                            component: PermissionRoleAddOrEdit,
-                            meta: {
-                                tab_index: '/permission/role',
-                                crumb: [
-                                    { path: '/permission', icon: 'el-icon-message', con: '权限管理' },
-                                    { path: '/permission/role', con: '角色管理' },
-                                    { con: '编辑系统角色' }
-                                ]
-                            }
-                        },
-                        /**角色详情*/
-                        {
-                            path: 'role/details/:role_id',
-                            name: 'permission-role-details',
-                            component: PermissionRoleDetails,
-                            meta: {
-                                tab_index: '/permission/role',
-                                crumb: [
-                                    { path: '/permission', icon: 'el-icon-message', con: '权限管理' },
-                                    { path: '/permission/role', con: '角色管理' },
-                                    { con: '角色详情' }
-                                ]
-                            }
-                        },
-                        /**角色添加资源*/
-                        {
-                            path: 'role/details/:role_id/resource',
-                            name: 'permission-role-add-resource',
-                            component: PermissionRoleAddResource,
-                            meta: {
-                                tab_index: '/permission/role',
-                                crumb: [
-                                    { path: '/permission', icon: 'el-icon-message', con: '权限管理' },
-                                    { path: '/permission/role', con: '角色管理' },
-                                    { path: '/permission/role/details', params: 'role_id', con: '角色详情' },
-                                    { con: '添加系统资源' }
-                                ]
-                            }
-                        },
-                        /**资源管理*/
-                        {
-                            path: 'resource',
-                            name: 'permission-resource-index',
-                            component: PermissionResourceIndex,
-                            meta: {
-                                tab_index: '/permission/resource',
-                                crumb: [
-                                    { path: '/permission', icon: 'el-icon-message', con: '权限管理' },
-                                    { con: '资源管理' }
-                                ]
-                            }
-                        },
-                        /**添加资源*/
-                        {
-                            path: 'resource/add',
-                            name: 'permission-resource-add-or-edit',
-                            component: PermissionResourceAddOrEdit,
-                            meta: {
-                                tab_index: '/permission/resource',
-                                crumb: [
-                                    { path: '/permission', icon: 'el-icon-message', con: '权限管理' },
-                                    { path: '/permission/resource', con: '资源管理' },
-                                    { con: '添加系统资源' }
-                                ]
-                            }
-                        },
-                        /**编辑资源*/
-                        {
-                            path: 'resource/edit/:resource_id',
-                            name: 'permission-resource-add-or-edit',
-                            component: PermissionResourceAddOrEdit,
-                            meta: {
-                                tab_index: '/permission/resource',
-                                crumb: [
-                                    { path: '/permission', icon: 'el-icon-message', con: '权限管理' },
-                                    { path: '/permission/resource', con: '资源管理' },
-                                    { con: '编辑系统资源' }
-                                ]
-                            }
-                        },
-                        /**管理员管理*/
-                        {
-                            path: 'admin',
-                            name: 'permission-admin-index',
-                            component: PermissionAdminIndex,
-                            meta: {
-                                tab_index: '/permission/admin',
-                                crumb: [
-                                    { path: '/permission', icon: 'el-icon-message', con: '权限管理' },
-                                    { con: '管理员管理' }
-                                ]
-                            }
-                        },
-                        /**新增管理员数据*/
-                        {
-                            path: 'admin/add',
-                            name: 'permission-admin-add-or-edit',
-                            component: PermissionAdminAddOrEdit,
-                            meta: {
-                                tab_index: '/permission/admin',
-                                crumb: [
-                                    { path: '/permission', icon: 'el-icon-message', con: '权限管理' },
-                                    { path: '/permission/admin', con: '管理员管理' },
-                                    { con: '新增管理员' }
-                                ]
-                            }
-                        },
-                        /**编辑管理员数据*/
-                        {
-                            path: 'admin/edit/:admin_id',
-                            name: 'permission-admin-add-or-edit',
-                            component: PermissionAdminAddOrEdit,
-                            meta: {
-                                tab_index: '/permission/admin',
-                                crumb: [
-                                    { path: '/permission', icon: 'el-icon-message', con: '权限管理' },
-                                    { path: '/permission/admin', con: '管理员管理' },
-                                    { con: '编辑管理员' }
-                                ]
-                            }
-                        },
-                        /**管理员日志*/
-                        {
-                            path: 'log',
-                            name: 'permission-log-index',
-                            component: PermissionLogIndex,
-                            meta: {
-                                tab_index: '/permission/log',
-                                crumb: [
-                                    { path: '/permission', icon: 'el-icon-message', con: '权限管理' },
-                                    { con: '管理员日志' }
-                                ]
-                            }
-                        },
-                    ]
+                    }
+                },
+                /**编辑新增文章页*/
+                {
+                    path: 'editor',
+                    name: 'editor',
+                    component: Editor,
+                    meta: {
+                        tab_index: '/editor',
+                        crumb: [
+                            { con: '新增文章' }
+                        ]
+                    }
                 }
             ]
         },

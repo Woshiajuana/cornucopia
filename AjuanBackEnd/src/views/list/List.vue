@@ -70,7 +70,8 @@
                     label="操作">
                     <template scope="scope">
                         <a href="#/permission/role/edit/woshiajuana" class="el-button el-button--small">编辑</a>
-                        <a href="#/permission/role/edit/woshiajuana" class="el-button el-button--info el-button--small">上架</a>
+                        <a v-if="scope.row.is" href="#/permission/role/edit/woshiajuana" class="el-button el-button--info el-button--small">上架</a>
+                        <a href="#/permission/role/edit/woshiajuana"class="el-button el-button--warning el-button--small" v-else >下架</a>
                         <a href="#/permission/role/edit/woshiajuana" class="el-button el-button--danger el-button--small">删除</a>
                     </template>
                 </el-table-column>
@@ -119,14 +120,17 @@
                 tableData3: [{
                     date: '2016-05-03',
                     name: '王小虎',
+                    is: true,
                     address: '上海市普陀区金沙江路 1518 弄'
                 }, {
                     date: '2016-05-02',
                     name: '王小虎',
+                    is: true,
                     address: '上海市普陀区金沙江路 1518 弄'
                 }, {
                     date: '2016-05-04',
                     name: '王小虎',
+                    is: true,
                     address: '上海市普陀区金沙江路 1518 弄'
                 }, {
                     date: '2016-05-01',
@@ -135,6 +139,7 @@
                 }, {
                     date: '2016-05-01',
                     name: '王小虎',
+                    is: true,
                     address: '上海市普陀区金沙江路 1518 弄'
                 }, {
                     date: '2016-05-01',

@@ -61,7 +61,7 @@
 .operate-wrap{
     @extend %clearfix;
     margin-bottom: 20px;
-    button{
+    a,button{
         @extend %fr;
         margin-left: 10px;
     }

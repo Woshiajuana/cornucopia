@@ -21,8 +21,14 @@
             </div>
         </article>
         <nav class="article-nav">
-            <a href="#" class="article-prev-link">＜写在父亲节</a>
-            <a href="#" class="article-next-link">写在父亲节＞</a>
+            <a href="#" class="article-prev-link">
+                PREVIOUS
+                <span>写在父亲节</span>
+            </a>
+            <a href="#" class="article-next-link">
+                NEXT
+                <span>写在父亲节</span>
+            </a>
         </nav>
     </div>
 </template>
@@ -54,18 +60,26 @@
         }
     }
     .article-nav{
+        @extend %clearfix;
         border-top: 1px solid #ddd;
         margin: 0 40px;
-        height: 80px;
-        line-height: 80px;
-        padding-bottom: 80px;
         a{
             @extend %c9;
-            @extend %f14;
+            @extend %f12;
+            @include tst(color,.5s);
+            padding: 30px 0;
+            &:hover{
+                @extend %c3;
+            }
+        }
+        span{
+            @extend %f16;
+            @extend %db;
         }
     }
     .article-next-link{
         @extend %fr;
+        @extend %tar;
     }
     .article-prev-link{
         @extend %fl;
@@ -80,6 +94,9 @@
         }
     }
     @media screen and (max-width: 800px) {
+        .article-nav{
+            margin: 0 10px;
+        }
         .article-inner{
             margin: 20px 10px;
         }

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../views/home/Home.vue'
+import Article from '../views/article/Article.vue'
 
 
 Vue.use(Router);
@@ -12,6 +13,12 @@ let router = new Router({
             path: '/',
             name: 'home',
             component: Home
+        },
+        /**文章内容页*/
+        {
+            path: '/article',
+            name: 'article',
+            component: Article
         }
     ]
 });

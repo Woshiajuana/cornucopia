@@ -97,10 +97,9 @@
     }
     .container-wrap{
         @extend %wm;
-        margin: 30px auto 0;
+        margin: 50px auto 0;
         background-color: #fff;
-        height: 1800px;
-        box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+        box-shadow: 0 1px 1px 0 rgba(0,0,0,.1), 0 -1px 1px rgba(0,0,0,.05);
     }
     @media screen and (max-width: 800px) {
         .set-up-wrap{

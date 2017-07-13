@@ -1,6 +1,11 @@
 <template>
   <div class="header-wrap">
-      <a href="#/" class="header-logo"><img class="header-logo-img" src="../assets/img/logo.png" alt="">UMI金融管理平台</a>
+      <a href="#/" class="header-logo">
+          <svg class="header-logo-img">
+              <use xlink:href="#logo-icon"></use>
+          </svg>
+          <span>管理平台</span>
+      </a>
       <div class="user-info">
           <el-dropdown>
               <span class="el-dropdown-link user-name">
@@ -56,12 +61,17 @@
         @extend %fl;
         @extend %f18;
         @extend %cfff;
-        padding: 12px 0 0 10px;
+        padding: 9px 0 0 10px;
+        span,svg{
+            @extend %vam;
+        }
     }
     .header-logo-img{
         @extend %dib;
+        width: 90px;
         margin-right: 10px;
-        height: 25px;
+        height: 32px;
+        fill: #fff;
     }
     .user-info{
         @extend %pa;

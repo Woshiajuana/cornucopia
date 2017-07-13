@@ -3,7 +3,7 @@
         <div class="menu-inner">
             <el-menu theme="dark" router unique-opened :default-active="tabIndex" class="el-menu-vertical-demo">
                 <el-submenu index="/article">
-                    <template slot="title"><i class="el-icon-message"></i>文章管理</template>
+                    <template slot="title"><i class="el-icon-document"></i>文章管理</template>
                     <el-menu-item-group>
                         <el-menu-item index="/article?tag=all">全部文章</el-menu-item>
                         <el-menu-item index="/article?tag=html">HTML</el-menu-item>
@@ -19,8 +19,8 @@
                         <el-menu-item index="/article?tag=other">OTHER</el-menu-item>
                     </el-menu-item-group>
                 </el-submenu>
-                <el-menu-item index="/tag"><i class="el-icon-message"></i>标签管理</el-menu-item>
-                <el-menu-item index="/tag"><i class="el-icon-message"></i>标签管理</el-menu-item>
+                <el-menu-item index="/add"><i class="el-icon-plus"></i>新增文章</el-menu-item>
+                <el-menu-item index="/tag"><i class="el-icon-star-on"></i>标签管理</el-menu-item>
             </el-menu>
         </div>
     </div>

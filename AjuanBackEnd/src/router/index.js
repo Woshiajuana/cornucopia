@@ -29,6 +29,9 @@ import ProductTypeIndex from '../views/product/children/ProductTypeIndex.vue'
 import ProductTypeAdd from '../views/product/children/ProductTypeAdd.vue'
 import ProductTypeEdit from '../views/product/children/ProductTypeEdit.vue'
 
+/**文章列表*/
+import List from '../views/list/List.vue'
+
 Vue.use(Router);
 
 let router = new Router({
@@ -39,13 +42,17 @@ let router = new Router({
             name: 'home',
             component: Home,
             children: [
-                /**权限管理*/
+                /**文章列表*/
                 {
-                    path: 'permission',
-                    name: 'permission',
-                    component: Permission,
+                    path: 'article',
+                    name: 'list',
+                    component: List,
                     meta: {
-                        tab_index: 'permission'
+                        tab_index: '/article?tag=all',
+                        crumb: [
+                            { path: '/article?tag=all', icon: 'el-icon-document', con: '文章管理' },
+                            { con: '全部文章' }
+                        ]
                     },
                     children: [
                         /**角色管理*/
@@ -210,110 +217,6 @@ let router = new Router({
                                 crumb: [
                                     { path: '/permission', icon: 'el-icon-message', con: '权限管理' },
                                     { con: '管理员日志' }
-                                ]
-                            }
-                        },
-                    ]
-                },
-                /**产品管理*/
-                {
-                    path: 'product',
-                    name: 'product',
-                    component: Product,
-                    meta: {
-                        tab_index: 'product'
-                    },
-                    children: [
-                        /**产品类型管理*/
-                        {
-                            path: 'type',
-                            name: 'product-type-index',
-                            component: ProductTypeIndex,
-                            meta: {
-                                tab_index: '/product/type',
-                                crumb: [
-                                    { path: '/product', icon: 'el-icon-message', con: '产品管理' },
-                                    { con: '产品类型管理' }
-                                ]
-                            }
-                        },
-                        /**添加产品类型*/
-                        {
-                            path: 'type/add',
-                            name: 'product-type-add',
-                            component: ProductTypeAdd,
-                            meta: {
-                                tab_index: '/product/type',
-                                crumb: [
-                                    { path: '/product', icon: 'el-icon-message', con: '产品管理' },
-                                    { path: '/product/type', con: '产品类型管理' },
-                                    { con: '添加产品类型' }
-                                ]
-                            }
-                        },
-                        /**编辑产品类型*/
-                        {
-                            path: 'type/edit/:bizId',
-                            name: 'product-type-edit',
-                            component: ProductTypeEdit,
-                            meta: {
-                                tab_index: '/product/type',
-                                crumb: [
-                                    { path: '/product', icon: 'el-icon-message', con: '产品管理' },
-                                    { path: '/product/type', con: '产品类型管理' },
-                                    { con: '编辑产品类型' }
-                                ]
-                            }
-                        },
-                    ]
-                },
-                /**系统管理*/
-                {
-                    path: 'system',
-                    name: 'system',
-                    component: System,
-                    meta: {
-                        tab_index: 'system'
-                    },
-                    children: [
-                        /**机构类型管理*/
-                        {
-                            path: 'institution',
-                            name: 'system-institution-index',
-                            component: SystemInstitutionIndex,
-                            meta: {
-                                tab_index: '/system/institution',
-                                crumb: [
-                                    { path: '/system', icon: 'el-icon-message', con: '系统管理' },
-                                    { con: '机构类型管理' }
-                                ]
-                            }
-                        },
-                        /**添加机构类行*/
-                        {
-                            path: 'institution/add',
-                            name: 'system-institution-add-or-edit',
-                            component: SystemInstitutionAddOrEdit,
-                            meta: {
-                                tab_index: '/system/institution',
-                                crumb: [
-                                    { path: '/system', icon: 'el-icon-message', con: '系统管理' },
-                                    { path: '/system/institution', con: '机构类型管理' },
-                                    { con: '添加机构类型' }
-                                ]
-                            }
-                        },
-                        /**编辑角色*/
-                        {
-                            path: 'institution/edit/:bizId',
-                            name: 'system-institution-add-or-edit',
-                            component: SystemInstitutionAddOrEdit,
-                            meta: {
-                                tab_index: '/system/institution',
-                                crumb: [
-                                    { path: '/system', icon: 'el-icon-message', con: '系统管理' },
-                                    { path: '/system/institution', con: '机构类型管理' },
-                                    { con: '编辑机构类型' }
                                 ]
                             }
                         },

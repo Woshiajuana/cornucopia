@@ -20,8 +20,12 @@
 </script>
 <style lang="scss">
     @import "../../assets/scss/define";
-    .index-view{
-        @extend %pr;
+    .views-wrap{
+        @extend %pa;
+        @extend %t0;
+        @extend %r0;
+        @extend %l0;
+        @extend %b0;
     }
     .container-wrap{
         position: absolute !important;

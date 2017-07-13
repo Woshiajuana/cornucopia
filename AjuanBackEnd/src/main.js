@@ -5,6 +5,7 @@ import store from './store/index.js';
 import Tool from './assets/lib/Tool';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-default/index.css';
+import 'simplemde/dist/simplemde.min.css'
 
 Vue.config.productionTip = false;
 

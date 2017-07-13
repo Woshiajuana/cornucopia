@@ -171,7 +171,7 @@
             '$route': 'editorOrUpdate'
         },
         created () {
-            this.editorOrUpdate();
+//            this.editorOrUpdate();
             this.$nextTick( () => {
                 setTimeout( () => {
                     this.simplemde = new SimpleMDE({

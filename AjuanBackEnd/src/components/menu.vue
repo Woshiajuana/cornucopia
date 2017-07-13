@@ -20,7 +20,13 @@
                     </el-menu-item-group>
                 </el-submenu>
                 <el-menu-item index="/editor"><i class="el-icon-plus"></i>新增文章</el-menu-item>
-                <el-menu-item index="/tag"><i class="el-icon-star-on"></i>标签管理</el-menu-item>
+                <el-submenu index="/tag">
+                    <template slot="title"><i class="el-icon-star-on"></i>标签管理</template>
+                    <el-menu-item-group>
+                        <el-menu-item index="/tag/table">标签管理</el-menu-item>
+                        <el-menu-item index="/tag/group">标签分组</el-menu-item>
+                    </el-menu-item-group>
+                </el-submenu>
             </el-menu>
         </div>
     </div>

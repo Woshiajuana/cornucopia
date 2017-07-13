@@ -16,6 +16,11 @@ import List from '../views/list/List.vue'
 /**编辑列表*/
 import Editor from '../views/editor/Editor.vue'
 
+/**标签管理*/
+import Tag from '../views/tag/Tag.vue'
+import TagList from '../views/tag/children/TagList.vue'
+import TagAddOrEdit from '../views/tag/children/TagAddOrEdit.vue'
+
 Vue.use(Router);
 
 let router = new Router({
@@ -51,6 +56,32 @@ let router = new Router({
                             { con: '新增文章' }
                         ]
                     }
+                },
+                /**标签管理页*/
+                {
+                    path: 'tag',
+                    name: 'tag',
+                    component: Tag,
+                    meta: {
+                        tab_index: '/tag',
+                        crumb: [
+                            { con: '标签管理' }
+                        ]
+                    },
+                    children: [
+                        /**标签列表页*/
+                        {
+                            path: 'list',
+                            name: 'tag-list',
+                            component: Tag,
+                            meta: {
+                                tab_index: '/tag',
+                                crumb: [
+                                    { con: '标签管理' }
+                                ]
+                            }
+                        }
+                    ]
                 }
             ]
         },

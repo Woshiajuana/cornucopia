@@ -93,7 +93,7 @@ let router = new Router({
                                 tab_index: '/tag/list',
                                 crumb: [
                                     { con: '类别管理' },
-                                    { con: '文章类别' },
+                                    { path: '/tag/list', con: '文章类别' },
                                     { con: '新增文章类别' }
                                 ]
                             }
@@ -107,7 +107,7 @@ let router = new Router({
                                 tab_index: '/tag/list',
                                 crumb: [
                                     { con: '类别管理' },
-                                    { con: '文章类别' },
+                                    { path: '/tag/list', con: '文章类别' },
                                     { con: '编辑文章类别' }
                                 ]
                             }
@@ -134,6 +134,7 @@ let router = new Router({
                                 tab_index: '/tag/group',
                                 crumb: [
                                     { con: '类别管理' },
+                                    { path: '/tag/group', con: '文章分组' },
                                     { con: '新增类别分组' }
                                 ]
                             }
@@ -147,6 +148,7 @@ let router = new Router({
                                 tab_index: '/tag/group',
                                 crumb: [
                                     { con: '类别管理' },
+                                    { path: '/tag/group', con: '文章分组' },
                                     { con: '编辑类别分组' }
                                 ]
                             }

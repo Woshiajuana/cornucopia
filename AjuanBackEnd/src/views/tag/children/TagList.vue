@@ -69,7 +69,6 @@
 </template>
 <script>
     import Crumb from '../../../components/crumb.vue'
-    import ElButton from "../../../../../AjuanFrontEnd/node_modules/element-ui/packages/button/src/button";
     export default {
         name: 'tag-list',
         data() {
@@ -310,7 +309,6 @@
             }
         },
         components: {
-            ElButton,
             Crumb
         }
     }

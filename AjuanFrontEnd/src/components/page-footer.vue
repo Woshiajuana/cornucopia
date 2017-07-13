@@ -72,7 +72,7 @@
         }
         &:hover{
             svg{
-                fill: #fff;
+                fill: #f15556;
             }
         }
     }

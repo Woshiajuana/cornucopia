@@ -21,10 +21,10 @@
                 </el-submenu>
                 <el-menu-item index="/editor"><i class="el-icon-plus"></i>新增文章</el-menu-item>
                 <el-submenu index="/tag">
-                    <template slot="title"><i class="el-icon-star-on"></i>标签管理</template>
+                    <template slot="title"><i class="el-icon-star-on"></i>类别管理</template>
                     <el-menu-item-group>
-                        <el-menu-item index="/tag/table">标签管理</el-menu-item>
-                        <el-menu-item index="/tag/group">标签分组</el-menu-item>
+                        <el-menu-item index="/tag/list">文章类别</el-menu-item>
+                        <el-menu-item index="/tag/group">类别分组</el-menu-item>
                     </el-menu-item-group>
                 </el-submenu>
             </el-menu>

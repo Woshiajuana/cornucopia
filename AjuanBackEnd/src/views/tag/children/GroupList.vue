@@ -1,11 +1,11 @@
 <template>
     <div class="container-wrap">
-        标签列表新增或编辑
+        分组列表
     </div>
 </template>
 <script>
     export default {
-        name: 'tag-add-or-edit'
+        name: 'group-list'
     }
 </script>
 <style lang="scss">

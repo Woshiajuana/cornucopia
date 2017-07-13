@@ -16,10 +16,12 @@ import List from '../views/list/List.vue'
 /**编辑列表*/
 import Editor from '../views/editor/Editor.vue'
 
-/**标签管理*/
+/**类别管理*/
 import Tag from '../views/tag/Tag.vue'
 import TagList from '../views/tag/children/TagList.vue'
 import TagAddOrEdit from '../views/tag/children/TagAddOrEdit.vue'
+import GroupList from '../views/tag/children/GroupList.vue'
+import GroupAddOrEdit from '../views/tag/children/GroupAddOrEdit.vue'
 
 Vue.use(Router);
 
@@ -40,7 +42,7 @@ let router = new Router({
                     meta: {
                         tab_index: '/list?tag=all',
                         crumb: [
-                            { path: '/list?tag=all', icon: 'el-icon-document', con: '文章管理' },
+                            { con: '文章管理' },
                             { con: '全部文章' }
                         ]
                     }
@@ -57,7 +59,7 @@ let router = new Router({
                         ]
                     }
                 },
-                /**标签管理页*/
+                /**类别管理页*/
                 {
                     path: 'tag',
                     name: 'tag',
@@ -65,19 +67,87 @@ let router = new Router({
                     meta: {
                         tab_index: '/tag',
                         crumb: [
-                            { con: '标签管理' }
+                            { con: '类别管理' }
                         ]
                     },
                     children: [
-                        /**标签列表页*/
+                        /**类别列表页*/
                         {
                             path: 'list',
                             name: 'tag-list',
-                            component: Tag,
+                            component: TagList,
                             meta: {
-                                tab_index: '/tag',
+                                tab_index: '/tag/list',
                                 crumb: [
-                                    { con: '标签管理' }
+                                    { con: '类别管理' },
+                                    { con: '文章类别' }
+                                ]
+                            }
+                        },
+                        /**类别新增页*/
+                        {
+                            path: 'list/add',
+                            name: 'tag-add',
+                            component: TagAddOrEdit,
+                            meta: {
+                                tab_index: '/tag/list',
+                                crumb: [
+                                    { con: '类别管理' },
+                                    { con: '文章类别' },
+                                    { con: '新增文章类别' }
+                                ]
+                            }
+                        },
+                        /**类别编辑页*/
+                        {
+                            path: 'list/edit',
+                            name: 'tag-edit',
+                            component: TagAddOrEdit,
+                            meta: {
+                                tab_index: '/tag/list',
+                                crumb: [
+                                    { con: '类别管理' },
+                                    { con: '文章类别' },
+                                    { con: '编辑文章类别' }
+                                ]
+                            }
+                        },
+                        /**分组列表*/
+                        {
+                            path: 'group',
+                            name: 'group-list',
+                            component: GroupList,
+                            meta: {
+                                tab_index: '/tag/group',
+                                crumb: [
+                                    { con: '类别管理' },
+                                    { con: '类别分组' }
+                                ]
+                            }
+                        },
+                        /**分组列表新增*/
+                        {
+                            path: 'group/add',
+                            name: 'group-add',
+                            component: GroupAddOrEdit,
+                            meta: {
+                                tab_index: '/tag/group',
+                                crumb: [
+                                    { con: '类别管理' },
+                                    { con: '新增类别分组' }
+                                ]
+                            }
+                        },
+                        /**分组列表编辑*/
+                        {
+                            path: 'group/edit',
+                            name: 'group-edit',
+                            component: GroupAddOrEdit,
+                            meta: {
+                                tab_index: '/tag/group',
+                                crumb: [
+                                    { con: '类别管理' },
+                                    { con: '编辑类别分组' }
                                 ]
                             }
                         }

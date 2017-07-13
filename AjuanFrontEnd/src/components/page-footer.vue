@@ -42,15 +42,17 @@
 <style lang="scss">
     @import "../assets/scss/define";
     .footer-wrap{
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+        margin-top: 1px;
+        margin-bottom: 80px;
     }
     .footer-inner{
-        padding: 80px 0 50px;
-        background-color: #f15556;
+        @extend %wm;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+        padding: 30px 0;
+        background-color: #fff;
     }
     .footer-icon,.footer-copy{
         @extend %pr;
-        @extend %wm;
         @extend %tac;
     }
     .footer-icon{
@@ -68,7 +70,7 @@
             @extend %w100;
             @extend %h100;
             @include tst(fill,.5s);
-            fill: #ddd;
+            fill: #f15556;
         }
         &:hover{
             svg{
@@ -77,24 +79,25 @@
         }
     }
     .footer-copy{
-        @extend %cc;
+        @extend %c9;
         @extend %f12;
         margin-top: 15px;
         a{
-            @extend %cc;
+            @extend %c9;
         }
     }
     @media screen and (max-width: 800px) {
+        .footer-wrap{
+            margin-bottom: 0;
+        }
         .footer-inner{
+            width: 100%;
             padding: 20px 0;
         }
         .icon-item{
             width: 26px;
             height: 26px;
             margin: 0 2px;
-        }
-        .footer-icon,.footer-copy{
-            width: 100%;
         }
         .footer-copy{
             margin-top: 0;

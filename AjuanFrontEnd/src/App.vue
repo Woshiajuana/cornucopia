@@ -92,20 +92,34 @@
         @extend %t0;
         @extend %b0;
         @extend %l0;
+        @extend %r0;
         overflow-y: scroll;
-        right: -18px;
     }
     .container-wrap{
         @extend %wm;
-        margin: 30px auto;
+        margin: 30px auto 0;
         background-color: #fff;
         height: 1800px;
         box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
     }
     @media screen and (max-width: 800px) {
+        .set-up-wrap{
+            right: -85% !important;
+            width: 85% !important;
+        }
+        .nav-menu-wrap{
+            left: -85% !important;
+            width: 85% !important;
+        }
         .container-wrap{
-            width: auto;
-            margin: 10px;
+            margin-top: 0;
+            width: 100%;
+        }
+        #app.set-up-open {
+            transform: translate3d(-85%, 0, 0);
+        }
+        #app.nav-menu-open {
+            transform: translate3d(85%, 0, 0);
         }
     }
 </style>

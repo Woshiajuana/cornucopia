@@ -7,14 +7,26 @@
                 <dd class="set-up-item">
                     <div class="set-up-font-size">
                         <span class="set-up-font-size-btn">-</span>
-                        <span class="set-up-font-size-con"></span>
+                        <span class="set-up-font-size-con">13</span>
                         <span class="set-up-font-size-btn">+</span>
                     </div>
                 </dd>
+                <dt class="set-up-con-title">模式设置</dt>
+                <dd class="set-up-item">
+                    <div class="set-up-mode">
+                        <span class="set-up-mode-btn active" title="白天">
+                            <svg class="set-btn-icon">
+                                <use xlink:href="#son-icon"></use>
+                            </svg>
+                        </span>
+                        <span class="set-up-mode-btn" title="晚上">
+                             <svg class="set-btn-icon">
+                                 <use xlink:href="#moon-icon"></use>
+                             </svg>
+                        </span>
+                    </div>
+                </dd>
             </dl>
-            <div class="set-up-btn-con">
-
-            </div>
         </div>
     </div>
 </template>
@@ -73,23 +85,48 @@
             }
         }
         dd{
+            margin: 10px;
             padding-left: 54px;
         }
     }
     .set-up-font-size{
-        width: 80px;
+        width: 92px;
         height: 24px;
         line-height: 24px;
         border: 1px solid #ddd;
         span{
             @extend %fl;
+            @extend %tac;
+            height: 24px;
         }
     }
     .set-up-font-size-con{
-
+        width: 40px;
     }
     .set-up-font-size-btn{
-        width: 20px;
+        @extend %cp;
+        @extend %cfff;
+        width: 26px;
         background-color: #ddd;
+    }
+    .set-up-mode{
+        height: 26px;
+    }
+    .set-up-mode-btn{
+        @extend %fl;
+        @extend %cp;
+        width: 26px;
+        height: 26px;
+        margin-right: 20px;
+        &.active{
+            .set-btn-icon{
+                fill: #f15556;
+            }
+        }
+    }
+    .set-btn-icon{
+        @extend %w100;
+        @extend %h100;
+        fill: #999;
     }
 </style>

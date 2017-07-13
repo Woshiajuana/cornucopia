@@ -7,12 +7,12 @@
         </div>
         <a href="#/" class="header-logo">
             <svg class="header-logo-icon">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo-icon"></use>
+                <use xlink:href="#logo-icon"></use>
             </svg>
         </a>
         <div class="set-btn" title="设置" :class=" { 'active':isOpenOrHideSetUp } " @click=" openOrHideSetUp ">
             <svg class="set-btn-icon">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#set-icon"></use>
+                <use xlink:href="#set-icon"></use>
             </svg>
         </div>
     </header>

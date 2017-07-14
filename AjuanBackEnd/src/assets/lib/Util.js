@@ -2,8 +2,6 @@
  * Created by Administrator on 2017/5/2.
  */
 import axios from 'axios'
-import Tool from './Tool'
-import router from '../../router/index'
 axios.defaults.headers.post['Content-Type'] = "application/json; charset=utf-8";
 
 const Util = function (win) {
@@ -23,7 +21,7 @@ const Util = function (win) {
 
     /**用户登录*/
     Util.login = function ( user ) {
-        return Util.ajax("user/login", "POST",{ user: user });
+        return Util.ajax("user/login", "POST",{ user_name: user.user_name, user_password: user.user_password });
     };
 
     /**
@@ -38,10 +36,7 @@ const Util = function (win) {
                 url: url,
                 method: method,
                 baseURL: MAIN_URL,
-                // headers:{
-                //     Authorization: localSession.achieve('token') != null ?
-                //         localSession.achieve('token') : ''
-                // },
+                timeout: 10 * 1000,
                 data: isGet ? '' : data,
                 params: isGet ? data : '',
                 responseType: 'json'

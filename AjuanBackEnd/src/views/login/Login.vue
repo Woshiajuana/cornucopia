@@ -2,7 +2,7 @@
     <!--登录页-->
     <div class="views-wrap login-view">
         <div class="login-content"
-             v-loading="is_timer"
+             v-loading="is_loading"
              element-loading-text="登录中~~~">
             <h1 class="login-title">后台管理系统</h1>
             <div class="input-wrap">
@@ -39,7 +39,7 @@
                 callback();
             };
             return {
-                is_timer: false,
+                is_loading: false,
                 loginForm: {
                     user_name: '',
                     user_password: ''
@@ -58,25 +58,30 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        if (this.is_timer) return;
-                        this.is_timer = true;
+                        this.is_loading = true;
                         Util.login(this.loginForm).then((result) => {
-                            console.log(result)
-//                            setTimeout( () => {
-//                                if (result.status){
-//                                    var data = result.data;
-//                                    Tool.dataToSessionStorageOperate.save('token', data.token);
-//                                    Tool.dataToSessionStorageOperate.save('user', data.user);
-//                                    this.$router.push("/?tab=all");
-//                                } else {
-//                                    this.$message({
-//                                        showClose: true,
-//                                        message: result.msg,
-//                                        type: 'error'
-//                                    });
-//                                }
-//                                this.is_timer = false;
-//                            },1000)
+                            setTimeout( () => {
+                                this.is_loading = false;
+                                if (result.status){
+                                    var data = result.data;
+                                    Tool.dataToSessionStorageOperate.save('token', data.token);
+                                    Tool.dataToSessionStorageOperate.save('user', data.user);
+                                    this.$router.push("/list?tag=all");
+                                } else {
+                                    this.$message({
+                                        showClose: true,
+                                        message: result.msg,
+                                        type: 'error'
+                                    });
+                                }
+                            },1000)
+                        }).catch( (err) => {
+                            this.is_loading = false;
+                            this.$message({
+                                showClose: true,
+                                message: '系统开了小差',
+                                type: 'error'
+                            });
                         })
                     }
                 });

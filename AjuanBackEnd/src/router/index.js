@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
 import Store from '../store/index'
 import types from '../store/mutation-types'
+import Tool from '../assets/lib/Tool'
 
 /**登录页*/
 import Login from '../views/login/Login.vue'
@@ -171,17 +171,21 @@ let router = new Router({
  * 如果用户已经登录，则回跳到登录的页的时候，要转到首页
  * */
 router.beforeEach( (to, from, next) => {
-    // var user = Tool.dataToSessionStorageOperate.achieve('user');
-    // var token = Tool.dataToSessionStorageOperate.achieve('token');
-    // if ((!token || !user) && to.path != '/login'){
-    //     next('/login');
-    // } else if ( token && user && to.path == '/login'){
-    //     next('/?tab=all');
-    // } else if ( token && user && to.path == '/' && !to.query.tab) {
-    //     next('/?tab=all');
-    // } else {
-    //     next();
-    // }
+    var user = Tool.dataToSessionStorageOperate.achieve('user');
+    var token = Tool.dataToSessionStorageOperate.achieve('token');
+    if ((!token || !user) && to.path != '/login'){
+        console.log(1)
+        next('/login');
+    } else if ( token && user && to.path == '/login'){
+        console.log(2)
+        next('/list?tag=all');
+    } else if ( token && user && to.path == '/' && !to.query.tag) {
+        console.log(3)
+        next('/list?tag=all');
+    } else {
+        console.log(4)
+        next();
+    }
     if( to.meta.tab_index ) Store.commit( types.SET_TAB_INDEX, to.meta.tab_index );
     next();
 });

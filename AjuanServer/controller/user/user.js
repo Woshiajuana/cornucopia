@@ -2,26 +2,27 @@
  * Created by Administrator on 2017/7/14.
  */
 'use strict';
-
+/**引入数据库模型*/
 import user_module from '../../models/user'
-
+/**引入token工具*/
+import jwt from 'jsonwebtoken';
 class User {
     constructor (){
 
     }
     async login(req, res, next){
         /**这里的req.body能够使用就在index.js中引入了const bodyParser = require('body-parser')*/
-        if(!req.query.user_name) {
+        if(!req.body.user_name) {
             res.json({status: 0, msg: '请输入帐号'});
             return;
         }
-        if(!req.query.user_password) {
+        if(!req.body.user_password) {
             res.json({status: 0, msg: '请输入密码'});
             return;
         }
         let user = {
-            user_name: req.query.user_name,
-            user_password: req.query.user_password
+            user_name: req.body.user_name,
+            user_password: req.body.user_password
         };
         user_module.find(user, function(err, doc){
             if(doc.length){
@@ -48,7 +49,6 @@ class User {
             }
         });
     }
-
 }
 
 export default new User()

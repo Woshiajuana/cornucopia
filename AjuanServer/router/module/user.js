@@ -8,6 +8,6 @@ import User from '../../controller/user/user'
 
 const router = express.Router();
 
-router.get('/login', User.login);
+router.post('/login', User.login);
 
 export default router

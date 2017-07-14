@@ -2,21 +2,17 @@
  * 创建服务端后台主要文件
  * */
 
-/**引入编写好的api*/
-// const api = require('./api/interface');
-const api = require('./router/index');
+/**引入配置文件*/
+import DEFAULT from './config/DEFAULT'
 
-/**引入文件模块*/
-const fs = require('fs');
-
-/**引入处理路径的模块*/
-const path = require('path');
+/**引入路由接口文件*/
+import router from './router/index'
 
 /**引入处理post数据的模块*/
-const bodyParser = require('body-parser');
+import bodyParser from 'body-parser';
 
 /**引入Express*/
-const express = require('express');
+import express from 'express';
 
 /**创建一个express实例*/
 const app = express();
@@ -38,8 +34,13 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use(api);
+router(app);
+
+app.use((err, req, res, next) => {
+    res.status(404).send('未找到当前路由');
+});
 
 /**监听8088端口*/
-app.listen(8088);
+app.listen( DEFAULT.PORT );
+
 console.log('success listen…………');

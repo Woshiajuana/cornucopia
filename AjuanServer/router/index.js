@@ -5,6 +5,7 @@
 
 import home from './module/home'
 import user from './module/user'
+import group from './module/group'
 
 export default app => {
     app.get('/', (req, res, next) => {
@@ -12,4 +13,5 @@ export default app => {
     });
     app.use('/home', home);
     app.use('/user', user);
+    app.use('/group', group);
 }

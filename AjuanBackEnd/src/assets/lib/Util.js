@@ -24,6 +24,27 @@ const Util = function (win) {
         return Util.ajax("user/login", "POST",{ user_name: user.user_name, user_password: user.user_password });
     };
 
+    /**分组列表*/
+    Util.fetchGroupList = function ( page_num, page_size, key_words ) {
+        return Util.ajax("group/list", "POST",{ page_num, page_size, key_words  });
+    };
+
+    /**列表详情*/
+    Util.fetchGroupDetailByGroupId = function ( _id ) {
+        return Util.ajax("group/info", "POST",{ _id  });
+    };
+
+    /**新增分组*/
+    Util.addGroupData = function ( group_name ) {
+        return Util.ajax("group/add", "POST",{ group_name  });
+    };
+
+    /**编辑分组*/
+    Util.editGroupData = function ( _id, group_name ) {
+        return Util.ajax("group/add", "POST",{ _id, group_name });
+    };
+
+
     /**
      * 公用请求ajax的方式
      * */

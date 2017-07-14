@@ -171,8 +171,8 @@ let router = new Router({
  * 如果用户已经登录，则回跳到登录的页的时候，要转到首页
  * */
 router.beforeEach( (to, from, next) => {
-    var user = Tool.dataToSessionStorageOperate.achieve('user');
-    var token = Tool.dataToSessionStorageOperate.achieve('token');
+    var user = Tool.dataToSessionStorageOperate.achieve('user'),
+        token = Tool.dataToSessionStorageOperate.achieve('token');
     if ((!token || !user) && to.path != '/login'){
         console.log(1)
         next('/login');

@@ -3,7 +3,8 @@
  * */
 
 /**引入编写好的api*/
-const api = require('./api/interface');
+// const api = require('./api/interface');
+const api = require('./router/index');
 
 /**引入文件模块*/
 const fs = require('fs');

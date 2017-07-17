@@ -141,7 +141,7 @@ let router = new Router({
                         },
                         /**分组列表编辑*/
                         {
-                            path: 'group/edit',
+                            path: 'group/edit/:_id',
                             name: 'group-edit',
                             component: GroupAddOrEdit,
                             meta: {

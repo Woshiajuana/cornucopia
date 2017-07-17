@@ -1,14 +1,16 @@
 <template>
-    <div class="container-wrap">
+    <div class="container-wrap"
+         v-loading="is_loading"
+         element-loading-text="加载中~~~">
         <div class="container-inner">
             <crumb></crumb>
-            <el-form :inline="true" :model="formInline" class="demo-form-inline">
+            <el-form :inline="true" class="demo-form-inline">
                 <el-form-item label="分组名称">
-                    <el-input v-model="formInline.user" placeholder="分组名称"></el-input>
+                    <el-input v-model="key_words" placeholder="分组名称"></el-input>
                 </el-form-item>
                 <el-form-item label="创建时间">
                     <el-col :span="24">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="formInline.date1" style="width: 100%;"></el-date-picker>
+                        <el-date-picker type="date" placeholder="选择日期" v-model="group_date" style="width: 100%;"></el-date-picker>
                     </el-col>
                 </el-form-item>
                 <el-form-item>
@@ -24,7 +26,7 @@
             </div>
             <el-table
                 ref="multipleTable"
-                :data="tableData3"
+                :data="group_arr"
                 border
                 tooltip-effect="dark"
                 style="width: 100%"
@@ -35,20 +37,20 @@
                     width="55">
                 </el-table-column>
                 <el-table-column
-                    prop="name"
+                    prop="group_name"
                     label="分组名称">
                 </el-table-column>
                 <el-table-column
                     label="日期"
                     width="120">
-                    <template scope="scope">{{ scope.row.date }}</template>
+                    <template scope="scope">{{ scope.row.group_date | format('yyyy-MM-dd') }}</template>
                 </el-table-column>
                 <el-table-column
                     width="240"
                     align="center"
                     label="操作">
                     <template scope="scope">
-                        <router-link to="/tag/group/edit" class="el-button el-button--small">编辑</router-link>
+                        <router-link :to="'/tag/group/edit/'+ scope.row._id" class="el-button el-button--small">编辑</router-link>
                         <button class="el-button el-button--danger el-button--small">删除</button>
                     </template>
                 </el-table-column>
@@ -58,149 +60,42 @@
             <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="currentPage4"
+                :current-page="page_count"
                 :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
+                :page-size="page_size"
+                layout="total, prev, pager, next, jumper"
+                :total="group_total">
             </el-pagination>
         </div>
     </div>
 </template>
 <script>
     import Crumb from '../../../components/crumb.vue'
+    import Util from '../../../assets/lib/Util'
     export default {
         name: 'group-list',
         data() {
             return {
-                formInline: {
-                    user: '',
-                    region: '',
-                    date1: '',
-                    date2: ''
+                form_data: {
+                    name: '',
+                    date: ''
                 },
+                group_date:'',
                 page_num:1,
                 page_count: 0,
                 page_size:12,
-                article_total: 0,
-                key_word: '',
+                group_total: 0,
+                key_words: '',
                 is_loading: false,
-                article_arr: [],
-                currentPage1: 5,
-                currentPage2: 5,
-                currentPage3: 5,
-                currentPage4: 4,
-                tableData3: [{
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    is: true,
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    is: true,
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    is: true,
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    is: true,
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-08',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-06',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }],
+                group_arr: [],
                 multipleSelection: []
             }
+        },
+        watch: {
+            '$route': 'fetchGroupList'
+        },
+        created () {
+            this.fetchGroupList();
         },
         methods: {
             handleSelectionChange(val) {
@@ -219,40 +114,11 @@
                 console.log(`当前页: ${val}`);
             },
             onSubmit() {
-                console.log('submit!');
-            },
-            /**下架或发布文章*/
-            offOrReleaseArticle (article) {
-                this.is_loading = true;
-                Util.offOrReleaseArticle({
-                    _id: article._id,
-                    article_is_publish: !article.article_is_publish
-                },(result) => {
-                    setTimeout( () => {
-                        this.is_loading = false;
-                        if (result.status) {
-                            this.$message({
-                                showClose: true,
-                                message: result.msg,
-                                type: 'success'
-                            });
-                            this.fetchArticlesList();
-                        } else {
-                            this.$message({
-                                showClose: true,
-                                message: result.msg,
-                                type: 'error'
-                            });
-                        }
-                    },300)
-                })
-            },
-            handleIconClick () {
-                Tool.jumpPage('?tab='+this.$route.query.tab+'&&key_word='+this.key_word);
+                this.$router.push('/tag/group?key_words=' + this.key_words);
             },
             handleCurrentChange (val) {
                 this.page_num = val;
-                Tool.jumpPage('?tab='+this.$route.query.tab+'&&page_num='+this.page_num);
+                this.$router.push('/tag/group?page_num='+this.page_num);
             },
             /**删除文章数据*/
             deleteArticle ({_id,article_title}) {
@@ -275,28 +141,24 @@
                     this.$message({type: 'info', message: '已取消删除'});
                 });
             },
-            /**获取文章列表数据*/
-            fetchArticlesList (route) {
+            /**获取列表数据*/
+            fetchGroupList (route) {
                 this.is_loading = true;
-                var tab = route ? route.query.tab: this.$route.query.tab;
-                var key_word = route ? route.query.key_word: this.$route.query.key_word;
+                var key_words = route ? route.query.key_words: this.$route.query.key_words;
                 var page_num = route ? route.query.page_num: this.$route.query.page_num;
                 this.page_num = +page_num || 1;
-                setTimeout(()=>{
-                    this.$store.commit(types.SET_TAB_INDEX,tab);
-                },600);
-                Util.fetchArticlesList({
-                    tab: tab,
+                console.log(key_words)
+                Util.fetchGroupList({
                     page_num: this.page_num,
                     page_size: this.page_size,
-                    key_word: key_word
-                }, (result) => {
+                    key_words: key_words
+                }).then((result) => {
                     setTimeout( () => {
                         if(result.status == 1) {
                             var data = result.data;
-                            this.article_arr = data.article_arr;
-                            this.page_count = data.page_count;
-                            this.article_total = data.article_total;
+                            this.group_arr = data.arr;
+                            this.page_count = data.count;
+                            this.group_total = data.total;
                         }
                         else this.$message({type: 'error', message: result.msg});
                         this.is_loading = false;
@@ -313,6 +175,3 @@
         }
     }
 </script>
-<style lang="scss">
-    @import "../../../assets/scss/define";
-</style>

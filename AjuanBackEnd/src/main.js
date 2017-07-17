@@ -22,6 +22,10 @@ axios.interceptors.request.use(function (config) {
     return Promise.reject(err);
 });
 
+Vue.filter('format', (date,fmt) => {
+    return Tool.format(fmt,new Date(date))
+});
+
 new Vue({
     el: '#app',
     router,

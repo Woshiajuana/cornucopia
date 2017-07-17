@@ -29,7 +29,7 @@ const Util = function (win) {
         return Util.ajax("group/list", "POST",{ page_num, page_size, key_words  });
     };
 
-    /**列表详情*/
+    /**分组详情*/
     Util.fetchGroupDetailByGroupId = function ( _id ) {
         return Util.ajax("group/info", "POST",{ _id  });
     };
@@ -41,9 +41,12 @@ const Util = function (win) {
 
     /**编辑分组*/
     Util.editGroupData = function ( _id, group_name ) {
-        return Util.ajax("group/add", "POST",{ _id, group_name });
+        return Util.ajax("group/edit", "POST",{ _id, group_name });
     };
-
+    /**删除分组*/
+    Util.deleteGroupData = function ( _id ) {
+        return Util.ajax("group/delete", "POST",{ _id });
+    };
 
     /**
      * 公用请求ajax的方式

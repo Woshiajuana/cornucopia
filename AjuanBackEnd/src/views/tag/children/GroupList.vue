@@ -81,9 +81,9 @@
                     date: ''
                 },
                 group_date:'',
-                page_num:1,
+                page_num: 1,
                 page_count: 0,
-                page_size:12,
+                page_size: 2,
                 group_total: 0,
                 key_words: '',
                 is_loading: false,
@@ -118,7 +118,7 @@
             },
             handleCurrentChange (val) {
                 this.page_num = val;
-                this.$router.push('/tag/group?page_num='+this.page_num);
+                this.$router.push('/tag/group?page_num=' + this.page_num);
             },
             /**删除文章数据*/
             deleteArticle ({_id,article_title}) {
@@ -147,12 +147,7 @@
                 var key_words = route ? route.query.key_words: this.$route.query.key_words;
                 var page_num = route ? route.query.page_num: this.$route.query.page_num;
                 this.page_num = +page_num || 1;
-                console.log(key_words)
-                Util.fetchGroupList({
-                    page_num: this.page_num,
-                    page_size: this.page_size,
-                    key_words: key_words
-                }).then((result) => {
+                Util.fetchGroupList(this.page_num,this.page_size,key_words).then((result) => {
                     setTimeout( () => {
                         if(result.status == 1) {
                             var data = result.data;
@@ -163,6 +158,13 @@
                         else this.$message({type: 'error', message: result.msg});
                         this.is_loading = false;
                     },300);
+                }).catch( (err) => {
+                    this.is_loading = false;
+                    this.$message({
+                        showClose: true,
+                        message: '系统开了小差',
+                        type: 'error'
+                    });
                 });
             },
             /**编辑文档*/

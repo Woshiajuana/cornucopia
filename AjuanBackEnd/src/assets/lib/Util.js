@@ -26,12 +26,12 @@ const Util = function (win) {
 
     /**分组列表*/
     Util.fetchGroupList = function ( page_num, page_size, key_words ) {
-        return Util.ajax("group/list", "POST",{ page_num, page_size, key_words  });
+        return Util.ajax("group/list", "POST",{  page_num, page_size, key_words });
     };
 
     /**分组详情*/
     Util.fetchGroupDetailByGroupId = function ( _id ) {
-        return Util.ajax("group/info", "POST",{ _id  });
+        return Util.ajax("group/info", "POST",{ _id });
     };
 
     /**新增分组*/
@@ -52,6 +52,7 @@ const Util = function (win) {
      * 公用请求ajax的方式
      * */
     Util.ajax = (url, method, data) => {
+        console.log(data)
         var isGet = false;
         if (method.match(/get/i) != null) isGet = true;
         ( url.indexOf('http://') > -1 ) && ( MAIN_URL = '' );

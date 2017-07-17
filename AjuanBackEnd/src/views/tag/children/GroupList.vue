@@ -29,8 +29,7 @@
                 :data="group_arr"
                 border
                 tooltip-effect="dark"
-                style="width: 100%"
-                @selection-change="handleSelectionChange">
+                style="width: 100%">
                 <el-table-column
                     type="selection"
                     align="center"
@@ -51,16 +50,15 @@
                     label="操作">
                     <template scope="scope">
                         <router-link :to="'/tag/group/edit/'+ scope.row._id" class="el-button el-button--small">编辑</router-link>
-                        <button class="el-button el-button--danger el-button--small">删除</button>
+                        <button @click="deleteGroupData(scope.row)" class="el-button el-button--danger el-button--small">删除</button>
                     </template>
                 </el-table-column>
             </el-table>
         </div>
         <div class="pagination-wrap">
             <el-pagination
-                @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="page_count"
+                :current-page="page_num"
                 :page-sizes="[100, 200, 300, 400]"
                 :page-size="page_size"
                 layout="total, prev, pager, next, jumper"
@@ -82,13 +80,11 @@
                 },
                 group_date:'',
                 page_num: 1,
-                page_count: 0,
                 page_size: 2,
                 group_total: 0,
                 key_words: '',
                 is_loading: false,
-                group_arr: [],
-                multipleSelection: []
+                group_arr: []
             }
         },
         watch: {
@@ -98,37 +94,23 @@
             this.fetchGroupList();
         },
         methods: {
-            handleSelectionChange(val) {
-                this.multipleSelection = val;
-            },
-            handleEdit(index, row) {
-                console.log(index, row);
-            },
-            handleDelete(index, row) {
-                console.log(index, row);
-            },
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
-            },
             onSubmit() {
                 this.$router.push('/tag/group?key_words=' + this.key_words);
             },
             handleCurrentChange (val) {
                 this.page_num = val;
+                console.log(val + 'xsxasxasxasxas哈姐啊山东阿斯')
                 this.$router.push('/tag/group?page_num=' + this.page_num);
             },
             /**删除文章数据*/
-            deleteArticle ({_id,article_title}) {
-                this.$confirm('是否删除'+ article_title +'?', '提示', {
+            deleteGroupData ({ _id, group_name }) {
+                this.$confirm('是否删除'+ group_name +'?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
                     this.is_loading = true;
-                    Util.deleteArticle(_id,(result) => {
+                    Util.deleteGroupData(_id,(result) => {
                         this.is_loading = false;
                         if(result.status){
                             this.fetchArticlesList();
@@ -152,7 +134,6 @@
                         if(result.status == 1) {
                             var data = result.data;
                             this.group_arr = data.arr;
-                            this.page_count = data.count;
                             this.group_total = data.total;
                         }
                         else this.$message({type: 'error', message: result.msg});

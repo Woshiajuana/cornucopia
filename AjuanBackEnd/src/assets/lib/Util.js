@@ -36,7 +36,7 @@ const Util = function (win) {
 
     /**新增分组*/
     Util.addGroupData = function ( group_name ) {
-        return Util.ajax("group/add", "POST",{ group_name  });
+        return Util.ajax("group/add", "POST",{ group_name });
     };
 
     /**编辑分组*/

@@ -52,7 +52,6 @@ const Util = function (win) {
      * 公用请求ajax的方式
      * */
     Util.ajax = (url, method, data) => {
-        console.log(data)
         var isGet = false;
         if (method.match(/get/i) != null) isGet = true;
         ( url.indexOf('http://') > -1 ) && ( MAIN_URL = '' );

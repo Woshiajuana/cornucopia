@@ -80,7 +80,7 @@
                 },
                 group_date:'',
                 page_num: 1,
-                page_size: 2,
+                page_size: 10,
                 group_total: 0,
                 key_words: '',
                 is_loading: false,
@@ -95,12 +95,14 @@
         },
         methods: {
             onSubmit() {
-                this.$router.push('/tag/group?key_words=' + this.key_words);
+                this.page_num = 1;
+                this.$route.query.key_words ? this.$router.push('/tag/group?page_num=' + this.page_num + '&key_words=' + this.key_words) :
+                this.key_words ? this.$router.push('/tag/group?page_num=' + this.page_num + '&key_words=' + this.key_words) : '';
             },
             handleCurrentChange (val) {
                 this.page_num = val;
-                console.log(val + 'xsxasxasxasxas哈姐啊山东阿斯')
-                this.$router.push('/tag/group?page_num=' + this.page_num);
+                this.key_words ? this.$router.push('/tag/group?page_num=' + this.page_num + '&key_words=' + this.key_words)
+                    : this.$router.push('/tag/group?page_num=' + this.page_num);
             },
             /**删除文章数据*/
             deleteGroupData ({ _id, group_name }) {

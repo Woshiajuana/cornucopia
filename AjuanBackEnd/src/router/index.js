@@ -100,7 +100,7 @@ let router = new Router({
                         },
                         /**类别编辑页*/
                         {
-                            path: 'list/edit',
+                            path: 'list/edit/:_id',
                             name: 'tag-edit',
                             component: TagAddOrEdit,
                             meta: {

@@ -6,6 +6,7 @@
 import home from './module/home'
 import user from './module/user'
 import group from './module/group'
+import tag from './module/tag'
 
 export default app => {
     app.get('/', (req, res, next) => {
@@ -14,4 +15,5 @@ export default app => {
     app.use('/home', home);
     app.use('/user', user);
     app.use('/group', group);
+    app.use('/tag', tag);
 }

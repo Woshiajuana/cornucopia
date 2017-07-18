@@ -10,7 +10,7 @@
                         <el-input v-model="key_words" placeholder="请输入分组名称"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="searchGroupByGroupName">查询</el-button>
+                        <el-button type="primary" @click="searchData">查询</el-button>
                     </el-form-item>
                 </el-form>
                 <router-link to="/tag/group/add" class="el-button el-button--primary"><i class="el-icon-plus el-icon--left"></i>新增</router-link>
@@ -69,7 +69,7 @@
             return {
                 select_arr: [],
                 page_num: 1,
-                page_size: 10,
+                page_size: 12,
                 group_total: 0,
                 key_words: '',
                 is_loading: false,
@@ -119,7 +119,7 @@
                 this.select_arr = rows;
             },
             /**搜索*/
-            searchGroupByGroupName() {
+            searchData() {
                 this.page_num = 1;
                 this.$route.query.key_words ? this.$router.push('/tag/group?page_num=' + this.page_num + '&key_words=' + this.key_words) :
                 this.key_words ? this.$router.push('/tag/group?page_num=' + this.page_num + '&key_words=' + this.key_words) : '';
@@ -183,10 +183,6 @@
                         type: 'error'
                     });
                 });
-            },
-            /**编辑文档*/
-            editorArticle (article) {
-                this.$router.push('/editor/' + article._id);
             }
         },
         components: {

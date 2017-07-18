@@ -1,311 +1,193 @@
 <template>
-    <div class="container-wrap">
+    <div class="container-wrap"
+         v-loading="is_loading"
+         element-loading-text="加载中~~~">
         <div class="container-inner">
             <crumb></crumb>
-            <el-form :inline="true" :model="formInline" class="demo-form-inline">
-                <el-form-item label="类别名称">
-                    <el-input v-model="formInline.user" placeholder="类别名称"></el-input>
-                </el-form-item>
-                <el-form-item label="创建时间">
-                    <el-col :span="24">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="formInline.date1" style="width: 100%;"></el-date-picker>
-                    </el-col>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="onSubmit">查询</el-button>
-                </el-form-item>
-            </el-form>
             <div class="operate-wrap el-col el-col-24">
-                <h2 class="session-title">类别列表</h2>
-                <el-button class="el-button el-button--danger" :disabled="true"><i class="el-icon-delete el-icon--left"></i>删除</el-button>
-                <el-button class="el-button el-button--warning" :disabled="true"><i class="el-icon-upload el-icon--left"></i>下架</el-button>
-                <el-button class="el-button el-button--primary" :disabled="true"><i class="el-icon-upload el-icon--left"></i>上架</el-button>
+                <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item>
+                        <el-input v-model="key_words" placeholder="请输入类别名称"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="searchData">查询</el-button>
+                    </el-form-item>
+                </el-form>
                 <router-link to="/tag/list/add" class="el-button el-button--primary"><i class="el-icon-plus el-icon--left"></i>新增</router-link>
+                <el-button @click="deleteManyTagsData" class="el-button el-button--danger" :disabled="!select_arr.length"><i class="el-icon-delete el-icon--left"></i>删除</el-button>
             </div>
             <el-table
                 ref="multipleTable"
-                :data="tableData3"
+                :data="data_arr"
                 border
                 tooltip-effect="dark"
-                style="width: 100%"
-                @selection-change="handleSelectionChange">
+                @selection-change="handleSelectionChange"
+                style="width: 100%">
                 <el-table-column
                     type="selection"
                     align="center"
                     width="55">
                 </el-table-column>
                 <el-table-column
-                    prop="name"
+                    prop="tag_name"
                     label="类别名称">
+                </el-table-column>
+                <el-table-column
+                    prop="tag_group"
+                    label="所属分组"
+                    width="120">
                 </el-table-column>
                 <el-table-column
                     label="日期"
                     width="120">
-                    <template scope="scope">{{ scope.row.date }}</template>
+                    <template scope="scope">{{ scope.row.tag_date | format('yyyy-MM-dd') }}</template>
                 </el-table-column>
                 <el-table-column
                     width="240"
                     align="center"
                     label="操作">
                     <template scope="scope">
-                        <router-link to="/tag/list/edit" class="el-button el-button--small">编辑</router-link>
-                        <button class="el-button el-button--danger el-button--small">删除</button>
+                        <router-link :to="'/tag/list/edit/'+ scope.row._id" class="el-button el-button--small">编辑</router-link>
+                        <button @click="deleteTagData(scope.row)" class="el-button el-button--danger el-button--small">删除</button>
                     </template>
                 </el-table-column>
             </el-table>
         </div>
         <div class="pagination-wrap">
             <el-pagination
-                @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="currentPage4"
+                :current-page="page_num"
                 :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
+                :page-size="page_size"
+                layout="total, prev, pager, next, jumper"
+                :total="total">
             </el-pagination>
         </div>
     </div>
 </template>
 <script>
     import Crumb from '../../../components/crumb.vue'
+    import Util from '../../../assets/lib/Util'
     export default {
-        name: 'tag-list',
+        name: 'group-list',
         data() {
             return {
-                formInline: {
-                    user: '',
-                    region: '',
-                    date1: '',
-                    date2: ''
-                },
-                page_num:1,
-                page_count: 0,
-                page_size:12,
-                article_total: 0,
-                key_word: '',
+                select_arr: [],
+                page_num: 1,
+                page_size: 12,
+                total: 0,
+                key_words: '',
                 is_loading: false,
-                article_arr: [],
-                currentPage1: 5,
-                currentPage2: 5,
-                currentPage3: 5,
-                currentPage4: 4,
-                tableData3: [{
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    is: true,
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    is: true,
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    is: true,
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    is: true,
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-08',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-06',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }],
-                multipleSelection: []
+                data_arr: []
             }
         },
+        watch: {
+            '$route': 'fetchTagList'
+        },
+        created () {
+            this.fetchTagList();
+        },
         methods: {
-            handleSelectionChange(val) {
-                this.multipleSelection = val;
-            },
-            handleEdit(index, row) {
-                console.log(index, row);
-            },
-            handleDelete(index, row) {
-                console.log(index, row);
-            },
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
-            },
-            onSubmit() {
-                console.log('submit!');
-            },
-            /**下架或发布文章*/
-            offOrReleaseArticle (article) {
-                this.is_loading = true;
-                Util.offOrReleaseArticle({
-                    _id: article._id,
-                    article_is_publish: !article.article_is_publish
-                },(result) => {
-                    setTimeout( () => {
-                        this.is_loading = false;
-                        if (result.status) {
-                            this.$message({
-                                showClose: true,
-                                message: result.msg,
-                                type: 'success'
-                            });
-                            this.fetchArticlesList();
-                        } else {
-                            this.$message({
-                                showClose: true,
-                                message: result.msg,
-                                type: 'error'
-                            });
-                        }
-                    },300)
-                })
-            },
-            handleIconClick () {
-                Tool.jumpPage('?tab='+this.$route.query.tab+'&&key_word='+this.key_word);
-            },
-            handleCurrentChange (val) {
-                this.page_num = val;
-                Tool.jumpPage('?tab='+this.$route.query.tab+'&&page_num='+this.page_num);
-            },
-            /**删除文章数据*/
-            deleteArticle ({_id,article_title}) {
-                this.$confirm('是否删除'+ article_title +'?', '提示', {
+            /**删除多个数据*/
+            deleteManyTagsData () {
+                if (!this.select_arr.length) return;
+                this.$confirm('是否删除当前选择的'+ this.select_arr.length +'条数据?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
                     this.is_loading = true;
-                    Util.deleteArticle(_id,(result) => {
+                    Util.deleteManyTagsData(this.select_arr).then((result) => {
+                        setTimeout( () => {
+                            this.is_loading = false;
+                            if(result.status){
+                                this.fetchTagList();
+                                this.$message({type: 'success', message: result.msg});
+                            }else{
+                                this.$message({type: 'error', message: result.msg});
+                            }
+                        },300);
+                    }).catch( (err) => {
                         this.is_loading = false;
-                        if(result.status){
-                            this.fetchArticlesList();
-                            this.$message({type: 'success', message: result.msg});
-                        }else{
-                            this.$message({type: 'error', message: result.msg});
-                        }
+                        this.$message({
+                            showClose: true,
+                            message: '系统开了小差',
+                            type: 'error'
+                        });
                     });
                 }).catch(() => {
                     this.$message({type: 'info', message: '已取消删除'});
                 });
             },
-            /**获取文章列表数据*/
-            fetchArticlesList (route) {
+            /**多项选择*/
+            handleSelectionChange (rows) {
+                this.select_arr = rows;
+            },
+            /**搜索*/
+            searchData () {
+                this.page_num = 1;
+                this.$route.query.key_words ? this.$router.push('/tag/group?page_num=' + this.page_num + '&key_words=' + this.key_words) :
+                    this.key_words ? this.$router.push('/tag/group?page_num=' + this.page_num + '&key_words=' + this.key_words) : '';
+            },
+            handleCurrentChange (val) {
+                this.page_num = val;
+                this.key_words ? this.$router.push('/tag/group?page_num=' + this.page_num + '&key_words=' + this.key_words)
+                    : this.$router.push('/tag/group?page_num=' + this.page_num);
+            },
+            /**删除文章数据*/
+            deleteTagData ({ _id, tag_name }) {
+                this.$confirm('是否删除'+ tag_name +'?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.is_loading = true;
+                    Util.deleteTagData(_id).then((result) => {
+                        setTimeout( () => {
+                            this.is_loading = false;
+                            if(result.status){
+                                this.fetchTagList();
+                                this.$message({type: 'success', message: result.msg});
+                            }else{
+                                this.$message({type: 'error', message: result.msg});
+                            }
+                        },300);
+                    }).catch( (err) => {
+                        this.is_loading = false;
+                        this.$message({
+                            showClose: true,
+                            message: '系统开了小差',
+                            type: 'error'
+                        });
+                    });
+                }).catch(() => {
+                    this.$message({type: 'info', message: '已取消删除'});
+                });
+            },
+            /**获取列表数据*/
+            fetchTagList (route) {
                 this.is_loading = true;
-                var tab = route ? route.query.tab: this.$route.query.tab;
-                var key_word = route ? route.query.key_word: this.$route.query.key_word;
+                var key_words = route ? route.query.key_words: this.$route.query.key_words;
                 var page_num = route ? route.query.page_num: this.$route.query.page_num;
                 this.page_num = +page_num || 1;
-                setTimeout(()=>{
-                    this.$store.commit(types.SET_TAB_INDEX,tab);
-                },600);
-                Util.fetchArticlesList({
-                    tab: tab,
-                    page_num: this.page_num,
-                    page_size: this.page_size,
-                    key_word: key_word
-                }, (result) => {
+                Util.fetchTagList(this.page_num,this.page_size,key_words).then((result) => {
                     setTimeout( () => {
                         if(result.status == 1) {
                             var data = result.data;
-                            this.article_arr = data.article_arr;
-                            this.page_count = data.page_count;
-                            this.article_total = data.article_total;
+                            this.data_arr = data.arr;
+                            this.total = data.total;
                         }
                         else this.$message({type: 'error', message: result.msg});
                         this.is_loading = false;
                     },300);
+                }).catch( (err) => {
+                    this.is_loading = false;
+                    this.$message({
+                        showClose: true,
+                        message: '系统开了小差',
+                        type: 'error'
+                    });
                 });
-            },
-            /**编辑文档*/
-            editorArticle (article) {
-                this.$router.push('/editor/' + article._id);
             }
         },
         components: {
@@ -313,6 +195,3 @@
         }
     }
 </script>
-<style lang="scss">
-    @import "../../../assets/scss/define";
-</style>

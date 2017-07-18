@@ -56,8 +56,37 @@ const Util = function (win) {
 
     /**批量删除分组*/
     Util.deleteManyGroupsData = function ( idArr ) {
-        // return Util.ajax("group/deletes", "POST",{ idArr: JSON.stringify(idArr) });
         return Util.ajax("group/deletes", "POST",{ idArr });
+    };
+
+    /**标签列表*/
+    Util.fetchTagList = function ( page_num, page_size, key_words ) {
+        return Util.ajax("tag/list", "POST",{  page_num, page_size, key_words });
+    };
+
+    /**分组详情*/
+    Util.fetchTagDetailByTagId = function ( _id ) {
+        return Util.ajax("tag/info", "POST",{ _id });
+    };
+
+    /**新增分组*/
+    Util.addTagData = function ( tag_name, tag_group ) {
+        return Util.ajax("tag/add", "POST",{ tag_name, tag_group });
+    };
+
+    /**编辑分组*/
+    Util.editTagData = function ( _id, tag_name, tag_group ) {
+        return Util.ajax("tag/edit", "POST",{ _id, tag_name, tag_group });
+    };
+
+    /**删除分组*/
+    Util.deleteTagData = function ( _id ) {
+        return Util.ajax("tag/delete", "POST",{ _id });
+    };
+
+    /**批量删除分组*/
+    Util.deleteManyTagsData = function ( idArr ) {
+        return Util.ajax("tag/deletes", "POST",{ idArr });
     };
 
     /**

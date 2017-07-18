@@ -3,24 +3,25 @@
  */
 'use strict';
 /**引入数据库模型*/
-import group_module from '../../models/group'
+import tag_module from '../../models/tag'
 /**引入分页查询工具库*/
 import dbHelper from '../../lib/page-query';
 
-class Group {
+class Tag {
     constructor (){}
     /**新增分组*/
     async add(req, res, next){
         /**这里的req.body能够使用就在index.js中引入了const bodyParser = require('body-parser')*/
-        if(!req.body.group_name) {
-            res.json({status: 0, msg: '请输入分组名称'});
+        if(!req.body.tag_name || !req.body.tag_group) {
+            res.json({status: 0, msg: '缺少必要参数'});
             return;
         }
-        let group = {
-            group_name: req.body.group_name,
-            group_date: new Date()
+        let tag = {
+            tag_name: req.body.tag_name,
+            tag_group: req.body.tag_group,
+            tag_date: new Date()
         };
-        group_module.create(group, function(err, doc){
+        tag_module.create(tag, function(err, doc){
             if(err){
                 res.json({
                     status: 0,
@@ -38,19 +39,16 @@ class Group {
     async edit(req, res, next){
         /**这里的req.body能够使用就在index.js中引入了const bodyParser = require('body-parser')*/
         var _id = req.body._id;
-        if(!_id) {
-            res.json({status: 0, msg: '缺少参数'});
+        if(!_id || !req.body.tag_name || !req.body.tag_group ) {
+            res.json({status: 0, msg: '缺少必要参数'});
             return;
         }
-        if(!req.body.group_name) {
-            res.json({status: 0, msg: '请输入分组名称'});
-            return;
-        }
-        let group = {
-            group_name: req.body.group_name,
-            group_date: new Date()
+        let tag = {
+            tag_name: req.body.tag_name,
+            tag_group: req.body.tag_group,
+            tag_date: new Date()
         };
-        group_module.update({_id},group,(err,doc) => {
+        tag_module.update({_id},tag,(err,doc) => {
             if (err) {
                 res.json({
                     status: 0,
@@ -69,10 +67,10 @@ class Group {
         /**这里的req.body能够使用就在index.js中引入了const bodyParser = require('body-parser')*/
         var _id = req.body._id;
         if(!_id) {
-            res.json({status: 0, msg: '缺少参数'});
+            res.json({status: 0, msg: '缺少必要参数'});
             return;
         }
-        group_module.find({_id},(err,doc) => {
+        tag_module.find({_id},(err,doc) => {
             if(doc.length){
                 res.json({
                     status: 1,
@@ -90,11 +88,11 @@ class Group {
     /**分组列表*/
     async list(req, res, next){
         let page = +req.body.page_num || 1;
-        let rows = +req.body.page_size || 999999;
+        let rows = +req.body.page_size || 12;
         let key_words = req.body.key_words;
         let query = {};
-        if(key_words) query.group_name =  eval("/"+key_words+"/ig");
-        dbHelper.pageQuery(page, rows, group_module, '', query, {'group_date': -1}, (error, $page) => {
+        if(key_words) query.tag_name =  eval("/"+key_words+"/ig");
+        dbHelper.pageQuery(page, rows, tag_module, '', query, {'tag_date': -1}, (error, $page) => {
             if(error){
                 res.json({status: 0, msg: '获取数据失败'});
             }else{
@@ -113,10 +111,10 @@ class Group {
     async del(req, res, next){
         var _id = req.body._id;
         if(!_id) {
-            res.json({status: 0, msg: '缺少参数'});
+            res.json({status: 0, msg: '缺少必要参数'});
             return;
         }
-        group_module.remove({_id},(err,doc) => {
+        tag_module.remove({_id},(err,doc) => {
             if (err) {
                 res.json({
                     status: 0,
@@ -134,10 +132,10 @@ class Group {
     async dels(req, res, next){
         var idArr = req.body.idArr;
         if(!idArr || !idArr.length) {
-            res.json({status: 0, msg: '缺少参数'});
+            res.json({status: 0, msg: '缺少必要参数'});
             return;
         }
-        group_module.remove({_id: { $in: idArr }},(err,doc) => {
+        tag_module.remove({_id: { $in: idArr }},(err,doc) => {
             if (err) {
                 res.json({
                     status: 0,
@@ -153,4 +151,4 @@ class Group {
     }
 }
 
-export default new Group()
+export default new Tag()

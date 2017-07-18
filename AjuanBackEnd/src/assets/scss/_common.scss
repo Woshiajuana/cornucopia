@@ -13,7 +13,8 @@
     @extend %l0;
     @extend %t0;
     @extend %oya;
-    padding: 0 20px 80px;
+    overflow-y: scroll;
+    padding: 0 20px 65px;
     .el-breadcrumb{
         @extend %f14;
         @include br(4px);
@@ -67,6 +68,9 @@
     }
     .demo-form-inline{
         @extend %fr;
+    }
+    .el-form-item{
+        margin-bottom: 0;
     }
 }
 .session-title{

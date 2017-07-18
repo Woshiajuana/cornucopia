@@ -62,8 +62,11 @@
     @extend %clearfix;
     margin-bottom: 20px;
     a,button{
-        @extend %fr;
+        @extend %fl;
         margin-left: 10px;
+    }
+    .demo-form-inline{
+        @extend %fr;
     }
 }
 .session-title{

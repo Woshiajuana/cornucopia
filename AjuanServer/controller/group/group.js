@@ -130,6 +130,27 @@ class Group {
             }
         })
     }
+    /**删除多个分组*/
+    async dels(req, res, next){
+        var idArr = req.body.idArr;
+        if(!idArr.length) {
+            res.json({status: 0, msg: '缺少参数'});
+            return;
+        }
+        group_module.remove({_id},(err,doc) => {
+            if (err) {
+                res.json({
+                    status: 0,
+                    msg: '删除失败'
+                });
+            } else {
+                res.json({
+                    status: 1,
+                    msg: '删除成功'
+                });
+            }
+        })
+    }
 }
 
 export default new Group()

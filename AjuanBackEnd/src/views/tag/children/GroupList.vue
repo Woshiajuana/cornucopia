@@ -4,31 +4,24 @@
          element-loading-text="加载中~~~">
         <div class="container-inner">
             <crumb></crumb>
-            <el-form :inline="true" class="demo-form-inline">
-                <el-form-item label="分组名称">
-                    <el-input v-model="key_words" placeholder="分组名称"></el-input>
-                </el-form-item>
-                <el-form-item label="创建时间">
-                    <el-col :span="24">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="group_date" style="width: 100%;"></el-date-picker>
-                    </el-col>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="onSubmit">查询</el-button>
-                </el-form-item>
-            </el-form>
             <div class="operate-wrap el-col el-col-24">
-                <h2 class="session-title">分组列表</h2>
-                <el-button class="el-button el-button--danger" :disabled="true"><i class="el-icon-delete el-icon--left"></i>删除</el-button>
-                <el-button class="el-button el-button--warning" :disabled="true"><i class="el-icon-upload el-icon--left"></i>下架</el-button>
-                <el-button class="el-button el-button--primary" :disabled="true"><i class="el-icon-upload el-icon--left"></i>上架</el-button>
+                <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item>
+                        <el-input v-model="key_words" placeholder="请输入分组名称"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="searchGroupByGroupName">查询</el-button>
+                    </el-form-item>
+                </el-form>
                 <router-link to="/tag/group/add" class="el-button el-button--primary"><i class="el-icon-plus el-icon--left"></i>新增</router-link>
+                <el-button @click="deleteManyGroups" class="el-button el-button--danger" :disabled="!select_arr.length"><i class="el-icon-delete el-icon--left"></i>删除</el-button>
             </div>
             <el-table
                 ref="multipleTable"
                 :data="group_arr"
                 border
                 tooltip-effect="dark"
+                @selection-change="handleSelectionChange"
                 style="width: 100%">
                 <el-table-column
                     type="selection"
@@ -74,11 +67,7 @@
         name: 'group-list',
         data() {
             return {
-                form_data: {
-                    name: '',
-                    date: ''
-                },
-                group_date:'',
+                select_arr: [],
                 page_num: 1,
                 page_size: 10,
                 group_total: 0,
@@ -94,7 +83,34 @@
             this.fetchGroupList();
         },
         methods: {
-            onSubmit() {
+            /**删除多个数据*/
+            deleteManyGroups () {
+                if (!this.select_arr.length) return;
+                this.$confirm('是否删除当前选择的'+ this.select_arr.length +'条数据?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.is_loading = true;
+                    Util.deleteGroupData(_id,(result) => {
+                        this.is_loading = false;
+                        if(result.status){
+                            this.fetchArticlesList();
+                            this.$message({type: 'success', message: result.msg});
+                        }else{
+                            this.$message({type: 'error', message: result.msg});
+                        }
+                    });
+                }).catch(() => {
+                    this.$message({type: 'info', message: '已取消删除'});
+                });
+            },
+            /**多项选择*/
+            handleSelectionChange (rows) {
+                this.select_arr = rows;
+            },
+            /**搜索*/
+            searchGroupByGroupName() {
                 this.page_num = 1;
                 this.$route.query.key_words ? this.$router.push('/tag/group?page_num=' + this.page_num + '&key_words=' + this.key_words) :
                 this.key_words ? this.$router.push('/tag/group?page_num=' + this.page_num + '&key_words=' + this.key_words) : '';

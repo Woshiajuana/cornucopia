@@ -39,7 +39,7 @@
                     setTimeout( () => {
                         if(result.status == 1) {
                             this.$message({type: 'success', message: result.msg});
-                            this.form.name = '';
+                            this.$router.push('/tag/group');
                         }
                         else this.$message({type: 'error', message: result.msg});
                         this.is_loading = false;
@@ -75,11 +75,11 @@
             },
             editGroupData ( _id, group_name ) {
                 this.is_loading = true;
-                Util.fetchGroupDetailByGroupId( _id, group_name).then((result) => {
+                Util.editGroupData( _id, group_name).then((result) => {
                     setTimeout( () => {
                         if(result.status == 1) {
-                            var data = result.data;
-                            this.form.name = data.group_name;
+                            this.$message({type: 'success', message: result.msg});
+                            this.$router.push('/tag/group');
                         }
                         else this.$message({type: 'error', message: result.msg});
                         this.is_loading = false;

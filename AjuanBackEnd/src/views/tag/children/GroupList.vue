@@ -14,7 +14,7 @@
                     </el-form-item>
                 </el-form>
                 <router-link to="/tag/group/add" class="el-button el-button--primary"><i class="el-icon-plus el-icon--left"></i>新增</router-link>
-                <el-button @click="deleteManyGroups" class="el-button el-button--danger" :disabled="!select_arr.length"><i class="el-icon-delete el-icon--left"></i>删除</el-button>
+                <el-button @click="deleteManyGroupsData" class="el-button el-button--danger" :disabled="!select_arr.length"><i class="el-icon-delete el-icon--left"></i>删除</el-button>
             </div>
             <el-table
                 ref="multipleTable"
@@ -84,7 +84,7 @@
         },
         methods: {
             /**删除多个数据*/
-            deleteManyGroups () {
+            deleteManyGroupsData () {
                 if (!this.select_arr.length) return;
                 this.$confirm('是否删除当前选择的'+ this.select_arr.length +'条数据?', '提示', {
                     confirmButtonText: '确定',
@@ -92,14 +92,23 @@
                     type: 'warning'
                 }).then(() => {
                     this.is_loading = true;
-                    Util.deleteGroupData(_id,(result) => {
+                    Util.deleteManyGroupsData(this.select_arr).then((result) => {
+                        setTimeout( () => {
+                            this.is_loading = false;
+                            if(result.status){
+                                this.fetchGroupList();
+                                this.$message({type: 'success', message: result.msg});
+                            }else{
+                                this.$message({type: 'error', message: result.msg});
+                            }
+                        },300);
+                    }).catch( (err) => {
                         this.is_loading = false;
-                        if(result.status){
-                            this.fetchArticlesList();
-                            this.$message({type: 'success', message: result.msg});
-                        }else{
-                            this.$message({type: 'error', message: result.msg});
-                        }
+                        this.$message({
+                            showClose: true,
+                            message: '系统开了小差',
+                            type: 'error'
+                        });
                     });
                 }).catch(() => {
                     this.$message({type: 'info', message: '已取消删除'});
@@ -128,14 +137,23 @@
                     type: 'warning'
                 }).then(() => {
                     this.is_loading = true;
-                    Util.deleteGroupData(_id,(result) => {
+                    Util.deleteGroupData(_id).then((result) => {
+                        setTimeout( () => {
+                            this.is_loading = false;
+                            if(result.status){
+                                this.fetchGroupList();
+                                this.$message({type: 'success', message: result.msg});
+                            }else{
+                                this.$message({type: 'error', message: result.msg});
+                            }
+                        },300);
+                    }).catch( (err) => {
                         this.is_loading = false;
-                        if(result.status){
-                            this.fetchArticlesList();
-                            this.$message({type: 'success', message: result.msg});
-                        }else{
-                            this.$message({type: 'error', message: result.msg});
-                        }
+                        this.$message({
+                            showClose: true,
+                            message: '系统开了小差',
+                            type: 'error'
+                        });
                     });
                 }).catch(() => {
                     this.$message({type: 'info', message: '已取消删除'});

@@ -4,6 +4,11 @@
 import axios from 'axios'
 axios.defaults.headers.post['Content-Type'] = "application/json; charset=utf-8";
 
+const PackData = (data) => {
+    return JSON.stringify(data)
+};
+
+
 const Util = function (win) {
 
     /**
@@ -43,9 +48,16 @@ const Util = function (win) {
     Util.editGroupData = function ( _id, group_name ) {
         return Util.ajax("group/edit", "POST",{ _id, group_name });
     };
+
     /**删除分组*/
     Util.deleteGroupData = function ( _id ) {
         return Util.ajax("group/delete", "POST",{ _id });
+    };
+
+    /**批量删除分组*/
+    Util.deleteManyGroupsData = function ( idArr ) {
+        // return Util.ajax("group/deletes", "POST",{ idArr: JSON.stringify(idArr) });
+        return Util.ajax("group/deletes", "POST",{ idArr });
     };
 
     /**
@@ -61,8 +73,8 @@ const Util = function (win) {
                 method: method,
                 baseURL: MAIN_URL,
                 timeout: 10 * 1000,
-                data: isGet ? '' : data,
-                params: isGet ? data : '',
+                data: isGet ? '' : PackData(data),
+                params: isGet ? PackData(data) : '',
                 responseType: 'json'
             }).then((res) => {
                 return resolve(res.data)

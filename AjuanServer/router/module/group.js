@@ -13,5 +13,6 @@ router.post('/edit', Group.edit);
 router.post('/info', Group.info);
 router.post('/list', Group.list);
 router.post('/delete', Group.del);
+router.post('/deletes', Group.dels);
 
 export default router

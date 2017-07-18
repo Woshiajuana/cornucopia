@@ -133,11 +133,11 @@ class Group {
     /**删除多个分组*/
     async dels(req, res, next){
         var idArr = req.body.idArr;
-        if(!idArr.length) {
+        if(!idArr || !idArr.length) {
             res.json({status: 0, msg: '缺少参数'});
             return;
         }
-        group_module.remove({_id},(err,doc) => {
+        group_module.remove({_id: { $in: idArr }},(err,doc) => {
             if (err) {
                 res.json({
                     status: 0,

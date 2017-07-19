@@ -159,16 +159,16 @@
             },
             /**搜索*/
             searchData () {
-                this.page_num = 1;
+//                this.page_num = 1;
                 this.$route.query.key_words || this.$route.query.tag_group ?
-                    this.$router.push('/tag/list?page_num=' + this.page_num + '&key_words=' + this.key_words + '&tag_group=' + this.tag_group)
-                    : this.key_words ? this.$router.push('/tag/list?page_num=' + this.page_num + '&key_words=' + this.key_words + '&tag_group=' + this.tag_group)
-                    : this.tag_group ? this.$router.push('/tag/list?page_num=' + this.page_num + '&key_words=' + this.key_words + '&tag_group=' + this.tag_group) : '';
+                    this.$router.push('/tag/list?key_words=' + this.key_words + '&tag_group=' + this.tag_group)
+                    : this.key_words ? this.$router.push('/tag/list?key_words=' + this.key_words + '&tag_group=' + this.tag_group)
+                    : this.tag_group ? this.$router.push('/tag/list?key_words=' + this.key_words + '&tag_group=' + this.tag_group) : '';
             },
             handleCurrentChange (val) {
                 this.page_num = val;
-                this.key_words ? this.$router.push('/tag/list?page_num=' + this.page_num + '&key_words=' + this.key_words)
-                    : this.$router.push('/tag/list?page_num=' + this.page_num);
+                this.key_words || this.tag_group ? this.$router.push('/tag/list?page_num=' + this.page_num + '&key_words=' + this.key_words + '&tag_group=' + this.tag_group)
+                    :  this.$router.push('/tag/list?page_num=' + this.page_num);
             },
             /**删除文章数据*/
             deleteTagData ({ _id, tag_name }) {

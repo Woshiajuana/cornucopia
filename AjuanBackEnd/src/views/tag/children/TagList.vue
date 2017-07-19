@@ -10,6 +10,17 @@
                         <el-input v-model="key_words" placeholder="请输入类别名称"></el-input>
                     </el-form-item>
                     <el-form-item>
+                        <el-select v-model="tag_group" placeholder="请选择类别分组">
+                            <el-option :label="'全部'" :value="'all'"></el-option>
+                            <el-option
+                                v-for="(item,index) in options"
+                                :key="index"
+                                :label="item.group_name"
+                                :value="item.group_name">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
                         <el-button type="primary" @click="searchData">查询</el-button>
                     </el-form-item>
                 </el-form>
@@ -72,11 +83,13 @@
         name: 'group-list',
         data() {
             return {
+                options: [],
                 select_arr: [],
                 page_num: 1,
                 page_size: 12,
                 total: 0,
                 key_words: '',
+                tag_group: '',
                 is_loading: false,
                 data_arr: []
             }
@@ -86,8 +99,29 @@
         },
         created () {
             this.fetchTagList();
+            this.fetchGroupList();
         },
         methods: {
+            fetchGroupList () {
+                this.is_loading = true;
+                Util.fetchGroupList().then((result) => {
+                    setTimeout(() => {
+                        if(result.status == 1) {
+                            var data = result.data;
+                            this.options = data.arr;
+                        }
+                        else this.$message({type: 'error', message: result.msg});
+                        this.is_loading = false;
+                    },300)
+                }).catch( (err) => {
+                    this.is_loading = false;
+                    this.$message({
+                        showClose: true,
+                        message: '系统开了小差',
+                        type: 'error'
+                    });
+                });
+            },
             /**删除多个数据*/
             deleteManyTagsData () {
                 if (!this.select_arr.length) return;
@@ -126,13 +160,15 @@
             /**搜索*/
             searchData () {
                 this.page_num = 1;
-                this.$route.query.key_words ? this.$router.push('/tag/group?page_num=' + this.page_num + '&key_words=' + this.key_words) :
-                    this.key_words ? this.$router.push('/tag/group?page_num=' + this.page_num + '&key_words=' + this.key_words) : '';
+                this.$route.query.key_words || this.$route.query.tag_group ?
+                    this.$router.push('/tag/list?page_num=' + this.page_num + '&key_words=' + this.key_words + '&tag_group=' + this.tag_group)
+                    : this.key_words ? this.$router.push('/tag/list?page_num=' + this.page_num + '&key_words=' + this.key_words + '&tag_group=' + this.tag_group)
+                    : this.tag_group ? this.$router.push('/tag/list?page_num=' + this.page_num + '&key_words=' + this.key_words + '&tag_group=' + this.tag_group) : '';
             },
             handleCurrentChange (val) {
                 this.page_num = val;
-                this.key_words ? this.$router.push('/tag/group?page_num=' + this.page_num + '&key_words=' + this.key_words)
-                    : this.$router.push('/tag/group?page_num=' + this.page_num);
+                this.key_words ? this.$router.push('/tag/list?page_num=' + this.page_num + '&key_words=' + this.key_words)
+                    : this.$router.push('/tag/list?page_num=' + this.page_num);
             },
             /**删除文章数据*/
             deleteTagData ({ _id, tag_name }) {
@@ -169,8 +205,9 @@
                 this.is_loading = true;
                 var key_words = route ? route.query.key_words: this.$route.query.key_words;
                 var page_num = route ? route.query.page_num: this.$route.query.page_num;
+                var tag_group = route ? route.query.tag_group: this.$route.query.tag_group;
                 this.page_num = +page_num || 1;
-                Util.fetchTagList(this.page_num,this.page_size,key_words).then((result) => {
+                Util.fetchTagList(this.page_num,this.page_size,tag_group,key_words).then((result) => {
                     setTimeout( () => {
                         if(result.status == 1) {
                             var data = result.data;

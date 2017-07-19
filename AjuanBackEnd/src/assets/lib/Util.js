@@ -60,8 +60,8 @@ const Util = function (win) {
     };
 
     /**标签列表*/
-    Util.fetchTagList = function ( page_num, page_size, key_words ) {
-        return Util.ajax("tag/list", "POST",{  page_num, page_size, key_words });
+    Util.fetchTagList = function ( page_num, page_size, tag_group, key_words ) {
+        return Util.ajax("tag/list", "POST",{  page_num, page_size, tag_group, key_words });
     };
 
     /**分组详情*/

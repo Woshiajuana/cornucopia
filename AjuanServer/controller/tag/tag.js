@@ -90,8 +90,10 @@ class Tag {
         let page = +req.body.page_num || 1;
         let rows = +req.body.page_size || 12;
         let key_words = req.body.key_words;
+        let tag_group = req.body.tag_group;
         let query = {};
         if(key_words) query.tag_name =  eval("/"+key_words+"/ig");
+        if(tag_group && tag_group != 'all') query.tag_group =  tag_group;
         dbHelper.pageQuery(page, rows, tag_module, '', query, {'tag_date': -1}, (error, $page) => {
             if(error){
                 res.json({status: 0, msg: '获取数据失败'});

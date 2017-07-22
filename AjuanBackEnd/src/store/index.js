@@ -19,7 +19,7 @@ const state = {
 const actions = {
     fetchLabel ({state,commit}) {
         commit(types.SET_LABEL_LOADING,true);
-        Util.fetchLabel( (result) => {
+        Util.fetchGroupList( (result) => {
             setTimeout(() => {
                 commit(types.SET_LABEL_LOADING,false);
                 if(result.status) {

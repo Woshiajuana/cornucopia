@@ -2,33 +2,26 @@
     <div class="container-wrap">
         <div class="container-inner">
             <crumb></crumb>
-            <el-form :inline="true" :model="formInline" class="demo-form-inline">
-                <el-form-item label="文章名称">
-                    <el-input v-model="formInline.user" placeholder="用户名"></el-input>
-                </el-form-item>
-                <el-form-item label="文章类别">
-                    <el-select v-model="formInline.user" placeholder="文章类别">
-                        <el-option label="区域一" value="shanghai"></el-option>
-                        <el-option label="区域二" value="beijing"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="是否上下架">
-                    <el-select v-model="formInline.user" placeholder="是否上下架">
-                        <el-option label="是" value="1"></el-option>
-                        <el-option label="否" value="0"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="创建时间">
-                    <el-col :span="24">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="formInline.date1" style="width: 100%;"></el-date-picker>
-                    </el-col>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="onSubmit">查询</el-button>
-                </el-form-item>
-            </el-form>
             <div class="operate-wrap el-col el-col-24">
-                <h2 class="session-title">文章列表</h2>
+                <el-form :inline="true" class="demo-form-inline">
+                    <el-form-item label="文章名称">
+                        <el-input v-model="formInline.user" placeholder="用户名"></el-input>
+                    </el-form-item>
+                    <el-form-item label="是否上下架">
+                        <el-select v-model="formInline.user" placeholder="是否上下架">
+                            <el-option label="是" value="1"></el-option>
+                            <el-option label="否" value="0"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="创建时间">
+                        <el-col :span="24">
+                            <el-date-picker type="date" placeholder="选择日期" v-model="formInline.date1" style="width: 100%;"></el-date-picker>
+                        </el-col>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="onSubmit">查询</el-button>
+                    </el-form-item>
+                </el-form>
                 <el-button class="el-button el-button--danger" :disabled="true"><i class="el-icon-delete el-icon--left"></i>删除</el-button>
                 <el-button class="el-button el-button--warning" :disabled="true"><i class="el-icon-upload el-icon--left"></i>下架</el-button>
                 <el-button class="el-button el-button--primary" :disabled="true"><i class="el-icon-upload el-icon--left"></i>上架</el-button>

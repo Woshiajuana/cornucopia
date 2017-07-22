@@ -1,8 +1,9 @@
 <template>
-    <div class="container-wrap">
-        <div class="container-content editor-wrap"
-             v-loading="is_loading"
-             :element-loading-text="loading_text">
+    <div class="container-wrap"
+         v-loading="is_loading"
+         :element-loading-text="loading_text">
+        <div class="container-inner">
+            <crumb></crumb>
             <p class="prompt-text"><span class="prompt-icon">*</span>文章类型和文章标题：</p>
             <el-input class="input-box" placeholder="请输入标题" v-model="article_title">
                 <template slot="prepend">
@@ -19,15 +20,16 @@
                 <p class="prompt-text"><span class="prompt-icon">*</span>正文：</p>
                 <textarea id="textarea"></textarea>
             </div>
-            <div class="input-btn">
-                <el-button v-if="!article" type="default" @click="uploadArticle(0)">保存草稿</el-button>
-                <el-button v-if="!article" type="primary" @click="uploadArticle(1)">发布文章</el-button>
-                <el-button v-if="article" type="primary" @click="updateArticle()">完成修改</el-button>
+            <div class="operate-wrap el-col el-col-24">
+                <el-button v-if="!article" type="default" class="el-button el-button--default" @click="uploadArticle(0)">保存草稿</el-button>
+                <el-button v-if="!article" type="primary" class="el-button el-button--primary" @click="uploadArticle(1)">发布文章</el-button>
+                <el-button v-if="article" type="primary" class="el-button el-button--primary" @click="updateArticle()">完成修改</el-button>
             </div>
         </div>
     </div>
 </template>
 <script>
+    import Crumb from '../../components/crumb.vue'
     import types from '../../store/mutation-types'
     import Util from '../../assets/lib/Util'
     import Tool from '../../assets/lib/Tool'
@@ -171,7 +173,6 @@
             '$route': 'editorOrUpdate'
         },
         created () {
-//            this.editorOrUpdate();
             this.$nextTick( () => {
                 setTimeout( () => {
                     this.simplemde = new SimpleMDE({
@@ -179,6 +180,9 @@
                     });
                 },500)
             });
+        },
+        components: {
+            Crumb
         }
     }
 </script>

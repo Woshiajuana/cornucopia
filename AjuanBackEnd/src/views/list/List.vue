@@ -22,9 +22,9 @@
                         <el-button type="primary" @click="onSubmit">查询</el-button>
                     </el-form-item>
                 </el-form>
+                <el-button class="el-button el-button--primary" :disabled="true"><i class="el-icon-circle-check el-icon--left"></i>上架</el-button>
+                <el-button class="el-button el-button--warning" :disabled="true"><i class="el-icon-circle-cross el-icon--left"></i>下架</el-button>
                 <el-button class="el-button el-button--danger" :disabled="true"><i class="el-icon-delete el-icon--left"></i>删除</el-button>
-                <el-button class="el-button el-button--warning" :disabled="true"><i class="el-icon-upload el-icon--left"></i>下架</el-button>
-                <el-button class="el-button el-button--primary" :disabled="true"><i class="el-icon-upload el-icon--left"></i>上架</el-button>
             </div>
             <el-table
                 ref="multipleTable"

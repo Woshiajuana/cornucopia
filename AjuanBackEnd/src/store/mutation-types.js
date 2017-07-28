@@ -3,12 +3,12 @@
  */
 const SET_TAB_INDEX = 'SET_TAB_INDEX';
 
-const INIT_LABEL = 'INIT_LABEL';
+const INIT_TAG = 'INIT_TAG';
 
-const SET_LABEL_LOADING = 'SET_LABEL_LOADING';
+const SET_TAG_LOADING = 'SET_TAG_LOADING';
 
 export default {
     SET_TAB_INDEX,
-    INIT_LABEL,
-    SET_LABEL_LOADING
+    INIT_TAG,
+    SET_TAG_LOADING
 }

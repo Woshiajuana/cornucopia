@@ -9,9 +9,10 @@
                 <template slot="prepend">
                     <el-select v-model="article_type" placeholder="请选择文章类型">
                         <el-option
-                            v-for="item in labelArr"
-                            :label="item.label"
-                            :value="item.label">
+                            v-for="(item,index) in tagArr"
+                            :key="index"
+                            :label="item.tag_name"
+                            :value="item.tag_name">
                         </el-option>
                     </el-select>
                 </template>
@@ -47,8 +48,8 @@
             }
         },
         computed: {
-            labelArr () {
-                return this.$store.state.label_arr;
+            tagArr () {
+                return this.$store.state.tag_arr;
             }
         },
         methods: {

@@ -4,7 +4,7 @@
 'use strict';
 
 import express from 'express'
-import Article from '../../controller/tag/tag'
+import Article from '../../controller/article/article'
 
 const router = express.Router();
 

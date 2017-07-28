@@ -102,7 +102,7 @@
             fetchArticle (_id) {
                 this.is_loading = true;
                 this.loading_text = '获取文章数据';
-                Util.fetchArticle({_id}, (result) => {
+                Util.fetchArticle({_id}).then((result) => {
                     setTimeout(() => {
                         this.is_loading = false;
                         this.loading_text = '拼命上传中~~~';
@@ -136,7 +136,7 @@
                 this.article.article_type = this.article_type;
                 this.article.article_title = this.article_title;
                 this.article.article_con = this.simplemde.value();
-                Util.updateArticle(this.article, (result) => {
+                Util.updateArticle(this.article).then((result) => {
                     setTimeout(() => {
                         this.is_loading = false;
                         if (result.status) {

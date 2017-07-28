@@ -13,11 +13,6 @@
                             <el-option label="否" value="0"></el-option>
                         </el-select>
                     </el-form-item>
-                    <el-form-item label="创建时间">
-                        <el-col :span="24">
-                            <el-date-picker type="date" placeholder="选择日期" v-model="formInline.date1" style="width: 100%;"></el-date-picker>
-                        </el-col>
-                    </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmit">查询</el-button>
                     </el-form-item>

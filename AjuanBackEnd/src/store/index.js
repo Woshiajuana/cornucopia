@@ -17,14 +17,14 @@ const state = {
 };
 
 const actions = {
-    fetchTagList ({state,commit}) {
+    fetchTagList ( { commit } ) {
         commit(types.SET_TAG_LOADING,true);
-        Util.fetchTagList().then((result) => {
-            setTimeout(() => {
-                commit(types.SET_TAG_LOADING,false);
-                if(result.status == 1) {
+        Util.fetchTagList().then( (result) => {
+            setTimeout( () => {
+                commit( types.SET_TAG_LOADING, false );
+                if( result.status == 1 ) {
                     var tags = result.data.arr;
-                    commit(types.INIT_TAG,tags);
+                    commit( types.INIT_TAG, tags );
                 }
             },300)
         });

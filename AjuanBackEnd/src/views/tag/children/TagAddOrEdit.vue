@@ -74,6 +74,7 @@
                             this.$router.push('/tag/list');
                         }
                         else this.$message({type: 'error', message: result.msg});
+                        this.$store.dispatch('fetchTagList');
                         this.is_loading = false;
                     },300);
                 }).catch( (err) => {
@@ -115,6 +116,7 @@
                             this.$router.push('/tag/list');
                         }
                         else this.$message({type: 'error', message: result.msg});
+                        this.$store.dispatch('fetchTagList');
                         this.is_loading = false;
                     },300);
                 }).catch( (err) => {

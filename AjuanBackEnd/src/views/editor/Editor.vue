@@ -64,16 +64,12 @@
                     return;
                 }
                 this.is_loading = true;
-                var article = {
-                        article_title: this.article_title,
-                        article_type: this.article_type,
-                        article_is_publish: type ? true : false,
-                        article_con: this.simplemde && this.simplemde.value()
-                    },
+                var article_is_publish = type ? true : false,
+                    article_con = this.simplemde && this.simplemde.value(),
                     error_msg = type ? '发布文章失败' : '保存草稿失败',
                     success_msg = type ? '发布文章成功' : '保存草稿成功';
-                setTimeout(() => {
-                    Util.uploadArticle(article,(result) => {
+                Util.addArticleData( this.article_title, this.article_type, article_con, article_is_publish ).then((result) => {
+                    setTimeout(() => {
                         if(result.status){
                             this.reset();
                             this.$message({
@@ -88,8 +84,8 @@
                                 type: 'error'
                             });
                         }
-                    });
-                },300);
+                    },300);
+                });
             },
             /**重置*/
             reset () {
@@ -99,10 +95,10 @@
                 this.simplemde && this.simplemde.value("");
             },
             /**获取数据*/
-            fetchArticle (_id) {
+            fetchArticleDetailByTagId ( _id ) {
                 this.is_loading = true;
                 this.loading_text = '获取文章数据';
-                Util.fetchArticle({_id}).then((result) => {
+                Util.fetchArticleDetailByTagId({ _id }).then((result) => {
                     setTimeout(() => {
                         this.is_loading = false;
                         this.loading_text = '拼命上传中~~~';
@@ -136,7 +132,7 @@
                 this.article.article_type = this.article_type;
                 this.article.article_title = this.article_title;
                 this.article.article_con = this.simplemde.value();
-                Util.updateArticle(this.article).then((result) => {
+                Util.editArticleData(this.article).then((result) => {
                     setTimeout(() => {
                         this.is_loading = false;
                         if (result.status) {
@@ -159,7 +155,7 @@
             editorOrUpdate (route) {
                 var _id = route ? route.params._id : this.$route.params._id;
                 if (_id) {
-                    this.fetchArticle( _id );
+                    this.fetchArticleDetailByTagId( _id );
                 } else {
                     this.reset();
                     this.article = '';

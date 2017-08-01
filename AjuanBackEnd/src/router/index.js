@@ -40,7 +40,7 @@ let router = new Router({
                     name: 'list',
                     component: List,
                     meta: {
-                        tab_index: '/list?tag=all',
+                        tag_index: '/list?tag=all',
                         crumb: [
                             { con: '文章管理' },
                             { con: '全部文章' }
@@ -53,7 +53,7 @@ let router = new Router({
                     name: 'editor',
                     component: Editor,
                     meta: {
-                        tab_index: '/editor',
+                        tag_index: '/editor',
                         crumb: [
                             { con: '新增文章' }
                         ]
@@ -65,7 +65,7 @@ let router = new Router({
                     name: 'editor',
                     component: Editor,
                     meta: {
-                        tab_index: '/list?tag=all',
+                        tag_index: '/list?tag=all',
                         crumb: [
                             { con: '文章管理' },
                             { con: '编辑文章' }
@@ -78,7 +78,7 @@ let router = new Router({
                     name: 'tag',
                     component: Tag,
                     meta: {
-                        tab_index: '/tag',
+                        tag_index: '/tag',
                         crumb: [
                             { con: '类别管理' }
                         ]
@@ -90,7 +90,7 @@ let router = new Router({
                             name: 'tag-list',
                             component: TagList,
                             meta: {
-                                tab_index: '/tag/list',
+                                tag_index: '/tag/list',
                                 crumb: [
                                     { con: '类别管理' },
                                     { con: '文章类别' }
@@ -103,7 +103,7 @@ let router = new Router({
                             name: 'tag-add',
                             component: TagAddOrEdit,
                             meta: {
-                                tab_index: '/tag/list',
+                                tag_index: '/tag/list',
                                 crumb: [
                                     { con: '类别管理' },
                                     { path: '/tag/list', con: '文章类别' },
@@ -117,7 +117,7 @@ let router = new Router({
                             name: 'tag-edit',
                             component: TagAddOrEdit,
                             meta: {
-                                tab_index: '/tag/list',
+                                tag_index: '/tag/list',
                                 crumb: [
                                     { con: '类别管理' },
                                     { path: '/tag/list', con: '文章类别' },
@@ -131,7 +131,7 @@ let router = new Router({
                             name: 'group-list',
                             component: GroupList,
                             meta: {
-                                tab_index: '/tag/group',
+                                tag_index: '/tag/group',
                                 crumb: [
                                     { con: '类别管理' },
                                     { con: '类别分组' }
@@ -144,7 +144,7 @@ let router = new Router({
                             name: 'group-add',
                             component: GroupAddOrEdit,
                             meta: {
-                                tab_index: '/tag/group',
+                                tag_index: '/tag/group',
                                 crumb: [
                                     { con: '类别管理' },
                                     { path: '/tag/group', con: '文章分组' },
@@ -158,7 +158,7 @@ let router = new Router({
                             name: 'group-edit',
                             component: GroupAddOrEdit,
                             meta: {
-                                tab_index: '/tag/group',
+                                tag_index: '/tag/group',
                                 crumb: [
                                     { con: '类别管理' },
                                     { path: '/tag/group', con: '文章分组' },
@@ -199,7 +199,7 @@ router.beforeEach( (to, from, next) => {
         console.log(4)
         next();
     }
-    if( to.meta.tab_index ) Store.commit( types.SET_TAB_INDEX, to.meta.tab_index );
+    if( to.meta.tag_index ) Store.commit( types.SET_TAG_INDEX, to.meta.tag_index );
     next();
 });
 export default router

@@ -1,7 +1,7 @@
 <template>
     <div class="menu-wrap">
         <div class="menu-inner">
-            <el-menu theme="dark" router unique-opened :default-active="tabIndex" class="el-menu-vertical-demo">
+            <el-menu theme="dark" router unique-opened :default-active="tagIndex" class="el-menu-vertical-demo">
                 <el-submenu index="/list">
                     <template slot="title"><i class="el-icon-document"></i>文章管理</template>
                     <el-menu-item-group v-loading="tagLoading">
@@ -22,6 +22,7 @@
     </div>
 </template>
 <script>
+    import types from '../store/mutation-types'
     export default {
         name: 'menu',
         data () {
@@ -30,11 +31,10 @@
             }
         },
         computed: {
-            tabIndex(){
-                return this.$store.state.tab_index;
+            tagIndex(){
+                return this.$store.state.tag_index;
             },
             tagArr () {
-                console.log(this.$store.state.tag_arr)
                 return this.$store.state.tag_arr;
             },
             tagLoading () {
@@ -42,7 +42,11 @@
             }
         },
         created () {
-            this.$store.dispatch('fetchTagList');
+            this.$store.dispatch('fetchTagList',() => {
+                this.$nextTick( () => {
+                    this.$store.commit(types.SET_TAG_INDEX,'/list?tag=' + this.$route.query.tag);
+                })
+            });
         }
     }
 </script>

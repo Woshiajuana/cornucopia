@@ -158,7 +158,6 @@
                 } else {
                     this.reset();
                     this.article = '';
-                    this.$store.commit(types.SET_TAB_INDEX,'2');
                 }
             }
         },

@@ -11,20 +11,20 @@ Vue.use(Vuex);
  * 数据存储
  * */
 const state = {
-    tab_index: 'all',
+    tag_index: '/list?tag=all',
     tag_arr: [],
     tag_loading: false
 };
 
 const actions = {
-    fetchTagList ( { commit } ) {
+    fetchTagList ( { commit }, callback ) {
         commit(types.SET_TAG_LOADING,true);
         Util.fetchTagList().then( (result) => {
             setTimeout( () => {
                 commit( types.SET_TAG_LOADING, false );
                 if( result.status == 1 ) {
-                    var tags = result.data.arr;
-                    commit( types.INIT_TAG, tags );
+                    commit( types.INIT_TAG, result.data.arr);
+                    callback && callback();
                 }
             },300)
         });
@@ -43,8 +43,8 @@ const modules = {
  * */
 const mutations = {
     /**全局设置MENU的tab选项值*/
-    [ types.SET_TAB_INDEX ] (state,tab_index) {
-        state.tab_index = tab_index;
+    [ types.SET_TAG_INDEX ] (state,tag_index) {
+        state.tag_index = tag_index;
     },
     /**全局设置MENU的文章类别*/
     [ types.INIT_TAG ] (state,tag_arr) {

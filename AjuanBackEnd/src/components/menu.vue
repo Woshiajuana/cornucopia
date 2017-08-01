@@ -44,7 +44,7 @@
         created () {
             this.$store.dispatch('fetchTagList',() => {
                 this.$nextTick( () => {
-                    this.$store.commit(types.SET_TAG_INDEX,'/list?tag=' + this.$route.query.tag);
+                    this.$route.query.tag && this.$store.commit(types.SET_TAG_INDEX,'/list?tag=' + this.$route.query.tag);
                 })
             });
         }

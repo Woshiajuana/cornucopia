@@ -12,7 +12,7 @@ class Article {
     /**新增文章*/
     async add(req, res, next){
         /**这里的req.body能够使用就在index.js中引入了const bodyParser = require('body-parser')*/
-        if(!req.body.article_title || !req.body.article_type || !req.body.article_con || !req.body.article_is_publish) {
+        if(!req.body.article_title || !req.body.article_type || !req.body.article_con ||  typeof req.body.article_is_publish == 'undefined') {
             res.json({status: 0, msg: '缺少必要参数'});
             return;
         }

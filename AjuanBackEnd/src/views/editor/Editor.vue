@@ -22,8 +22,8 @@
                 <textarea id="textarea"></textarea>
             </div>
             <div class="operate-wrap el-col el-col-24">
-                <el-button v-if="!article" type="default" class="el-button el-button--default" @click="uploadArticle(0)">保存草稿</el-button>
-                <el-button v-if="!article" type="primary" class="el-button el-button--primary" @click="uploadArticle(1)">发布文章</el-button>
+                <el-button v-if="!article" type="default" class="el-button el-button--default" @click="uploadArticle(false)">保存草稿</el-button>
+                <el-button v-if="!article" type="primary" class="el-button el-button--primary" @click="uploadArticle(true)">发布文章</el-button>
                 <el-button v-if="article" type="primary" class="el-button el-button--primary" @click="updateArticle()">完成修改</el-button>
             </div>
         </div>
@@ -65,7 +65,7 @@
                     return;
                 }
                 this.is_loading = true;
-                var article_is_publish = type ? true : false,
+                var article_is_publish = type,
                     article_con = this.simplemde && this.simplemde.value(),
                     error_msg = type ? '发布文章失败' : '保存草稿失败',
                     success_msg = type ? '发布文章成功' : '保存草稿成功';

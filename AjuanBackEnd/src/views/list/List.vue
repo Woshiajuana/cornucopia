@@ -165,19 +165,11 @@
             /**获取文章列表数据*/
             fetchArticleList (route) {
                 this.is_loading = true;
-                var tab = route ? route.query.tab: this.$route.query.tab;
+                var tag = route ? route.query.tag: this.$route.query.tag;
                 var key_word = route ? route.query.key_word: this.$route.query.key_word;
                 var page_num = route ? route.query.page_num: this.$route.query.page_num;
                 this.page_num = +page_num || 1;
-                setTimeout(()=>{
-                    this.$store.commit(types.SET_TAB_INDEX,tab);
-                },600);
-                Util.fetchArticleList({
-                    tab: tab,
-                    page_num: this.page_num,
-                    page_size: this.page_size,
-                    key_word: key_word
-                }).then((result) => {
+                Util.fetchArticleList( page_num, this.page_size, tag, this.article_is_publish_input, key_word ).then((result) => {
                     setTimeout( () => {
                         if(result.status == 1) {
                             var data = result.data;

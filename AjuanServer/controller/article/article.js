@@ -90,13 +90,15 @@ class Article {
     }
     /**文章列表*/
     async list(req, res, next){
-        let article_type = req.query.tab == 'all' ? '' : req.query.tab;
+        let article_type = req.query.article_type == 'all' ? '' : req.query.article_type;
+        let article_is_publish = req.query.article_is_publish;
         let page = +req.query.page_num || 1;
         let rows = +req.query.page_size || 99999;
         let key_word = req.query.key_word;
         let query = {};
         if(article_type) query.article_type = article_type;
         if(key_word) query.article_title =  eval("/"+key_word+"/ig");
+        if(article_is_publish) query.article_is_publish = article_is_publish;
         dbHelper.pageQuery(page, rows, article_module, '', query, {'article_time': 1}, (error, $page) => {
             if(error){
                 res.json({status: 0, msg: '获取数据失败'});

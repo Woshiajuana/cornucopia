@@ -66,6 +66,29 @@ class Article {
             }
         })
     }
+    /**上下架文章*/
+    async up_or_down(req, res, next){
+        /**这里的req.body能够使用就在index.js中引入了const bodyParser = require('body-parser')*/
+        var _id = req.body._id,
+            article_is_publish = req.body.article_is_publish;
+        if(!_id || typeof article_is_publish == 'undefined') {
+            res.json({status: 0, msg: '缺少必要参数'});
+            return;
+        }
+        article_module.update( { _id },{ $set: { article_is_publish } },(err,doc) => {
+            if (err) {
+                res.json({
+                    status: 0,
+                    msg: '上架失败'
+                });
+            } else {
+                res.json({
+                    status: 1,
+                    msg: '上架成功'
+                });
+            }
+        })
+    }
     /**查询文章*/
     async info(req, res, next){
         var _id = req.body._id;

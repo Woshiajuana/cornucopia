@@ -104,6 +104,11 @@ const Util = function (win) {
         return Util.ajax("article/edit", "POST",{ _id, article_title, article_type, article_con, article_is_publish });
     };
 
+    /**上下架文章*/
+    Util.offOrReleaseArticle = function ( _id, article_is_publish ) {
+        return Util.ajax("article/up_or_down", "POST",{ _id, article_is_publish });
+    };
+
     /**删除文章*/
     Util.deleteArticleData = function ( _id ) {
         return Util.ajax("article/delete", "POST",{ _id });

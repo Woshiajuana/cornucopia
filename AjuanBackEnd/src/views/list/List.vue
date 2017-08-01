@@ -58,8 +58,8 @@
                     label="操作">
                     <template scope="scope">
                         <el-button type="default" size="small" @click="editorArticle(scope.row)">编辑</el-button>
-                        <el-button @click="offOrReleaseArticle(scope.row)" v-if="scope.row.article_is_publish" type="warning" size="small">下架</el-button>
-                        <el-button @click="offOrReleaseArticle(scope.row)" type="info" v-else size="small">发表</el-button>
+                        <el-button @click="offOrReleaseArticle(scope.row)" key='off' v-if="scope.row.article_is_publish" type="warning" size="small">下架</el-button>
+                        <el-button @click="offOrReleaseArticle(scope.row)" key='release' type="info" v-else size="small">发表</el-button>
                         <el-button @click="deleteArticleData(scope.row)" type="danger" size="small">删除</el-button>
                     </template>
                 </el-table-column>
@@ -111,11 +111,8 @@
             /**下架或发布文章*/
             offOrReleaseArticle (article) {
                 this.is_loading = true;
-                Util.offOrReleaseArticle({
-                    _id: article._id,
-                    article_is_publish: !article.article_is_publish
-                },(result) => {
-                    setTimeout( () => {
+                Util.offOrReleaseArticle( article._id, !article.article_is_publish).then((result) => {
+                    setTimeout(() => {
                         this.is_loading = false;
                         if (result.status) {
                             this.$message({
@@ -123,7 +120,7 @@
                                 message: result.msg,
                                 type: 'success'
                             });
-                            this.fetchArticlesList();
+                            this.fetchArticleList();
                         } else {
                             this.$message({
                                 showClose: true,
@@ -132,7 +129,14 @@
                             });
                         }
                     },300)
-                })
+                }).catch( (err) => {
+                    this.is_loading = false;
+                    this.$message({
+                        showClose: true,
+                        message: '系统开了小差',
+                        type: 'error'
+                    });
+                });
             },
             onSubmitHandle () {
                 this.$router.push('/list?tag=' + this.$route.query.tag + '&key_word='+this.key_word)
@@ -160,6 +164,13 @@
                     });
                 }).catch(() => {
                     this.$message({type: 'info', message: '已取消删除'});
+                }).catch( (err) => {
+                    this.is_loading = false;
+                    this.$message({
+                        showClose: true,
+                        message: '系统开了小差',
+                        type: 'error'
+                    });
                 });
             },
             /**获取文章列表数据*/
@@ -180,6 +191,13 @@
                         else this.$message({type: 'error', message: result.msg});
                         this.is_loading = false;
                     },300);
+                }).catch( (err) => {
+                    this.is_loading = false;
+                    this.$message({
+                        showClose: true,
+                        message: '系统开了小差',
+                        type: 'error'
+                    });
                 });
             },
             /**编辑文档*/

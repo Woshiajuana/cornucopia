@@ -14,5 +14,6 @@ router.post('/info', Article.info);
 router.post('/list', Article.list);
 router.post('/delete', Article.del);
 router.post('/deletes', Article.dels);
+router.post('/up_or_down', Article.up_or_down);
 
 export default router

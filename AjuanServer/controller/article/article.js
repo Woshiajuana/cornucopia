@@ -117,10 +117,10 @@ class Article {
         let article_is_publish = req.body.article_is_publish;
         let page = +req.body.page_num || 1;
         let rows = +req.body.page_size || 99999;
-        let key_word = req.body.key_word;
+        let key_words = req.body.key_words;
         let query = {};
         if(article_type) query.article_type = article_type;
-        if(key_word) query.article_title =  eval("/"+key_word+"/ig");
+        if(key_words) query.article_title =  eval("/"+key_words+"/ig");
         if(article_is_publish) query.article_is_publish = article_is_publish;
         dbHelper.pageQuery(page, rows, article_module, '', query, {'article_time': 1}, (error, $page) => {
             if(error){

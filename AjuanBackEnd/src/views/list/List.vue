@@ -7,10 +7,11 @@
             <div class="operate-wrap el-col el-col-24">
                 <el-form :inline="true" class="demo-form-inline">
                     <el-form-item label="文章名称">
-                        <el-input v-model="key_word" placeholder="请输入文章名称"></el-input>
+                        <el-input v-model="key_words" placeholder="请输入文章名称"></el-input>
                     </el-form-item>
                     <el-form-item label="是否上下架">
                         <el-select v-model="article_is_publish_input" placeholder="是否上下架">
+                            <el-option label="全部" value="all"></el-option>
                             <el-option label="是" value="1"></el-option>
                             <el-option label="否" value="0"></el-option>
                         </el-select>
@@ -90,7 +91,7 @@
                 page_count: 0,
                 page_size:12,
                 article_total: 0,
-                key_word: '',
+                key_words: '',
                 is_loading: false,
                 article_arr: [],
                 article_is_publish_input: ''
@@ -139,7 +140,7 @@
                 });
             },
             onSubmitHandle () {
-                this.$router.push('/list?tag=' + this.$route.query.tag + '&key_word='+this.key_word)
+                this.$router.push('/list?tag=' + this.$route.query.tag + '&key_words='+this.key_words)
             },
             handleCurrentChange (val) {
                 this.page_num = val;
@@ -177,10 +178,10 @@
             fetchArticleList (route) {
                 this.is_loading = true;
                 var tag = route ? route.query.tag: this.$route.query.tag;
-                var key_word = route ? route.query.key_word: this.$route.query.key_word;
+                var key_words = route ? route.query.key_words: this.$route.query.key_words;
                 var page_num = route ? route.query.page_num: this.$route.query.page_num;
                 this.page_num = +page_num || 1;
-                Util.fetchArticleList( page_num, this.page_size, tag, this.article_is_publish_input, key_word ).then((result) => {
+                Util.fetchArticleList( page_num, this.page_size, tag, this.article_is_publish_input, key_words ).then((result) => {
                     setTimeout( () => {
                         if(result.status == 1) {
                             var data = result.data;

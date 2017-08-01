@@ -7,16 +7,16 @@
             <div class="operate-wrap el-col el-col-24">
                 <el-form :inline="true" class="demo-form-inline">
                     <el-form-item label="文章名称">
-                        <el-input v-model="formInline.user" placeholder="请输入文章名称"></el-input>
+                        <el-input v-model="key_word" placeholder="请输入文章名称"></el-input>
                     </el-form-item>
                     <el-form-item label="是否上下架">
-                        <el-select v-model="formInline.user" placeholder="是否上下架">
+                        <el-select v-model="article_is_publish_input" placeholder="是否上下架">
                             <el-option label="是" value="1"></el-option>
                             <el-option label="否" value="0"></el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="onSubmit">查询</el-button>
+                        <el-button type="primary" @click="onSubmitHandle">查询</el-button>
                     </el-form-item>
                 </el-form>
                 <el-button class="el-button el-button--primary" :disabled="true"><i class="el-icon-circle-check el-icon--left"></i>上架</el-button>
@@ -28,8 +28,7 @@
                 :data="article_arr"
                 border
                 tooltip-effect="dark"
-                style="width: 100%"
-                @selection-change="handleSelectionChange">
+                style="width: 100%">
                 <el-table-column
                     type="selection"
                     align="center"
@@ -45,11 +44,6 @@
                     width="120">
                 </el-table-column>
                 <el-table-column
-                    label="是否上下架"
-                    width="120">
-                    <template scope="scope">{{ scope.row.date }}</template>
-                </el-table-column>
-                <el-table-column
                     label="日期"
                     width="200"
                     show-overflow-tooltip>
@@ -63,23 +57,21 @@
                     align="center"
                     label="操作">
                     <template scope="scope">
-                        <a href="#/permission/role/edit/woshiajuana" class="el-button el-button--small">编辑</a>
-                        <a v-if="scope.row.is" href="#/permission/role/edit/woshiajuana" class="el-button el-button--info el-button--small">上架</a>
-                        <a href="#/permission/role/edit/woshiajuana"class="el-button el-button--warning el-button--small" v-else >下架</a>
-                        <a href="#/permission/role/edit/woshiajuana" class="el-button el-button--danger el-button--small">删除</a>
+                        <el-button type="default" size="small" @click="editorArticle(scope.row)">编辑</el-button>
+                        <el-button @click="offOrReleaseArticle(scope.row)" v-if="scope.row.article_is_publish" type="warning" size="small">下架</el-button>
+                        <el-button @click="offOrReleaseArticle(scope.row)" type="info" v-else size="small">发表</el-button>
+                        <el-button @click="deleteArticleData(scope.row)" type="danger" size="small">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
         </div>
         <div class="pagination-wrap">
             <el-pagination
-                @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
+                :current-page="page_num"
+                :page-size="page_size"
+                layout="total, prev, pager, next, jumper"
+                :total="article_total">
             </el-pagination>
         </div>
     </div>
@@ -101,24 +93,7 @@
                 key_word: '',
                 is_loading: false,
                 article_arr: [],
-                formInline: {
-                    user: '',
-                    region: '',
-                    date1: '',
-                    date2: ''
-                },
-                page_num:1,
-                page_count: 0,
-                page_size:12,
-                article_total: 0,
-                key_word: '',
-                is_loading: false,
-                article_arr: [],
-                currentPage1: 5,
-                currentPage2: 5,
-                currentPage3: 5,
-                currentPage4: 4,
-                multipleSelection: []
+                article_is_publish_input: ''
             }
         },
         created () {
@@ -133,24 +108,6 @@
             '$route': 'fetchArticleList'
         },
         methods: {
-            handleSelectionChange(val) {
-                this.multipleSelection = val;
-            },
-            handleEdit(index, row) {
-                console.log(index, row);
-            },
-            handleDelete(index, row) {
-                console.log(index, row);
-            },
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
-            },
-            onSubmit() {
-                console.log('submit!');
-            },
             /**下架或发布文章*/
             offOrReleaseArticle (article) {
                 this.is_loading = true;
@@ -177,7 +134,7 @@
                     },300)
                 })
             },
-            handleIconClick () {
+            onSubmitHandle () {
                 Tool.jumpPage('?tab='+this.$route.query.tab+'&&key_word='+this.key_word);
             },
             handleCurrentChange (val) {
@@ -185,17 +142,17 @@
                 Tool.jumpPage('?tab='+this.$route.query.tab+'&&page_num='+this.page_num);
             },
             /**删除文章数据*/
-            deleteArticle ({_id,article_title}) {
+            deleteArticleData ({_id,article_title}) {
                 this.$confirm('是否删除'+ article_title +'?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
                     this.is_loading = true;
-                    Util.deleteArticle(_id,(result) => {
+                    Util.deleteArticleData(_id).then((result) => {
                         this.is_loading = false;
                         if(result.status){
-                            this.fetchArticlesList();
+                            this.fetchArticleList();
                             this.$message({type: 'success', message: result.msg});
                         }else{
                             this.$message({type: 'error', message: result.msg});

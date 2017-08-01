@@ -22,13 +22,14 @@
                 </el-form>
                 <el-button class="el-button el-button--primary" :disabled="true"><i class="el-icon-circle-check el-icon--left"></i>上架</el-button>
                 <el-button class="el-button el-button--warning" :disabled="true"><i class="el-icon-circle-cross el-icon--left"></i>下架</el-button>
-                <el-button class="el-button el-button--danger" :disabled="true"><i class="el-icon-delete el-icon--left"></i>删除</el-button>
+                <el-button @click="deleteManyArticlesData" class="el-button el-button--danger" :disabled="!select_arr.length"><i class="el-icon-delete el-icon--left"></i>删除</el-button>
             </div>
             <el-table
                 ref="multipleTable"
                 :data="article_arr"
                 border
                 tooltip-effect="dark"
+                @selection-change="handleSelectionChange"
                 style="width: 100%">
                 <el-table-column
                     type="selection"
@@ -87,6 +88,7 @@
         name: 'list',
         data() {
             return {
+                select_arr: [],
                 page_num:1,
                 page_count: 0,
                 page_size:12,
@@ -206,6 +208,40 @@
             /**编辑文档*/
             editorArticle (article) {
                 this.$router.push('/editor/' + article._id);
+            },
+            /**多项选择*/
+            handleSelectionChange (rows) {
+                this.select_arr = rows;
+            },
+            deleteManyArticlesData () {
+                if (!this.select_arr.length) return;
+                this.$confirm('是否删除当前选择的'+ this.select_arr.length +'条数据?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.is_loading = true;
+                    Util.deleteManyArticlesData(this.select_arr).then((result) => {
+                        setTimeout( () => {
+                            this.is_loading = false;
+                            if(result.status){
+                                this.fetchGroupList();
+                                this.$message({type: 'success', message: result.msg});
+                            }else{
+                                this.$message({type: 'error', message: result.msg});
+                            }
+                        },300);
+                    }).catch( (err) => {
+                        this.is_loading = false;
+                        this.$message({
+                            showClose: true,
+                            message: '系统开了小差',
+                            type: 'error'
+                        });
+                    });
+                }).catch(() => {
+                    this.$message({type: 'info', message: '已取消删除'});
+                });
             }
         },
         components: {

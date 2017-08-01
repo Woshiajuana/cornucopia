@@ -47,7 +47,7 @@ let router = new Router({
                         ]
                     }
                 },
-                /**编辑新增文章页*/
+                /**新增文章页*/
                 {
                     path: 'editor',
                     name: 'editor',
@@ -56,6 +56,19 @@ let router = new Router({
                         tab_index: '/editor',
                         crumb: [
                             { con: '新增文章' }
+                        ]
+                    }
+                },
+                /**文章编辑页*/
+                {
+                    path: 'editor/:_id',
+                    name: 'editor',
+                    component: Editor,
+                    meta: {
+                        tab_index: '/list?tag=all',
+                        crumb: [
+                            { con: '文章管理' },
+                            { con: '编辑文章' }
                         ]
                     }
                 },

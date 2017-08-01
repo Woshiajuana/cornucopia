@@ -43,6 +43,7 @@
                 article_type: '',
                 simplemde: '',
                 article: '',
+                article_is_publish: '',
                 article_con: '',
                 loading_text: '拼命上传中~~~'
             }
@@ -103,10 +104,11 @@
                         this.is_loading = false;
                         this.loading_text = '拼命上传中~~~';
                         if (result.status) {
-                            this.article = result.data.articles[0];
+                            this.article = result.data;
                             this.article_title = this.article.article_title;
                             this.article_type = this.article.article_type;
                             this.article_con = this.article.article_con;
+                            this.article_is_publish = this.article.article_is_publish;
                             this.simplemde && this.simplemde.value(this.article_con);
                         } else {
                             this.$message({
@@ -129,10 +131,7 @@
                     return;
                 }
                 this.is_loading = true;
-                this.article.article_type = this.article_type;
-                this.article.article_title = this.article_title;
-                this.article.article_con = this.simplemde.value();
-                Util.editArticleData(this.article).then((result) => {
+                Util.editArticleData( this.$route.params._id, this.article_title, this.article_type, this.simplemde.value(), this.article_is_publish ).then((result) => {
                     setTimeout(() => {
                         this.is_loading = false;
                         if (result.status) {
@@ -170,6 +169,7 @@
             '$route': 'editorOrUpdate'
         },
         created () {
+            this.editorOrUpdate();
             this.$nextTick( () => {
                 setTimeout( () => {
                     this.simplemde = new SimpleMDE({

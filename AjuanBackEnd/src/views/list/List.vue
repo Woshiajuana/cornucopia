@@ -135,21 +135,21 @@
                 })
             },
             onSubmitHandle () {
-                Tool.jumpPage('?tab='+this.$route.query.tab+'&&key_word='+this.key_word);
+                this.$router.push('/list?tag=' + this.$route.query.tag + '&key_word='+this.key_word)
             },
             handleCurrentChange (val) {
                 this.page_num = val;
-                Tool.jumpPage('?tab='+this.$route.query.tab+'&&page_num='+this.page_num);
+                this.$router.push('/list?tag=' + this.$route.query.tag + '&page_num=' + this.page_num)
             },
             /**删除文章数据*/
-            deleteArticleData ({_id,article_title}) {
+            deleteArticleData ({ _id, article_title }) {
                 this.$confirm('是否删除'+ article_title +'?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
                     this.is_loading = true;
-                    Util.deleteArticleData(_id).then((result) => {
+                    Util.deleteArticleData( _id ).then(( result ) => {
                         this.is_loading = false;
                         if(result.status){
                             this.fetchArticleList();

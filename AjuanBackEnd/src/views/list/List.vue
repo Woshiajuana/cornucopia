@@ -1,11 +1,13 @@
 <template>
-    <div class="container-wrap">
+    <div class="container-wrap"
+         v-loading="is_loading"
+         element-loading-text="拼命加载中~~~">
         <div class="container-inner">
             <crumb></crumb>
             <div class="operate-wrap el-col el-col-24">
                 <el-form :inline="true" class="demo-form-inline">
                     <el-form-item label="文章名称">
-                        <el-input v-model="formInline.user" placeholder="用户名"></el-input>
+                        <el-input v-model="formInline.user" placeholder="请输入文章名称"></el-input>
                     </el-form-item>
                     <el-form-item label="是否上下架">
                         <el-select v-model="formInline.user" placeholder="是否上下架">
@@ -23,7 +25,7 @@
             </div>
             <el-table
                 ref="multipleTable"
-                :data="tableData3"
+                :data="article_arr"
                 border
                 tooltip-effect="dark"
                 style="width: 100%"
@@ -34,13 +36,13 @@
                     width="55">
                 </el-table-column>
                 <el-table-column
-                    prop="name"
+                    prop="article_title"
                     label="文章名称">
                 </el-table-column>
                 <el-table-column
+                    prop="article_type"
                     label="类别"
                     width="120">
-                    <template scope="scope">{{ scope.row.date }}</template>
                 </el-table-column>
                 <el-table-column
                     label="是否上下架"
@@ -49,8 +51,12 @@
                 </el-table-column>
                 <el-table-column
                     label="日期"
-                    width="120">
-                    <template scope="scope">{{ scope.row.date }}</template>
+                    width="200"
+                    show-overflow-tooltip>
+                    <template scope="scope">
+                        <el-icon name="time"></el-icon>
+                        <span style="margin-left: 10px">{{ scope.row.article_time | articleTime }}</span>
+                    </template>
                 </el-table-column>
                 <el-table-column
                     width="240"
@@ -88,6 +94,13 @@
         name: 'list',
         data() {
             return {
+                page_num:1,
+                page_count: 0,
+                page_size:12,
+                article_total: 0,
+                key_word: '',
+                is_loading: false,
+                article_arr: [],
                 formInline: {
                     user: '',
                     region: '',
@@ -105,120 +118,11 @@
                 currentPage2: 5,
                 currentPage3: 5,
                 currentPage4: 4,
-                tableData3: [{
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    is: true,
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    is: true,
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    is: true,
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    is: true,
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-08',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-06',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-07',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }],
                 multipleSelection: []
             }
         },
         created () {
-//            this.fetchArticlesList();
+            this.fetchArticleList();
         },
         filters: {
             articleTime (article_time) {
@@ -226,7 +130,7 @@
             }
         },
         watch: {
-            '$route': 'fetchArticlesList'
+            '$route': 'fetchArticleList'
         },
         methods: {
             handleSelectionChange(val) {
@@ -302,7 +206,7 @@
                 });
             },
             /**获取文章列表数据*/
-            fetchArticlesList (route) {
+            fetchArticleList (route) {
                 this.is_loading = true;
                 var tab = route ? route.query.tab: this.$route.query.tab;
                 var key_word = route ? route.query.key_word: this.$route.query.key_word;
@@ -311,18 +215,18 @@
                 setTimeout(()=>{
                     this.$store.commit(types.SET_TAB_INDEX,tab);
                 },600);
-                Util.fetchArticlesList({
+                Util.fetchArticleList({
                     tab: tab,
                     page_num: this.page_num,
                     page_size: this.page_size,
                     key_word: key_word
-                }, (result) => {
+                }).then((result) => {
                     setTimeout( () => {
                         if(result.status == 1) {
                             var data = result.data;
-                            this.article_arr = data.article_arr;
-                            this.page_count = data.page_count;
-                            this.article_total = data.article_total;
+                            this.article_arr = data.arr;
+                            this.page_count = data.count;
+                            this.article_total = data.total;
                         }
                         else this.$message({type: 'error', message: result.msg});
                         this.is_loading = false;

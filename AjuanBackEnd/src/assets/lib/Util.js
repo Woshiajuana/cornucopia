@@ -142,6 +142,7 @@ const Util = function (win) {
     };
 
     return Util;
+
 } (window);
 
 export default Util;

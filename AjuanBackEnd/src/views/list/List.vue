@@ -140,11 +140,11 @@
                 });
             },
             onSubmitHandle () {
-                this.$router.push('/list?tag=' + this.$route.query.tag + '&key_words='+this.key_words)
+                this.$router.push('/list?tag=' + this.$route.query.tag + '&key_words='+this.key_words + '&is_publish='+this.article_is_publish_input )
             },
             handleCurrentChange (val) {
                 this.page_num = val;
-                this.$router.push('/list?tag=' + this.$route.query.tag + '&page_num=' + this.page_num)
+                this.$router.push('/list?tag=' + this.$route.query.tag + '&page_num=' + this.page_num +'&key_words='+this.key_words + '&is_publish='+this.article_is_publish_input )
             },
             /**删除文章数据*/
             deleteArticleData ({ _id, article_title }) {
@@ -180,8 +180,10 @@
                 var tag = route ? route.query.tag: this.$route.query.tag;
                 var key_words = route ? route.query.key_words: this.$route.query.key_words;
                 var page_num = route ? route.query.page_num: this.$route.query.page_num;
+                var article_is_publish_input = route ? route.query.is_publish: this.$route.query.article_is_publish_input;
+                article_is_publish_input == 'all' && (article_is_publish_input = '');
                 this.page_num = +page_num || 1;
-                Util.fetchArticleList( page_num, this.page_size, tag, this.article_is_publish_input, key_words ).then((result) => {
+                Util.fetchArticleList( page_num, this.page_size, tag, article_is_publish_input, key_words ).then((result) => {
                     setTimeout( () => {
                         if(result.status == 1) {
                             var data = result.data;

@@ -33,7 +33,7 @@
         },
         methods: {
             achieveUser () {
-//                this.user_name = Tool.dataToSessionStorageOperate.achieve('user').user_name;
+                this.user_name = Tool.dataToSessionStorageOperate.achieve('user').user_name;
             },
             safeExit () {
                 this.$confirm('是否安全退出?', '提示', {
@@ -42,6 +42,11 @@
                     type: 'warning'
                 }).then(() => {
                     Tool.dataToSessionStorageOperate.clear();
+                    this.$message({
+                        showClose: true,
+                        message: '成功退出',
+                        type: 'success'
+                    });
                     this.$router.push("/login");
                 });
             }

@@ -1,5 +1,7 @@
 <template>
-    <div class="home-wrap"></div>
+    <div class="home-view">
+        首页
+    </div>
 </template>
 <script>
     export default {

@@ -1,5 +1,7 @@
 <template>
-    <div class="find-wrap"></div>
+    <div class="find-view">
+        发现
+    </div>
 </template>
 <script>
     export default {

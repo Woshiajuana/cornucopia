@@ -4,6 +4,8 @@ import Router from 'vue-router'
 import types from '../store/mutation-types'
 /**首页*/
 import Home from '../views/home/Home.vue'
+/**发现*/
+import Find from '../views/find/Find.vue'
 
 Vue.use(Router);
 
@@ -16,6 +18,15 @@ const router = new Router({
             component: Home,
             meta: {
                 status: 1
+            }
+        },
+        /**发现*/
+        {
+            path: '/find',
+            name: 'find',
+            component: Find,
+            meta: {
+                status: 2
             }
         }
     ]

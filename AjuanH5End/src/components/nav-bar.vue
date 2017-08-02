@@ -2,15 +2,15 @@
     <tabbar class="nav-bar-wrap">
         <tabbar-item :selected="navIndex == 1" link="/">
             <svg slot="icon" class="nav-item nav-home-item">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-home"></use>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#home-icon"></use>
             </svg>
             <span slot="label">首页</span>
         </tabbar-item>
-        <tabbar-item :selected="navIndex == 2" link="/account">
+        <tabbar-item :selected="navIndex == 2" link="/find">
             <svg slot="icon" class="nav-item nav-account-item">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-account"></use>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#find-icon"></use>
             </svg>
-            <span slot="label">记账</span>
+            <span slot="label">发现</span>
         </tabbar-item>
         <tabbar-item :selected="navIndex == 3" link="/bill">
             <svg slot="icon" class="nav-item nav-bill-item">
@@ -56,8 +56,9 @@
         .nav-item{
             fill: #999;
             &.nav-home-item{
-                width: j(27);
-                height: j(27);
+                margin-top: j(3);
+                width: j(21);
+                height: j(21);
             }
             &.nav-account-item{
                 margin-top: j(4);

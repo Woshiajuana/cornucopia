@@ -84,13 +84,10 @@
         }
         .weui-bar__item_on{
             .nav-item{
-                fill: #58B7FF;
+                fill: $mc;
             }
             span{
-                padding: 0 j(3);
-                border-radius: j(5);
-                color: #fff !important;
-                background-color: #58B7FF;
+                color: $mc !important;
             }
         }
     }

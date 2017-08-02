@@ -46,7 +46,8 @@
     .view-wrap{
         @extend %pa;
         @extend %r0;
+        @extend %t0;
         @extend %l0;
-
+        bottom: j(50);
     }
 </style>

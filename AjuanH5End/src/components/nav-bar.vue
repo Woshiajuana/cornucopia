@@ -1,5 +1,5 @@
 <template>
-    <tabbar v-if="isNotFirst" class="nav-bar-wrap">
+    <tabbar class="nav-bar-wrap">
         <tabbar-item :selected="navIndex == 1" link="/">
             <svg slot="icon" class="nav-item nav-home-item">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-home"></use>
@@ -33,9 +33,6 @@
         computed: {
             navIndex () {
                 return this.$store.state.nav_index;
-            },
-            isNotFirst () {
-                return this.$store.state.is_not_first;
             }
         },
         components: {
@@ -48,26 +45,34 @@
     @import '../assets/scss/define';
     .nav-bar-wrap{
         height: j(50);
+        .weui-tabbar__icon{
+            width: j(27);
+            height: j(27);
+        }
+        .weui-tabbar__label{
+            line-height: inherit;
+            font-size: j(10);
+        }
         .nav-item{
             fill: #999;
             &.nav-home-item{
-                width: 27px;
-                height: 27px;
+                width: j(27);
+                height: j(27);
             }
             &.nav-account-item{
-                margin-top: 4px;
-                width: 20px;
-                height: 20px;
+                margin-top: j(4);
+                width: j(20);
+                height: j(20);
             }
             &.nav-bill-item{
-                margin-top: 3px;
-                width: 22px;
-                height: 22px;
+                margin-top: j(3);
+                width: j(22);
+                height: j(22);
             }
             &.nav-chart-item{
-                margin-top: 5px;
-                width: 23px;
-                height: 23px;
+                margin-top: j(5);
+                width: j(23);
+                height: j(23);
             }
         }
         .weui-tabbar__item{
@@ -80,8 +85,8 @@
                 fill: #58B7FF;
             }
             span{
-                padding: 0 3px;
-                border-radius: 5px;
+                padding: 0 j(3);
+                border-radius: j(5);
                 color: #fff !important;
                 background-color: #58B7FF;
             }

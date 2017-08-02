@@ -2,7 +2,10 @@
     <div class="home-view">
         <scroller lock-x ref="scrollerEvent">
             <header class="home-header">
-                <a href="#/search" class="home-search-link">搜索文章</a>
+                <div class="home-header-top">
+                    <i class="home-header-top-filter-btn"></i>
+                </div>
+                <a href="#/search" class="home-header-search-link">搜索文章</a>
             </header>
         </scroller>
     </div>
@@ -20,19 +23,23 @@
     @import "../../assets/scss/define";
     .home-header{
         @extend %oh;
-        height: j(120);
+        height: j(100);
         background-color: $mc;
+        padding: j(10) 0;
     }
-    .home-search-link{
+    .home-header-search-link{
         @extend %db;
         @extend %tac;
         @extend %bgwhite;
-        margin: 0 j(16);
+        @extend %c3;
+        margin: j(10) j(16);
         height: j(36);
         line-height: j(36);
         border-radius: j(36);
-        box-shadow: 0 0.026667rem 0.066667rem 0 rgba(0,0,0,.2);
-        color: #333;
+        box-shadow: 0 j(3) j(3) 0 rgba(0,0,0,.2);
         font-size: j(14);
+    }
+    .home-header-top{
+        height: j(35);
     }
 </style>

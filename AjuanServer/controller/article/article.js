@@ -89,6 +89,42 @@ class Article {
             }
         })
     }
+    /**批量上下架文章*/
+    async up_or_downs(req, res, next){
+        var idArr = req.body.idArr;
+        var article_is_publish = req.body.article_is_publish;
+        if(!idArr || !idArr.length || typeof article_is_publish == 'undefined') {
+            res.json({status: 0, msg: '缺少必要参数'});
+            return;
+        }
+        var timer = 0,
+            type = true;
+        function update (arr) {
+            if (arr.length == timer) {
+                if (type) {
+                    res.json({
+                        status: 1,
+                        msg: '操作成功'
+                    });
+                } else {
+                    res.json({
+                        status: 0,
+                        msg: '操作失败'
+                    });
+                }
+                return;
+            }
+            article_module.update({_id: arr[timer]},{ $set: { article_is_publish } },(err,doc) => {
+                if (err) {
+                    type = false;
+                } else {
+                    timer++;
+                    update(arr)
+                }
+            });
+        };
+        update(idArr);
+    }
     /**查询文章*/
     async info(req, res, next){
         var _id = req.body._id;
@@ -122,7 +158,7 @@ class Article {
         if(article_type) query.article_type = article_type;
         if(key_words) query.article_title =  eval("/"+key_words+"/ig");
         if(article_is_publish) query.article_is_publish = article_is_publish;
-        dbHelper.pageQuery(page, rows, article_module, '', query, {'article_time': 1}, (error, $page) => {
+        dbHelper.pageQuery(page, rows, article_module, '', query, {'article_time': -1}, (error, $page) => {
             if(error){
                 res.json({status: 0, msg: '获取数据失败'});
             }else{

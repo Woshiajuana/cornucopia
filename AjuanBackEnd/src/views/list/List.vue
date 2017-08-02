@@ -20,8 +20,8 @@
                         <el-button type="primary" @click="onSubmitHandle">查询</el-button>
                     </el-form-item>
                 </el-form>
-                <el-button class="el-button el-button--primary" :disabled="true"><i class="el-icon-circle-check el-icon--left"></i>上架</el-button>
-                <el-button class="el-button el-button--warning" :disabled="true"><i class="el-icon-circle-cross el-icon--left"></i>下架</el-button>
+                <el-button @click="offOrReleaseArticles(true)" class="el-button el-button--primary" :disabled="upBtn"><i class="el-icon-circle-check el-icon--left"></i>上架</el-button>
+                <el-button @click="offOrReleaseArticles(false)" class="el-button el-button--warning" :disabled="downBtn"><i class="el-icon-circle-cross el-icon--left"></i>下架</el-button>
                 <el-button @click="deleteManyArticlesData" class="el-button el-button--danger" :disabled="!select_arr.length"><i class="el-icon-delete el-icon--left"></i>删除</el-button>
             </div>
             <el-table
@@ -83,7 +83,6 @@
     import Tool from '../../assets/lib/Tool';
     import types from '../../store/mutation-types';
     import Crumb from '../../components/crumb.vue'
-    import ElButton from "../../../../AjuanFrontEnd/node_modules/element-ui/packages/button/src/button";
     export default {
         name: 'list',
         data() {
@@ -97,6 +96,22 @@
                 is_loading: false,
                 article_arr: [],
                 article_is_publish_input: ''
+            }
+        },
+        computed: {
+            upBtn () {
+                var type = false;
+                this.select_arr.forEach((item) => {
+                    if (item.article_is_publish) type = true;
+                });
+                return (!this.select_arr.length || type);
+            },
+            downBtn () {
+                var type = false;
+                this.select_arr.forEach((item) => {
+                    if (!item.article_is_publish) type = true;
+                });
+                return (!this.select_arr.length || type);
             }
         },
         created () {
@@ -115,6 +130,40 @@
             offOrReleaseArticle (article) {
                 this.is_loading = true;
                 Util.offOrReleaseArticle( article._id, !article.article_is_publish).then((result) => {
+                    setTimeout(() => {
+                        this.is_loading = false;
+                        if (result.status) {
+                            this.$message({
+                                showClose: true,
+                                message: result.msg,
+                                type: 'success'
+                            });
+                            this.fetchArticleList();
+                        } else {
+                            this.$message({
+                                showClose: true,
+                                message: result.msg,
+                                type: 'error'
+                            });
+                        }
+                    },300)
+                }).catch( (err) => {
+                    this.is_loading = false;
+                    this.$message({
+                        showClose: true,
+                        message: '系统开了小差',
+                        type: 'error'
+                    });
+                });
+            },
+            /**批量操作下架或发布文章*/
+            offOrReleaseArticles ( article_is_publish ) {
+                this.is_loading = true;
+                var idArr = [];
+                this.select_arr.forEach((item) => {
+                    idArr.push(item._id)
+                });
+                Util.offOrReleaseArticles ( idArr, article_is_publish ).then((result) => {
                     setTimeout(() => {
                         this.is_loading = false;
                         if (result.status) {
@@ -225,7 +274,7 @@
                         setTimeout( () => {
                             this.is_loading = false;
                             if(result.status){
-                                this.fetchGroupList();
+                                this.fetchArticleList();
                                 this.$message({type: 'success', message: result.msg});
                             }else{
                                 this.$message({type: 'error', message: result.msg});
@@ -245,7 +294,6 @@
             }
         },
         components: {
-            ElButton,
             Crumb
         }
     }

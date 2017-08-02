@@ -119,6 +119,12 @@ const Util = function (win) {
         return Util.ajax("article/deletes", "POST",{ idArr });
     };
 
+    /**批量上下架文章*/
+    Util.offOrReleaseArticles = function ( idArr, article_is_publish ) {
+        return Util.ajax("article/up_or_downs", "POST",{ idArr, article_is_publish });
+    };
+
+
     /**公用请求ajax的方式*/
     Util.ajax = (url, method, data) => {
         var isGet = false;

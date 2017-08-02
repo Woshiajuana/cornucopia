@@ -5,14 +5,16 @@
 
 import express from 'express'
 import Tag from '../../controller/tag/tag'
+/**引入token中间键*/
+import checkApiToken from '../../middlewares/check_api_token'
 
 const router = express.Router();
 
-router.post('/add', Tag.add);
-router.post('/edit', Tag.edit);
-router.post('/info', Tag.info);
-router.post('/list', Tag.list);
-router.post('/delete', Tag.del);
-router.post('/deletes', Tag.dels);
+router.post('/add', checkApiToken, Tag.add);
+router.post('/edit', checkApiToken, Tag.edit);
+router.post('/info', checkApiToken, Tag.info);
+router.post('/list', checkApiToken, Tag.list);
+router.post('/delete', checkApiToken, Tag.del);
+router.post('/deletes', checkApiToken, Tag.dels);
 
 export default router

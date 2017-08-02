@@ -3,6 +3,7 @@
  */
 import axios from 'axios'
 axios.defaults.headers.post['Content-Type'] = "application/json; charset=utf-8";
+import router from '../../router/index'
 
 const PackData = (data) => {
     return JSON.stringify(data)
@@ -124,7 +125,6 @@ const Util = function (win) {
         return Util.ajax("article/up_or_downs", "POST",{ idArr, article_is_publish });
     };
 
-
     /**公用请求ajax的方式*/
     Util.ajax = (url, method, data) => {
         var isGet = false;
@@ -140,6 +140,10 @@ const Util = function (win) {
                 params: isGet ? PackData(data) : '',
                 responseType: 'json'
             }).then((res) => {
+                if(res.data.status == -1) {
+                    router.push('/login');
+                    return;
+                }
                 return resolve(res.data)
             }).catch ((err) => {
                 return reject(err)

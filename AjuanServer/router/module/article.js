@@ -5,16 +5,18 @@
 
 import express from 'express'
 import Article from '../../controller/article/article'
+/**引入token中间键*/
+import checkApiToken from '../../middlewares/check_api_token'
 
 const router = express.Router();
 
-router.post('/add', Article.add);
-router.post('/edit', Article.edit);
-router.post('/info', Article.info);
-router.post('/list', Article.list);
-router.post('/delete', Article.del);
-router.post('/deletes', Article.dels);
-router.post('/up_or_down', Article.up_or_down);
-router.post('/up_or_downs', Article.up_or_downs);
+router.post('/add', checkApiToken, Article.add);
+router.post('/edit', checkApiToken, Article.edit);
+router.post('/info', checkApiToken, Article.info);
+router.post('/list', checkApiToken, Article.list);
+router.post('/delete', checkApiToken, Article.del);
+router.post('/deletes', checkApiToken, Article.dels);
+router.post('/up_or_down', checkApiToken, Article.up_or_down);
+router.post('/up_or_downs', checkApiToken, Article.up_or_downs);
 
 export default router

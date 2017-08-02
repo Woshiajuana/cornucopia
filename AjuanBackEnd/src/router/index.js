@@ -187,16 +187,12 @@ router.beforeEach( (to, from, next) => {
     var user = Tool.dataToSessionStorageOperate.achieve('user'),
         token = Tool.dataToSessionStorageOperate.achieve('token');
     if ((!token || !user) && to.path != '/login'){
-        console.log(1)
         next('/login');
     } else if ( token && user && to.path == '/login'){
-        console.log(2)
         next('/list?tag=all');
     } else if ( token && user && to.path == '/' && !to.query.tag) {
-        console.log(3)
         next('/list?tag=all');
     } else {
-        console.log(4)
         next();
     }
     if( to.meta.tag_index ) Store.commit( types.SET_TAG_INDEX, to.meta.tag_index );

@@ -56,9 +56,9 @@
         .nav-item{
             fill: #999;
             &.nav-home-item{
-                margin-top: j(3);
-                width: j(21);
-                height: j(21);
+                margin-top: j(2);
+                width: j(25);
+                height: j(25);
             }
             &.nav-account-item{
                 margin-top: j(4);
@@ -77,6 +77,7 @@
             }
         }
         .weui-tabbar__item{
+            padding: j(3) 0 0 0;
             span{
                 color: #999 !important;
             }

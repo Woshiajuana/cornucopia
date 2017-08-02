@@ -3,7 +3,9 @@
         <scroller lock-x ref="scrollerEvent">
             <header class="home-header">
                 <div class="home-header-top">
-                    <i class="home-header-top-filter-btn"></i>
+                    <svg slot="icon" class="home-header-top-filter-btn">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#filter-icon"></use>
+                    </svg>
                 </div>
                 <a href="#/search" class="home-header-search-link">搜索文章</a>
             </header>
@@ -40,6 +42,17 @@
         font-size: j(14);
     }
     .home-header-top{
+        @extend %pr;
         height: j(35);
+    }
+    .home-header-top-filter-btn{
+        @extend %pa;
+        @extend %cp;
+        @extend %t50;
+        right: j(20);
+        margin-top: j(-12);
+        width: j(25);
+        height: j(25);
+        fill: #f2f2f2;
     }
 </style>

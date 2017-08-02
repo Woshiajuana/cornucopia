@@ -1,32 +1,30 @@
 <template>
-    <div class="nav-bar-wrap">
-        <tabbar v-if="isNotFirst">
-            <tabbar-item :selected="navIndex == 1" link="/">
-                <svg slot="icon" class="nav-item nav-home-item">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-home"></use>
-                </svg>
-                <span slot="label">首页</span>
-            </tabbar-item>
-            <tabbar-item :selected="navIndex == 2" link="/account">
-                <svg slot="icon" class="nav-item nav-account-item">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-account"></use>
-                </svg>
-                <span slot="label">记账</span>
-            </tabbar-item>
-            <tabbar-item :selected="navIndex == 3" link="/bill">
-                <svg slot="icon" class="nav-item nav-bill-item">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-bill"></use>
-                </svg>
-                <span slot="label">账单</span>
-            </tabbar-item>
-            <tabbar-item :selected="navIndex == 4" link="/chart">
-                <svg slot="icon" class="nav-item nav-chart-item">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-chart"></use>
-                </svg>
-                <span slot="label">分析</span>
-            </tabbar-item>
-        </tabbar>
-    </div>
+    <tabbar v-if="isNotFirst" class="nav-bar-wrap">
+        <tabbar-item :selected="navIndex == 1" link="/">
+            <svg slot="icon" class="nav-item nav-home-item">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-home"></use>
+            </svg>
+            <span slot="label">首页</span>
+        </tabbar-item>
+        <tabbar-item :selected="navIndex == 2" link="/account">
+            <svg slot="icon" class="nav-item nav-account-item">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-account"></use>
+            </svg>
+            <span slot="label">记账</span>
+        </tabbar-item>
+        <tabbar-item :selected="navIndex == 3" link="/bill">
+            <svg slot="icon" class="nav-item nav-bill-item">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-bill"></use>
+            </svg>
+            <span slot="label">账单</span>
+        </tabbar-item>
+        <tabbar-item :selected="navIndex == 4" link="/chart">
+            <svg slot="icon" class="nav-item nav-chart-item">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#nav-chart"></use>
+            </svg>
+            <span slot="label">分析</span>
+        </tabbar-item>
+    </tabbar>
 </template>
 <script>
     import { Tabbar, TabbarItem } from 'vux'
@@ -49,6 +47,7 @@
 <style lang="scss">
     @import '../assets/scss/define';
     .nav-bar-wrap{
+        height: j(50);
         .nav-item{
             fill: #999;
             &.nav-home-item{

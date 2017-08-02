@@ -3,7 +3,7 @@
         <!--主体内容视图-->
         <transition :name="animateName">
             <!--<keep-alive>-->
-            <router-view></router-view>
+            <router-view class="view-wrap"></router-view>
             <!--</keep-alive>-->
         </transition>
         <!--/主体内容视图-->
@@ -37,8 +37,16 @@
     @import "./assets/scss/common";
     #app{
         @extend %pa;
+        @extend %oh;
         @extend %t0;
         @extend %r0;
+        @extend %l0;
         @extend %b0;
+    }
+    .view-wrap{
+        @extend %pa;
+        @extend %r0;
+        @extend %l0;
+
     }
 </style>

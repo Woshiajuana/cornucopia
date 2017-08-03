@@ -5,19 +5,25 @@
             scrollbar-y
             use-pulldown
             use-pullup
+            :backSpeed="300"
             :height="scroller_height"
             @on-pulldown-loading="refreshHandle"
             @on-pullup-loading="loadMoreHandle"
             ref="scroller" v-model="scroller_status">
             <!--content slot-->
-            <header class="home-header">
-                <div class="home-header-top">
-                    <svg @click="is_open = !is_open" slot="icon" class="home-header-top-filter-btn">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#filter-icon"></use>
-                    </svg>
+            <div class="home-wrap">
+                <header class="home-header">
+                    <div class="home-header-top">
+                        <svg @click="is_open = !is_open" slot="icon" class="home-header-top-filter-btn">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#filter-icon"></use>
+                        </svg>
+                    </div>
+                    <a href="#/search" class="home-header-search-link">搜索文章</a>
+                </header>
+                <div class="homer-inner">
+
                 </div>
-                <a href="#/search" class="home-header-search-link">搜索文章</a>
-            </header>
+            </div>
             <!--pulldown slot-->
             <div slot="pulldown" class="xs-plugin-pulldown-container xs-plugin-pulldown-down" style="position: absolute; width: 100%; height: 60px; line-height: 60px; top: -60px; text-align: center;">
                 <span v-show="scroller_status.pulldownStatus === 'default'"></span>
@@ -113,6 +119,11 @@
             -webkit-transition: all linear 0.2s;
             font-size: j(12);
         }
+    }
+    .xs-container,
+    .home-wrap{
+        @extend %pr;
+        min-height: 100%;
     }
     .home-header{
         @extend %oh;

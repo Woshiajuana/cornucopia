@@ -50,6 +50,5 @@
         @extend %t0;
         @extend %l0;
         bottom: j(50);
-        background-color: #dddbe0;
     }
 </style>

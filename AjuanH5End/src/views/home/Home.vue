@@ -1,6 +1,23 @@
 <template>
     <div class="home-view" :class="{ 'active': is_open }">
-        <scroller lock-x ref="scrollerEvent">
+        <scroller
+            roller
+            lock-x
+            scrollbar-y
+            use-pullup
+            use-pulldown
+            @on-pullup-loading="loadMore"
+            @on-pulldown-loading="refresh"
+            ref="scroller"
+            v-model="pullstatus">
+            <!--<div slot="pulldown" class="xs-plugin-pulldown-container xs-plugin-pulldown-down">-->
+                <!--<span v-show="pullstatus.pulldownStatus === 'default'"></span>-->
+                <!--<span class="pulldown-arrow"-->
+                      <!--v-show="pullstatus.pulldownStatus === 'down' || pullstatus.pulldownStatus === 'up'"-->
+                      <!--:class="{'rotate': pullstatus.pulldownStatus === 'up'}">↓</span>-->
+                <!--<span class="pull-loading" v-show="pullstatus.pulldownStatus === 'loading'"><spinner-->
+                    <!--type="ios-small"></spinner><label>刷新中</label></span>-->
+            <!--</div>-->
             <header class="home-header">
                 <div class="home-header-top">
                     <svg @click="is_open = !is_open" slot="icon" class="home-header-top-filter-btn">
@@ -9,6 +26,15 @@
                 </div>
                 <a href="#/search" class="home-header-search-link">搜索文章</a>
             </header>
+
+            <!--<div v-show="pullstatus.pullupStatus !== 'default'" slot="pullup" class="xs-plugin-pullup-container xs-plugin-pullup-up">-->
+                <!--<span v-show="pullstatus.pullupStatus === 'default'"></span>-->
+                <!--<span class="pullup-arrow"-->
+                      <!--v-show="pullstatus.pullupStatus === 'down' || pullstatus.pullupStatus === 'up'"-->
+                      <!--:class="{'rotate': pullstatus.pullupStatus === 'up'}">↓</span>-->
+                <!--<span class="pull-loading" v-show="pullstatus.pullupStatus === 'loading'"><spinner-->
+                    <!--type="ios-small"></spinner><label>加载中</label></span>-->
+            <!--</div>-->
         </scroller>
         <transition name="fade">
             <div class="home-filter-mask" v-show="is_open" @click="is_open = false"></div>
@@ -20,12 +46,16 @@
 </template>
 <script>
     import GestureMobile from '../../assets/lib/GestureMobile'
-    import { Scroller } from 'vux'
+    import { Scroller,Spinner } from 'vux'
     export default {
         name: 'home',
         data () {
             return {
-                is_open: false
+                is_open: false,
+                pullstatus: {
+                    pullupStatus: 'default',
+                    pulldownStatus: 'default'
+                }
             }
         },
         created () {
@@ -41,8 +71,29 @@
                 });
             })
         },
+        methods: {
+            /**上拉加载更多*/
+            loadMore () {
+                setTimeout(() => {
+                    setTimeout(() => {
+                        this.$refs.scroller.donePullup()
+                    }, 10);
+                }, 500)
+            },
+            /**下拉刷新*/
+            refresh () {
+                setTimeout(() => {
+                    this.$nextTick(() => {
+                        setTimeout(() => {
+                            this.$refs.scroller.donePulldown()
+                        }, 10)
+                    })
+                }, 500)
+            }
+        },
         components: {
-            Scroller
+            Scroller,
+            Spinner
         }
     }
 </script>

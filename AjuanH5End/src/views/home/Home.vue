@@ -19,6 +19,7 @@
     </div>
 </template>
 <script>
+    import GestureMobile from '../../assets/lib/GestureMobile'
     import { Scroller } from 'vux'
     export default {
         name: 'home',
@@ -26,6 +27,19 @@
             return {
                 is_open: false
             }
+        },
+        created () {
+            this.$nextTick(() => {
+                let _this = this;
+                GestureMobile(this.$el,{
+                    leftCallBackFun () {
+                        _this.is_open = true;
+                    },
+                    rightCallBackFun () {
+                        _this.is_open = false;
+                    }
+                });
+            })
         },
         components: {
             Scroller

@@ -14,8 +14,14 @@
             <div class="home-wrap">
                 <header class="home-header">
                     <div class="home-header-top">
-                        <div class="home-header-time">
-
+                        <div class="home-header-top-date">
+                            <div class="home-header-top-date-con">
+                                <span class="home-header-top-date-con-day">03</span>
+                                <svg @click="is_open = !is_open" slot="icon" class="home-header-date-icon">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#date-icon"></use>
+                                </svg>
+                            </div>
+                            2017-08-03
                         </div>
                         <svg @click="is_open = !is_open" slot="icon" class="home-header-top-filter-btn">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#filter-icon"></use>
@@ -24,7 +30,13 @@
                     <a href="#/search" class="home-header-search-link">搜索文章</a>
                 </header>
                 <div class="homer-inner">
-
+                    <article-list-item></article-list-item>
+                    <article-list-item></article-list-item>
+                    <article-list-item></article-list-item>
+                    <article-list-item></article-list-item>
+                    <article-list-item></article-list-item>
+                    <article-list-item></article-list-item>
+                    <article-list-item></article-list-item>
                 </div>
             </div>
             <!--pulldown slot-->
@@ -50,6 +62,7 @@
 </template>
 <script>
     import GestureMobile from '../../assets/lib/GestureMobile'
+    import ArticleListItem from '../../components/article-list-item.vue'
     import { Scroller, Spinner } from 'vux'
     export default {
         name: 'home',
@@ -100,7 +113,8 @@
         },
         components: {
             Scroller,
-            Spinner
+            Spinner,
+            ArticleListItem
         }
     }
 </script>
@@ -112,27 +126,23 @@
             @include tft(translate3d(-83%,0,0))
         }
         .rotate {
-            transform: rotate(-180deg);
+            @include tfr(-180deg);
         }
+        .pulldown-arrow,
         .pullup-arrow{
             @extend %db;
-            @extend %c6;
+            @extend %cfff;
+            transition: all linear 0.2s;
+            -webkit-transition: all linear 0.2s;
+            font-size: j(12);
+        }
+        .pullup-arrow{
             height: 40px;
             line-height: 40px;
-            transition: all linear 0.2s;
-            -webkit-transition: all linear 0.2s;
-            font-size: j(12);
-            color: #fff;
         }
         .pulldown-arrow {
-            @extend %db;
-            @extend %c6;
             height: 60px;
             line-height: 60px;
-            transition: all linear 0.2s;
-            -webkit-transition: all linear 0.2s;
-            font-size: j(12);
-            color: #fff;
         }
         .xs-plugin-pulldown-container,
         .xs-plugin-pullup-container{
@@ -156,7 +166,7 @@
     .xs-container,
     .home-wrap{
         @extend %pr;
-        /*min-height: 100%;*/
+        min-height: 100%;
     }
     .home-header{
         @extend %oh;
@@ -178,7 +188,58 @@
     }
     .home-header-top{
         @extend %pr;
+        color: #f2f2f2;
         height: j(35);
+        line-height: j(35);
+    }
+    .home-header-top-date{
+        @extend %pa;
+        @extend %t0;
+        @extend %cp;
+        @extend %h100;
+        left: j(20);
+        font-size: j(14);
+        padding-left: j(30);
+        &:after{
+            @extend %pa;
+            @extend %t50;
+            margin-top: j(-3);
+            right: j(-15);
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: j(5) solid transparent;
+            border-right: j(5) solid transparent;
+            border-top: j(6) solid #f2f2f2;
+        }
+    }
+    .home-header-top-date-con{
+        @extend %pa;
+        @extend %t50;
+        @extend %l0;
+        margin-top: j(-12);
+        width: j(24);
+        height: j(24);
+    }
+    .home-header-top-date-con-day{
+        @extend %pa;
+        @extend %tac;
+        @extend %b0;
+        @extend %l0;
+        @extend %r0;
+        @extend %cfff;
+        font-size: j(12);
+        line-height: 1.4;
+    }
+    .home-header-date-icon{
+        @extend %pa;
+        @extend %t0;
+        @extend %b0;
+        @extend %l0;
+        @extend %r0;
+        @extend %w100;
+        @extend %h100;
+        fill: #fff;
     }
     .home-header-top-filter-btn{
         @extend %pa;

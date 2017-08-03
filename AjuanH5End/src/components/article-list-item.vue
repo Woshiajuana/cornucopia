@@ -23,7 +23,7 @@
     .article-list-item{
         @extend %pr;
         @extend .fadeIn;
-        animation-duration: 1s;
+        animation-duration: .5s;
         animation-fill-mode: both;
         height: j(60);
         padding: j(30) j(30) j(30) j(106);

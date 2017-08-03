@@ -1,5 +1,8 @@
 <template>
     <div class="home-view" :class="{ 'active': is_open }">
+        <svg slot="icon" class="home-logo-icon">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo-icon"></use>
+        </svg>
         <scroller
             lock-x
             scrollbar-y
@@ -11,11 +14,6 @@
             @on-pullup-loading="loadMoreHandle"
             ref="scroller" v-model="scroller_status">
             <!--content slot-->
-            <div class="home-logo">
-                <svg slot="icon" class="home-logo">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#home-icon"></use>
-                </svg>
-            </div>
             <div class="home-inner">
                 <header class="home-header">
                     <div class="home-header-top">
@@ -126,6 +124,7 @@
     @import "../../assets/scss/define";
     .home-view{
         @include tst(all,.5s);
+        background-color: #554a63;
         &.active{
             @include tft(translate3d(-83%,0,0))
         }
@@ -172,13 +171,14 @@
         @extend %pr;
         min-height: 100%;
     }
-    .home-logo{
-        @extend %pa;
-        @extend %w100;
+    .home-logo-icon{
+        @extend %pf;
+        @extend %t0;
         @extend %l0;
-        @extend %h100;
-        top: -100%;
-        background-color: red;
+        @extend %w100;
+        top: j(60);
+        height: j(120);
+        fill: $mc;
     }
     .home-header{
         @extend %oh;

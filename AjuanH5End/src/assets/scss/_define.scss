@@ -236,3 +236,52 @@
      -moz-border-radius: $radius;
           border-radius: $radius;
 }
+
+@mixin rounded($radius){
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin br($radius){
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin tfr($rotate){
+    -webkit-transform: rotate($rotate);
+    -moz-transform: rotate($rotate);
+    -ms-transform: rotate($rotate);
+    -o-transform: rotate($rotate);
+    transform: rotate($rotate);
+}
+
+@mixin tft($translate3d){
+    -webkit-transform: $translate3d;
+    -moz-transform: $translate3d;
+    -ms-transform: $translate3d;
+    -o-transform: $translate3d;
+    transform: $translate3d;
+}
+
+@mixin tst($sty,$time){
+    -webkit-transition: $sty $time;
+    -moz-transition: $sty $time;
+    -o-transition: $sty $time;
+    transition: $sty $time;
+}
+
+@mixin tst2($sty,$time,$sty2,$time2){
+    -webkit-transition: $sty $time, $sty2 $time2;
+    -moz-transition: $sty $time, $sty2 $time2;
+    -o-transition: $sty $time, $sty2 $time2;
+    transition: $sty $time, $sty2 $time2;
+}
+
+@mixin bosh($x,$y,$m,$n,$rgba){
+    -webkit-box-shadow: $x $y $m $n $rgba;
+    -moz-box-shadow: $x $y $m $n $rgba;
+    -o-box-shadow: $x $y $m $n $rgba;
+    box-shadow: $x $y $m $n $rgba;
+}

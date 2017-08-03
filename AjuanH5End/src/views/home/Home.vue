@@ -1,21 +1,32 @@
 <template>
-    <div class="home-view">
+    <div class="home-view" :class="{ 'active': is_open }">
         <scroller lock-x ref="scrollerEvent">
             <header class="home-header">
                 <div class="home-header-top">
-                    <svg slot="icon" class="home-header-top-filter-btn">
+                    <svg @click="is_open = !is_open" slot="icon" class="home-header-top-filter-btn">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#filter-icon"></use>
                     </svg>
                 </div>
                 <a href="#/search" class="home-header-search-link">搜索文章</a>
             </header>
         </scroller>
+        <transition name="fade">
+            <div class="home-filter-mask" v-show="is_open" @click="is_open = false"></div>
+        </transition>
+        <div class="home-filter-wrap">
+            过滤
+        </div>
     </div>
 </template>
 <script>
     import { Scroller } from 'vux'
     export default {
         name: 'home',
+        data () {
+            return {
+                is_open: false
+            }
+        },
         components: {
             Scroller
         }
@@ -23,6 +34,12 @@
 </script>
 <style lang="scss">
     @import "../../assets/scss/define";
+    .home-view{
+        @include tst(all,.5s);
+        &.active{
+            @include tft(translate3d(-83%,0,0))
+        }
+    }
     .home-header{
         @extend %oh;
         height: j(100);
@@ -54,5 +71,21 @@
         width: j(25);
         height: j(25);
         fill: #f2f2f2;
+    }
+    .home-filter-wrap{
+        @extend %pa;
+        @extend %b0;
+        @extend %t0;
+        width: 83%;
+        right: -83%;
+        background-color: #fff;
+    }
+    .home-filter-mask{
+        @extend %pa;
+        @extend %t0;
+        @extend %b0;
+        @extend %r0;
+        @extend %l0;
+        background: rgba(55,58,71,.9);
     }
 </style>

@@ -42,6 +42,7 @@
         @extend %r0;
         @extend %l0;
         @extend %b0;
+        background-color: #554a63;
     }
     .view-wrap{
         @extend %pa;
@@ -49,5 +50,6 @@
         @extend %t0;
         @extend %l0;
         bottom: j(50);
+        background-color: #dddbe0;
     }
 </style>

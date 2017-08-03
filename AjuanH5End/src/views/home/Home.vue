@@ -41,7 +41,7 @@
 </template>
 <script>
     import GestureMobile from '../../assets/lib/GestureMobile'
-    import { Scroller,Spinner } from 'vux'
+    import { Scroller, Spinner } from 'vux'
     export default {
         name: 'home',
         data () {
@@ -105,18 +105,13 @@
         .rotate {
             transform: rotate(-180deg);
         }
+        .pullup-arrow,
         .pulldown-arrow {
-            display: inline-block;
-            transition: all linear 0.2s;
-            color: #666;
-            font-size: 25px;
-        }
-        .pullup-arrow {
-            display: block;
+            @extend %db;
+            @extend %c6;
             transition: all linear 0.2s;
             -webkit-transition: all linear 0.2s;
-            color: #666;
-            font-size: 25px;
+            font-size: j(12);
         }
     }
     .home-header{

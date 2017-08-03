@@ -44,6 +44,7 @@
 <style lang="scss">
     @import '../assets/scss/define';
     .nav-bar-wrap{
+        background-color: #f8f5fc;
         height: j(50);
         .weui-tabbar__icon{
             width: j(27);

@@ -14,6 +14,9 @@
             <div class="home-wrap">
                 <header class="home-header">
                     <div class="home-header-top">
+                        <div class="home-header-time">
+
+                        </div>
                         <svg @click="is_open = !is_open" slot="icon" class="home-header-top-filter-btn">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#filter-icon"></use>
                         </svg>
@@ -83,14 +86,14 @@
             /**下拉刷新*/
             refreshHandle () {
                 setTimeout(() => {
-                    this.$refs.scroller.donePulldown()
+                    this.$refs.scroller.donePulldown();
                 }, 2000)
             },
             /**下拉刷新*/
             loadMoreHandle () {
                 setTimeout(() => {
                     setTimeout(() => {
-                        this.$refs.scroller.donePullup()
+                        this.$refs.scroller.donePullup();
                     }, 10)
                 }, 2000)
             }
@@ -111,19 +114,49 @@
         .rotate {
             transform: rotate(-180deg);
         }
-        .pullup-arrow,
-        .pulldown-arrow {
+        .pullup-arrow{
             @extend %db;
             @extend %c6;
+            height: 40px;
+            line-height: 40px;
             transition: all linear 0.2s;
             -webkit-transition: all linear 0.2s;
             font-size: j(12);
+            color: #fff;
+        }
+        .pulldown-arrow {
+            @extend %db;
+            @extend %c6;
+            height: 60px;
+            line-height: 60px;
+            transition: all linear 0.2s;
+            -webkit-transition: all linear 0.2s;
+            font-size: j(12);
+            color: #fff;
+        }
+        .xs-plugin-pulldown-container,
+        .xs-plugin-pullup-container{
+            @extend %pr;
+            span{
+                @extend %pa;
+                @extend %l0;
+                @extend %w100;
+                @extend %h100;
+                svg{
+                    stroke: #fff;
+                    @extend %pa;
+                    @extend %t50;
+                    @extend %l50;
+                    margin-top: -14px;
+                    margin-left: -14px;
+                }
+            }
         }
     }
     .xs-container,
     .home-wrap{
         @extend %pr;
-        min-height: 100%;
+        /*min-height: 100%;*/
     }
     .home-header{
         @extend %oh;

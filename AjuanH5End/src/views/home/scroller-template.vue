@@ -5,7 +5,7 @@
             scrollbar-y
             use-pulldown
             use-pullup
-            :height="scroller_height"
+            height="-50"
             @on-pulldown-loading="refreshHandle"
             @on-pullup-loading="loadMoreHandle"
             ref="scroller" v-model="scroller_status">
@@ -47,7 +47,13 @@
         data () {
             return {
                 is_open: false,
-                scroller_height: '',
+                n1: 10,
+                status: {
+                    pulldownStatus: 'default'
+                },
+                status1: {
+                    pulldownStatus: 'default'
+                },
                 scroller_status: {
                     pullupStatus: 'default',
                     pulldownStatus: 'default'
@@ -56,24 +62,18 @@
         },
         created () {
             this.$nextTick(() => {
-                this.bindGestureMobile(); /**绑定手势*/
-                this.initScrollerVisualHeight(); /**初始化滚动可视高度*/
+                let _this = this;
+                GestureMobile(this.$el,{
+                    leftCallBackFun () {
+                        _this.is_open = true;
+                    },
+                    rightCallBackFun () {
+                        _this.is_open = false;
+                    }
+                });
             })
         },
         methods: {
-            /**初始化滚动可视高度*/
-            initScrollerVisualHeight () {
-                var nd_bar = window.document.getElementsByClassName('nav-bar-wrap')[0];
-                nd_bar && (this.scroller_height = '-' + nd_bar.offsetHeight);
-            },
-            /**绑定手势*/
-            bindGestureMobile () {
-                let _this = this;
-                GestureMobile(this.$el,{
-                    leftCallBackFun () { _this.is_open = true; },
-                    rightCallBackFun () { _this.is_open = false; }
-                });
-            },
             /**下拉刷新*/
             refreshHandle () {
                 setTimeout(() => {

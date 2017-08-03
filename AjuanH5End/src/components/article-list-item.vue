@@ -5,6 +5,12 @@
         </div>
         <h2 class="article-list-item-title">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</h2>
         <p class="article-list-item-time">2017-08-03</p>
+        <div class="article-list-item-point">
+            <span class="article-list-item-point-number">(12)</span>
+            <svg class="article-list-item-point-icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#point-icon"></use>
+            </svg>
+        </div>
     </div>
 </template>
 <script>
@@ -16,10 +22,28 @@
     @import '../assets/scss/define';
     .article-list-item{
         @extend %pr;
+        @extend .fadeIn;
+        animation-duration: 1s;
+        animation-fill-mode: both;
         height: j(60);
         padding: j(30) j(30) j(30) j(106);
         background-color: #dddbe0;
         border-bottom: 1px solid #9f9da1;
+    }
+    .animated {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    .fadeIn {
+        animation-name: fadeIn;
     }
     .article-list-item-img{
         @extend %pa;
@@ -50,5 +74,23 @@
         font-size: j(12);
         height: j(20);
         line-height: j(20);
+    }
+    .article-list-item-point{
+        @extend %pa;
+        padding-right: j(25);
+        color: #999;
+        font-size: j(12);
+        right: j(20);
+        bottom: j(20);
+        height: j(20);
+        line-height: j(20);
+    }
+    .article-list-item-point-icon{
+        @extend %pa;
+        @extend %t0;
+        @extend %r0;
+        @extend %cp;
+        width: j(20);
+        height: j(20);
     }
 </style>

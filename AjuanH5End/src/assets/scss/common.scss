@@ -5,6 +5,7 @@ html,body{
     @extend %oh;
     @extend %h100;
 }
+
 .fade-enter-active, .fade-leave-active {
     transition: opacity .5s
 }

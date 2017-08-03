@@ -11,7 +11,12 @@
             @on-pullup-loading="loadMoreHandle"
             ref="scroller" v-model="scroller_status">
             <!--content slot-->
-            <div class="home-wrap">
+            <div class="home-logo">
+                <svg slot="icon" class="home-logo">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#home-icon"></use>
+                </svg>
+            </div>
+            <div class="home-inner">
                 <header class="home-header">
                     <div class="home-header-top">
                         <div class="home-header-top-date">
@@ -30,13 +35,7 @@
                     <a href="#/search" class="home-header-search-link">搜索文章</a>
                 </header>
                 <div class="homer-inner">
-                    <article-list-item></article-list-item>
-                    <article-list-item></article-list-item>
-                    <article-list-item></article-list-item>
-                    <article-list-item></article-list-item>
-                    <article-list-item></article-list-item>
-                    <article-list-item></article-list-item>
-                    <article-list-item></article-list-item>
+                    <article-list-item v-for="(item,index) in article_arr" :key="index"></article-list-item>
                 </div>
             </div>
             <!--pulldown slot-->
@@ -68,6 +67,7 @@
         name: 'home',
         data () {
             return {
+                article_arr: 10,
                 is_open: false,
                 scroller_height: '',
                 scroller_status: {
@@ -99,15 +99,19 @@
             /**下拉刷新*/
             refreshHandle () {
                 setTimeout(() => {
+                    this.article_arr = 10;
                     this.$refs.scroller.donePulldown();
                 }, 2000)
             },
             /**下拉刷新*/
             loadMoreHandle () {
                 setTimeout(() => {
-                    setTimeout(() => {
-                        this.$refs.scroller.donePullup();
-                    }, 10)
+                    this.article_arr += 5;
+                    this.$nextTick(() => {
+                        setTimeout(() => {
+                            this.$refs.scroller.donePullup();
+                        }, 10)
+                    })
                 }, 2000)
             }
         },
@@ -164,9 +168,17 @@
         }
     }
     .xs-container,
-    .home-wrap{
+    .home-inner{
         @extend %pr;
         min-height: 100%;
+    }
+    .home-logo{
+        @extend %pa;
+        @extend %w100;
+        @extend %l0;
+        @extend %h100;
+        top: -100%;
+        background-color: red;
     }
     .home-header{
         @extend %oh;

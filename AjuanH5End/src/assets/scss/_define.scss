@@ -231,6 +231,12 @@
 	background:#fff;
 }
 
+%twno{
+    @extend %oh;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 @mixin rounded($radius){
     -webkit-border-radius: $radius;
      -moz-border-radius: $radius;

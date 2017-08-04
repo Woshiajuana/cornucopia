@@ -1,17 +1,19 @@
 <template>
-    <div class="article-list-item">
-        <div src="" alt="" class="article-list-item-img">
-            <img src="" alt="">
+    <a class="article-list-item">
+        <div class="article-list-item-inner">
+            <div src="" alt="" class="article-list-item-img">
+                <img src="" alt="">
+            </div>
+            <h2 class="article-list-item-title">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</h2>
+            <p class="article-list-item-time">2017-08-03</p>
+            <div class="article-list-item-point">
+                <span class="article-list-item-point-number">(12)</span>
+                <svg class="article-list-item-point-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#point-icon"></use>
+                </svg>
+            </div>
         </div>
-        <h2 class="article-list-item-title">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</h2>
-        <p class="article-list-item-time">2017-08-03</p>
-        <div class="article-list-item-point">
-            <span class="article-list-item-point-number">(12)</span>
-            <svg class="article-list-item-point-icon">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#point-icon"></use>
-            </svg>
-        </div>
-    </div>
+    </a>
 </template>
 <script>
     export default {
@@ -21,14 +23,23 @@
 <style lang="scss">
     @import '../assets/scss/define';
     .article-list-item{
+        @extend %db;
         @extend %pr;
+        padding-left: j(30);
+        background-color: #f2f2f2;
+        &:first-child{
+            .article-list-item-inner{
+                border-top: none;
+            }
+        }
+    }
+    .article-list-item-inner{
         @extend .fadeIn;
         animation-duration: .5s;
         animation-fill-mode: both;
         height: j(60);
-        padding: j(30) j(30) j(30) j(106);
-        background-color: #dddbe0;
-        border-bottom: 1px solid #9f9da1;
+        padding: j(30) j(30) j(30) j(76);
+        border-top: 1px solid #ddd;
     }
     .animated {
         animation-duration: 1s;

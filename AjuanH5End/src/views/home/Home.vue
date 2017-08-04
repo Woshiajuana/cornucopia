@@ -1,8 +1,9 @@
 <template>
     <div class="home-view" :class="{ 'active': is_open }">
-        <svg slot="icon" class="home-logo-icon">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logo-icon"></use>
-        </svg>
+        <!--背景LOGO-->
+        <logo-bg></logo-bg>
+        <!--/背景LOGO-->
+        <!--主体内容-->
         <scroller
             lock-x
             scrollbar-y
@@ -12,6 +13,7 @@
             :height="scroller_height"
             @on-pulldown-loading="refreshHandle"
             @on-pullup-loading="loadMoreHandle"
+            @on-scroll="scrollHandle"
             ref="scroller" v-model="scroller_status">
             <!--content slot-->
             <div class="home-inner">
@@ -49,17 +51,27 @@
                 <span v-show="scroller_status.pullupStatus === 'loading'"><spinner type="ios-small"></spinner></span>
             </div>
         </scroller>
+        <!--/主体内容-->
+        <!--返回顶部-->
+        <return-top :top_dir="top_dir" @returnTop="returnTopHandle"></return-top>
+        <!--/返回顶部-->
+        <!--遮罩-->
         <transition name="fade">
             <div class="home-filter-mask" v-show="is_open" @click="is_open = false"></div>
         </transition>
+        <!--/遮罩-->
+        <!--过滤筛选-->
         <div class="home-filter-wrap">
             过滤
         </div>
+        <!--/过滤筛选-->
     </div>
 </template>
 <script>
     import GestureMobile from '../../assets/lib/GestureMobile'
     import ArticleListItem from '../../components/article-list-item.vue'
+    import ReturnTop from '../../components/return-top.vue'
+    import LogoBg from '../../components/logo-bg.vue'
     import { Scroller, Spinner } from 'vux'
     export default {
         name: 'home',
@@ -68,6 +80,7 @@
                 article_arr: 10,
                 is_open: false,
                 scroller_height: '',
+                top_dir: 0,
                 scroller_status: {
                     pullupStatus: 'default',
                     pulldownStatus: 'default'
@@ -101,7 +114,7 @@
                     this.$refs.scroller.donePulldown();
                 }, 2000)
             },
-            /**下拉刷新*/
+            /**上拉加载*/
             loadMoreHandle () {
                 setTimeout(() => {
                     this.article_arr += 5;
@@ -111,12 +124,23 @@
                         }, 10)
                     })
                 }, 2000)
+            },
+            /**滚动页面回调事件*/
+            scrollHandle ( { top } ) {
+                this.top_dir = top;
+            },
+            /**回顶部事件*/
+            returnTopHandle () {
+                this.$refs.scroller.reset({top:0});
+                this.top_dir = 0;
             }
         },
         components: {
             Scroller,
             Spinner,
-            ArticleListItem
+            ArticleListItem,
+            ReturnTop,
+            LogoBg
         }
     }
 </script>
@@ -171,15 +195,7 @@
         @extend %pr;
         min-height: 100%;
     }
-    .home-logo-icon{
-        @extend %pf;
-        @extend %t0;
-        @extend %l0;
-        @extend %w100;
-        top: j(60);
-        height: j(120);
-        fill: $mc;
-    }
+
     .home-header{
         @extend %oh;
         height: j(100);

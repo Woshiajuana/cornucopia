@@ -7,6 +7,8 @@ const SET_ANIMATE_NAME = 'SET_ANIMATE_NAME';
 const SET_NAV_INDEX = 'SET_NAV_INDEX';
 /**判断是否是第一次进入应用*/
 const JUDGE_IS_NOT_FIRST = 'JUDGE_IS_NOT_FIRST';
+/**设置高度滚动*/
+const SET_SCROLL_TOP = 'SET_SCROLL_TOP';
 export default {
     SET_ANIMATE_NAME,
     SET_NAV_INDEX,

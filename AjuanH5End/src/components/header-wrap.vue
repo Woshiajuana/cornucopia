@@ -1,13 +1,14 @@
 <template>
     <header class="header-wrap">
         <a href="javascript:;" @click="headerReturnHandle" class="header-return"></a>
-        <h2 class="header-title">{{ header_title }}</h2>
+        <h1 v-if="!is_h2" class="header-title">{{ header_title }}</h1>
+        <h2 v-else class="header-title">{{ header_title }}</h2>
     </header>
 </template>
 <script>
     export default {
         name: 'header',
-        props: [ 'header_title', 'is_left_click' ],
+        props: [ 'header_title', 'is_left_click', 'is_h2'],
         methods: {
             headerReturnHandle () {
                 this.$emit('headerLeftClick');
@@ -18,10 +19,11 @@
 </script>
 <style lang="scss">
     @import '../assets/scss/define';
+    $header_height: j(46);
     .header-wrap{
         @extend %pr;
-        height: j(42);
-        line-height: j(42);
+        height: $header_height;
+        line-height: $header_height;
         background-color: $mc;
     }
     .header-title{
@@ -35,8 +37,8 @@
         @extend %t0;
         @extend %l0;
         @extend %cp;
-        width: j(42);
-        height: j(42);
+        width: $header_height;
+        height: $header_height;
         &:after{
             @extend %pa;
             @extend %t50;

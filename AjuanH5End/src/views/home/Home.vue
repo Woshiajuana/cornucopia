@@ -24,7 +24,7 @@
                             <div class="home-header-top-date">
                                 <div class="home-header-top-date-con">
                                     <span class="home-header-top-date-con-day">03</span>
-                                    <svg @click="is_open = !is_open" slot="icon" class="home-header-date-icon">
+                                    <svg @click="is_open = !is_open" class="home-header-date-icon">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#date-icon"></use>
                                     </svg>
                                 </div>
@@ -36,7 +36,7 @@
                         </div>
                         <a href="#/search" class="home-header-search-link">搜索文章</a>
                     </header>
-                    <div class="homer-inner">
+                    <div class="home-con">
                         <article-list-item v-for="(item,index) in article_arr" :key="index"></article-list-item>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
             <!--/遮罩-->
             <!--过滤筛选-->
             <div class="home-filter-wrap">
-                <header-wrap header_title="分类" :is_left_click="true" @headerLeftClick="headerLeftClickHandle"></header-wrap>
+                <header-wrap :is_h2="true" header_title="分类" :is_left_click="true" @headerLeftClick="headerLeftClickHandle"></header-wrap>
                 <!--过滤主体-->
                 <scroller
                     lock-x
@@ -108,6 +108,7 @@
     import HeaderWrap from '../../components/header-wrap.vue'
     import LogoBg from '../../components/logo-bg.vue'
     import { Scroller, Spinner } from 'vux'
+    import DEFAULT_CONFIG from '../../assets/lib/DEFAULT_CONFIG'
     export default {
         name: 'home',
         data () {
@@ -147,7 +148,7 @@
                 setTimeout(() => {
                     this.article_arr = 10;
                     this.$refs.scroller.donePulldown();
-                }, 2000)
+                }, DEFAULT_CONFIG.SCROLL_TIME)
             },
             /**上拉加载*/
             loadMoreHandle () {
@@ -158,7 +159,7 @@
                             this.$refs.scroller.donePullup();
                         }, 10)
                     })
-                }, 2000)
+                }, DEFAULT_CONFIG.SCROLL_TIME)
             },
             /**滚动页面回调事件*/
             scrollHandle ( { top } ) {
@@ -189,43 +190,6 @@
     .home-view{
         @extend %oh;
         background-color: $bgmc;
-        .rotate {
-            @include tfr(-180deg);
-        }
-        .pulldown-arrow,
-        .pullup-arrow{
-            @extend %db;
-            @extend %cfff;
-            transition: all linear 0.2s;
-            -webkit-transition: all linear 0.2s;
-            font-size: j(12);
-        }
-        .pullup-arrow{
-            height: 40px;
-            line-height: 40px;
-        }
-        .pulldown-arrow {
-            height: 60px;
-            line-height: 60px;
-        }
-        .xs-plugin-pulldown-container,
-        .xs-plugin-pullup-container{
-            @extend %pr;
-            span{
-                @extend %pa;
-                @extend %l0;
-                @extend %w100;
-                @extend %h100;
-                svg{
-                    stroke: #fff;
-                    @extend %pa;
-                    @extend %t50;
-                    @extend %l50;
-                    margin-top: -14px;
-                    margin-left: -14px;
-                }
-            }
-        }
     }
     .home-wrap{
         @extend %pa;

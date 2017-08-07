@@ -6,6 +6,10 @@ import types from '../store/mutation-types'
 import Home from '../views/home/Home.vue'
 /**发现*/
 import Find from '../views/find/Find.vue'
+/**搜索*/
+import Search from '../views/search/Search.vue'
+import SearchIndex from '../views/search/children/SearchIndex.vue'
+import SearchResult from '../views/search/children/SearchResult.vue'
 
 Vue.use(Router);
 
@@ -28,6 +32,30 @@ const router = new Router({
             meta: {
                 status: 2
             }
+        },
+        /**搜索*/
+        {
+            path: '/search',
+            name: 'search',
+            component: Search,
+            children: [
+                {
+                    path: '/',
+                    name: 'search-index',
+                    component: SearchIndex,
+                    meta: {
+                        status: 2
+                    }
+                },
+                {
+                    path: 'result/:key_words',
+                    name: 'search-result',
+                    component: SearchResult,
+                    meta: {
+                        status: 2
+                    }
+                }
+            ]
         }
     ]
 });

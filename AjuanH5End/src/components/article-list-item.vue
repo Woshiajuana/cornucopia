@@ -1,5 +1,5 @@
 <template>
-    <a class="article-list-item">
+    <a class="article-list-item animated">
         <div class="article-list-item-inner">
             <div src="" alt="" class="article-list-item-img">
                 <img src="" alt="">
@@ -25,8 +25,9 @@
     .article-list-item{
         @extend %db;
         @extend %pr;
+        @extend .fadeIn;
         padding-left: j(30);
-        background-color: $article_bg;
+        background-color: #fff;
         &:first-child{
             .article-list-item-inner{
                 border-top: none;
@@ -34,9 +35,6 @@
         }
     }
     .article-list-item-inner{
-        @extend .fadeIn;
-        animation-duration: .5s;
-        animation-fill-mode: both;
         height: j(60);
         padding: j(30) j(30) j(30) j(76);
         border-top: 1px solid #ddd;

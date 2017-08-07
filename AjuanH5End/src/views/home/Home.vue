@@ -61,9 +61,7 @@
             <!--/遮罩-->
             <!--过滤筛选-->
             <div class="home-filter-wrap">
-                <svg class="home-filter-close">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#close-icon"></use>
-                </svg>
+                <header-wrap header_title="分类" :is_left_click="true" @headerLeftClick="headerLeftClickHandle"></header-wrap>
                 <!--过滤主体-->
                 <scroller
                     lock-x
@@ -73,7 +71,6 @@
                     ref="filter_scroller">
                     <!--content slot-->
                     <dl class="home-filter-inner">
-                        <dt class="home-filter-title">分类</dt>
                         <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
                         <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
                         <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
@@ -108,6 +105,7 @@
     import GestureMobile from '../../assets/lib/GestureMobile'
     import ArticleListItem from '../../components/article-list-item.vue'
     import ReturnTop from '../../components/return-top.vue'
+    import HeaderWrap from '../../components/header-wrap.vue'
     import LogoBg from '../../components/logo-bg.vue'
     import { Scroller, Spinner } from 'vux'
     export default {
@@ -170,11 +168,16 @@
             returnTopHandle () {
                 this.$refs.scroller.reset({top:0});
                 this.top_dir = 0;
+            },
+            /**过滤页面回退事件*/
+            headerLeftClickHandle () {
+                this.is_open = false;
             }
         },
         components: {
             Scroller,
             Spinner,
+            HeaderWrap,
             ArticleListItem,
             ReturnTop,
             LogoBg
@@ -340,6 +343,7 @@
         background: rgba(55,58,71,.9);
     }
     .home-filter-close{
+        z-index: 1;
         @extend %pa;
         @extend %cp;
         @include br(50%);
@@ -347,12 +351,12 @@
         left: j(16);
         width: j(20);
         height: j(20);
-        box-shadow: 0 j(3) j(3) 0 rgba(0,0,0,.2);
         fill: #999;
     }
     .home-filter-inner{
+        @extend %pr;
         @extend %tac;
-        padding: j(80) 0;
+        padding: j(20) 0 j(80);
     }
     .home-filter-title{
         font-size: j(18);

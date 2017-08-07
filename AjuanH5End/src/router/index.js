@@ -12,6 +12,10 @@ import SearchIndex from '../views/search/children/SearchIndex.vue'
 import SearchResult from '../views/search/children/SearchResult.vue'
 /**文章*/
 import Article from '../views/article/Article.vue'
+/**留言*/
+import Message from '../views/message/Message.vue'
+/**关于*/
+import About from '../views/about/About.vue'
 
 Vue.use(Router);
 
@@ -66,6 +70,24 @@ const router = new Router({
             component: Article,
             meta: {
                 status: 3
+            }
+        },
+        /**留言*/
+        {
+            path: '/message',
+            name: 'message',
+            component: Message,
+            meta: {
+                status: 4
+            }
+        },
+        /**关于*/
+        {
+            path: '/about',
+            name: 'about',
+            component: About,
+            meta: {
+                status: 5
             }
         }
     ]

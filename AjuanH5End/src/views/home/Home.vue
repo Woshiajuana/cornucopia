@@ -1,70 +1,76 @@
 <template>
-    <div class="home-view" :class="{ 'active': is_open }">
+    <div class="home-view">
         <!--背景LOGO-->
         <logo-bg></logo-bg>
         <!--/背景LOGO-->
         <!--主体内容-->
-        <scroller
-            lock-x
-            scrollbar-y
-            use-pulldown
-            use-pullup
-            :backSpeed="300"
-            :height="scroller_height"
-            @on-pulldown-loading="refreshHandle"
-            @on-pullup-loading="loadMoreHandle"
-            @on-scroll="scrollHandle"
-            ref="scroller" v-model="scroller_status">
-            <!--content slot-->
-            <div class="home-inner">
-                <header class="home-header">
-                    <div class="home-header-top">
-                        <div class="home-header-top-date">
-                            <div class="home-header-top-date-con">
-                                <span class="home-header-top-date-con-day">03</span>
-                                <svg @click="is_open = !is_open" slot="icon" class="home-header-date-icon">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#date-icon"></use>
-                                </svg>
+        <div class="home-wrap" :class="{ 'active': is_open }">
+            <!--数据-->
+            <scroller
+                lock-x
+                scrollbar-y
+                use-pulldown
+                use-pullup
+                :backSpeed="300"
+                :height="scroller_height"
+                @on-pulldown-loading="refreshHandle"
+                @on-pullup-loading="loadMoreHandle"
+                @on-scroll="scrollHandle"
+                ref="scroller" v-model="scroller_status">
+                <!--content slot-->
+                <div class="home-inner">
+                    <header class="home-header">
+                        <div class="home-header-top">
+                            <div class="home-header-top-date">
+                                <div class="home-header-top-date-con">
+                                    <span class="home-header-top-date-con-day">03</span>
+                                    <svg @click="is_open = !is_open" slot="icon" class="home-header-date-icon">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#date-icon"></use>
+                                    </svg>
+                                </div>
+                                2017-08-03
                             </div>
-                            2017-08-03
+                            <svg @click="is_open = !is_open" slot="icon" class="home-header-top-filter-btn">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#filter-icon"></use>
+                            </svg>
                         </div>
-                        <svg @click="is_open = !is_open" slot="icon" class="home-header-top-filter-btn">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#filter-icon"></use>
-                        </svg>
+                        <a href="#/search" class="home-header-search-link">搜索文章</a>
+                    </header>
+                    <div class="homer-inner">
+                        <article-list-item v-for="(item,index) in article_arr" :key="index"></article-list-item>
                     </div>
-                    <a href="#/search" class="home-header-search-link">搜索文章</a>
-                </header>
-                <div class="homer-inner">
-                    <article-list-item v-for="(item,index) in article_arr" :key="index"></article-list-item>
                 </div>
+                <!--pulldown slot-->
+                <div slot="pulldown" class="xs-plugin-pulldown-container xs-plugin-pulldown-down" style="position: absolute; width: 100%; height: 60px; line-height: 60px; top: -60px; text-align: center;">
+                    <span v-show="scroller_status.pulldownStatus === 'default'"></span>
+                    <span class="pulldown-arrow" v-show="scroller_status.pulldownStatus === 'down' || scroller_status.pulldownStatus === 'up'" :class="{'rotate': scroller_status.pulldownStatus === 'up'}">↓</span>
+                    <span v-show="scroller_status.pulldownStatus === 'loading'"><spinner type="ios-small"></spinner></span>
+                </div>
+                <!--pullup slot-->
+                <div slot="pullup" class="xs-plugin-pullup-container xs-plugin-pullup-up" style="position: absolute; width: 100%; height: 40px; bottom: -40px; text-align: center;">
+                    <span v-show="scroller_status.pullupStatus === 'default'"></span>
+                    <span class="pullup-arrow" v-show="scroller_status.pullupStatus === 'default' || scroller_status.pullupStatus === 'up' || scroller_status.pullupStatus === 'down'" :class="{'rotate': scroller_status.pullupStatus === 'down'}">↑</span>
+                    <span v-show="scroller_status.pullupStatus === 'loading'"><spinner type="ios-small"></spinner></span>
+                </div>
+            </scroller>
+            <!--/数据-->
+            <!--遮罩-->
+            <transition name="fade">
+                <div class="home-filter-mask" v-show="is_open" @click="is_open = false"></div>
+            </transition>
+            <!--/遮罩-->
+            <!--过滤筛选-->
+            <div class="home-filter-wrap">
+                <svg class="home-filter-close">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#close-icon"></use>
+                </svg>
             </div>
-            <!--pulldown slot-->
-            <div slot="pulldown" class="xs-plugin-pulldown-container xs-plugin-pulldown-down" style="position: absolute; width: 100%; height: 60px; line-height: 60px; top: -60px; text-align: center;">
-                <span v-show="scroller_status.pulldownStatus === 'default'"></span>
-                <span class="pulldown-arrow" v-show="scroller_status.pulldownStatus === 'down' || scroller_status.pulldownStatus === 'up'" :class="{'rotate': scroller_status.pulldownStatus === 'up'}">↓</span>
-                <span v-show="scroller_status.pulldownStatus === 'loading'"><spinner type="ios-small"></spinner></span>
-            </div>
-            <!--pullup slot-->
-            <div slot="pullup" class="xs-plugin-pullup-container xs-plugin-pullup-up" style="position: absolute; width: 100%; height: 40px; bottom: -40px; text-align: center;">
-                <span v-show="scroller_status.pullupStatus === 'default'"></span>
-                <span class="pullup-arrow" v-show="scroller_status.pullupStatus === 'default' || scroller_status.pullupStatus === 'up' || scroller_status.pullupStatus === 'down'" :class="{'rotate': scroller_status.pullupStatus === 'down'}">↑</span>
-                <span v-show="scroller_status.pullupStatus === 'loading'"><spinner type="ios-small"></spinner></span>
-            </div>
-        </scroller>
+            <!--/过滤筛选-->
+        </div>
         <!--/主体内容-->
         <!--返回顶部-->
         <return-top :top_dir="top_dir" @returnTop="returnTopHandle"></return-top>
         <!--/返回顶部-->
-        <!--遮罩-->
-        <transition name="fade">
-            <div class="home-filter-mask" v-show="is_open" @click="is_open = false"></div>
-        </transition>
-        <!--/遮罩-->
-        <!--过滤筛选-->
-        <div class="home-filter-wrap">
-            过滤
-        </div>
-        <!--/过滤筛选-->
     </div>
 </template>
 <script>
@@ -147,11 +153,8 @@
 <style lang="scss">
     @import "../../assets/scss/define";
     .home-view{
-        @include tst(all,.5s);
-        background-color: #554a63;
-        &.active{
-            @include tft(translate3d(-83%,0,0))
-        }
+        @extend %oh;
+        background-color: $bgmc;
         .rotate {
             @include tfr(-180deg);
         }
@@ -190,12 +193,22 @@
             }
         }
     }
+    .home-wrap{
+        @extend %pa;
+        @extend %t0;
+        @extend %r0;
+        @extend %l0;
+        @extend %b0;
+        @include tst(all,.5s);
+        &.active{
+            @include tft(translate3d(-83%,0,0))
+        }
+    }
     .xs-container,
     .home-inner{
         @extend %pr;
         min-height: 100%;
     }
-
     .home-header{
         @extend %oh;
         height: j(100);
@@ -285,7 +298,7 @@
         @extend %t0;
         width: 83%;
         right: -83%;
-        background-color: #fff;
+        background-color: #f2f2f2;
     }
     .home-filter-mask{
         @extend %pa;
@@ -294,5 +307,16 @@
         @extend %r0;
         @extend %l0;
         background: rgba(55,58,71,.9);
+    }
+    .home-filter-close{
+        @extend %pa;
+        @extend %cp;
+        @include br(50%);
+        top: j(16);
+        left: j(16);
+        width: j(20);
+        height: j(20);
+        box-shadow: 0 j(3) j(3) 0 rgba(0,0,0,.2);
+        fill: #999;
     }
 </style>

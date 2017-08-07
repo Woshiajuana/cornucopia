@@ -26,7 +26,7 @@
         @extend %db;
         @extend %pr;
         padding-left: j(30);
-        background-color: #f2f2f2;
+        background-color: $article_bg;
         &:first-child{
             .article-list-item-inner{
                 border-top: none;

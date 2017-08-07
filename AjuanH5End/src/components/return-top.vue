@@ -34,6 +34,15 @@
         box-shadow: 0 j(3) j(3) 0 rgba(0,0,0,.2);
         &.active{
             right: j(10);
+            animation: rotate360 .3s;
+        }
+    }
+    @keyframes rotate360 {
+        0% {
+            transform: rotate(-180deg);
+        }
+        100% {
+            transform: rotate(-360deg);
         }
     }
     .return-top-icon{

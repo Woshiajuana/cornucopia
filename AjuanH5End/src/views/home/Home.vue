@@ -147,7 +147,7 @@
             refreshHandle () {
                 setTimeout(() => {
                     this.article_arr = 10;
-                    this.$refs.scroller.donePulldown();
+                    this.$refs.scroller && this.$refs.scroller.donePulldown();
                 }, DEFAULT_CONFIG.SCROLL_TIME)
             },
             /**上拉加载*/
@@ -156,7 +156,7 @@
                     this.article_arr += 5;
                     this.$nextTick(() => {
                         setTimeout(() => {
-                            this.$refs.scroller.donePullup();
+                            this.$refs.scroller && this.$refs.scroller.donePullup();
                         }, 10)
                     })
                 }, DEFAULT_CONFIG.SCROLL_TIME)

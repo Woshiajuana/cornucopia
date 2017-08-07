@@ -1,5 +1,5 @@
 <template>
-    <a class="article-list-item animated">
+    <a class="article-list-item animated" href="#/article/1">
         <div class="article-list-item-inner">
             <div src="" alt="" class="article-list-item-img">
                 <img src="" alt="">

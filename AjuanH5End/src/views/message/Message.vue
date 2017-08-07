@@ -1,9 +1,9 @@
 <template>
-    <div class="article-view">
+    <div class="message-view">
         <!--背景LOGO-->
         <logo-bg></logo-bg>
         <!--/背景LOGO-->
-        <header-wrap header_title="HTML基础知识"></header-wrap>
+        <header-wrap header_title="发现"></header-wrap>
         <scroller
             lock-x
             scrollbar-y
@@ -11,7 +11,7 @@
             :height="scroller_height"
             ref="scroller">
             <!--content slot-->
-            <div class="article-inner">
+            <div class="find-inner">
                 <p>
                     额，什么鬼，怎么还不是我背了那么多遍的那道闭包题，让我想想。 setTimeout 会延迟执行，那么执行到 console.log 的时候，其实 i 已经变成 5 了，对，就是这样，这么简单怎么可能难到老子。
                 </p>
@@ -57,7 +57,7 @@
     import LogoBg from '../../components/logo-bg.vue'
     import { Scroller } from 'vux'
     export default {
-        name: 'article',
+        name: 'find',
         data () {
             return {
                 scroller_height: ''
@@ -88,13 +88,13 @@
 </script>
 <style lang="scss">
     @import "../../assets/scss/define";
-    .article-view{
+    .find-view{
         background-color: $bgmc;
         .xs-container{
             min-height: 100%;
         }
     }
-    .article-inner{
+    .find-inner{
         @extend %pr;
         @extend %c6;
         @extend %bgwhite;

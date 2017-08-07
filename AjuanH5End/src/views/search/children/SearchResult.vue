@@ -1,14 +1,19 @@
 <template>
-    <div class="search-result">
-        <div class="search-result-null">
+    <div class="search-result" :class="{'search-null-bg': !article_arr}">
+        <!--背景LOGO-->
+        <logo-bg></logo-bg>
+        <!--/背景LOGO-->
+        <template v-if="!article_arr">
             <img src="../../../assets/img/search-null.png" class="search-null-img">
-        </div>
+            <p class="search-null-prompt">毛都冒得一根~~~</p>
+        </template>
         <scroller
+            v-else
             lock-x
             scrollbar-y
             use-pulldown
             use-pullup
-            :backSpeed="300"
+            :backSpeed="200"
             :height="scroller_height"
             @on-pulldown-loading="refreshHandle"
             @on-pullup-loading="loadMoreHandle"
@@ -32,7 +37,7 @@
             </div>
         </scroller>
         <!--返回顶部-->
-        <return-top :top_dir="top_dir" @returnTop="returnTopHandle"></return-top>
+        <return-top v-if="article_arr" :top_dir="top_dir" @returnTop="returnTopHandle"></return-top>
         <!--/返回顶部-->
     </div>
 </template>
@@ -40,6 +45,7 @@
     import ArticleListItem from '../../../components/article-list-item.vue'
     import DEFAULT_CONFIG from '../../../assets/lib/DEFAULT_CONFIG'
     import ReturnTop from '../../../components/return-top.vue'
+    import LogoBg from '../../../components/logo-bg.vue'
     import { Scroller, Spinner } from 'vux'
     export default {
         name: 'search-result',
@@ -74,7 +80,7 @@
             refreshHandle () {
                 setTimeout(() => {
                     this.article_arr = 10;
-                    this.$refs.scroller.donePulldown();
+                    this.$refs.scroller && this.$refs.scroller.donePulldown();
                 }, DEFAULT_CONFIG.SCROLL_TIME)
             },
             /**上拉加载*/
@@ -83,7 +89,7 @@
                     this.article_arr += 5;
                     this.$nextTick(() => {
                         setTimeout(() => {
-                            this.$refs.scroller.donePullup();
+                            this.$refs.scroller && this.$refs.scroller.donePullup();
                         }, 10)
                     })
                 }, DEFAULT_CONFIG.SCROLL_TIME)
@@ -106,7 +112,8 @@
             ArticleListItem,
             Scroller,
             ReturnTop,
-            Spinner
+            Spinner,
+            LogoBg
         }
     }
 </script>
@@ -115,20 +122,24 @@
     .search-result{
         @extend %pr;
         background-color: $bgmc;
-    }
-    .search-result-null{
-        @extend %pa;
-        @extend %t0;
-        @extend %l0;
-        @extend %r0;
-        @extend %b0;
-        @extend %oh;
-        @extend %bgwhite;
+        &.search-null-bg{
+            @extend %bgwhite;
+        }
+        .logo-bg{
+            top: j(115);
+        }
     }
     .search-null-img{
         @extend %db;
         @extend %ma;
+        margin-top: j(80);
         width: j(161);
         height: j(148);
+    }
+    .search-null-prompt{
+        @extend %tac;
+        @extend %c6;
+        font-size: j(16);
+        margin-top: j(80);
     }
 </style>

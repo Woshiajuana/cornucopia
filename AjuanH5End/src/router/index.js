@@ -11,7 +11,7 @@ import Search from '../views/search/Search.vue'
 import SearchIndex from '../views/search/children/SearchIndex.vue'
 import SearchResult from '../views/search/children/SearchResult.vue'
 /**文章*/
-
+import Article from '../views/article/Article.vue'
 
 Vue.use(Router);
 
@@ -58,6 +58,15 @@ const router = new Router({
                     }
                 }
             ]
+        },
+        /**发现*/
+        {
+            path: '/article/:_id',
+            name: 'article',
+            component: Article,
+            meta: {
+                status: 3
+            }
         }
     ]
 });

@@ -1,5 +1,8 @@
 <template>
     <div class="search-result">
+        <div class="search-result-null">
+            <img src="../../../assets/img/search-null.png" class="search-null-img">
+        </div>
         <scroller
             lock-x
             scrollbar-y
@@ -28,11 +31,15 @@
                 <span v-show="scroller_status.pullupStatus === 'loading'"><spinner type="ios-small"></spinner></span>
             </div>
         </scroller>
+        <!--返回顶部-->
+        <return-top :top_dir="top_dir" @returnTop="returnTopHandle"></return-top>
+        <!--/返回顶部-->
     </div>
 </template>
 <script>
     import ArticleListItem from '../../../components/article-list-item.vue'
     import DEFAULT_CONFIG from '../../../assets/lib/DEFAULT_CONFIG'
+    import ReturnTop from '../../../components/return-top.vue'
     import { Scroller, Spinner } from 'vux'
     export default {
         name: 'search-result',
@@ -98,6 +105,7 @@
         components: {
             ArticleListItem,
             Scroller,
+            ReturnTop,
             Spinner
         }
     }
@@ -105,6 +113,22 @@
 <style lang="scss">
     @import "../../../assets/scss/define";
     .search-result{
+        @extend %pr;
         background-color: $bgmc;
+    }
+    .search-result-null{
+        @extend %pa;
+        @extend %t0;
+        @extend %l0;
+        @extend %r0;
+        @extend %b0;
+        @extend %oh;
+        @extend %bgwhite;
+    }
+    .search-null-img{
+        @extend %db;
+        @extend %ma;
+        width: j(161);
+        height: j(148);
     }
 </style>

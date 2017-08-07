@@ -10,6 +10,8 @@ import Find from '../views/find/Find.vue'
 import Search from '../views/search/Search.vue'
 import SearchIndex from '../views/search/children/SearchIndex.vue'
 import SearchResult from '../views/search/children/SearchResult.vue'
+/**文章*/
+
 
 Vue.use(Router);
 

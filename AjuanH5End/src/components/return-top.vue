@@ -1,5 +1,5 @@
 <template>
-    <i class="return-top" :class="{'active': top_dir > 600}" @click="returnTopHandle">
+    <i class="return-top" :class="{'active': top_dir > 520}" @click="returnTopHandle">
         <svg slot="icon" class="return-top-icon">
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#return-top-icon"></use>
         </svg>

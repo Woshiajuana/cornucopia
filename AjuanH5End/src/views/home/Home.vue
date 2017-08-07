@@ -64,6 +64,37 @@
                 <svg class="home-filter-close">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#close-icon"></use>
                 </svg>
+                <!--过滤主体-->
+                <scroller
+                    lock-x
+                    scrollbar-y
+                    :backSpeed="300"
+                    :height="scroller_height"
+                    ref="filter_scroller">
+                    <!--content slot-->
+                    <dl class="home-filter-inner">
+                        <dt class="home-filter-title">分类</dt>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                     </dl>
+                </scroller>
+                <!--/过滤主体-->
             </div>
             <!--/过滤筛选-->
         </div>
@@ -318,5 +349,21 @@
         height: j(20);
         box-shadow: 0 j(3) j(3) 0 rgba(0,0,0,.2);
         fill: #999;
+    }
+    .home-filter-inner{
+        @extend %tac;
+        padding: j(80) 0;
+    }
+    .home-filter-title{
+        font-size: j(18);
+        margin-bottom: j(10);
+    }
+    .home-filter-item{
+        font-size: j(14);
+        height: j(36);
+        line-height: j(36);
+    }
+    .home-filter-item-link{
+        @extend %c3;
     }
 </style>

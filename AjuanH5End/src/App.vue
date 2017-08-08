@@ -9,7 +9,7 @@
         <!--/主体内容视图-->
 
         <!--导航条-->
-        <nav-bar></nav-bar>
+        <nav-bar v-if="!$route.meta.is_hide_nav_bar"></nav-bar>
         <!--/导航条-->
 
         <!--svg-->

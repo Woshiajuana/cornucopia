@@ -42,7 +42,6 @@ const router = new Router({
         /**搜索*/
         {
             path: '/search',
-            name: 'search',
             component: Search,
             children: [
                 {
@@ -50,7 +49,8 @@ const router = new Router({
                     name: 'search-index',
                     component: SearchIndex,
                     meta: {
-                        status: 2
+                        status: 2,
+                        is_hide_nav_bar: true
                     }
                 },
                 {
@@ -58,19 +58,11 @@ const router = new Router({
                     name: 'search-result',
                     component: SearchResult,
                     meta: {
-                        status: 2
+                        status: 2,
+                        is_hide_nav_bar: true
                     }
                 }
             ]
-        },
-        /**发现*/
-        {
-            path: '/article/:_id',
-            name: 'article',
-            component: Article,
-            meta: {
-                status: 3
-            }
         },
         /**留言*/
         {
@@ -78,7 +70,7 @@ const router = new Router({
             name: 'message',
             component: Message,
             meta: {
-                status: 4
+                status: 3
             }
         },
         /**关于*/
@@ -86,6 +78,15 @@ const router = new Router({
             path: '/about',
             name: 'about',
             component: About,
+            meta: {
+                status: 4
+            }
+        },
+        /**文章*/
+        {
+            path: '/article/:_id',
+            name: 'article',
+            component: Article,
             meta: {
                 status: 5
             }

@@ -74,7 +74,8 @@
             initScrollerVisualHeight () {
                 var nd_bar = window.document.getElementsByClassName('nav-bar-wrap')[0],
                     nd_header = window.document.getElementsByClassName('search-header')[0];
-                nd_bar && nd_header && (this.scroller_height = '-' + (nd_bar.offsetHeight + nd_header.offsetHeight));
+                nd_header && (this.scroller_height = '-' + nd_header.offsetHeight);
+                nd_bar && (this.scroller_height = '-' + (nd_bar.offsetHeight + nd_header.offsetHeight));
             },
             /**下拉刷新*/
             refreshHandle () {

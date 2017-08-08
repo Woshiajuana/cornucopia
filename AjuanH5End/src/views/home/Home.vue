@@ -52,6 +52,9 @@
                     <span class="pullup-arrow" v-show="scroller_status.pullupStatus === 'default' || scroller_status.pullupStatus === 'up' || scroller_status.pullupStatus === 'down'" :class="{'rotate': scroller_status.pullupStatus === 'down'}">↑</span>
                     <span v-show="scroller_status.pullupStatus === 'loading'"><spinner type="ios-small"></spinner></span>
                 </div>
+                <!--没有更多-->
+                <with-out></with-out>
+                <!--/没有更多-->
             </scroller>
             <!--/数据-->
             <!--遮罩-->
@@ -107,13 +110,19 @@
     import ReturnTop from '../../components/return-top.vue'
     import HeaderWrap from '../../components/header-wrap.vue'
     import LogoBg from '../../components/logo-bg.vue'
+    import WithOut from '../../components/with-out.vue'
     import { Scroller, Spinner } from 'vux'
     import DEFAULT_CONFIG from '../../assets/lib/DEFAULT_CONFIG'
+    import Util from '../../assets/lib/Util'
     export default {
         name: 'home',
         data () {
             return {
-                article_arr: 10,
+                page_num:1,
+                page_count: 0,
+                page_size:12,
+                article_total: 0,
+                article_arr: [],
                 is_open: false,
                 scroller_height: '',
                 top_dir: 0,
@@ -124,12 +133,31 @@
             }
         },
         created () {
+            this.fetchArticleList();
             this.$nextTick(() => {
                 this.bindGestureMobile(); /**绑定手势*/
                 this.initScrollerVisualHeight(); /**初始化滚动可视高度*/
             })
         },
         methods: {
+            /**获取文章列表*/
+            fetchArticleList () {
+                this.is_loading = true;
+                Util.fetchArticleList( this.page_num, this.page_size ).then((result) => {
+                    setTimeout(() => {
+                        if(result.status == 1) {
+                            var data = result.data;
+                            this.article_arr = data.arr;
+                            this.page_count = data.count;
+                            this.article_total = data.total;
+                        }
+                        this.is_loading = false;
+                    },300);
+                }).catch( (err) => {
+                    this.is_loading = false;
+
+                });
+            },
             /**初始化滚动可视高度*/
             initScrollerVisualHeight () {
                 var nd_bar = window.document.getElementsByClassName('nav-bar-wrap')[0];
@@ -181,7 +209,8 @@
             HeaderWrap,
             ArticleListItem,
             ReturnTop,
-            LogoBg
+            LogoBg,
+            WithOut
         }
     }
 </script>

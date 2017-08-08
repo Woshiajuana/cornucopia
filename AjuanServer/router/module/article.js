@@ -19,4 +19,7 @@ router.post('/deletes', checkApiToken, Article.dels);
 router.post('/up_or_down', checkApiToken, Article.up_or_down);
 router.post('/up_or_downs', checkApiToken, Article.up_or_downs);
 
+/**h5*/
+router.post('/v1/h5/list', Article.list);
+
 export default router

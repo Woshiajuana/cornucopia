@@ -7,19 +7,16 @@
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#delete-icon"></use>
                 </svg>
             </h2>
-            <a class="search-label-link" href="#/search/result/1">JAVASCRIPT</a>
+            <a class="search-label-link" href="#/search/result/1">javascript</a>
         </section>
         <section class="search-label-section">
             <h2 class="search-label-title">热门搜索</h2>
-            <a class="search-label-link" href="#">JAVASCRIPT</a>
-            <a class="search-label-link" href="#">JAVASCRIPT</a>
-            <a class="search-label-link" href="#">JAVASCRIPT</a>
-            <a class="search-label-link" href="#">JAVASCRIPT</a>
-            <a class="search-label-link" href="#">JAVASCRIPT</a>
-            <a class="search-label-link" href="#">JAVASCRIPT</a>
-            <a class="search-label-link" href="#">JAVASCRIPT</a>
-            <a class="search-label-link" href="#">JAVASCRIPT</a>
-            <a class="search-label-link" href="#">JAVASCRIPT</a>
+            <a class="search-label-link" href="#/search/result/javascript">javascript</a>
+            <a class="search-label-link" href="#/search/result/vue">vue.js</a>
+            <a class="search-label-link" href="#/search/result/angular">angular</a>
+            <a class="search-label-link" href="#/search/result/node">node.js</a>
+            <a class="search-label-link" href="#/search/result/css">css</a>
+            <a class="search-label-link" href="#/search/result/jquery">jquery</a>
         </section>
     </div>
 </template>

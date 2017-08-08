@@ -24,7 +24,7 @@
                             <div class="home-header-top-date">
                                 <div class="home-header-top-date-con">
                                     <span class="home-header-top-date-con-day">03</span>
-                                    <svg @click="is_open = !is_open" class="home-header-date-icon">
+                                    <svg class="home-header-date-icon">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#date-icon"></use>
                                     </svg>
                                 </div>

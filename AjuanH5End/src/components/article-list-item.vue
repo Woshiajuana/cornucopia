@@ -1,23 +1,25 @@
 <template>
     <a class="article-list-item animated" href="#/article/1">
         <div class="article-list-item-inner">
-            <div src="" alt="" class="article-list-item-img">
-                <img src="" alt="">
-            </div>
+            <div class="article-list-item-img" :style="{backgroundColor: getRandomColor}"></div>
             <h2 class="article-list-item-title">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</h2>
             <p class="article-list-item-time">2017-08-03</p>
-            <div class="article-list-item-point">
-                <span class="article-list-item-point-number">(12)</span>
-                <svg class="article-list-item-point-icon">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#point-icon"></use>
-                </svg>
+            <div class="article-list-item-info">
+                <span class="article-list-item-type">JAVASCRIPT</span>
             </div>
         </div>
     </a>
 </template>
 <script>
+    import Tool from '../assets/lib/Tool'
     export default {
-        name: 'article-list-item'
+        name: 'article-list-item',
+        props: [ 'img_color' ],
+        computed: {
+            getRandomColor () {
+                return Tool.getRandomColor();
+            }
+        }
     }
 </script>
 <style lang="scss">
@@ -63,7 +65,6 @@
         height: j(60);
         left: j(30);
         margin-top: j(-30);
-        background-color: #aeaab4;
         img{
             @extend %db;
             @extend %w100;
@@ -84,9 +85,8 @@
         height: j(20);
         line-height: j(20);
     }
-    .article-list-item-point{
+    .article-list-item-info{
         @extend %pa;
-        padding-right: j(25);
         color: #999;
         font-size: j(12);
         right: j(20);

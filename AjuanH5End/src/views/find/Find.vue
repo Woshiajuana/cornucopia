@@ -49,12 +49,16 @@
                     额，什么鬼，怎么还不是我背了那么多遍的那道闭包题，让我想想。 setTimeout 会延迟执行，那么执行到 console.log 的时候，其实 i 已经变成 5 了，对，就是这样，这么简单怎么可能难到老子。
                 </p>
             </div>
+            <!--没有更多-->
+            <with-out></with-out>
+            <!--/没有更多-->
         </scroller>
     </div>
 </template>
 <script>
     import HeaderWrap from '../../components/header-wrap.vue'
     import LogoBg from '../../components/logo-bg.vue'
+    import WithOut from '../../components/with-out.vue'
     import { Scroller } from 'vux'
     export default {
         name: 'find',
@@ -82,7 +86,8 @@
         components: {
             HeaderWrap,
             Scroller,
-            LogoBg
+            LogoBg,
+            WithOut
         }
     }
 </script>

@@ -1,7 +1,12 @@
 <template>
     <div class="search-label-wrap">
         <section class="search-label-section">
-            <h2 class="search-label-title">历史搜索</h2>
+            <h2 class="search-label-title">
+                历史搜索
+                <svg class="search-label-delete">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#delete-icon"></use>
+                </svg>
+            </h2>
             <a class="search-label-link" href="#/search/result/1">JAVASCRIPT</a>
         </section>
         <section class="search-label-section">
@@ -36,11 +41,22 @@
         }
     }
     .search-label-title{
+        @extend %pr;
         @extend %fwb;
         @extend %c6;
         font-size: j(16);
         height: j(35);
         line-height: j(35);
+    }
+    .search-label-delete{
+        @extend %pa;
+        @extend %t50;
+        @extend %r0;
+        fill: #999;
+        margin-top: j(-8);
+        width: j(16);
+        height: j(16);
+
     }
     .search-label-link{
         @extend %fl;

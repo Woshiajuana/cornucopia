@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 /**store参数变量*/
 import types from '../store/mutation-types'
+/**四大首页容器*/
+import Index from '../views/index/Index.vue'
 /**首页*/
 import Home from '../views/home/Home.vue'
 /**发现*/
@@ -21,23 +23,49 @@ Vue.use(Router);
 
 const router = new Router({
     routes: [
-        /**首页*/
+        /**首页容器*/
         {
             path: '/',
-            name: 'home',
-            component: Home,
-            meta: {
-                status: 1
-            }
-        },
-        /**发现*/
-        {
-            path: '/find',
-            name: 'find',
-            component: Find,
-            meta: {
-                status: 2
-            }
+            name: 'index',
+            component: Index,
+            children: [
+                /**首页*/
+                {
+                    path: '/',
+                    name: 'home',
+                    component: Home,
+                    meta: {
+                        status: 1
+                    }
+                },
+                /**发现*/
+                {
+                    path: '/find',
+                    name: 'find',
+                    component: Find,
+                    meta: {
+                        status: 2
+                    }
+                },
+                /**留言*/
+                {
+                    path: '/message',
+                    name: 'message',
+                    component: Message,
+                    meta: {
+                        status: 3
+                    }
+                },
+                /**关于*/
+                {
+                    path: '/about',
+                    name: 'about',
+                    component: About,
+                    meta: {
+                        status: 4
+                    }
+                }
+            ]
         },
         /**搜索*/
         {
@@ -49,8 +77,7 @@ const router = new Router({
                     name: 'search-index',
                     component: SearchIndex,
                     meta: {
-                        status: 2,
-                        is_hide_nav_bar: true
+                        status: 2
                     }
                 },
                 {
@@ -58,29 +85,10 @@ const router = new Router({
                     name: 'search-result',
                     component: SearchResult,
                     meta: {
-                        status: 2,
-                        is_hide_nav_bar: true
+                        status: 2
                     }
                 }
             ]
-        },
-        /**留言*/
-        {
-            path: '/message',
-            name: 'message',
-            component: Message,
-            meta: {
-                status: 3
-            }
-        },
-        /**关于*/
-        {
-            path: '/about',
-            name: 'about',
-            component: About,
-            meta: {
-                status: 4
-            }
         },
         /**文章*/
         {

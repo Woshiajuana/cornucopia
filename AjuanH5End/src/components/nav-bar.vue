@@ -1,24 +1,24 @@
 <template>
     <tabbar class="nav-bar-wrap">
-        <tabbar-item :selected="navIndex == 1" link="/">
+        <tabbar-item :selected="$route.name == 'home'" link="/">
             <svg slot="icon" class="nav-item nav-item-1">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#home-icon"></use>
             </svg>
             <span slot="label">首页</span>
         </tabbar-item>
-        <tabbar-item :selected="navIndex == 2" link="/find">
+        <tabbar-item :selected="$route.name == 'find'" link="/find">
             <svg slot="icon" class="nav-item nav-item-2">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#find-icon"></use>
             </svg>
             <span slot="label">发现</span>
         </tabbar-item>
-        <tabbar-item :selected="navIndex == 3" link="/message">
+        <tabbar-item :selected="$route.name == 'message'" link="/message">
             <svg slot="icon" class="nav-item nav-item-3">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#message-icon"></use>
             </svg>
             <span slot="label">留言</span>
         </tabbar-item>
-        <tabbar-item :selected="navIndex == 4" link="/about">
+        <tabbar-item :selected="$route.name == 'about'" link="/about">
             <svg slot="icon" class="nav-item nav-item-4">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#about-icon"></use>
             </svg>
@@ -30,11 +30,6 @@
     import { Tabbar, TabbarItem } from 'vux'
     export default {
         name: 'nav-bar',
-        computed: {
-            navIndex () {
-                return this.$store.state.nav_index;
-            }
-        },
         components: {
             Tabbar,
             TabbarItem

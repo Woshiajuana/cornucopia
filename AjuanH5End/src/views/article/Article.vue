@@ -74,9 +74,8 @@
         methods: {
             /**初始化滚动可视高度*/
             initScrollerVisualHeight () {
-                var nd_bar = window.document.getElementsByClassName('nav-bar-wrap')[0],
-                    nd_header = window.document.getElementsByClassName('header-wrap')[0];
-                nd_bar && nd_header && (this.scroller_height = '-' + (nd_bar.offsetHeight + nd_header.offsetHeight));
+                var nd_header = window.document.getElementsByClassName('header-wrap')[0];
+                nd_header && (this.scroller_height = '-' + nd_header.offsetHeight);
             }
         },
         components: {

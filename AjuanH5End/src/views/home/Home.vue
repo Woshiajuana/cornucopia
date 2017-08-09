@@ -40,7 +40,7 @@
                         <article-list-item
                             v-for="(item,index) in article_arr"
                             :key="index"
-                            :is_fade_in="is_fade_in"
+                            :is_fade_in="item.is_fade_in"
                             :article_title="item.article_title"
                             :article_time="item.article_time"
                             :article_type="item.article_type">
@@ -158,6 +158,9 @@
                         if(result.status == 1) {
                             var data = result.data;
                             this.article_total = data.total;
+                            data.arr.forEach((item,index)=>{
+                                item.is_fade_in = this.is_fade_in;
+                            });
                             this.article_arr = this.page_num == 1 ? data.arr : [...this.article_arr,...data.arr];
                             this.article_arr.length == this.article_total && this.$refs.scroller && this.$refs.scroller.disablePullup();
                             this.$nextTick(() => {
@@ -186,6 +189,7 @@
             /**下拉刷新*/
             refreshHandle () {
                 this.page_num = 1;
+                this.is_fade_in = false;
                 this.fetchArticleList( () => {
                     this.$refs.scroller && this.$refs.scroller.donePulldown();
                     this.$refs.scroller && this.$refs.scroller.enablePullup();

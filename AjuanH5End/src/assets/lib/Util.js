@@ -21,13 +21,18 @@ const Util = function (win) {
     }
 
     /**文章列表*/
-    Util.fetchArticleList = function ( page_num, page_size, key_words) {
-        return Util.ajax("article/v1/h5/list", "POST",{  page_num, page_size, key_words });
+    Util.fetchArticleList = function ( page_num, page_size, article_type, key_words) {
+        return Util.ajax("article/v1/h5/list", "POST",{  page_num, page_size, article_type, key_words });
     };
 
     /**文章详情*/
     Util.fetchArticleDetailById = function ( _id ) {
-        return Util.ajax("article/delete", "POST",{ _id });
+        return Util.ajax("article/v1/h5/info", "POST",{ _id });
+    };
+
+    /**标签列表*/
+    Util.fetchTagList = function () {
+        return Util.ajax("tag/v1/h5/list", "POST");
     };
 
     /**公用请求ajax的方式*/

@@ -36,7 +36,8 @@
                         </div>
                         <a href="#/search" class="home-header-search-link">搜索文章</a>
                     </header>
-                    <div class="home-con">
+                    <null-img v-if="!article_arr.length"></null-img>
+                    <div v-if="article_arr.length" class="home-con">
                         <article-list-item
                             v-for="(item,index) in article_arr"
                             :key="index"
@@ -60,7 +61,7 @@
                     <span v-show="scroller_status.pullupStatus === 'loading'"><spinner type="ios-small"></spinner></span>
                 </div>
                 <!--没有更多-->
-                <with-out v-if="article_total === article_arr.length"></with-out>
+                <with-out v-if="article_total != 0 &&article_total === article_arr.length"></with-out>
                 <!--/没有更多-->
             </scroller>
             <!--/数据-->
@@ -81,24 +82,11 @@
                     ref="filter_scroller">
                     <!--content slot-->
                     <dl class="home-filter-inner">
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
-                        <dl class="home-filter-item"><a class="home-filter-item-link" href="#">JAVASCRIPT</a></dl>
+                        <dl class="home-filter-item" @click="is_open = false"><a class="home-filter-item-link" href="#/?tag=all">全部文章</a></dl>
+                        <dl class="home-filter-item"
+                            @click="is_open = false"
+                            v-for="(item,index) in tag_arr"
+                            :key="index"><a class="home-filter-item-link" :href="'#/?tag=' + item.tag_name">{{item.tag_name}}</a></dl>
                      </dl>
                 </scroller>
                 <!--/过滤主体-->
@@ -118,6 +106,7 @@
     import HeaderWrap from '../../components/header-wrap.vue'
     import LogoBg from '../../components/logo-bg.vue'
     import WithOut from '../../components/with-out.vue'
+    import NullImg from '../../components/null-img.vue'
     import { Scroller, Spinner } from 'vux'
     import DEFAULT_CONFIG from '../../assets/lib/DEFAULT_CONFIG'
     import Util from '../../assets/lib/Util'
@@ -134,10 +123,19 @@
                 is_open: false,
                 scroller_height: '',
                 top_dir: 0,
+                tag_arr: [],
                 scroller_status: {
                     pullupStatus: 'default',
                     pulldownStatus: 'default'
                 }
+            }
+        },
+        watch: {
+            '$route': function () {
+                this.$vux.loading.show({text: DEFAULT_CONFIG.LOADING_OR_TIME_OUT.LOADING_TEXT});
+                this.fetchArticleList(() => {
+                    this.$vux.loading.hide();
+                });
             }
         },
         computed: {
@@ -149,6 +147,7 @@
             }
         },
         created () {
+            this.fetchTagList();
             this.$vux.loading.show({text: DEFAULT_CONFIG.LOADING_OR_TIME_OUT.LOADING_TEXT});
             this.fetchArticleList(() => {
                 this.$vux.loading.hide();
@@ -161,8 +160,8 @@
         methods: {
             /**获取文章列表*/
             fetchArticleList (callback) {
-                this.is_loading = true;
-                Util.fetchArticleList( this.page_num, this.page_size ).then((result) => {
+                var tag = this.$route.query.tag || '';
+                Util.fetchArticleList( this.page_num, this.page_size, tag ).then((result) => {
                     setTimeout(() => {
                         if(result.status == 1) {
                             var data = result.data;
@@ -197,7 +196,7 @@
                 this.is_fade_in = false;
                 this.fetchArticleList( () => {
                     this.$refs.scroller && this.$refs.scroller.donePulldown();
-                    this.$refs.scroller && this.$refs.scroller.enablePullup();
+                    if(this.article_total != 0) this.$refs.scroller && this.$refs.scroller.enablePullup();
                 });
             },
             /**上拉加载*/
@@ -228,6 +227,17 @@
             /**日期筛选敬请期待*/
             dateClickHandle () {
                 this.$message({msg: '日期筛选敬请期待'});
+            },
+            /**获取文章类别*/
+            fetchTagList () {
+                Util.fetchTagList().then( (result) => {
+                    if( result.status == 1 ) {
+                        this.tag_arr = result.data.arr;
+                        this.tag_arr = [...this.tag_arr,...this.tag_arr];
+                        this.$nextTick(() => { this.$refs.filter_scroller && this.$refs.filter_scroller.reset(); });
+                        console.log(this.tag_arr)
+                    }
+                });
             }
         },
         components: {
@@ -237,7 +247,8 @@
             ArticleListItem,
             ReturnTop,
             LogoBg,
-            WithOut
+            WithOut,
+            NullImg
         }
     }
 </script>
@@ -262,6 +273,9 @@
     .home-inner{
         @extend %pr;
         min-height: 100%;
+    }
+    .home-inner{
+        @extend %bgwhite;
     }
     .home-header{
         @extend %oh;

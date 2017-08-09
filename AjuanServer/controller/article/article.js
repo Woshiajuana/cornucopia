@@ -173,6 +173,32 @@ class Article {
             }
         });
     }
+    /**文章列表*/
+    async list_h5(req, res, next){
+        let article_type = req.body.article_type == 'all' ? '' : req.body.article_type;
+        let article_is_publish = true;
+        let page = +req.body.page_num || 1;
+        let rows = +req.body.page_size || 99999;
+        let key_words = req.body.key_words;
+        let query = {};
+        if(article_type) query.article_type = article_type;
+        if(key_words) query.article_title =  eval("/"+key_words+"/ig");
+        if(article_is_publish) query.article_is_publish = article_is_publish;
+        dbHelper.pageQuery(page, rows, article_module, '', query, {'article_time': -1}, (error, $page) => {
+            if(error){
+                res.json({status: 0, msg: '获取数据失败'});
+            }else{
+                res.json({
+                    status:1,
+                    data: {
+                        arr: $page.results,
+                        total: $page.total,
+                        count: Math.ceil($page.pageCount)
+                    }
+                });
+            }
+        });
+    }
     /**删除文章*/
     async del(req, res, next){
         var _id = req.body._id;

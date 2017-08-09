@@ -17,4 +17,7 @@ router.post('/list', checkApiToken, Tag.list);
 router.post('/delete', checkApiToken, Tag.del);
 router.post('/deletes', checkApiToken, Tag.dels);
 
+/**h5*/
+router.post('/v1/h5/list', Tag.list);
+
 export default router

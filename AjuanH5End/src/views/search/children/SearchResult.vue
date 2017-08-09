@@ -3,10 +3,7 @@
         <!--背景LOGO-->
         <logo-bg></logo-bg>
         <!--/背景LOGO-->
-        <template v-if="!article_arr">
-            <img src="../../../assets/img/search-null.png" class="search-null-img">
-            <p class="search-null-prompt">毛都冒得一根~~~</p>
-        </template>
+        <null-img v-if="!article_arr"></null-img>
         <scroller
             v-else
             lock-x
@@ -46,6 +43,7 @@
     import DEFAULT_CONFIG from '../../../assets/lib/DEFAULT_CONFIG'
     import ReturnTop from '../../../components/return-top.vue'
     import LogoBg from '../../../components/logo-bg.vue'
+    import NullImg from '../../../components/null-img.vue'
     import { Scroller, Spinner } from 'vux'
     export default {
         name: 'search-result',
@@ -114,7 +112,8 @@
             Scroller,
             ReturnTop,
             Spinner,
-            LogoBg
+            LogoBg,
+            NullImg
         }
     }
 </script>
@@ -129,18 +128,5 @@
         .logo-bg{
             top: j(115);
         }
-    }
-    .search-null-img{
-        @extend %db;
-        @extend %ma;
-        margin-top: j(80);
-        width: j(161);
-        height: j(148);
-    }
-    .search-null-prompt{
-        @extend %tac;
-        @extend %c6;
-        font-size: j(16);
-        margin-top: j(80);
     }
 </style>

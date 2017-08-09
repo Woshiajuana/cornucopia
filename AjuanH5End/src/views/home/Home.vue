@@ -47,13 +47,13 @@
                     <span v-show="scroller_status.pulldownStatus === 'loading'"><spinner type="ios-small"></spinner></span>
                 </div>
                 <!--pullup slot-->
-                <div slot="pullup" class="xs-plugin-pullup-container xs-plugin-pullup-up" style="position: absolute; width: 100%; height: 40px; bottom: -40px; text-align: center;">
+                <div slot="pullup" v-show="article_arr.length != article_total" class="xs-plugin-pullup-container xs-plugin-pullup-up" style="position: absolute; width: 100%; height: 40px; bottom: -40px; text-align: center;">
                     <span v-show="scroller_status.pullupStatus === 'default'"></span>
                     <span class="pullup-arrow" v-show="scroller_status.pullupStatus === 'default' || scroller_status.pullupStatus === 'up' || scroller_status.pullupStatus === 'down'" :class="{'rotate': scroller_status.pullupStatus === 'down'}">↑</span>
                     <span v-show="scroller_status.pullupStatus === 'loading'"><spinner type="ios-small"></spinner></span>
                 </div>
                 <!--没有更多-->
-                <with-out v-if="article_total == article_arr.length"></with-out>
+                <with-out v-if="article_total === article_arr.length"></with-out>
                 <!--/没有更多-->
             </scroller>
             <!--/数据-->
@@ -119,7 +119,6 @@
         data () {
             return {
                 page_num: 1,
-                page_count: 0,
                 page_size: 10,
                 article_total: '',
                 article_arr: [],
@@ -147,12 +146,12 @@
                     setTimeout(() => {
                         if(result.status == 1) {
                             var data = result.data;
-                            this.article_arr = data.arr;
-                            this.page_count = data.count;
                             this.article_total = data.total;
+                            this.article_arr = this.page_num == 1 ? data.arr : [...this.article_arr,...data.arr];
+                            this.article_arr.length == this.article_total && this.$refs.scroller && this.$refs.scroller.disablePullup();
                             this.$nextTick(() => {
                                 this.$refs.scroller && this.$refs.scroller.reset();
-                            })
+                            });
                         }
                         callback && callback();
                     },DEFAULT_CONFIG.SCROLL_TIME);
@@ -178,8 +177,8 @@
                 this.page_num = 1;
                 this.fetchArticleList( () => {
                     this.$refs.scroller && this.$refs.scroller.donePulldown();
+                    this.$refs.scroller && this.$refs.scroller.enablePullup();
                 });
-
             },
             /**上拉加载*/
             loadMoreHandle () {

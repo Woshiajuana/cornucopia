@@ -11,6 +11,9 @@
 </script>
 <style lang="scss">
     @import "../assets/scss/define";
+    .null-img{
+        @extend %oh;
+    }
     .search-null-img{
         @extend %db;
         @extend %ma;

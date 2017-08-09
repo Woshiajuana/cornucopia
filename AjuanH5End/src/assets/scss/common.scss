@@ -51,6 +51,9 @@ html,body{
         animation-duration: .3s;
         animation-fill-mode: both;
     }
+    .xs-container{
+        height: 100%;
+    }
 }
 .message-div{
     @extend %pf;

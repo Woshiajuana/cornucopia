@@ -1,8 +1,8 @@
 <template>
     <div class="search-view">
         <div class="search-header">
-            <a href="javascript:history.go(-1);" class="search-header-return"></a>
-            <input type="text" v-model="search_input" placeholder="请输入文章名" class="search-input">
+            <a :href="$route.params.key_words ? '#/search' : '#/'" class="search-header-return"></a>
+            <input type="text" @keyup.enter="searchHandle" v-model="search_input" placeholder="请输入文章名" class="search-input">
             <svg v-show="search_input" @click="searchCloseHandle" class="search-input-close">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#close-icon"></use>
             </svg>
@@ -19,17 +19,24 @@
 </template>
 <script>
     import HeaderWrap from '../../components/header-wrap.vue'
+    import types from '../../store/mutation-types'
     export default {
         name: 'search',
         data (){
             return {
-                search_input: ''
+                search_input: this.$route.params.key_words || ''
             }
         },
         methods: {
             /**搜索关闭按钮点击事件*/
             searchCloseHandle () {
                 this.search_input = '';
+            },
+            /**搜索事件*/
+            searchHandle () {
+                this.search_input = this.search_input.trim();
+                this.search_input && this.$store.commit(types.SET_KEY_WORDS,this.search_input);
+                this.search_input && this.$router.push('/search/result/' + this.search_input);
             }
         },
         components: {

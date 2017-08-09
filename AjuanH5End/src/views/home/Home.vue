@@ -288,9 +288,6 @@
             @include tft(translate3d(-83%,0,0))
         }
     }
-    .xs-container{
-        height: 100%;
-    }
     .home-inner{
         @extend %pr;
     }

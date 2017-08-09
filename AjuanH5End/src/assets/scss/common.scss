@@ -48,6 +48,21 @@ html,body{
         animation-fill-mode: both;
     }
 }
+.message-div{
+    @extend %pf;
+    @extend %tac;
+    @extend %t50;
+    @extend %l50;
+    margin-top: j(-17);
+    height: j(34);
+    line-height: j(34);
+    padding: 0 j(24);
+    font-size:j(16);
+    color:#ffffff;
+    border-radius:70px;
+    opacity:0.6;
+    background:#000000;
+}
 .weui-toast{
     opacity:0.6 !important;
     background:#000000 !important;

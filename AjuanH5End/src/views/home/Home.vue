@@ -23,12 +23,12 @@
                         <div class="home-header-top">
                             <div class="home-header-top-date">
                                 <div class="home-header-top-date-con">
-                                    <span class="home-header-top-date-con-day">03</span>
+                                    <span class="home-header-top-date-con-day">{{dayComputed}}</span>
                                     <svg class="home-header-date-icon">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#date-icon"></use>
                                     </svg>
                                 </div>
-                                2017-08-03
+                                {{dateComputed}}
                             </div>
                             <svg @click="is_open = !is_open" slot="icon" class="home-header-top-filter-btn">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#filter-icon"></use>
@@ -121,6 +121,7 @@
     import { Scroller, Spinner } from 'vux'
     import DEFAULT_CONFIG from '../../assets/lib/DEFAULT_CONFIG'
     import Util from '../../assets/lib/Util'
+    import Tool from '../../assets/lib/Tool'
     export default {
         name: 'home',
         data () {
@@ -137,6 +138,14 @@
                     pullupStatus: 'default',
                     pulldownStatus: 'default'
                 }
+            }
+        },
+        computed: {
+            dateComputed () {
+                return Tool.format('yyyy-MM-dd');
+            },
+            dayComputed () {
+                return Tool.format('dd');
             }
         },
         created () {
@@ -158,19 +167,15 @@
                         if(result.status == 1) {
                             var data = result.data;
                             this.article_total = data.total;
-                            data.arr.forEach((item,index)=>{
-                                item.is_fade_in = this.is_fade_in;
-                            });
+                            data.arr.forEach((item)=>{ item.is_fade_in = this.is_fade_in; });
                             this.article_arr = this.page_num == 1 ? data.arr : [...this.article_arr,...data.arr];
                             this.article_arr.length == this.article_total && this.$refs.scroller && this.$refs.scroller.disablePullup();
-                            this.$nextTick(() => {
-                                this.$refs.scroller && this.$refs.scroller.reset();
-                            });
+                            this.$nextTick(() => { this.$refs.scroller && this.$refs.scroller.reset(); });
                         }
                         callback && callback();
                     },DEFAULT_CONFIG.SCROLL_TIME);
                 }).catch( (err) => {
-
+                    this.$message({msg: '系统开小差'});
                 });
             },
             /**初始化滚动可视高度*/

@@ -37,7 +37,13 @@
                         <a href="#/search" class="home-header-search-link">搜索文章</a>
                     </header>
                     <div class="home-con">
-                        <article-list-item v-for="(item,index) in article_arr" :key="index"></article-list-item>
+                        <article-list-item
+                            v-for="(item,index) in article_arr"
+                            :key="index"
+                            :article_title="item.article_title"
+                            :article_time="item.article_time"
+                            :article_type="item.article_type">
+                        </article-list-item>
                     </div>
                 </div>
                 <!--pulldown slot-->

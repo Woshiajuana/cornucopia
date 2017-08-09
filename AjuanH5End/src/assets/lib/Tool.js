@@ -64,8 +64,8 @@ const Tool = function (win) {
     /**
      * 格式化时间
      * */
-    Tool.format = function(fmt) {
-        var time = new Date();
+    Tool.format = function(fmt,date) {
+        var time = date || new Date();
         var o = {
             "M+" : time.getMonth()+1,
             "d+" : time.getDate(),

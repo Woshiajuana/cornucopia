@@ -245,11 +245,12 @@
                 Util.fetchTagList().then( (result) => {
                     if( result.status == 1 ) {
                         this.tag_arr = result.data.arr;
-                        this.tag_arr = [...this.tag_arr,...this.tag_arr];
                         this.$nextTick(() => { this.$refs.filter_scroller && this.$refs.filter_scroller.reset(); });
                         console.log(this.tag_arr)
                     }
-                });
+                }).catch( (err) => {
+                    this.$message({msg: '系统开小差'});
+                });;
             },
             /**筛选文章点击事件*/
             filterClickHandle (url) {

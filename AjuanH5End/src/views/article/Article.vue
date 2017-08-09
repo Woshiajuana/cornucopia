@@ -59,7 +59,9 @@
                             },520)
                         })
                     },DEFAULT_CONFIG.LOADING_OR_TIME_OUT.TIME_OUT)
-                });
+                }).catch( (err) => {
+                    this.$message({msg: '系统开小差'});
+                });;
             }
         },
         activated: function () {

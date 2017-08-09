@@ -48,6 +48,23 @@ html,body{
         animation-fill-mode: both;
     }
 }
+.weui-toast{
+    opacity:0.6 !important;
+    background:#000000 !important;
+    top: 50% !important;
+    width: j(100) !important;
+    height: j(100) !important;
+    margin-top: j(-50) !important;
+    .weui-loading{
+        margin: j(24) 0 0 !important;
+        width: j(36) !important;
+        height: j(36) !important;
+    }
+    .weui-toast__content{
+        height: j(22) !important;
+        font-size: j(16) !important;
+    }
+}
 @keyframes fadeInUp {
     from {
         opacity: 0;

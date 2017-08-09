@@ -6,7 +6,9 @@ import ReturnTop from './assets/lib/ReturnTop';
 import './assets/lib/flexible.js'
 /**使用vux的插件提示功能*/
 import  { ToastPlugin } from 'vux'
+import  { LoadingPlugin } from 'vux'
 Vue.use(ToastPlugin);
+Vue.use(LoadingPlugin);
 Vue.use(ReturnTop);
 
 Vue.config.productionTip = false;

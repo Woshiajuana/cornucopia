@@ -138,7 +138,10 @@
             }
         },
         created () {
-            this.fetchArticleList();
+            this.$vux.loading.show({text: DEFAULT_CONFIG.LOADING_OR_TIME_OUT.LOADING_TEXT});
+            this.fetchArticleList(() => {
+                this.$vux.loading.hide();
+            });
             this.$nextTick(() => {
                 this.bindGestureMobile(); /**绑定手势*/
                 this.initScrollerVisualHeight(); /**初始化滚动可视高度*/

@@ -40,6 +40,7 @@
                         <article-list-item
                             v-for="(item,index) in article_arr"
                             :key="index"
+                            :is_fade_in="is_fade_in"
                             :article_title="item.article_title"
                             :article_time="item.article_time"
                             :article_type="item.article_type">
@@ -124,10 +125,11 @@
         name: 'home',
         data () {
             return {
+                is_fade_in: false,
                 page_num: 1,
                 page_size: 10,
                 article_total: '',
-                article_arr: [],
+                article_arr: 10,
                 is_open: false,
                 scroller_height: '',
                 top_dir: 0,
@@ -192,6 +194,7 @@
             /**上拉加载*/
             loadMoreHandle () {
                 this.page_num++;
+                this.is_fade_in = true;
                 this.fetchArticleList( () => {
                     this.$nextTick(() => {
                         setTimeout(() => {

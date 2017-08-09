@@ -53,7 +53,7 @@
                     <span v-show="scroller_status.pullupStatus === 'loading'"><spinner type="ios-small"></spinner></span>
                 </div>
                 <!--没有更多-->
-                <with-out></with-out>
+                <with-out v-if="article_total == article_arr.length"></with-out>
                 <!--/没有更多-->
             </scroller>
             <!--/数据-->
@@ -118,10 +118,10 @@
         name: 'home',
         data () {
             return {
-                page_num:1,
+                page_num: 1,
                 page_count: 0,
-                page_size:12,
-                article_total: 0,
+                page_size: 10,
+                article_total: '',
                 article_arr: [],
                 is_open: false,
                 scroller_height: '',
@@ -141,7 +141,7 @@
         },
         methods: {
             /**获取文章列表*/
-            fetchArticleList () {
+            fetchArticleList (callback) {
                 this.is_loading = true;
                 Util.fetchArticleList( this.page_num, this.page_size ).then((result) => {
                     setTimeout(() => {
@@ -150,11 +150,13 @@
                             this.article_arr = data.arr;
                             this.page_count = data.count;
                             this.article_total = data.total;
+                            this.$nextTick(() => {
+                                this.$refs.scroller && this.$refs.scroller.reset();
+                            })
                         }
-                        this.is_loading = false;
-                    },300);
+                        callback && callback();
+                    },DEFAULT_CONFIG.SCROLL_TIME);
                 }).catch( (err) => {
-                    this.is_loading = false;
 
                 });
             },
@@ -173,21 +175,22 @@
             },
             /**下拉刷新*/
             refreshHandle () {
-                setTimeout(() => {
-                    this.article_arr = 10;
+                this.page_num = 1;
+                this.fetchArticleList( () => {
                     this.$refs.scroller && this.$refs.scroller.donePulldown();
-                }, DEFAULT_CONFIG.SCROLL_TIME)
+                });
+
             },
             /**上拉加载*/
             loadMoreHandle () {
-                setTimeout(() => {
-                    this.article_arr += 5;
+                this.page_num++;
+                this.fetchArticleList( () => {
                     this.$nextTick(() => {
                         setTimeout(() => {
                             this.$refs.scroller && this.$refs.scroller.donePullup();
                         }, 10)
                     })
-                }, DEFAULT_CONFIG.SCROLL_TIME)
+                });
             },
             /**滚动页面回调事件*/
             scrollHandle ( { top } ) {

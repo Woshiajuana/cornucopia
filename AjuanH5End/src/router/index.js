@@ -26,7 +26,6 @@ const router = new Router({
         /**首页容器*/
         {
             path: '/',
-            name: 'index',
             component: Index,
             children: [
                 /**首页*/

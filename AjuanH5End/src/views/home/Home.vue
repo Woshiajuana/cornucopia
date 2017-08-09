@@ -83,11 +83,10 @@
                     ref="filter_scroller">
                     <!--content slot-->
                     <dl class="home-filter-inner">
-                        <dl class="home-filter-item" @click="is_open = false"><a class="home-filter-item-link" href="#/?tag=all">全部文章</a></dl>
+                        <dl class="home-filter-item"><a class="home-filter-item-link" @click="filterClickHandle('/?tag=all')" href="javascript:;">全部文章</a></dl>
                         <dl class="home-filter-item"
-                            @click="is_open = false"
                             v-for="(item,index) in tag_arr"
-                            :key="index"><a class="home-filter-item-link" :href="'#/?tag=' + item.tag_name">{{item.tag_name}}</a></dl>
+                            :key="index"><a @click="filterClickHandle('/?tag=' + item.tag_name)" class="home-filter-item-link" href="javascript:;">{{item.tag_name}}</a></dl>
                      </dl>
                 </scroller>
                 <!--/过滤主体-->
@@ -120,11 +119,12 @@
                 page_num: 1,
                 page_size: 10,
                 article_total: '',
-                article_arr: 10,
+                article_arr: 5,
                 is_open: false,
                 scroller_height: '',
                 top_dir: 0,
                 tag_arr: [],
+                article_type: this.$route.query.tag,
                 scroller_status: {
                     pullupStatus: 'default',
                     pulldownStatus: 'default'
@@ -133,7 +133,7 @@
         },
         watch: {
             /**监听路由变化，过滤文章数据*/
-            '$route': function () {
+            'article_type': function () {
                 this.page_num = 1;
                 this.$vux.loading.show({text: DEFAULT_CONFIG.LOADING_OR_TIME_OUT.LOADING_TEXT});
                 this.fetchArticleList(() => {
@@ -249,6 +249,12 @@
                         console.log(this.tag_arr)
                     }
                 });
+            },
+            /**筛选文章点击事件*/
+            filterClickHandle (url) {
+                this.is_open = false;
+                this.$router.push(url);
+                this.article_type = this.$route.query.tag;
             }
         },
         components: {

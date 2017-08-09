@@ -43,6 +43,10 @@ html,body{
             }
         }
     }
+    .xs-plugin-pullup-container{
+        position: relative !important;
+        bottom: 0 !important;
+    }
     .animated{
         animation-duration: .3s;
         animation-fill-mode: both;

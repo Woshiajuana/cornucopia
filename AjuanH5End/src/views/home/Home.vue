@@ -18,7 +18,8 @@
                 @on-scroll="scrollHandle"
                 ref="scroller" v-model="scroller_status">
                 <!--content slot-->
-                <div class="home-inner">
+                <div class="home-inner"
+                     :style="{height: article_total < 5 ? '100%' : 'auto'}">
                     <header class="home-header">
                         <div class="home-header-top">
                             <div class="home-header-top-date" @click="dateClickHandle">
@@ -36,8 +37,8 @@
                         </div>
                         <a href="#/search" class="home-header-search-link">搜索文章</a>
                     </header>
-                    <null-img v-if="!article_arr.length"></null-img>
-                    <div v-if="article_arr.length" class="home-con">
+                    <null-img v-if="article_total===0"></null-img>
+                    <div class="home-con">
                         <article-list-item
                             v-for="(item,index) in article_arr"
                             :key="index"
@@ -131,25 +132,30 @@
             }
         },
         watch: {
+            /**监听路由变化，过滤文章数据*/
             '$route': function () {
+                this.page_num = 1;
                 this.$vux.loading.show({text: DEFAULT_CONFIG.LOADING_OR_TIME_OUT.LOADING_TEXT});
                 this.fetchArticleList(() => {
+                    this.$nextTick(() => { this.$refs.scroller && this.$refs.scroller.reset({top:0}); });
                     this.$vux.loading.hide();
                 });
             }
         },
         computed: {
+            /**日期计算属性*/
             dateComputed () {
                 return Tool.format('yyyy-MM-dd');
             },
+            /**几号计算属性*/
             dayComputed () {
                 return Tool.format('dd');
             }
         },
         created () {
-            this.fetchTagList();
+            this.fetchTagList();/**获取文章类别*/
             this.$vux.loading.show({text: DEFAULT_CONFIG.LOADING_OR_TIME_OUT.LOADING_TEXT});
-            this.fetchArticleList(() => {
+            this.fetchArticleList(() => {/**获取文章列表*/
                 this.$vux.loading.hide();
             });
             this.$nextTick(() => {
@@ -168,7 +174,7 @@
                             this.article_total = data.total;
                             data.arr.forEach((item)=>{ item.is_fade_in = this.is_fade_in; });
                             this.article_arr = this.page_num == 1 ? data.arr : [...this.article_arr,...data.arr];
-                            this.article_arr.length == this.article_total && this.$refs.scroller && this.$refs.scroller.disablePullup();
+                            this.article_arr.length === this.article_total ? (this.$refs.scroller && this.$refs.scroller.disablePullup()) : (this.$refs.scroller && this.$refs.scroller.enablePullup());
                             this.$nextTick(() => { this.$refs.scroller && this.$refs.scroller.reset(); });
                         }
                         callback && callback();
@@ -196,7 +202,12 @@
                 this.is_fade_in = false;
                 this.fetchArticleList( () => {
                     this.$refs.scroller && this.$refs.scroller.donePulldown();
-                    if(this.article_total != 0) this.$refs.scroller && this.$refs.scroller.enablePullup();
+                    if(this.article_arr.length === this.article_total){
+                        this.$refs.scroller && this.$refs.scroller.disablePullup();
+                    }else{
+                        this.$refs.scroller && this.$refs.scroller.enablePullup();
+                    }
+
                 });
             },
             /**上拉加载*/
@@ -269,10 +280,11 @@
             @include tft(translate3d(-83%,0,0))
         }
     }
-    .xs-container,
+    .xs-container{
+        height: 100%;
+    }
     .home-inner{
         @extend %pr;
-        min-height: 100%;
     }
     .home-inner{
         @extend %bgwhite;

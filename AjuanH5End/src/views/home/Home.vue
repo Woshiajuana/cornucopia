@@ -21,7 +21,7 @@
                 <div class="home-inner">
                     <header class="home-header">
                         <div class="home-header-top">
-                            <div class="home-header-top-date">
+                            <div class="home-header-top-date" @click="dateClickHandle">
                                 <div class="home-header-top-date-con">
                                     <span class="home-header-top-date-con-day">{{dayComputed}}</span>
                                     <svg class="home-header-date-icon">
@@ -224,6 +224,10 @@
             /**过滤页面回退事件*/
             headerLeftClickHandle () {
                 this.is_open = false;
+            },
+            /**日期筛选敬请期待*/
+            dateClickHandle () {
+                this.$message({msg: '日期筛选敬请期待'});
             }
         },
         components: {

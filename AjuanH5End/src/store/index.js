@@ -12,7 +12,8 @@ Vue.use(Vuex);
 const state = {
     is_not_first: true,
     animate_name: 'vux-pop-in',
-    nav_index: 1
+    nav_index: 1,
+    key_words: ''
 };
 
 /**
@@ -37,6 +38,11 @@ const mutations = {
     /**判断菜单栏选择情况*/
     [ types.SET_NAV_INDEX ] (state,nav_index) {
         state.nav_index = nav_index;
+    },
+    /**设置搜索关键词*/
+    [ types.SET_KEY_WORDS ] (state,key_words) {
+        console.log(key_words)
+        state.key_words = key_words;
     }
 };
 

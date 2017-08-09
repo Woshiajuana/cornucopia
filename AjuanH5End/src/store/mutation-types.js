@@ -9,8 +9,11 @@ const SET_NAV_INDEX = 'SET_NAV_INDEX';
 const JUDGE_IS_NOT_FIRST = 'JUDGE_IS_NOT_FIRST';
 /**设置高度滚动*/
 const SET_SCROLL_TOP = 'SET_SCROLL_TOP';
+/**设置搜索关键词*/
+const SET_KEY_WORDS = 'SET_KEY_WORDS';
 export default {
     SET_ANIMATE_NAME,
     SET_NAV_INDEX,
+    SET_KEY_WORDS,
     JUDGE_IS_NOT_FIRST
 }

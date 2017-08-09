@@ -1,7 +1,7 @@
 <template>
     <a class="article-list-item animated"
        :class="{fadeIn: is_fade_in}"
-       href="#/article/1">
+       :href="'#/article/' + _id">
         <div class="article-list-item-inner">
             <div class="article-list-item-img" :style="{backgroundColor: article_title ? getRandomColor : '#f2f2f2'}"></div>
             <h2 class="article-list-item-title" :style="{backgroundColor: article_title ? 'transparent' : '#f2f2f2'}">{{article_title}}</h2>
@@ -16,7 +16,7 @@
     import Tool from '../assets/lib/Tool'
     export default {
         name: 'article-list-item',
-        props: [ 'article_title', 'article_time', 'article_type', 'is_fade_in'],
+        props: [ 'article_title', 'article_time', 'article_type', 'is_fade_in', '_id'],
         filters: {
             timeFilter (time) {
                 if(!time){

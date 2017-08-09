@@ -43,6 +43,7 @@
                             v-for="(item,index) in article_arr"
                             :key="index"
                             :is_fade_in="item.is_fade_in"
+                            :_id="item._id"
                             :article_title="item.article_title"
                             :article_time="item.article_time"
                             :article_type="item.article_type">

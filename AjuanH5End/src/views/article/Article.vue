@@ -3,7 +3,7 @@
         <!--背景LOGO-->
         <logo-bg></logo-bg>
         <!--/背景LOGO-->
-        <header-wrap header_title="HTML基础知识"></header-wrap>
+        <header-wrap :header_title="article ? article.article_title : '详情'"></header-wrap>
         <scroller
             lock-x
             scrollbar-y
@@ -11,44 +11,7 @@
             :height="scroller_height"
             ref="scroller">
             <!--content slot-->
-            <div class="article-inner">
-                <p>
-                    额，什么鬼，怎么还不是我背了那么多遍的那道闭包题，让我想想。 setTimeout 会延迟执行，那么执行到 console.log 的时候，其实 i 已经变成 5 了，对，就是这样，这么简单怎么可能难到老子。
-                </p>
-                <p>
-                    额，什么鬼，怎么还不是我背了那么多遍的那道闭包题，让我想想。 setTimeout 会延迟执行，那么执行到 console.log 的时候，其实 i 已经变成 5 了，对，就是这样，这么简单怎么可能难到老子。
-                </p>
-                <p>
-                    额，什么鬼，怎么还不是我背了那么多遍的那道闭包题，让我想想。 setTimeout 会延迟执行，那么执行到 console.log 的时候，其实 i 已经变成 5 了，对，就是这样，这么简单怎么可能难到老子。
-                </p>
-                <p>
-                    额，什么鬼，怎么还不是我背了那么多遍的那道闭包题，让我想想。 setTimeout 会延迟执行，那么执行到 console.log 的时候，其实 i 已经变成 5 了，对，就是这样，这么简单怎么可能难到老子。
-                </p>
-                <p>
-                    额，什么鬼，怎么还不是我背了那么多遍的那道闭包题，让我想想。 setTimeout 会延迟执行，那么执行到 console.log 的时候，其实 i 已经变成 5 了，对，就是这样，这么简单怎么可能难到老子。
-                </p>
-                <p>
-                    额，什么鬼，怎么还不是我背了那么多遍的那道闭包题，让我想想。 setTimeout 会延迟执行，那么执行到 console.log 的时候，其实 i 已经变成 5 了，对，就是这样，这么简单怎么可能难到老子。
-                </p>
-                <p>
-                    额，什么鬼，怎么还不是我背了那么多遍的那道闭包题，让我想想。 setTimeout 会延迟执行，那么执行到 console.log 的时候，其实 i 已经变成 5 了，对，就是这样，这么简单怎么可能难到老子。
-                </p>
-                <p>
-                    额，什么鬼，怎么还不是我背了那么多遍的那道闭包题，让我想想。 setTimeout 会延迟执行，那么执行到 console.log 的时候，其实 i 已经变成 5 了，对，就是这样，这么简单怎么可能难到老子。
-                </p>
-                <p>
-                    额，什么鬼，怎么还不是我背了那么多遍的那道闭包题，让我想想。 setTimeout 会延迟执行，那么执行到 console.log 的时候，其实 i 已经变成 5 了，对，就是这样，这么简单怎么可能难到老子。
-                </p>
-                <p>
-                    额，什么鬼，怎么还不是我背了那么多遍的那道闭包题，让我想想。 setTimeout 会延迟执行，那么执行到 console.log 的时候，其实 i 已经变成 5 了，对，就是这样，这么简单怎么可能难到老子。
-                </p>
-                <p>
-                    额，什么鬼，怎么还不是我背了那么多遍的那道闭包题，让我想想。 setTimeout 会延迟执行，那么执行到 console.log 的时候，其实 i 已经变成 5 了，对，就是这样，这么简单怎么可能难到老子。
-                </p>
-                <p>
-                    额，什么鬼，怎么还不是我背了那么多遍的那道闭包题，让我想想。 setTimeout 会延迟执行，那么执行到 console.log 的时候，其实 i 已经变成 5 了，对，就是这样，这么简单怎么可能难到老子。
-                </p>
-            </div>
+            <div class="article-inner" v-html="article.article_con"></div>
             <!--没有更多-->
             <with-out></with-out>
             <!--/没有更多-->
@@ -59,28 +22,52 @@
     import HeaderWrap from '../../components/header-wrap.vue'
     import LogoBg from '../../components/logo-bg.vue'
     import WithOut from '../../components/with-out.vue'
+    import Util from '../../assets/lib/Util'
+    import DEFAULT_CONFIG from '../../assets/lib/DEFAULT_CONFIG'
     import { Scroller } from 'vux'
     export default {
         name: 'article',
         data () {
             return {
-                scroller_height: ''
+                scroller_height: '',
+                article: ''
             }
         },
         created () {
             this.$nextTick(() => {
                 this.initScrollerVisualHeight(); /**初始化滚动可视高度*/
-                setTimeout(() =>{
-                    this.$refs.scroller.reset();
-                },520)
-            })
+            });
         },
         methods: {
             /**初始化滚动可视高度*/
             initScrollerVisualHeight () {
                 var nd_header = window.document.getElementsByClassName('header-wrap')[0];
                 nd_header && (this.scroller_height = '-' + nd_header.offsetHeight);
+            },
+            /**获取文章详情*/
+            fetchArticleDetailById () {
+                this.$vux.loading.show({text: DEFAULT_CONFIG.LOADING_OR_TIME_OUT.LOADING_TEXT});
+                Util.fetchArticleDetailById(this.$route.params._id).then( (result) => {
+                    setTimeout(() => {
+                        this.$vux.loading.hide();
+                        if( result.status == 1 ) {
+                            this.article = result.data;
+                        }
+                        this.$nextTick(() => {
+                            setTimeout(() =>{
+                                this.$refs.scroller.reset();
+                            },520)
+                        })
+                    },DEFAULT_CONFIG.LOADING_OR_TIME_OUT.TIME_OUT)
+                });
             }
+        },
+        activated: function () {
+            this.article = '';
+            this.fetchArticleDetailById();
+        },
+        deactivated: function () {
+
         },
         components: {
             HeaderWrap,
@@ -95,7 +82,7 @@
     .article-view{
         background-color: $bgmc;
         .xs-container{
-            min-height: 100%;
+            height: 100%;
         }
     }
     .article-inner{

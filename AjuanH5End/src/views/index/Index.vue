@@ -2,9 +2,9 @@
     <div>
         <!--主体内容视图-->
         <transition :name="animateName">
-            <!--<keep-alive>-->
-            <router-view class="view-main"></router-view>
-            <!--</keep-alive>-->
+            <keep-alive>
+                <router-view class="view-main"></router-view>
+            </keep-alive>
         </transition>
         <!--/主体内容视图-->
         <!--导航条-->

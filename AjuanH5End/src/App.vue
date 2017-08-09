@@ -2,9 +2,9 @@
     <div id="app">
         <!--主体内容视图-->
         <transition :name="animateName">
-            <!--<keep-alive>-->
-            <router-view class="view-wrap"></router-view>
-            <!--</keep-alive>-->
+            <keep-alive>
+                <router-view class="view-wrap"></router-view>
+            </keep-alive>
         </transition>
         <!--/主体内容视图-->
         <!--svg-->

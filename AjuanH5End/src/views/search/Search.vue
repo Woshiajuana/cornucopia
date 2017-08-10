@@ -20,6 +20,8 @@
 <script>
     import HeaderWrap from '../../components/header-wrap.vue'
     import types from '../../store/mutation-types'
+    import Tool from '../../assets/lib/Tool'
+    import DEFAULT_CONFIG from '../../assets/lib/DEFAULT_CONFIG'
     export default {
         name: 'search',
         data (){
@@ -35,8 +37,12 @@
             /**搜索事件*/
             searchHandle () {
                 this.search_input = this.search_input.trim();
-                this.search_input && this.$store.commit(types.SET_KEY_WORDS,this.search_input);
-                this.search_input && this.$router.push('/search/result/' + this.search_input);
+                if (!this.search_input) return;
+                this.$store.commit(types.SET_KEY_WORDS,this.search_input);
+                this.$router.push('/search/result/' + this.search_input);
+                var history_key_words_arr = Tool.dataToLocalStorageOperate.achieve(DEFAULT_CONFIG.HISTORY_KEY_WORDS) || [];
+                history_key_words_arr.push(this.search_input);
+                Tool.dataToLocalStorageOperate.save(DEFAULT_CONFIG.HISTORY_KEY_WORDS,history_key_words_arr);
             }
         },
         components: {

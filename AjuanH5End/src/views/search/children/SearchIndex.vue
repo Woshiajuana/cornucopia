@@ -1,13 +1,13 @@
 <template>
     <div class="search-label-wrap">
-        <section class="search-label-section">
+        <section class="search-label-section" v-if="history_key_words_arr">
             <h2 class="search-label-title">
                 历史搜索
-                <svg class="search-label-delete">
+                <svg class="search-label-delete" @click="deleteHistoryHandle">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#delete-icon"></use>
                 </svg>
             </h2>
-            <a class="search-label-link" href="#/search/result/1">javascript</a>
+            <a v-for="(item,index) in history_key_words_arr" :key="index" class="search-label-link" :href="'#/search/result/' + item">{{item}}</a>
         </section>
         <section class="search-label-section">
             <h2 class="search-label-title">热门搜索</h2>
@@ -21,8 +21,25 @@
     </div>
 </template>
 <script>
+    import Tool from '../../../assets/lib/Tool'
+    import DEFAULT_CONFIG from '../../../assets/lib/DEFAULT_CONFIG'
     export default {
-        name: 'search-index'
+        name: 'search-index',
+        data () {
+            return {
+                history_key_words_arr: ''
+            }
+        },
+        created () {
+            this.history_key_words_arr = Tool.dataToLocalStorageOperate.achieve(DEFAULT_CONFIG.HISTORY_KEY_WORDS);
+        },
+        methods: {
+            /**删除历史搜索记录*/
+            deleteHistoryHandle () {
+                Tool.dataToLocalStorageOperate.remove(DEFAULT_CONFIG.HISTORY_KEY_WORDS);
+                this.history_key_words_arr = Tool.dataToLocalStorageOperate.achieve(DEFAULT_CONFIG.HISTORY_KEY_WORDS);
+            }
+        }
     }
 </script>
 <style lang="scss">

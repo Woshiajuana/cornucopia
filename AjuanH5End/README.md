@@ -2,7 +2,19 @@
 
 > A Vue.js project
 
-## Build Setup
+## 实现功能
+
+[x] 首页文章列表
+
+[x] 文章搜索
+
+[x] 历史搜索
+
+[x] 热门搜索
+
+[ ] 发现
+
+## 执行步骤
 
 ``` bash
 # install dependencies

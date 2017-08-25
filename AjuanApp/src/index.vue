@@ -14,6 +14,8 @@
     export default {
         data: {
             turnTable: new TurnTableController({
+                duration: 5000,
+                speed: 360 * 10,
                 angle_range: [
                     [0,45],
                     [46,90],

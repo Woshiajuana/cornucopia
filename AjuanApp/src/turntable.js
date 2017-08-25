@@ -9,8 +9,8 @@ const TurnTableController = (function () {
      * 默认参数
      * */
     const DEFAULT_OPTION = {
-        duration: 3000,                                         /**转盘转动的时间单位ms*/
-        speed: 360 * 4,                                         /**转盘普通旋转的圈数，速度*/
+        duration: 5000,                                         /**转盘转动的时间单位ms*/
+        speed: 360 * 10,                                         /**转盘普通旋转的圈数，速度*/
         angle_range: [[0,90],[91,180],[181,270],[271,360]],     /**转盘各大奖励角度范围*/
         delay: 0,                                               /**点击延时多久触发转动ms*/
         timing_function: 'ease-in-out'                           /**转盘转动速度曲线*/

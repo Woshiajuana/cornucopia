@@ -39,7 +39,6 @@
     .nav-bar-txt {
         justify-content: center;
         align-items: center;
-        /*height: 60;*/
     }
     .nav-bar-img {
         justify-content: center;

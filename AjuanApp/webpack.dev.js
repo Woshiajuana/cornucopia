@@ -9,8 +9,8 @@ config.devServer = {
   compress: true,
   // hot: true,
   host: '0.0.0.0',
-  public: ip + ':8080/web',
- // publicPath: '/dist/',
+  public: ip + ':5060',
+ publicPath: '/dist/',
 };
 // configs.plugins.push(new webpack.HotModuleReplacementPlugin());
 console.log('server is running! Please open ' + chalk.green('http://' + ip + ':8080/web/index.html'));

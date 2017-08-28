@@ -1,9 +1,6 @@
 <template>
     <div class="wrapper" @click="update">
-        <div class="turntable-wrap" @click="turnHandle">
-            <image ref="turntable" class="turntable-bg" :src="turntable_img"></image>
-            <image class="turntable-pointer" :src="pointer_img"></image>
-        </div>
+       发现
     </div>
 </template>
 
@@ -54,6 +51,7 @@
         align-items: center;
         justify-content: center;
         background-color: #5e7885;
+        font-size: 72px;
     }
     .turntable-wrap{
         position: relative;

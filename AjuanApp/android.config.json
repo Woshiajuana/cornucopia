@@ -2,5 +2,5 @@
   "AppName":"AJUAN",
   "AppId":"com.ajuan.www",
   "SplashText":"Hello AJUAN",
-  "WeexBundle":"index.js"
+  "WeexBundle":"App.js"
 }

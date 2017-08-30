@@ -135,9 +135,8 @@
         watch: {
             /**监听路由变化，过滤文章数据*/
             'article_type': function () {
-                this.page_num = 1;
                 this.$vux.loading.show({text: DEFAULT_CONFIG.LOADING_OR_TIME_OUT.LOADING_TEXT});
-                this.fetchArticleList(() => {
+                this.fetchArticleList( 1, () => {
                     this.$nextTick(() => { this.$refs.scroller && this.$refs.scroller.reset({top:0}); });
                     this.$vux.loading.hide();
                 });
@@ -156,9 +155,7 @@
         created () {
             this.fetchTagList();/**获取文章类别*/
             this.$vux.loading.show({text: DEFAULT_CONFIG.LOADING_OR_TIME_OUT.LOADING_TEXT});
-            this.fetchArticleList(() => {/**获取文章列表*/
-                this.$vux.loading.hide();
-            });
+            this.fetchArticleList( 1, () => {/**获取文章列表*/this.$vux.loading.hide();});
             this.$nextTick(() => {
                 this.bindGestureMobile(); /**绑定手势*/
                 this.initScrollerVisualHeight(); /**初始化滚动可视高度*/
@@ -166,15 +163,16 @@
         },
         methods: {
             /**获取文章列表*/
-            fetchArticleList (callback) {
+            fetchArticleList (page_num, callback) {
                 var tag = this.$route.query.tag || '';
-                Util.fetchArticleList( this.page_num, this.page_size, tag ).then((result) => {
+                Util.fetchArticleList( page_num, this.page_size, tag ).then((result) => {
                     setTimeout(() => {
                         if(result.status == 1) {
                             var data = result.data;
                             this.article_total = data.total;
+                            this.page_num = page_num;
                             data.arr.forEach((item)=>{ item.is_fade_in = this.is_fade_in; });
-                            this.article_arr = this.page_num == 1 ? data.arr : [...this.article_arr,...data.arr];
+                            this.article_arr = page_num == 1 ? data.arr : [...this.article_arr,...data.arr];
                             this.article_arr.length === this.article_total ? (this.$refs.scroller && this.$refs.scroller.disablePullup()) : (this.$refs.scroller && this.$refs.scroller.enablePullup());
                             this.$nextTick(() => { this.$refs.scroller && this.$refs.scroller.reset(); });
                         }
@@ -182,6 +180,7 @@
                     },DEFAULT_CONFIG.SCROLL_TIME);
                 }).catch( (err) => {
                     this.$message({msg: '系统开小差'});
+                    callback && callback();
                 });
             },
             /**初始化滚动可视高度*/
@@ -199,9 +198,8 @@
             },
             /**下拉刷新*/
             refreshHandle () {
-                this.page_num = 1;
                 this.is_fade_in = false;
-                this.fetchArticleList( () => {
+                this.fetchArticleList( 1, () => {
                     this.$refs.scroller && this.$refs.scroller.donePulldown();
                     if(this.article_arr.length === this.article_total){
                         this.$refs.scroller && this.$refs.scroller.disablePullup();
@@ -213,9 +211,9 @@
             },
             /**上拉加载*/
             loadMoreHandle () {
-                this.page_num++;
+                var page_num = this.page_num + 1;
                 this.is_fade_in = true;
-                this.fetchArticleList( () => {
+                this.fetchArticleList(page_num, () => {
                     this.$nextTick(() => {
                         setTimeout(() => {
                             this.$refs.scroller && this.$refs.scroller.donePullup();

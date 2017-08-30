@@ -19,7 +19,7 @@
                     {
                         index: 0,
                         txt: '首页',
-                        src: 'http://172.21.65.1:13140/dist/index.js',
+                        src: 'http://192.170.2.151:13140/dist/index.js',
                         visibility: 'visible',
                         img_src1: source('sy_selected.png'),
                         img_src2: source('sy_normal.png'),
@@ -28,7 +28,7 @@
                     {
                         index: 1,
                         txt: '发现',
-                        src: 'http://172.21.65.1:13140/dist/find.js',
+                        src: 'http://192.170.2.151:13140/dist/find.js',
                         visibility: 'hidden',
                         img_src1: source('sxy_selected.png'),
                         img_src2: source('sxy_normal.png'),
@@ -37,7 +37,7 @@
                     {
                         index: 2,
                         txt: '我的',
-                        src: 'http://172.21.65.1:13140/dist/me.js',
+                        src: 'http://192.170.2.151:13140/dist/me.js',
                         visibility: 'hidden',
                         img_src1: source('wd_selected.png'),
                         img_src2: source('wd_normal.png'),

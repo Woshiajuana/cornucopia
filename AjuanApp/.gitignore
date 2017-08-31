@@ -6,3 +6,4 @@ temp/
 platforms/
 ## output files
 dist/
+plugins/

@@ -21,8 +21,7 @@
                         txt: '首页',
                         src: 'http://192.170.2.151:13140/dist/index.js',
                         visibility: 'visible',
-                        img_src1: source('sy_selected.png'),
-                        img_src2: source('sy_normal.png'),
+                        img_icon_name: 'home-icon',
                         checked: true
                     },
                     {
@@ -30,17 +29,23 @@
                         txt: '发现',
                         src: 'http://192.170.2.151:13140/dist/find.js',
                         visibility: 'hidden',
-                        img_src1: source('sxy_selected.png'),
-                        img_src2: source('sxy_normal.png'),
+                        img_icon_name: 'find-icon',
                         checked: false
                     },
                     {
                         index: 2,
-                        txt: '我的',
+                        txt: '留言',
                         src: 'http://192.170.2.151:13140/dist/me.js',
                         visibility: 'hidden',
-                        img_src1: source('wd_selected.png'),
-                        img_src2: source('wd_normal.png'),
+                        img_icon_name: 'message-icon',
+                        checked: false
+                    },
+                    {
+                        index: 3,
+                        txt: '关于',
+                        src: 'http://192.170.2.151:13140/dist/me.js',
+                        visibility: 'hidden',
+                        img_icon_name: 'about-icon',
                         checked: false
                     }
                 ]

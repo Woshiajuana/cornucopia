@@ -1,0 +1,4 @@
+#Fri Apr 07 12:00:37 CST 2017
+base.0=/Users/budao/weex-svg/android/dev/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+renamed.0=classes.dex
+file.0=/Users/budao/weex-svg/android/dev/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex

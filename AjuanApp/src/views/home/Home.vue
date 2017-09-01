@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper" @click="update">
+    <div class="wrapper">
         <div class="turntable-wrap" @click="turnHandle">
             <image ref="turntable" class="turntable-bg" :src="turntable_img"></image>
             <image class="turntable-pointer" :src="pointer_img"></image>

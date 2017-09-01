@@ -1,13 +1,16 @@
 <template>
     <div class="wrapper" @click="update">
-       发现
+        <div class="turntable-wrap" @click="turnHandle">
+            <image ref="turntable" class="turntable-bg" :src="turntable_img"></image>
+            <image class="turntable-pointer" :src="pointer_img"></image>
+        </div>
     </div>
 </template>
 
 <script>
     const animation = weex.requireModule('animation');
     const modal = weex.requireModule('modal');
-    import TurnTableController from './assets/lib/turntable'
+    import TurnTableController from '../../assets/lib/turntable'
     export default {
         data: {
             turnTable: new TurnTableController({
@@ -35,6 +38,8 @@
                     modal.toast({ message: '恭喜你是一个' + this.prize_arr[this.index] + '!!!' });
                 });
             }
+        },
+        components: {
         }
     }
 
@@ -51,7 +56,6 @@
         align-items: center;
         justify-content: center;
         background-color: #5e7885;
-        font-size: 72px;
     }
     .turntable-wrap{
         position: relative;

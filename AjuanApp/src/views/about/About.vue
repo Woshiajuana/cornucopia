@@ -1,13 +1,13 @@
 <template>
     <div class="wrapper" @click="update">
-       我的
+       关于
     </div>
 </template>
 
 <script>
     const animation = weex.requireModule('animation');
     const modal = weex.requireModule('modal');
-    import TurnTableController from './assets/lib/turntable'
+    import TurnTableController from '../../assets/lib/turntable'
     export default {
         data: {
             turnTable: new TurnTableController({

@@ -54,17 +54,14 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        height: 100px;
-        background-color: #f8f5fc;
     }
     .nav-bar-item{
         flex: 1;
         justify-content: center;
         align-items: center;
-        height: 100px;
     }
     .nav-bar-txt {
-        font-size: 20px;
+        font-size: 22px;
         justify-content: center;
         align-items: center;
     }

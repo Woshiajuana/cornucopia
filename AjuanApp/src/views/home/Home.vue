@@ -34,9 +34,11 @@
             </div>
         </cell>
         <article-list-item v-for="item in rows" :key="item"></article-list-item>
+        <!--下拉刷新-->
         <loading class="loading" @loading="loadingHandle" :display="showLoading">
             <loading-indicator class="mum-icon"></loading-indicator>
         </loading>
+        <!--/下拉刷新-->
     </list>
     <!--/滚动容器-->
 </template>
@@ -96,6 +98,8 @@
     .wrapper {
         position: absolute;
         top: 0;
+        width: 750px;
+        left: 0;
         bottom: 0;
     }
     .home-header{

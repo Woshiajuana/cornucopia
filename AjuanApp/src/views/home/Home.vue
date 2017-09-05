@@ -1,12 +1,12 @@
 <template>
     <!--滚动容器-->
-    <scroller class="wrapper">
+    <list class="wrapper">
         <!--上拉刷新-->
         <refresh class="refresh" @refresh="refreshHandle" @pullingdown="pullingDownHandle" :display="refreshing ? 'show' : 'hide'">
-            <text class="indicator">Refreshing ...</text>
+            <loading-indicator class="mum-icon"></loading-indicator>
         </refresh>
         <!--/上拉刷新-->
-        <div class="home-header">
+        <cell class="home-header">
             <div class="home-header-top">
                 <div class="home-header-top-date">
                     <div class="home-header-top-date-con">
@@ -29,29 +29,29 @@
 	V25.379L3.102,6.731C2.643,6.189,3.018,5.354,3.727,5.354h36.504C40.94,5.354,41.357,6.189,40.899,6.731L40.899,6.731z"/>
                 </svg>
             </div>
-            <div class="home-header-search-link">
+            <div class="home-header-search-link" @click="toSearchHandle">
                 <text class="home-header-search-link-txt">搜索文章</text>
             </div>
-        </div>
-        <div class="row" v-for="name in rows" :ref="'item'+name">
-            <text class="text" :ref="'text'+index">{{name}}</text>
-        </div>
+        </cell>
+        <article-list-item v-for="item in rows" :key="item"></article-list-item>
         <loading class="loading" @loading="loadingHandle" :display="showLoading">
-            <text class="indicator">Loading ...</text>
+            <loading-indicator class="mum-icon"></loading-indicator>
         </loading>
-    </scroller>
+    </list>
     <!--/滚动容器-->
 </template>
 
 <script>
     import Tool from '../../assets/lib/Tool'
-    const modal = weex.requireModule('modal')
+    import ArticleListItem from '../../components/article-list-item.vue'
+    const modal = weex.requireModule('modal');
+    const navigator = weex.requireModule('navigator');
     export default {
         data () {
             return {
                 showLoading: 'hide',
                 refreshing: false,
-                rows: 50
+                rows: 10
             }
         },
         computed: {
@@ -65,35 +65,37 @@
             }
         },
         methods: {
-            refreshHandle ( event ) {
-                this.refreshing = true
-                modal.toast({ message: '刷新' })
+            refreshHandle () {
+                this.refreshing = true;
                 setTimeout(() => {
+                    this.rows = 10;
                     this.refreshing = false
                 }, 2000)
             },
-            pullingDownHandle ( event ) {
-                modal.toast({ message: event.pullingDistance, duration: 1 })
-            },
+            pullingDownHandle ( event ) {},
             loadingHandle () {
-                modal.toast({ message: 'loading', duration: 1 })
-                this.showLoading = 'show'
+                modal.toast({ message: 'loading', duration: 1 });
+                this.showLoading = 'show';
                 setTimeout(() => {
                     this.rows+=10;
                     this.showLoading = 'hide';
                 }, 1500)
+            },
+            toSearchHandle () {
+
             }
+        },
+        components: {
+            ArticleListItem
         }
     }
 </script>
 
 <style>
     .wrapper {
-       flex: 1;
-    }
-    .loading,
-    .refresh{
-        background-color: #383838;
+        position: absolute;
+        top: 0;
+        bottom: 0;
     }
     .home-header{
         width: 750px;
@@ -171,5 +173,19 @@
         width: 50px;
         top: 10px;
         right: 40px;
+    }
+    .loading,
+    .refresh{
+        justify-content:center;
+        flex-direction: row;
+        align-items:center;
+        height: 80px;
+        line-height: 80px;
+        background-color: #383838;
+    }
+    .mum-icon{
+        margin-bottom: 15px;
+        width: 50px;
+        height: 50px;
     }
 </style>

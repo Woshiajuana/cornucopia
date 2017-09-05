@@ -1,31 +1,28 @@
 <template>
-    <a class="article-list-item animated"
-       :class="{fadeIn: is_fade_in}"
-       :href="'#/article/' + _id">
+    <cell class="article-list-item">
         <div class="article-list-item-inner">
             <div class="article-list-item-img" :style="{backgroundColor: article_title ? getRandomColor : '#f2f2f2'}"></div>
-            <h2 class="article-list-item-title" :style="{backgroundColor: article_title ? 'transparent' : '#f2f2f2'}">{{article_title}}</h2>
-            <p class="article-list-item-time" :style="{backgroundColor: article_title ? 'transparent' : '#f2f2f2'}">{{article_time | timeFilter}}</p>
+            <text class="article-list-item-title">HTML的基础知识</text>
+            <text class="article-list-item-time">2017-09-05</text>
             <div class="article-list-item-info">
-                <span class="article-list-item-type" :style="{backgroundColor: article_title ? 'transparent' : '#f2f2f2'}">{{article_type}}</span>
+                <text class="article-list-item-type">HTML</text>
             </div>
         </div>
-    </a>
+    </cell>
 </template>
 <script>
     import Tool from '../assets/lib/Tool'
     export default {
-        name: 'article-list-item',
-        props: [ 'article_title', 'article_time', 'article_type', 'is_fade_in', '_id'],
-        filters: {
-            timeFilter (time) {
-                if(!time){
-                    return '';
-                }else{
-                    return Tool.format('yyyy-MM-dd',new Date(time));
-                }
-            }
-        },
+//        props: [ 'article_title', 'article_time', 'article_type', 'is_fade_in', '_id'],
+//        filters: {
+//            timeFilter (time) {
+//                if(!time){
+//                    return '';
+//                }else{
+//                    return Tool.format('yyyy-MM-dd',new Date(time));
+//                }
+//            }
+//        },
         computed: {
             getRandomColor () {
                 return Tool.getRandomColor();
@@ -33,92 +30,56 @@
         }
     }
 </script>
-<style lang="scss">
-    @import '../assets/scss/define';
+<style>
     .article-list-item{
-        @extend %db;
-        @extend %pr;
-        padding-left: j(30);
+        position: relative;
+        padding-left: 60px;
         background-color: #fff;
-        &:first-child{
-            .article-list-item-inner{
-                border-top: none;
-            }
-        }
     }
     .article-list-item-inner{
-        height: j(60);
-        padding: j(30) j(20) j(30) j(76);
-        border-top: 1px solid #ddd;
-    }
-    .animated {
-        animation-duration: 1s;
-        animation-fill-mode: both;
-    }
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-    .fadeIn {
-        animation-name: fadeIn;
+        height: 240px;
+        padding-top: 60px;
+        padding-bottom: 60px;
+        padding-left: 152px;
+        padding-right: 40px;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        border-bottom-color: #ddd;
     }
     .article-list-item-img{
-        @extend %pa;
-        @extend %t50;
-        @extend %oh;
-        @include br(10px);
-        width: j(60);
-        height: j(60);
-        left: j(30);
-        margin-top: j(-30);
-        img{
-            @extend %db;
-            @extend %w100;
-            @extend %h100;
-        }
+        position: absolute;
+        height: 120px;
+        width: 120px;
+        left:0;
+        top: 60px;
+        border-radius: 20px;
     }
     .article-list-item-title{
-        @extend %c3;
-        @extend %fwn;
-        @extend %twno;
-        margin: j(5) 0;
-        height: j(20);
-        line-height: j(20);
-        font-size: j(16);
+        color: #333;
+        margin-top: 10px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 32px;
     }
     .article-list-item-time{
-        @extend %c9;
-        font-size: j(12);
-        height: j(20);
-        max-width: j(100);
-        line-height: j(20);
+        color: #999;
+        font-size: 24px;
+        height: 40px;
+        line-height: 40px;
     }
     .article-list-item-info{
-        @extend %pa;
-        color: #999;
-        font-size: j(12);
-        right: j(20);
-        bottom: j(20);
-        height: j(20);
-        line-height: j(20);
-        min-width: j(80);
+        position: absolute;
+        right: 40px;
+        bottom: 40px;
+        height: 32px;
+        min-width: 160px;
     }
     .article-list-item-type{
-        @extend %dib;
-        @extend %tar;
-        min-width: j(80);
-        height: j(16);
-    }
-    .article-list-item-point-icon{
-        @extend %pa;
-        @extend %t0;
-        @extend %r0;
-        @extend %cp;
-        width: j(20);
-        height: j(20);
+        text-align: right;
+        font-size: 24px;
+        color: #999;
+        width: 160px;
+        height: 32px;
+        line-height: 32px;
     }
 </style>

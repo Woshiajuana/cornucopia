@@ -14,6 +14,8 @@
 <script>
     import NavBar from './components/nav-bar.vue'
     import source from './assets/lib/source'
+    import PageUrlConfig from './config/page_url_config'
+    const modal = weex.requireModule('modal');
     export default {
         data () {
             return {
@@ -21,7 +23,7 @@
                     {
                         index: 0,
                         txt: '首页',
-                        src: 'http://192.170.2.151:13140/dist/views/home/Home.js',
+                        src: PageUrlConfig['home'],
                         visibility: 'visible',
                         img_icon_name: 'home-icon',
                         checked: true
@@ -29,7 +31,7 @@
                     {
                         index: 1,
                         txt: '发现',
-                        src: 'http://192.170.2.151:13140/dist/views/find/Find.js',
+                        src: PageUrlConfig['find'],
                         visibility: 'hidden',
                         img_icon_name: 'find-icon',
                         checked: false
@@ -37,7 +39,7 @@
                     {
                         index: 2,
                         txt: '留言',
-                        src: 'http://192.170.2.151:13140/dist/views/message/Message.js',
+                        src: PageUrlConfig['message'],
                         visibility: 'hidden',
                         img_icon_name: 'message-icon',
                         checked: false
@@ -45,7 +47,7 @@
                     {
                         index: 3,
                         txt: '关于',
-                        src: 'http://192.170.2.151:13140/dist/views/about/About.js',
+                        src: PageUrlConfig['about'],
                         visibility: 'hidden',
                         img_icon_name: 'about-icon',
                         checked: false
@@ -99,7 +101,7 @@
         height: 99px;
         background-color: #F7F7FA;
         border-top-width: 1px;
-        border-top-color: #e5e5e5;
+        border-top-color: #c0bfc4;
         border-top-style: solid;
     }
 </style>

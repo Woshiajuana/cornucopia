@@ -40,7 +40,6 @@
 <script>
     export default {
         props: [ 'nav_bar_arr' ],
-
         methods: {
             /**切换导航菜单*/
             switchNavBarHandle (nav_bar_index) {

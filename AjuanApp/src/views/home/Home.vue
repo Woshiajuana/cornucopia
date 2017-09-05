@@ -44,6 +44,7 @@
 <script>
     import Tool from '../../assets/lib/Tool'
     import ArticleListItem from '../../components/article-list-item.vue'
+    import PageUrl from '../../config/page_url_config'
     const modal = weex.requireModule('modal');
     const navigator = weex.requireModule('navigator');
     export default {
@@ -82,7 +83,7 @@
                 }, 1500)
             },
             toSearchHandle () {
-
+                navigator.push({url: PageUrl['search'], animated: 'true'})
             }
         },
         components: {

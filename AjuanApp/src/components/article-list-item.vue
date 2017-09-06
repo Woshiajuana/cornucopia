@@ -1,14 +1,14 @@
 <template>
-    <cell class="article-list-item">
+    <div class="article-list-item">
         <div class="article-list-item-inner">
             <div class="article-list-item-img" :style="{backgroundColor: article_title ? getRandomColor : '#f2f2f2'}"></div>
-            <text class="article-list-item-title">HTML的基础知识</text>
+            <text class="article-list-item-title">HTML和CSS的基础知识</text>
             <text class="article-list-item-time">2017-09-05</text>
             <div class="article-list-item-info">
                 <text class="article-list-item-type">HTML</text>
             </div>
         </div>
-    </cell>
+    </div>
 </template>
 <script>
     import Tool from '../assets/lib/Tool'

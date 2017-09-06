@@ -1,12 +1,12 @@
 <template>
     <!--滚动容器-->
-    <list class="wrapper">
+    <scroller class="wrapper">
         <!--上拉刷新-->
         <refresh class="refresh" @refresh="refreshHandle" @pullingdown="pullingDownHandle" :display="refreshing ? 'show' : 'hide'">
             <loading-indicator class="mum-icon"></loading-indicator>
         </refresh>
         <!--/上拉刷新-->
-        <cell class="home-header">
+        <div class="home-header">
             <div class="home-header-top">
                 <div class="home-header-top-date">
                     <div class="home-header-top-date-con">
@@ -32,14 +32,14 @@
             <div class="home-header-search-link" @click="toSearchHandle">
                 <text class="home-header-search-link-txt">搜索文章</text>
             </div>
-        </cell>
+        </div>
         <article-list-item v-for="item in rows" :key="item"></article-list-item>
         <!--下拉刷新-->
         <loading class="loading" @loading="loadingHandle" :display="showLoading">
             <loading-indicator class="mum-icon"></loading-indicator>
         </loading>
         <!--/下拉刷新-->
-    </list>
+    </scroller>
     <!--/滚动容器-->
 </template>
 

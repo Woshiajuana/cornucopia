@@ -1,12 +1,13 @@
 <template>
-    <div class="wrapper">
-       发现
-    </div>
+    <view center_item_title="发现"></view>
 </template>
 
 <script>
+    import View from './../../components/view.vue'
     export default {
-
+        components: {
+            View
+        }
     }
 
 </script>

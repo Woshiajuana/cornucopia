@@ -39,58 +39,44 @@
         border-bottom-width: 2px;
         border-bottom-color: #e5e5e5;
     }
-    .view-header-right {
-        position: absolute;
-        bottom: 0px;
-        right: 0px;
-        width: 108px;
-        height: 88px;
-    }
+    .view-header-right,
     .view-header-left {
         position: absolute;
-        bottom: 0px;
-        left: 0px;
-        width: 108px;
+        top: 0px;
         height: 88px;
     }
-    .header-right-text {
-        position: absolute;
-        top: 28px;
-        right: 32px;
-        text-align: right;
-        font-size: 30px;
-        font-family: 'Open Sans', sans-serif;
+    .view-header-right{
+        right: 0px;
     }
+    .view-header-left{
+        left: 0px;
+    }
+    .header-right-text,
     .header-left-text {
-        position: absolute;
         top: 28px;
-        left :32px;
-        text-align :center;
+        padding-left: 25px;
+        padding-right: 25px;
+        text-align: right;
         font-size: 30px;
         font-family: 'Open Sans', sans-serif;
     }
     .header-center-text {
         position: absolute;
-        bottom: 26px;
-        left: 172px;
-        right: 172px;
+        height: 88px;
+        left: 120px;
+        right: 120px;
+        line-height: 88px;
         text-align: center;
         font-size: 34px;
         font-family: 'Open Sans', sans-serif;
     }
-    .header-left-image {
-        position: absolute;
-        bottom: 20px;
-        left: 28px;
-        width: 40px;
-        height: 40px;
-    }
+    .header-left-image,
     .header-right-image {
-        position: absolute;
-        bottom: 20px;
-        right: 28px;
-        width: 40px;
+        top: 25px;
+        width: 90px;
         height: 40px;
+        padding-right: 25px;
+        padding-left: 25px;
     }
 </style>
 

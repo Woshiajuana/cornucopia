@@ -1,5 +1,44 @@
 <template>
-    <view center_item_title="发现"></view>
+    <view center_item_title="发现发现发现发">
+        <!--<div>-->
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>1</text>
+            <text>2</text>
+            <text>2</text>
+            <text>2</text>
+            <text>2</text>
+            <text>2</text>
+            <text>2</text>
+            <text>2</text>
+            <text>2</text>
+            <text>2</text>
+            <text>2</text>
+            <text>2</text>
+            <text>3</text>
+            <text>2</text>
+            <text>2</text>
+            <text>2</text>
+        <!--</div>-->
+    </view>
 </template>
 
 <script>
@@ -13,16 +52,10 @@
 </script>
 
 <style>
-    .wrapper {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #5e7885;
-        font-size: 72px;
+    .view-inner{
+        top: 90px;
+        width: 750px;
+        flex: 1;
+        background-color: #f5f5f5;
     }
 </style>

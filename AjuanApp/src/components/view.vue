@@ -1,6 +1,7 @@
 <template>
     <div class="view-wrap">
         <view-header
+        v-if="is_header"
         :background_color="background_color"
         :header_height="header_height"
         :left_item_img_src="left_item_img_src"
@@ -14,14 +15,34 @@
         @rightItemClick="rightItemClickHandle"
         @leftItemClick="leftItemClickHandle"
         ></view-header>
-        <slot></slot>
+        <scroller :style="{ top: is_header ? 90 : 0 }" class="view-inner">
+            <!--上拉刷新-->
+            <refresh class="view-refresh" @refresh="refreshHandle" @pullingdown="pullingDownHandle" :display="is_refresh ? 'show' : 'hide'">
+                <loading-indicator class="view-refresh-icon"></loading-indicator>
+            </refresh>
+            <!--/上拉刷新-->
+            <slot></slot>
+            <!--下拉刷新-->
+            <loading class="view-loading" @loading="loadingHandle" :display="is_load ? 'show' : 'hide'">
+                <loading-indicator class="view-loading-icon"></loading-indicator>
+            </loading>
+            <!--/下拉刷新-->
+        </scroller>
     </div>
 </template>
 
 <script>
     import ViewHeader from './children/view-header.vue'
     export default {
+        data () {
+            return {
+                is_load: false,
+                is_refresh: false
+            }
+        },
         props: {
+            /**是否有头部*/
+            is_header: { default: true },
             /**导航条背景色*/
             background_color: { default: '#ffffff' },
             /**导航条高度*/
@@ -39,7 +60,7 @@
             /**右侧按钮图片*/
             right_item_img_src: { default: '' },
             /**右侧按钮标题*/
-            right_item_title: { default: '' },
+            right_item_title: { default: '邀请注册' },
             /**右侧按钮标题颜色*/
             right_item_color: { default: 'black' }
         },
@@ -51,7 +72,22 @@
             /**左边按钮点击事件*/
             leftItemClickHandle (event) {
                 this.$emit('leftItemClick',event);
-            }
+            },
+            /**上拉加载数据*/
+            loadingHandle () {
+                this.showLoading = 'show';
+                setTimeout(() => {
+                    this.showLoading = 'hide';
+                }, 1500)
+            },
+            /**下拉刷新数据*/
+            refreshHandle () {
+                this.refreshing = true;
+                setTimeout(() => {
+                    this.refreshing = false
+                }, 2000)
+            },
+            pullingDownHandle ( event ) {}
         },
         components: {
             ViewHeader
@@ -62,5 +98,27 @@
 <style>
     .view-wrap{
         flex: 1;
+    }
+    .view-inner{
+        position: absolute;
+        width: 750px;
+        left: 0;
+        bottom: 0;
+        background-color: #f5f5f5;
+    }
+    .view-refresh,
+    .view-loading{
+        justify-content:center;
+        flex-direction: row;
+        align-items:center;
+        height: 80px;
+        line-height: 80px;
+        background-color: #383838;
+    }
+    .view-refresh-icon,
+    .view-loading-icon{
+        margin-bottom: 15px;
+        width: 50px;
+        height: 50px;
     }
 </style>

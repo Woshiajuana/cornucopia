@@ -77,7 +77,6 @@
             },
             pullingDownHandle ( event ) {},
             loadingHandle () {
-                modal.toast({ message: 'loading', duration: 1 });
                 this.showLoading = 'show';
                 setTimeout(() => {
                     this.rows+=10;

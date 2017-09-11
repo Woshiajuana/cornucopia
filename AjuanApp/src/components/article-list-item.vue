@@ -64,6 +64,7 @@
     .article-list-item-time{
         color: #999;
         font-size: 24px;
+        margin-top: 10px;
         height: 40px;
         line-height: 40px;
     }

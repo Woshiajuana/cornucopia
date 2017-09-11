@@ -17,13 +17,13 @@
         ></view-header>
         <scroller :style="{ top: is_header ? 90 : 0 }" class="view-inner">
             <!--上拉刷新-->
-            <refresh class="view-refresh" @refresh="refreshHandle" @pullingdown="pullingDownHandle" :display="is_refresh ? 'show' : 'hide'">
+            <refresh v-if="is_refresh" class="view-refresh" @refresh="refreshHandle" @pullingdown="pullingDownHandle" :display="is_refresh ? 'show' : 'hide'">
                 <loading-indicator class="view-refresh-icon"></loading-indicator>
             </refresh>
             <!--/上拉刷新-->
             <slot></slot>
             <!--下拉刷新-->
-            <loading class="view-loading" @loading="loadingHandle" :display="is_load ? 'show' : 'hide'">
+            <loading v-if="is_load" class="view-loading" @loading="loadingHandle" :display="is_load ? 'show' : 'hide'">
                 <loading-indicator class="view-loading-icon"></loading-indicator>
             </loading>
             <!--/下拉刷新-->
@@ -36,13 +36,19 @@
     export default {
         data () {
             return {
-                is_load: false,
-                is_refresh: false
+                /**下拉状态*/
+                is_load_status: false,
+                /**上拉状态*/
+                is_refresh_status: false
             }
         },
         props: {
             /**是否有头部*/
             is_header: { default: true },
+            /**是否支持下拉刷新*/
+            is_refresh: { default: false },
+            /**是否支持上拉加载*/
+            is_load: { default: false },
             /**导航条背景色*/
             background_color: { default: '#ffffff' },
             /**导航条高度*/
@@ -74,20 +80,24 @@
                 this.$emit('leftItemClick',event);
             },
             /**上拉加载数据*/
-            loadingHandle () {
-                this.showLoading = 'show';
+            loadingHandle (event) {
+                this.is_load_status = true;
+                this.$emit('load', event);
                 setTimeout(() => {
-                    this.showLoading = 'hide';
+                    this.is_load_status = false;
                 }, 1500)
             },
             /**下拉刷新数据*/
-            refreshHandle () {
-                this.refreshing = true;
+            refreshHandle (event) {
+                this.is_refresh_status = true;
+                this.$emit('refresh', event);
                 setTimeout(() => {
-                    this.refreshing = false
+                    this.is_refresh_status = false
                 }, 2000)
             },
-            pullingDownHandle ( event ) {}
+            pullingDownHandle (event) {
+                this.$emit('pullingDown', event);
+            }
         },
         components: {
             ViewHeader

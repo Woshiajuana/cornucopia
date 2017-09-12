@@ -1,15 +1,15 @@
 <template>
     <div class="webview-wrap">
-        <web class="content" ref="webview" :src="fullLink" @pagestart="startload" @pagefinish="finishload" @error="failload" :style="{ top: top }"></web>
-        <div class="tabbar">
-            <div class="tabbar-item" @click="goBack">
-                <image class="icon" :src="back_src"></image>
+        <web class="webview-inner" ref="webview" :src="fullLink" @pagestart="startload" @pagefinish="finishload" @error="failload" :style="{ top: top }"></web>
+        <div class="webview-menu">
+            <div class="webview-menu-item" @click="leftMenuClickHandle">
+                <image class="webview-menu-item-icon" :src="back_src"></image>
             </div>
-            <div class="tabbar-item" @click="reload">
-                <image class="icon" :src="reload_src"></image>
+            <div class="webview-menu-item" @click="centerMenuClickHandle">
+                <image class="webview-menu-item-icon" :src="reload_src"></image>
             </div>
-            <div class="tabbar-item" @click="close">
-                <image class="icon" :src="close_src"></image>
+            <div class="webview-menu-item" @click="rightMenuClickHandle">
+                <image class="webview-menu-item-icon" :src="close_src"></image>
             </div>
         </div>
     </div>
@@ -51,17 +51,17 @@
             failload: function(e) {
 
             },
-            goBack: function (e) {
+            leftMenuClickHandle: function (e) {
                 var count = this.count;
                 webview.goBack(this.$refs.webview);
                 setTimeout(function() {
                     if (count === this.count) return navigator.pop(); // hack
                 }.bind(this), 200);
             },
-            reload: function (e) {
+            centerMenuClickHandle: function (e) {
                 webview.reload(this.$refs.webview)
             },
-            close: function (e) {
+            rightMenuClickHandle: function (e) {
                 navigator.pop();
             }
         },
@@ -72,27 +72,22 @@
 //                var deviceWidth = env.deviceWidth / scale;
 //                this.top = 20.0 * 750.0 / deviceWidth;
 //            }
-        },
+        }
     };
 </script>
 
 <style>
     .webview-wrap {
-        width: 750px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        flex: 1;
     }
-    .content {
+    .webview-inner {
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 98px;
     }
-    .tabbar {
+    .webview-menu {
         position: absolute;
         left: 0;
         right: 0;
@@ -103,13 +98,13 @@
         justify-content: space-between;
         background-color: #f5f5f9;
     }
-    .tabbar-item {
+    .webview-menu-item {
         justify-content: center;
         align-items: center;
         height: 98px;
         width: 98px;
     }
-    .icon {
+    .webview-menu-item-icon {
         width: 45px;
         height: 45px;
     }

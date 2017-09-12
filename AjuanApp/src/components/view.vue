@@ -57,6 +57,7 @@
 
 <script>
     import ViewHeader from './children/view-header.vue'
+    import navigator from '../module/navigator/navigator'
     export default {
         data () {
             return {
@@ -113,7 +114,8 @@
             },
             /**左边按钮点击事件*/
             leftItemClickHandle (event) {
-                this.$emit('leftItemClick',event);
+//                this.$emit('leftItemClick',event);
+                navigator.pop();
             },
             /**上拉加载数据*/
             loadHandle (event) {

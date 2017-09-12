@@ -23,7 +23,7 @@
                     </svg>
                 </div>
                 <div class="search-label-con">
-                    <text class="search-label-link">html</text>
+                    <text class="search-label-link" @click="goTo">html</text>
                     <text class="search-label-link">javascript</text>
                     <text class="search-label-link">vue.js</text>
                     <text class="search-label-link">angular</text>
@@ -49,7 +49,8 @@
 </template>
 
 <script>
-    const navigator = weex.requireModule('navigator');
+    import navigator from '../../module/navigator/navigator'
+    import PageUrl from '../../config/page_url_config'
     export default {
         data (){
             return {
@@ -57,6 +58,9 @@
             }
         },
         methods: {
+            goTo () {
+                navigator.push({ url: PageUrl['find'], close: true })
+            },
             returnPageHandle () {
                 navigator.pop()
             }

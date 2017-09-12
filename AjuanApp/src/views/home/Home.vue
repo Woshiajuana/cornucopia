@@ -44,8 +44,8 @@ V25.379L3.102,6.731C2.643,6.189,3.018,5.354,3.727,5.354h36.504C40.94,5.354,41.35
     import View from '../../components/view.vue'
     import ArticleListItem from '../../components/article-list-item.vue'
     import PageUrl from '../../config/page_url_config'
+    import navigator from '../../module/navigator/navigator'
     const modal = weex.requireModule('modal');
-    const navigator = weex.requireModule('navigator');
     export default {
         data () {
             return {
@@ -89,7 +89,8 @@ V25.379L3.102,6.731C2.643,6.189,3.018,5.354,3.727,5.354h36.504C40.94,5.354,41.35
                 }, 1500)
             },
             toSearchHandle () {
-                navigator.push({url: PageUrl['search'], animated: 'true'})
+//                navigator.push({url: PageUrl['search'], animated: 'true'})
+                navigator.push({url: PageUrl['search']})
             }
         },
         components: {
@@ -100,9 +101,6 @@ V25.379L3.102,6.731C2.643,6.189,3.018,5.354,3.727,5.354h36.504C40.94,5.354,41.35
 </script>
 
 <style>
-    .haha{
-
-    }
     .home-header{
         width: 750px;
         height: 240px;

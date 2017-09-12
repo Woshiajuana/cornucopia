@@ -15,18 +15,19 @@
         @rightItemClick="rightItemClickHandle"
         @leftItemClick="leftItemClickHandle"
         ></view-header>
-        <scroller :style="{ top: is_header ? 90 : 1 }" class="view-inner">
+        <scroller :style="{ top: is_header ? 90 : .1 }" class="view-inner">
             <!--上拉刷新-->
             <refresh v-if="is_refresh" class="view-refresh" @refresh="refreshHandle" @pullingdown="pullingDownHandle" :display="is_refresh_status ? 'show' : 'hide'">
-                <loading-indicator class="view-refresh-icon"></loading-indicator>
+                <loading-indicator v-if="is_refresh_type" class="view-refresh-icon"></loading-indicator>
             </refresh>
             <!--/上拉刷新-->
             <!--主体-->
             <slot></slot>
             <!--/主体-->
             <!--下拉刷新-->
-            <loading v-if="is_load" class="view-loading" @loading="loadHandle" @pullingup="pullingUpHandle" :display="is_load_status">
-                <loading-indicator class="view-loading-icon"></loading-indicator>
+            <loading v-if="is_load" class="view-loading" @loading="loadHandle" @pullingup="pullingUpHandle" :display="is_load_status ? 'show' : 'hide'">
+                <loading-indicator class="view-loading-icon" :style="{visibility: is_load_type ? 'visible' : 'hidden'}"></loading-indicator>
+                <text class="view-loading-text" v-if="!is_load_type">没有更多了</text>
             </loading>
             <!--/下拉刷新-->
         </scroller>
@@ -42,7 +43,11 @@
                 /**下拉状态*/
                 is_refresh_status: false,
                 /**上拉状态*/
-                is_load_status: 'hide'
+                is_load_status: false,
+                /**是否可以上拉*/
+                is_load_type: true,
+                /**是否可以下拉*/
+                is_refresh_type: true
             }
         },
         props: {
@@ -84,13 +89,15 @@
             },
             /**上拉加载数据*/
             loadHandle (event) {
-                this.is_load_status = 'show';
-                this.$emit('load', event);
+                this.is_load_status = true;
+                this.is_load_type && this.$emit('load', event);
+                !this.is_load_type && setTimeout(this.loaded,0);
             },
             /**下拉刷新数据*/
             refreshHandle (event) {
                 this.is_refresh_status = true;
-                this.$emit('refresh', event);
+                this.is_refresh_type && this.$emit('refresh', event);
+                !this.is_refresh_type && setTimeout(this.refreshed,0);
             },
             /**下拉距离*/
             pullingDownHandle (event) {
@@ -101,17 +108,33 @@
                 this.$emit('pullingUp', event);
             },
             /**重置状态*/
-            reset () {
-                this.is_load_status = 'hide';
-                this.is_refresh_status = 'hide';
+            resetStatus () {
+                this.is_load_status = false;
+                this.is_refresh_status = false;
             },
             /**上拉完成*/
             loaded () {
-                this.is_load_status = 'hide';
+                this.is_load_status = false;
             },
             /**下拉完成*/
             refreshed () {
                 this.is_refresh_status = false;
+            },
+            /**禁止上拉*/
+            banLoad () {
+                this.is_load_type = false;
+            },
+            /**恢复上拉*/
+            regainLoad () {
+                this.is_load_type = true;
+            },
+            /**禁止下拉*/
+            banRefresh () {
+                this.is_refresh_type = false;
+            },
+            /**恢复下拉*/
+            regainRefresh () {
+                this.is_refresh_type = true;
             }
         },
         components: {
@@ -145,5 +168,9 @@
         margin-bottom: 15px;
         width: 50px;
         height: 50px;
+    }
+    .view-loading-text{
+        font-size: 24px;
+        color: #fff;
     }
 </style>

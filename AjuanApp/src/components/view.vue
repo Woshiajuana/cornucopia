@@ -17,13 +17,13 @@
         ></view-header>
         <scroller :style="{ top: is_header ? 90 : 0 }" class="view-inner">
             <!--上拉刷新-->
-            <refresh v-if="is_refresh" class="view-refresh" @refresh="refreshHandle" @pullingdown="pullingDownHandle" :display="is_refresh ? 'show' : 'hide'">
+            <refresh v-if="is_refresh" class="view-refresh" @refresh="refreshHandle" @pullingdown="pullingDownHandle" :display="is_refresh_status ? 'show' : 'hide'">
                 <loading-indicator class="view-refresh-icon"></loading-indicator>
             </refresh>
             <!--/上拉刷新-->
             <slot></slot>
             <!--下拉刷新-->
-            <loading v-if="is_load" class="view-loading" @loading="loadingHandle" @pullingup="pullingUpHandle" :display="is_load ? 'show' : 'hide'">
+            <loading v-if="is_load" class="view-loading" @loading="loadHandle" @pullingup="pullingUpHandle" :display="is_load_status ? 'show' : 'hide'">
                 <loading-indicator class="view-loading-icon"></loading-indicator>
             </loading>
             <!--/下拉刷新-->
@@ -81,7 +81,7 @@
                 this.$emit('leftItemClick',event);
             },
             /**上拉加载数据*/
-            loadingHandle (event) {
+            loadHandle (event) {
                 this.is_load_status = true;
                 this.$emit('load', event);
             },
@@ -98,20 +98,18 @@
             pullingUpHandle (event) {
                 this.$emit('pullingUp', event);
             },
-            /**重置*/
+            /**重置状态*/
             reset () {
                 this.is_load_status = false;
                 this.is_refresh_status = false
             },
             /**上拉完成*/
             loaded () {
-                modal.toast({message:'上拉完成'})
                 this.is_load_status = false;
             },
             /**下拉完成*/
             refreshed () {
-                modal.toast({message:'下拉完成'})
-                this.is_refresh_status = false
+                this.is_refresh_status = false;
             }
         },
         components: {

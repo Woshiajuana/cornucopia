@@ -1,33 +1,35 @@
 <template>
     <view :is_header="false" :is_refresh="true" :is_load="true"  @refresh="refreshHandle" @load="loadHandle" ref="scroller">
-        <div class="home-header">
-            <div class="home-header-top">
-                <div class="home-header-top-date">
-                    <div class="home-header-top-date-con">
-                        <text class="home-header-top-date-con-day-txt">{{dayComputed}}</text>
-                        <svg class="home-header-date-icon">
-                            <path fill="#F7F7FA" d="M4.19,37.714c0,2.324,1.871,4.19,4.19,4.19h27.238c2.324,0,4.19-1.871,4.19-4.19V10.476c0-2.324-1.871-4.19-4.19-4.19H8.381
+        <div>
+            <div class="home-header">
+                <div class="home-header-top">
+                    <div class="home-header-top-date">
+                        <div class="home-header-top-date-con">
+                            <text class="home-header-top-date-con-day-txt">{{dayComputed}}</text>
+                            <svg class="home-header-date-icon">
+                                <path fill="#F7F7FA" d="M4.19,37.714c0,2.324,1.871,4.19,4.19,4.19h27.238c2.324,0,4.19-1.871,4.19-4.19V10.476c0-2.324-1.871-4.19-4.19-4.19H8.381
 	c-2.324,0-4.19,1.871-4.19,4.19V37.714z M8.381,4.19h27.238c3.472,0,6.286,2.799,6.286,6.286v27.238
 	c0,3.472-2.799,6.286-6.286,6.286H8.381c-3.472,0-6.286-2.799-6.286-6.286V10.476C2.095,7.004,4.894,4.19,8.381,4.19z"/>
-                            <path fill="#F7F7FA" d="M40.369,16.848v-2.095H4.065v2.095H40.369z M11.733,8.331c0,0.579,0.469,1.048,1.047,1.048c0.579,0,1.048-0.469,1.048-1.047
+                                <path fill="#F7F7FA" d="M40.369,16.848v-2.095H4.065v2.095H40.369z M11.733,8.331c0,0.579,0.469,1.048,1.047,1.048c0.579,0,1.048-0.469,1.048-1.047
 	c0,0,0-0.001,0-0.001V2.099c0-0.579-0.469-1.048-1.047-1.048c-0.579,0-1.048,0.469-1.048,1.047c0,0,0,0.001,0,0.001
 	C11.733,2.099,11.733,8.331,11.733,8.331z M30.59,8.331c0,0.579,0.469,1.048,1.047,1.048s1.048-0.469,1.048-1.047
 	c0,0,0-0.001,0-0.001V2.099c0-0.579-0.469-1.047-1.048-1.047c-0.578,0-1.047,0.469-1.047,1.047C30.59,2.099,30.59,8.331,30.59,8.331
 	z"/>
-                        </svg>
+                            </svg>
+                        </div>
+                        <text class="home-header-top-date-txt">{{dateComputed}}</text>
                     </div>
-                    <text class="home-header-top-date-txt">{{dateComputed}}</text>
-                </div>
-                <svg class="home-header-top-filter-btn">
-                    <path fill="#F7F7FA" d="M40.899,6.731L25.338,25.379v10.847c0,0.25-0.125,0.501-0.292,0.667l-5.006,4.088c-0.542,0.459-1.377,0.042-1.377-0.667
+                    <svg class="home-header-top-filter-btn">
+                        <path fill="#F7F7FA" d="M40.899,6.731L25.338,25.379v10.847c0,0.25-0.125,0.501-0.292,0.667l-5.006,4.088c-0.542,0.459-1.377,0.042-1.377-0.667
 	V25.379L3.102,6.731C2.643,6.189,3.018,5.354,3.727,5.354h36.504C40.94,5.354,41.357,6.189,40.899,6.731L40.899,6.731z"/>
-                </svg>
+                    </svg>
+                </div>
+                <div class="home-header-search-link" @click="toSearchHandle">
+                    <text class="home-header-search-link-txt">搜索文章</text>
+                </div>
             </div>
-            <div class="home-header-search-link" @click="toSearchHandle">
-                <text class="home-header-search-link-txt">搜索文章</text>
-            </div>
+            <article-list-item v-for="item in rows" :key="item"></article-list-item>
         </div>
-        <article-list-item v-for="item in rows" :key="item"></article-list-item>
     </view>
 </template>
 
@@ -41,8 +43,6 @@
     export default {
         data () {
             return {
-                showLoading: 'hide',
-                refreshing: false,
                 rows: 10
             }
         },
@@ -56,11 +56,8 @@
                 return Tool.format('dd');
             }
         },
-        created () {
-        },
         methods: {
             refreshHandle () {
-
                 setTimeout(() => {
                     this.rows = 10;
                     this.$refs.scroller.refreshed();

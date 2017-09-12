@@ -13,7 +13,6 @@
 
 <script>
     import NavBar from './components/nav-bar.vue'
-    import source from './assets/lib/source'
     import PageUrlConfig from './config/page_url_config'
     const modal = weex.requireModule('modal');
     export default {
@@ -23,7 +22,7 @@
                     {
                         index: 0,
                         txt: '首页',
-                        src: PageUrlConfig['home'],
+                        src: PageUrlConfig['home1'],
                         visibility: 'visible',
                         img_icon_name: 'home-icon',
                         checked: true

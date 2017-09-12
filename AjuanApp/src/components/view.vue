@@ -58,6 +58,7 @@
 <script>
     import ViewHeader from './children/view-header.vue'
     import navigator from '../module/navigator/navigator'
+    import source from '../tool/source'
     export default {
         data () {
             return {
@@ -72,6 +73,8 @@
             }
         },
         props: {
+            /**是否不启用默认点击事件*/
+            is_not_enabled_left_default_click: { default: false },
             /**是否有头部*/
             is_header: { default: true },
             /**是否支持下拉刷新*/
@@ -83,7 +86,7 @@
             /**导航条高度*/
             header_height: { default: 90 },
             /**左侧按钮图片*/
-            left_item_img_src: { default: 'http://dsposweb.oss-cn-hangzhou.aliyuncs.com/Image/jyfl_1.png' },
+            left_item_img_src: { default: source('return-icon.png') },
             /**左侧按钮标题*/
             left_item_title: { default: '' },
             /**左侧按钮颜色*/
@@ -114,8 +117,7 @@
             },
             /**左边按钮点击事件*/
             leftItemClickHandle (event) {
-//                this.$emit('leftItemClick',event);
-                navigator.pop();
+                this.is_not_enabled_left_default_click ? this.$emit('leftItemClick',event) : navigator.pop();
             },
             /**上拉加载数据*/
             loadHandle (event) {

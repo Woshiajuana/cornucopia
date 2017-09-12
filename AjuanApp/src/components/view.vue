@@ -33,6 +33,7 @@
 
 <script>
     import ViewHeader from './children/view-header.vue'
+    const modal = weex.requireModule('modal');
     export default {
         data () {
             return {
@@ -104,10 +105,12 @@
             },
             /**上拉完成*/
             loaded () {
+                modal.toast({message:'上拉完成'})
                 this.is_load_status = false;
             },
             /**下拉完成*/
             refreshed () {
+                modal.toast({message:'下拉完成'})
                 this.is_refresh_status = false
             }
         },

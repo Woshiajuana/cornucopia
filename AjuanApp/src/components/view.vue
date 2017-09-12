@@ -15,7 +15,7 @@
         @rightItemClick="rightItemClickHandle"
         @leftItemClick="leftItemClickHandle"
         ></view-header>
-        <scroller :style="{ top: is_header ? 90 : 0 }" class="view-inner">
+        <scroller :style="{ top: is_header ? 90 : 1 }" class="view-inner">
             <!--上拉刷新-->
             <refresh v-if="is_refresh" class="view-refresh" @refresh="refreshHandle" @pullingdown="pullingDownHandle" :display="is_refresh_status ? 'show' : 'hide'">
                 <loading-indicator class="view-refresh-icon"></loading-indicator>

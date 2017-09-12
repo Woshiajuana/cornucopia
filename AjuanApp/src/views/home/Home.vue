@@ -5,6 +5,8 @@
         :is_load="true"
         @refresh="refreshHandle"
         @load="loadHandle"
+        @pullingDown="pullingDownHandle"
+        @pullingUp="pullingUpHandle"
         ref="scroller">
         <div class="home-header">
             <div class="home-header-top">
@@ -61,6 +63,14 @@ V25.379L3.102,6.731C2.643,6.189,3.018,5.354,3.727,5.354h36.504C40.94,5.354,41.35
             }
         },
         methods: {
+            /**下拉距离*/
+            pullingDownHandle (event) {
+                modal.toast({message: '下拉距离——' + event.pullingDistance})
+            },
+            /**上拉距离*/
+            pullingUpHandle (event) {
+                modal.toast({message: '上拉距离——' + event.pullingDistance})
+            },
             refreshHandle () {
                 setTimeout(() => {
                     this.rows = 10;

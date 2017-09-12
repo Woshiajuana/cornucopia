@@ -1,33 +1,54 @@
 <template>
     <div class="view-wrap">
         <view-header
-        v-if="is_header"
-        :background_color="background_color"
-        :header_height="header_height"
-        :left_item_img_src="left_item_img_src"
-        :left_item_title="left_item_title"
-        :left_item_color="left_item_color"
-        :center_item_title="center_item_title"
-        :center_item_color="center_item_color"
-        :right_item_img_src="right_item_img_src"
-        :right_item_title="right_item_title"
-        :right_item_color="right_item_color"
-        @rightItemClick="rightItemClickHandle"
-        @leftItemClick="leftItemClickHandle"
-        ></view-header>
+            v-if="is_header"
+            :background_color="background_color"
+            :header_height="header_height"
+            :left_item_img_src="left_item_img_src"
+            :left_item_title="left_item_title"
+            :left_item_color="left_item_color"
+            :center_item_title="center_item_title"
+            :center_item_color="center_item_color"
+            :right_item_img_src="right_item_img_src"
+            :right_item_title="right_item_title"
+            :right_item_color="right_item_color"
+            @rightItemClick="rightItemClickHandle"
+            @leftItemClick="leftItemClickHandle">
+        </view-header>
         <scroller :style="{ top: is_header ? 90 : .1 }" class="view-inner">
             <!--上拉刷新-->
-            <refresh v-if="is_refresh" class="view-refresh" @refresh="refreshHandle" @pullingdown="pullingDownHandle" :display="is_refresh_status ? 'show' : 'hide'">
-                <loading-indicator v-if="is_refresh_type" class="view-refresh-icon"></loading-indicator>
+            <refresh class="view-refresh"
+                     v-if="is_refresh"
+                     @refresh="refreshHandle"
+                     @pullingdown="pullingDownHandle"
+                     :style="{ backgroundColor: refresh_load_background_color }"
+                     :display="is_refresh_status ? 'show' : 'hide'">
+                <loading-indicator class="view-refresh-icon"
+                                   v-if="is_refresh_type"
+                                   :style="{ visibility: is_refresh_type ? 'visible' : 'hidden',
+                                   color: indicator_color,
+                                   backgroundColor: indicator_background_color }">
+                </loading-indicator>
             </refresh>
             <!--/上拉刷新-->
             <!--主体-->
             <slot></slot>
             <!--/主体-->
             <!--下拉刷新-->
-            <loading v-if="is_load" class="view-loading" @loading="loadHandle" @pullingup="pullingUpHandle" :display="is_load_status ? 'show' : 'hide'">
-                <loading-indicator class="view-loading-icon" :style="{visibility: is_load_type ? 'visible' : 'hidden'}"></loading-indicator>
-                <text class="view-loading-text" v-if="!is_load_type">没有更多了</text>
+            <loading class="view-loading"
+                     v-if="is_load"
+                     @loading="loadHandle"
+                     @pullingup="pullingUpHandle"
+                     :style="{ backgroundColor: refresh_load_background_color }"
+                     :display="is_load_status ? 'show' : 'hide'">
+                <loading-indicator class="view-loading-icon"
+                                   :style="{ visibility: is_load_type ? 'visible' : 'hidden',
+                                   color: indicator_color,
+                                   backgroundColor: indicator_background_color }">
+                </loading-indicator>
+                <text class="view-loading-text"
+                      v-if="!is_load_type"
+                      :style="{ color: load_done_color }">没有更多了</text>
             </loading>
             <!--/下拉刷新-->
         </scroller>
@@ -57,7 +78,7 @@
             /**是否支持上拉加载*/
             is_load: { default: false },
             /**导航条背景色*/
-            background_color: { default: '#ffffff' },
+            background_color: { default: '#FFFFFF' },
             /**导航条高度*/
             header_height: { default: 90 },
             /**左侧按钮图片*/
@@ -65,17 +86,25 @@
             /**左侧按钮标题*/
             left_item_title: { default: '' },
             /**左侧按钮颜色*/
-            left_item_color: { default: '#000' },
+            left_item_color: { default: '#000000' },
             /**导航条标题*/
             center_item_title: { default: '' },
             /**导航条标题颜色*/
-            center_item_color: { default: 'black' },
+            center_item_color: { default: '#000000' },
             /**右侧按钮图片*/
             right_item_img_src: { default: '' },
             /**右侧按钮标题*/
             right_item_title: { default: '邀请注册' },
             /**右侧按钮标题颜色*/
-            right_item_color: { default: 'black' }
+            right_item_color: { default: 'black' },
+            /**下拉上拉背景色*/
+            refresh_load_background_color: { default: '#383838' },
+            /**指示器颜色*/
+            indicator_color: { default: '#58B7FF' },
+            /**指示器背景颜色*/
+            indicator_background_color: { default: '#FFFFFF' },
+            /**字体颜色*/
+            load_done_color: { default: '#FFFFFF' }
         },
         methods: {
             /**右边按钮点击事件*/
@@ -158,19 +187,19 @@
         justify-content:center;
         flex-direction: row;
         align-items:center;
-        height: 80px;
-        line-height: 80px;
-        background-color: #383838;
+        height: 100px;
+        line-height: 100px;
     }
     .view-refresh-icon,
     .view-loading-icon{
-        margin-bottom: 15px;
         width: 50px;
         height: 50px;
-        color: #889967;
+        border-radius: 50px;
+    }
+    .view-refresh-icon{
+        margin-bottom: 25px;
     }
     .view-loading-text{
         font-size: 24px;
-        color: #fff;
     }
 </style>

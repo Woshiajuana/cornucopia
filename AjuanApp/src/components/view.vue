@@ -21,7 +21,9 @@
                 <loading-indicator class="view-refresh-icon"></loading-indicator>
             </refresh>
             <!--/上拉刷新-->
+            <!--主体-->
             <slot></slot>
+            <!--/主体-->
             <!--下拉刷新-->
             <loading v-if="is_load" class="view-loading" @loading="loadHandle" @pullingup="pullingUpHandle" :display="is_load_status">
                 <loading-indicator class="view-loading-icon"></loading-indicator>

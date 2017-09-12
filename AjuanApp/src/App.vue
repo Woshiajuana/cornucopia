@@ -22,7 +22,7 @@
                     {
                         index: 0,
                         txt: '首页',
-                        src: PageUrlConfig['home1'],
+                        src: PageUrlConfig['home'],
                         visibility: 'visible',
                         img_icon_name: 'home-icon',
                         checked: true

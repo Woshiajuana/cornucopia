@@ -99,6 +99,12 @@
                 this.$emit('pullingDown', event);
             }
         },
+        methods: {
+            /**重置*/
+            reset () {
+
+            }
+        },
         components: {
             ViewHeader
         }

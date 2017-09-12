@@ -59,7 +59,9 @@
         },
         methods: {
             goTo () {
-                navigator.push({ url: PageUrl['find'], close: true })
+                navigator.push({ url: PageUrl['webview'] },{
+                    link: 'http://www.baidu.com'
+                })
             },
             returnPageHandle () {
                 navigator.pop()

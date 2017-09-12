@@ -9,5 +9,11 @@ export default {
     /**弹出*/
     pop: (animated = 'true') => {
         navigator.pop({ animated: animated });
+    },
+    /**获取参数*/
+    params: (weex) => {
+        var bundleUrl = weex.$getConfig().bundleUrl;
+        var params = bundleUrl.substr(bundleUrl.indexOf("?params=") + 8);
+        return JSON.parse(decodeURIComponent(decodeURIComponent(params)));
     }
 }

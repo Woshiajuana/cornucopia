@@ -1,5 +1,11 @@
 <template>
-    <view :is_header="false" :is_refresh="true" :is_load="true"  @refresh="refreshHandle" @load="loadHandle" ref="scroller">
+    <view
+        :is_header="false"
+        :is_refresh="true"
+        :is_load="true"
+        @refresh="refreshHandle"
+        @load="loadHandle"
+        ref="scroller">
         <div class="home-header">
             <div class="home-header-top">
                 <div class="home-header-top-date">
@@ -56,14 +62,14 @@ V25.379L3.102,6.731C2.643,6.189,3.018,5.354,3.727,5.354h36.504C40.94,5.354,41.35
         },
         methods: {
             refreshHandle () {
-                this.rows = 10;
                 setTimeout(() => {
+                    this.rows = 10;
                     this.$refs.scroller.refreshed();
                 }, 2000)
             },
             loadHandle () {
-                this.rows += 10;
                 setTimeout(() => {
+                    this.rows += 10;
                     this.$refs.scroller.loaded();
                 }, 1500)
             },
@@ -79,6 +85,9 @@ V25.379L3.102,6.731C2.643,6.189,3.018,5.354,3.727,5.354h36.504C40.94,5.354,41.35
 </script>
 
 <style>
+    .haha{
+
+    }
     .home-header{
         width: 750px;
         height: 240px;

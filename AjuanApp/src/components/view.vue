@@ -17,7 +17,7 @@
         ></view-header>
         <scroller :style="{ top: is_header ? 90 : 0 }" class="view-inner">
             <!--上拉刷新-->
-            <refresh v-if="is_refresh" class="view-refresh" @refresh="refreshHandle" @pullingdown="pullingDownHandle" :display="is_refresh_status">
+            <refresh v-if="is_refresh" class="view-refresh" @refresh="refreshHandle" @pullingdown="pullingDownHandle" :display="is_refresh_status ? 'show' : 'hide'">
                 <loading-indicator class="view-refresh-icon"></loading-indicator>
             </refresh>
             <!--/上拉刷新-->
@@ -38,9 +38,9 @@
         data () {
             return {
                 /**下拉状态*/
-                is_load_status: 'hide',
+                is_refresh_status: false,
                 /**上拉状态*/
-                is_refresh_status: 'hide'
+                is_load_status: 'hide'
             }
         },
         props: {
@@ -87,7 +87,7 @@
             },
             /**下拉刷新数据*/
             refreshHandle (event) {
-                this.is_refresh_status = 'show';
+                this.is_refresh_status = true;
                 this.$emit('refresh', event);
             },
             /**下拉距离*/
@@ -109,7 +109,7 @@
             },
             /**下拉完成*/
             refreshed () {
-                this.is_refresh_status = 'hide';
+                this.is_refresh_status = false;
             }
         },
         components: {

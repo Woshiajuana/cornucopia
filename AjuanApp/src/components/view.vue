@@ -23,7 +23,7 @@
             <!--/上拉刷新-->
             <slot></slot>
             <!--下拉刷新-->
-            <loading v-if="is_load" class="view-loading" @loading="loadingHandle" :display="is_load ? 'show' : 'hide'">
+            <loading v-if="is_load" class="view-loading" @loading="loadingHandle" @pullingup="pullingUpHandle" :display="is_load ? 'show' : 'hide'">
                 <loading-indicator class="view-loading-icon"></loading-indicator>
             </loading>
             <!--/下拉刷新-->
@@ -83,26 +83,32 @@
             loadingHandle (event) {
                 this.is_load_status = true;
                 this.$emit('load', event);
-                setTimeout(() => {
-                    this.is_load_status = false;
-                }, 1500)
             },
             /**下拉刷新数据*/
             refreshHandle (event) {
                 this.is_refresh_status = true;
                 this.$emit('refresh', event);
-                setTimeout(() => {
-                    this.is_refresh_status = false
-                }, 2000)
             },
+            /**下拉距离*/
             pullingDownHandle (event) {
                 this.$emit('pullingDown', event);
-            }
-        },
-        methods: {
+            },
+            /**上拉距离*/
+            pullingUpHandle (event) {
+                this.$emit('pullingUp', event);
+            },
             /**重置*/
             reset () {
-
+                this.is_load_status = false;
+                this.is_refresh_status = false
+            },
+            /**上拉完成*/
+            loaded () {
+                this.is_load_status = false;
+            },
+            /**下拉完成*/
+            refreshed () {
+                this.is_refresh_status = false
             }
         },
         components: {

@@ -17,13 +17,13 @@
         ></view-header>
         <scroller :style="{ top: is_header ? 90 : 0 }" class="view-inner">
             <!--上拉刷新-->
-            <refresh v-if="is_refresh" class="view-refresh" @refresh="refreshHandle" @pullingdown="pullingDownHandle" :display="is_refresh_status ? 'show' : 'hide'">
+            <refresh v-if="is_refresh" class="view-refresh" @refresh="refreshHandle" @pullingdown="pullingDownHandle" :display="is_refresh_status">
                 <loading-indicator class="view-refresh-icon"></loading-indicator>
             </refresh>
             <!--/上拉刷新-->
             <slot></slot>
             <!--下拉刷新-->
-            <loading v-if="is_load" class="view-loading" @loading="loadHandle" @pullingup="pullingUpHandle" :display="is_load_status ? 'show' : 'hide'">
+            <loading v-if="is_load" class="view-loading" @loading="loadHandle" @pullingup="pullingUpHandle" :display="is_load_status">
                 <loading-indicator class="view-loading-icon"></loading-indicator>
             </loading>
             <!--/下拉刷新-->
@@ -38,9 +38,9 @@
         data () {
             return {
                 /**下拉状态*/
-                is_load_status: false,
+                is_load_status: 'hide',
                 /**上拉状态*/
-                is_refresh_status: false
+                is_refresh_status: 'hide'
             }
         },
         props: {
@@ -82,12 +82,12 @@
             },
             /**上拉加载数据*/
             loadHandle (event) {
-                this.is_load_status = true;
+                this.is_load_status = 'show';
                 this.$emit('load', event);
             },
             /**下拉刷新数据*/
             refreshHandle (event) {
-                this.is_refresh_status = true;
+                this.is_refresh_status = 'show';
                 this.$emit('refresh', event);
             },
             /**下拉距离*/
@@ -100,16 +100,16 @@
             },
             /**重置状态*/
             reset () {
-                this.is_load_status = false;
-                this.is_refresh_status = false
+                this.is_load_status = 'hide';
+                this.is_refresh_status = 'hide';
             },
             /**上拉完成*/
             loaded () {
-                this.is_load_status = false;
+                this.is_load_status = 'hide';
             },
             /**下拉完成*/
             refreshed () {
-                this.is_refresh_status = false;
+                this.is_refresh_status = 'hide';
             }
         },
         components: {

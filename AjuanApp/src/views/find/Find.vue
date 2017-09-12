@@ -1,7 +1,7 @@
 <template>
     <view
-        :is_header="false"
-        center_item_title="发现发现发现发"
+        center_item_title="标题"
+        right_item_title="活动"
         :is_refresh="true"
         :is_load="true"
         @refresh="refreshHandle"

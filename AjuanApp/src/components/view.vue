@@ -94,9 +94,9 @@
             /**右侧按钮图片*/
             right_item_img_src: { default: '' },
             /**右侧按钮标题*/
-            right_item_title: { default: '邀请注册' },
+            right_item_title: { default: '' },
             /**右侧按钮标题颜色*/
-            right_item_color: { default: 'black' },
+            right_item_color: { default: '#000000' },
             /**下拉上拉背景色*/
             refresh_load_background_color: { default: '#383838' },
             /**指示器颜色*/

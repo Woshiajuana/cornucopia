@@ -36,7 +36,6 @@
 
 <script>
     import ViewHeader from './children/view-header.vue'
-    const modal = weex.requireModule('modal');
     export default {
         data () {
             return {
@@ -168,6 +167,7 @@
         margin-bottom: 15px;
         width: 50px;
         height: 50px;
+        color: #889967;
     }
     .view-loading-text{
         font-size: 24px;

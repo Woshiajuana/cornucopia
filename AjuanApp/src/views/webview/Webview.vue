@@ -1,15 +1,22 @@
 <template>
     <div class="webview-wrap">
-        <web class="webview-inner" ref="webview" :src="fullLink" @pagestart="startload" @pagefinish="finishload" @error="failload" :style="{ top: top }"></web>
+        <web class="webview-inner"
+             ref="webview"
+             :src="webviewSrcCom"
+             :style="{ top: top }"
+             @pagestart="pageStartHandle"
+             @pagefinish="pageFinishHandle"
+             @error="pageErrorHandle">
+        </web>
         <div class="webview-menu">
             <div class="webview-menu-item" @click="leftMenuClickHandle">
-                <image class="webview-menu-item-icon" :src="back_src"></image>
+                <image class="webview-menu-item-icon" :src="leftMenuSrcCom"></image>
             </div>
             <div class="webview-menu-item" @click="centerMenuClickHandle">
-                <image class="webview-menu-item-icon" :src="reload_src"></image>
+                <image class="webview-menu-item-icon" :src="centerMenuSrcCom"></image>
             </div>
             <div class="webview-menu-item" @click="rightMenuClickHandle">
-                <image class="webview-menu-item-icon" :src="close_src"></image>
+                <image class="webview-menu-item-icon" :src="rightMenuSrcCom"></image>
             </div>
         </div>
     </div>
@@ -27,51 +34,53 @@
             }
         },
         computed: {
-            fullLink: function () {
-                var info = navigator.params(this) || {};
-                return info.link || '';
+            /**webview内容资源*/
+            webviewSrcCom: function () {
+                var webview_src = navigator.params(this) || {};
+                return webview_src.link || '';
             },
-            back_src: function () {
+            /**左边菜单资源*/
+            leftMenuSrcCom: function () {
                 return source('return-icon.png');
             },
-            reload_src: function () {
+            /**中间菜单资源*/
+            centerMenuSrcCom: function () {
                 return source('refresh-icon.png');
             },
-            close_src: function () {
+            /**右边菜单资源*/
+            rightMenuSrcCom: function () {
                 return source('close-icon.png');
             }
         },
         methods: {
-            startload: function(e) {
+            /**页面开始加载触发*/
+            pageStartHandle: function(event) {
                 this.count += 1;
             },
-            finishload: function(e) {
+            /**页面加载完成触发*/
+            pageFinishHandle: function(e) {
 
             },
-            failload: function(e) {
+            /**页面加载失败触发*/
+            pageErrorHandle: function(e) {
 
             },
-            leftMenuClickHandle: function (e) {
+            /**左边菜单点击事件*/
+            leftMenuClickHandle: function (event) {
                 var count = this.count;
                 webview.goBack(this.$refs.webview);
                 setTimeout(function() {
                     if (count === this.count) return navigator.pop(); // hack
                 }.bind(this), 200);
             },
-            centerMenuClickHandle: function (e) {
+            /**中间菜单点击事件*/
+            centerMenuClickHandle: function (event) {
                 webview.reload(this.$refs.webview)
             },
-            rightMenuClickHandle: function (e) {
+            /**右边菜单点击事件*/
+            rightMenuClickHandle: function (event) {
                 navigator.pop();
             }
-        },
-        created: function() {
-//            var env = this.$getConfig().env;
-//            if (env.platform === 'iOS') {
-//                var scale = env.scale;
-//                var deviceWidth = env.deviceWidth / scale;
-//                this.top = 20.0 * 750.0 / deviceWidth;
-//            }
         }
     };
 </script>

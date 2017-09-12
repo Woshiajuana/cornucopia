@@ -22,7 +22,7 @@
                 nav_bar_arr: [
                     {
                         index: 0,
-                        txt: '首页1',
+                        txt: '首页',
                         src: PageUrlConfig['home'],
                         visibility: 'visible',
                         img_icon_name: 'home-icon',

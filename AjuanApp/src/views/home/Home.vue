@@ -1,11 +1,5 @@
 <template>
-    <!--滚动容器-->
-    <scroller class="wrapper">
-        <!--上拉刷新-->
-        <refresh class="refresh" @refresh="refreshHandle" @pullingdown="pullingDownHandle" :display="refreshing ? 'show' : 'hide'">
-            <loading-indicator class="mum-icon"></loading-indicator>
-        </refresh>
-        <!--/上拉刷新-->
+    <view :is_header="false" :is_refresh="true" :is_load="true"  @refresh="refreshHandle" @load="loadHandle" ref="scroller">
         <div class="home-header">
             <div class="home-header-top">
                 <div class="home-header-top-date">
@@ -34,17 +28,12 @@
             </div>
         </div>
         <article-list-item v-for="item in rows" :key="item"></article-list-item>
-        <!--下拉刷新-->
-        <loading class="loading" @loading="loadingHandle" :display="showLoading">
-            <loading-indicator class="mum-icon"></loading-indicator>
-        </loading>
-        <!--/下拉刷新-->
-    </scroller>
-    <!--/滚动容器-->
+    </view>
 </template>
 
 <script>
     import Tool from '../../assets/lib/Tool'
+    import View from '../../components/view.vue'
     import ArticleListItem from '../../components/article-list-item.vue'
     import PageUrl from '../../config/page_url_config'
     const modal = weex.requireModule('modal');
@@ -67,20 +56,20 @@
                 return Tool.format('dd');
             }
         },
+        created () {
+        },
         methods: {
             refreshHandle () {
-                this.refreshing = true;
+
                 setTimeout(() => {
                     this.rows = 10;
-                    this.refreshing = false
+                    this.$refs.scroller.refreshed();
                 }, 2000)
             },
-            pullingDownHandle ( event ) {},
-            loadingHandle () {
-                this.showLoading = 'show';
+            loadHandle () {
                 setTimeout(() => {
-                    this.rows+=10;
-                    this.showLoading = 'hide';
+                    this.rows += 10;
+                    this.$refs.scroller.loaded();
                 }, 1500)
             },
             toSearchHandle () {
@@ -88,19 +77,13 @@
             }
         },
         components: {
-            ArticleListItem
+            ArticleListItem,
+            View
         }
     }
 </script>
 
 <style>
-    .wrapper {
-        position: absolute;
-        top: 0;
-        width: 750px;
-        left: 0;
-        bottom: 0;
-    }
     .home-header{
         width: 750px;
         height: 240px;
@@ -177,19 +160,5 @@
         width: 50px;
         top: 10px;
         right: 40px;
-    }
-    .loading,
-    .refresh{
-        justify-content:center;
-        flex-direction: row;
-        align-items:center;
-        height: 80px;
-        line-height: 80px;
-        background-color: #383838;
-    }
-    .mum-icon{
-        margin-bottom: 15px;
-        width: 50px;
-        height: 50px;
     }
 </style>

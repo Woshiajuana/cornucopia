@@ -1,5 +1,5 @@
 <template>
-    <view center_item_title="发现发现发现发">
+    <view center_item_title="发现发现发现发" is_refresh is_load>
         <!--<div>-->
             <text>1</text>
             <text>1</text>
@@ -52,10 +52,5 @@
 </script>
 
 <style>
-    .view-inner{
-        top: 90px;
-        width: 750px;
-        flex: 1;
-        background-color: #f5f5f5;
-    }
+
 </style>

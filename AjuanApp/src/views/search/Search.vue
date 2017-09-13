@@ -60,7 +60,7 @@
         methods: {
             goTo () {
                 navigator.push({ url: PageUrl['webview'] },{
-                    link: 'http://www.baidu.com'
+                    link: 'http://www.owulia.com/ink/'
                 })
             },
             returnPageHandle () {

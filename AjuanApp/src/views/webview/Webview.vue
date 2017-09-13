@@ -26,6 +26,7 @@
     import navigator from '../../module/navigator/navigator';
     import source from '../../tool/source';
     const webview = weex.requireModule('webview');
+    const modal = weex.requireModule('modal');
     export default {
         data: function () {
             return {
@@ -41,6 +42,7 @@
             },
             /**左边菜单资源*/
             leftMenuSrcCom: function () {
+                modal.toast('触发')
                 return source('return-icon.png');
             },
             /**中间菜单资源*/
@@ -55,6 +57,7 @@
         methods: {
             /**页面开始加载触发*/
             pageStartHandle: function(event) {
+                modal.toast('触发')
                 this.count += 1;
             },
             /**页面加载完成触发*/

@@ -55,7 +55,6 @@ V25.379L3.102,6.731C2.643,6.189,3.018,5.354,3.727,5.354h36.504C40.94,5.354,41.35
         computed: {
             /**日期计算属性*/
             dateComputed () {
-                console.log(111111)
                 return Tool.format('yyyy-MM-dd');
             },
             /**几号计算属性*/

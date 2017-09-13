@@ -2,7 +2,6 @@
  * Created by czg on 2017/8/25.
  */
 const animation = weex.requireModule('animation');
-const modal = weex.requireModule('modal');
 const TurnTableController = (function () {
 
     /**

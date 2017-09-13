@@ -47,7 +47,6 @@
     import Tool from '../../assets/lib/Tool'
     import ArticleListItem from '../../components/article-list-item.vue'
     import PageUrl from '../../config/page_url_config'
-    const modal = weex.requireModule('modal');
     const navigator = weex.requireModule('navigator');
     export default {
         data () {

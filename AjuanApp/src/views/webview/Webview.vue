@@ -3,7 +3,6 @@
         <web class="webview-inner"
              ref="webview"
              :src="webviewSrcCom"
-             :style="{ top: top }"
              @pagestart="pageStartHandle"
              @pagefinish="pageFinishHandle"
              @error="pageErrorHandle">
@@ -26,62 +25,55 @@
     import navigator from '../../module/navigator/navigator';
     import source from '../../tool/source';
     const webview = weex.requireModule('webview');
-    const modal = weex.requireModule('modal');
     export default {
         data: function () {
             return {
-                top: 0,
-                count: 0,
+                page_count: 0
             }
         },
         computed: {
             /**webview内容资源*/
-            webviewSrcCom: function () {
-                var webview_src = navigator.params(this) || {};
-                return webview_src.link || '';
+            webviewSrcCom () {
+                return navigator.params(this) ? navigator.params(this).link : '';
             },
             /**左边菜单资源*/
-            leftMenuSrcCom: function () {
-                modal.toast('触发')
+            leftMenuSrcCom () {
                 return source('return-icon.png');
             },
             /**中间菜单资源*/
-            centerMenuSrcCom: function () {
+            centerMenuSrcCom () {
                 return source('refresh-icon.png');
             },
             /**右边菜单资源*/
-            rightMenuSrcCom: function () {
+            rightMenuSrcCom () {
                 return source('close-icon.png');
             }
         },
         methods: {
             /**页面开始加载触发*/
-            pageStartHandle: function(event) {
-                modal.toast('触发')
-                this.count += 1;
-            },
+            pageStartHandle () {},
             /**页面加载完成触发*/
-            pageFinishHandle: function(e) {
-
+            pageFinishHandle () {
+                this.page_count += 1;
             },
             /**页面加载失败触发*/
-            pageErrorHandle: function(e) {
-
-            },
+            pageErrorHandle () {},
             /**左边菜单点击事件*/
-            leftMenuClickHandle: function (event) {
-                var count = this.count;
+            leftMenuClickHandle () {
+                var page_count = this.page_count;
                 webview.goBack(this.$refs.webview);
-                setTimeout(function() {
-                    if (count === this.count) return navigator.pop(); // hack
-                }.bind(this), 200);
+                setTimeout(() => {
+                    if (page_count === this.page_count) {
+                        return navigator.pop();
+                    } // hack
+                }, 200);
             },
             /**中间菜单点击事件*/
-            centerMenuClickHandle: function (event) {
+            centerMenuClickHandle () {
                 webview.reload(this.$refs.webview)
             },
             /**右边菜单点击事件*/
-            rightMenuClickHandle: function (event) {
+            rightMenuClickHandle () {
                 navigator.pop();
             }
         }

@@ -14,7 +14,6 @@
 <script>
     import NavBar from './components/nav-bar.vue'
     import PageUrlConfig from './config/page_url_config'
-    const modal = weex.requireModule('modal');
     export default {
         data () {
             return {

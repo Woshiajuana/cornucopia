@@ -16,7 +16,6 @@
 <script>
     import View from './../../components/view.vue'
     import ArticleListItem from '../../components/article-list-item.vue'
-    const modal = weex.requireModule('modal');
     export default {
         data () {
             return {
@@ -26,11 +25,11 @@
         methods: {
             /**下拉距离*/
             pullingDownHandle (event) {
-                modal.toast({message: '下拉距离——' + event.pullingDistance})
+
             },
             /**上拉距离*/
             pullingUpHandle (event) {
-                modal.toast({message: '上拉距离——' + event.pullingDistance})
+
             },
             refreshHandle () {
                 setTimeout(() => {

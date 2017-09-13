@@ -45,7 +45,6 @@ V25.379L3.102,6.731C2.643,6.189,3.018,5.354,3.727,5.354h36.504C40.94,5.354,41.35
     import ArticleListItem from '../../components/article-list-item.vue'
     import PageUrl from '../../config/page_url_config'
     import navigator from '../../module/navigator/navigator'
-    const modal = weex.requireModule('modal');
     export default {
         data () {
             return {
@@ -65,11 +64,9 @@ V25.379L3.102,6.731C2.643,6.189,3.018,5.354,3.727,5.354h36.504C40.94,5.354,41.35
         methods: {
             /**下拉距离*/
             pullingDownHandle (event) {
-                modal.toast({message: '下拉距离——' + event.pullingDistance})
             },
             /**上拉距离*/
             pullingUpHandle (event) {
-                modal.toast({message: '上拉距离——' + event.pullingDistance})
             },
             refreshHandle () {
                 setTimeout(() => {
@@ -82,7 +79,6 @@ V25.379L3.102,6.731C2.643,6.189,3.018,5.354,3.727,5.354h36.504C40.94,5.354,41.35
                 setTimeout(() => {
                     this.rows += 10;
                     if(this.rows >= 30) {
-                        modal.toast({message: this.rows + ''})
                         this.$refs.scroller.banLoad();
                     }
                     this.$refs.scroller.loaded();

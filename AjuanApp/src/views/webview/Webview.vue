@@ -65,7 +65,7 @@
                 setTimeout(() => {
                     if (page_count === this.page_count) {
                         return navigator.pop();
-                    } // hack
+                    }
                 }, 200);
             },
             /**中间菜单点击事件*/

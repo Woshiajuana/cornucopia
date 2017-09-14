@@ -1,9 +1,8 @@
 <template>
     <div class="switch-menu-wrap"
-         :style="{ top: menu_position_top,
-         bottom: menu_position_bottom,
-         height: menu_height,
-         background_color: menu_background_color }">
+         :class="{top: menu_position,bottom:!menu_position}"
+         :style="{ height: menu_height,
+         backgroundColor: menu_background_color }">
         <div class="switch-menu-item" v-for="( nav_bar_item, nav_bar_index ) in switch_page_arr" :key="nav_bar_index" @click="switchMenuHandle(nav_bar_index)">
             <svg class="switch-menu-img">
 
@@ -43,7 +42,7 @@
 </template>
 <script>
     export default {
-        props: [ 'switch_page_arr', 'menu_position_top', 'menu_position_bottom', 'menu_height', 'menu_background_color' ],
+        props: [ 'switch_page_arr', 'menu_position', 'menu_height', 'menu_background_color' ],
         methods: {
             /**切换导航菜单*/
             switchMenuHandle (nav_bar_index) {
@@ -53,14 +52,20 @@
     }
 </script>
 <style>
-    .switch-menu-wrap{
+    .switch-menu-wrap {
         flex-direction: row;
         align-items: center;
         border-top-width: 1px;
         border-top-color: #c0bfc4;
         border-top-style: solid;
     }
-    .switch-menu-item{
+    .top {
+        top: 0;
+    }
+    .bottom {
+        bottom: 0;
+    }
+    .switch-menu-item {
         flex: 1;
         justify-content: center;
         align-items: center;

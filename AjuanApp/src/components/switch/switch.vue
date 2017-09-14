@@ -1,11 +1,8 @@
 <template>
     <div class="switch-wrap">
         <switch-menu
-            v-if="menu_position=='top'"
-            :class="menu_position == 'top' ? '' : ''"
             :switch_page_arr="switch_page_arr"
-            :menu_position_top="0"
-            :menu_position_bottom="'auto'"
+            :menu_position="menu_position == 'top' ? true : false"
             :menu_height="menu_height"
             :menu_background_color="menu_background_color"
             @switchMenu="switchMenuHandle">
@@ -22,16 +19,6 @@
             </embed>
         </div>
         <!--/主体-->
-        <switch-menu
-            v-if="menu_position=='bottom'"
-            :switch_page_arr="switch_page_arr"
-            :menu_position="menu_position"
-            :menu_position_top="'auto'"
-            :menu_position_bottom="0"
-            :menu_height="menu_height"
-            :menu_background_color="menu_background_color"
-            @switchMenu="switchMenuHandle">
-        </switch-menu>
     </div>
 </template>
 
@@ -41,11 +28,11 @@
     export default {
         props: {
             /**菜单位置*/
-            menu_position: { default: 'top' },
+            menu_position: { default: 'bottom' },
             /**菜单高度*/
             menu_height: { default: 100 },
             /**菜单颜色*/
-            menu_background_color: { default: '#FFFFFF' },
+            menu_background_color: { default: 'red' },
             /**内容*/
             switch_page_arr: { default: [{
                 index: 0,

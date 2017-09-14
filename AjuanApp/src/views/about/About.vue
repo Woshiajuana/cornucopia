@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import View from './../../components/view.vue'
+    import View from '../../components/view/view.vue'
     export default {
         methods: {
 

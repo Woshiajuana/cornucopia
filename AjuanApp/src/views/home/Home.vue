@@ -41,7 +41,7 @@ V25.379L3.102,6.731C2.643,6.189,3.018,5.354,3.727,5.354h36.504C40.94,5.354,41.35
 
 <script>
     import Tool from '../../assets/lib/Tool'
-    import View from '../../components/view.vue'
+    import View from '../../components/view/view.vue'
     import ArticleListItem from '../../components/article-list-item.vue'
     import PageUrl from '../../config/page_url_config'
     import navigator from '../../module/navigator/navigator'

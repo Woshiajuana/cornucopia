@@ -1,18 +1,15 @@
 <template>
-    <view
-        center_item_title="发现"
-        left_item_img_src="">
-    </view>
+    <switch></switch>
 </template>
 
 <script>
-    import View from './../../components/view.vue'
+    import Switch from '../../components/switch/switch.vue'
     export default {
         methods: {
 
         },
         components: {
-            View
+            Switch
         }
     }
 </script>

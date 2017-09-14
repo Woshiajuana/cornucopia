@@ -15,7 +15,6 @@
             View
         }
     }
-
 </script>
 
 <style>

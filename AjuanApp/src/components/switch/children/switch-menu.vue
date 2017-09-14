@@ -1,6 +1,6 @@
 <template>
     <div class="switch-menu-wrap"
-         :class="{top: menu_position,bottom:!menu_position}"
+         :class="{ top: menu_position, bottom: !menu_position }"
          :style="{ height: menu_height,
          backgroundColor: menu_background_color }">
         <div class="switch-menu-item" v-for="( nav_bar_item, nav_bar_index ) in switch_page_arr" :key="nav_bar_index" @click="switchMenuHandle(nav_bar_index)">
@@ -53,6 +53,9 @@
 </script>
 <style>
     .switch-menu-wrap {
+        position: absolute;
+        left: 0;
+        width: 750px;
         flex-direction: row;
         align-items: center;
         border-top-width: 1px;

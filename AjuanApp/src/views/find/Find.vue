@@ -1,15 +1,15 @@
 <template>
-    <switch></switch>
+    <switch-com></switch-com>
 </template>
 
 <script>
-    import Switch from '../../components/switch/switch.vue'
+    import SwitchCom from '../../components/switch/switch.vue'
     export default {
         methods: {
 
         },
         components: {
-            Switch
+            SwitchCom
         }
     }
 </script>

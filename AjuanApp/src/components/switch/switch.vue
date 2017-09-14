@@ -1,34 +1,42 @@
 <template>
     <div class="switch-wrap">
-        <!--<switch-menu-->
-            <!--v-if="menu_position=='top'"-->
-            <!--:switch_page_arr="switch_page_arr"-->
-            <!--:menu_position_top="0"-->
-            <!--:menu_position_bottom="'auto'"-->
-            <!--:menu_height="menu_height"-->
-            <!--:menu_background_color="menu_background_color"-->
-            <!--@switchMenu="switchMenuHandle">-->
-        <!--</switch-menu>-->
+        <switch-menu
+            v-if="menu_position=='top'"
+            :class="menu_position == 'top' ? '' : ''"
+            :switch_page_arr="switch_page_arr"
+            :menu_position_top="0"
+            :menu_position_bottom="'auto'"
+            :menu_height="menu_height"
+            :menu_background_color="menu_background_color"
+            @switchMenu="switchMenuHandle">
+        </switch-menu>
         <!--主体-->
-        <!--<div class="switch-inner">-->
-            <!--<embed class="switch-content" v-for="(item, index) in nav_bar_arr" :key="index" :style="{visibility: item.visibility}" :src="item.src" type="weex"></embed>-->
-        <!--</div>-->
-        <text>xxxxxxxxxxxxxxxxxxx</text>
+        <div class="switch-inner">
+            <embed class="switch-content"
+                   v-if="menu_position=='top'"
+                   v-for="(item, index) in nav_bar_arr"
+                   :key="index"
+                   :style="{visibility: item.visibility}"
+                   :src="item.src"
+                   type="weex">
+            </embed>
+        </div>
         <!--/主体-->
-        <!--<switch-menu-->
-            <!--v-if="menu_position=='bottom'"-->
-            <!--:switch_page_arr="switch_page_arr"-->
-            <!--:menu_position="menu_position"-->
-            <!--:menu_position_top="'auto'"-->
-            <!--:menu_position_bottom="0"-->
-            <!--:menu_height="menu_height"-->
-            <!--:menu_background_color="menu_background_color">-->
-        <!--</switch-menu>-->
+        <switch-menu
+            v-if="menu_position=='bottom'"
+            :switch_page_arr="switch_page_arr"
+            :menu_position="menu_position"
+            :menu_position_top="'auto'"
+            :menu_position_bottom="0"
+            :menu_height="menu_height"
+            :menu_background_color="menu_background_color"
+            @switchMenu="switchMenuHandle">
+        </switch-menu>
     </div>
 </template>
 
 <script>
-//    import SwitchMenu from './children/switch-menu.vue'
+    import SwitchMenu from './children/switch-menu.vue'
     import PageUrlConfig from './../../config/page_url_config'
     export default {
         props: {
@@ -88,7 +96,7 @@
             }
         },
         components: {
-//            SwitchMenu
+            SwitchMenu
         }
     }
 </script>
@@ -97,7 +105,6 @@
     .switch-content,
     .switch-wrap{
         flex: 1;
-        background-color: red;
     }
     .switch-inner{
         position: absolute;

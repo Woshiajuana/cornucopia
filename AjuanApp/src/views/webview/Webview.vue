@@ -26,7 +26,7 @@
     import source from '../../tool/source';
     const webview = weex.requireModule('webview');
     export default {
-        data: function () {
+        data () {
             return {
                 page_count: 0
             }

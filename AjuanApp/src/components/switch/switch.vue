@@ -8,9 +8,10 @@
             @switchMenu="switchMenuHandle">
         </switch-menu>
         <!--主体-->
-        <div class="switch-inner">
+        <div class="switch-inner"
+             :style="{top: menu_position ? 0 : 'auto',
+             bottom: menu_position ? 'auto' : 0}">
             <embed class="switch-content"
-                   v-if="menu_position=='top'"
                    v-for="(item, index) in nav_bar_arr"
                    :key="index"
                    :style="{visibility: item.visibility}"
@@ -30,9 +31,9 @@
             /**菜单位置*/
             menu_position: { default: 'bottom' },
             /**菜单高度*/
-            menu_height: { default: 100 },
+            menu_height: { default: 99 },
             /**菜单颜色*/
-            menu_background_color: { default: 'red' },
+            menu_background_color: { default: '#F7F7FA' },
             /**内容*/
             switch_page_arr: { default: [{
                 index: 0,

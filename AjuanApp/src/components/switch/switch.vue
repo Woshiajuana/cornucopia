@@ -9,8 +9,8 @@
         </switch-menu>
         <!--主体-->
         <div class="switch-inner"
-             :style="{top: menu_position ? 0 : 'auto',
-             bottom: menu_position ? 'auto' : 0}">
+             :style="{ top: menu_position == 'top' ? 100 : 0,
+             bottom: menu_position == 'top' ? 0 : 100 }">
             <embed class="switch-content"
                    v-for="(item, index) in nav_bar_arr"
                    :key="index"

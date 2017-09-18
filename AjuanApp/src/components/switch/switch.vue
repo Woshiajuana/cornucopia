@@ -12,7 +12,7 @@
              :style="{ top: menu_position == 'top' ? 100 : 0,
              bottom: menu_position == 'top' ? 0 : 100 }">
             <embed class="switch-content"
-                   v-for="(item, index) in nav_bar_arr"
+                   v-for="(item, index) in switch_page_arr"
                    :key="index"
                    :style="{visibility: item.visibility}"
                    :src="item.src"
@@ -70,7 +70,7 @@
         },
         methods: {
             /**切换菜单*/
-            switchMenuHandle () {
+            switchMenuHandle (index) {
                 for (var i = 0; i < this.switch_page_arr.length; i++) {
                     var nav_item = this.switch_page_arr[i];
                     if (i == index) {
@@ -90,7 +90,6 @@
 </script>
 
 <style>
-    .switch-content,
     .switch-wrap{
         flex: 1;
     }
@@ -99,5 +98,12 @@
         width: 750px;
         left: 0;
         right: 0;
+    }
+    .switch-content{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
 </style>

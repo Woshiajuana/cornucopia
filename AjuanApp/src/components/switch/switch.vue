@@ -35,38 +35,7 @@
             /**菜单颜色*/
             menu_background_color: { default: '#F7F7FA' },
             /**内容*/
-            switch_page_arr: { default: [{
-                index: 0,
-                txt: '首页',
-                src: PageUrlConfig['home'],
-                visibility: 'visible',
-                img_icon_name: 'home-icon',
-                checked: true
-            },
-            {
-                index: 1,
-                txt: '发现',
-                src: PageUrlConfig['find'],
-                visibility: 'hidden',
-                img_icon_name: 'find-icon',
-                checked: false
-            },
-            {
-                index: 2,
-                txt: '留言',
-                src: PageUrlConfig['message'],
-                visibility: 'hidden',
-                img_icon_name: 'message-icon',
-                checked: false
-            },
-            {
-                index: 3,
-                txt: '关于',
-                src: PageUrlConfig['about'],
-                visibility: 'hidden',
-                img_icon_name: 'about-icon',
-                checked: false
-            }] }
+            switch_page_arr: { default: [] }
         },
         methods: {
             /**切换菜单*/

@@ -13,7 +13,7 @@
     "keywords": [
         "weex"
     ],
-    "author": "",
+    "author": "Ajuan <zhigang.chen@owulia.com>",
     "license": "MIT",
     "dependencies": {
         "vue": "^2.1.8",

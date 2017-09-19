@@ -6,6 +6,7 @@
             :menu_height="menu_height"
             :menu_background_color="menu_background_color"
             @switchMenu="switchMenuHandle">
+            <slot name="menu"></slot>
         </switch-menu>
         <!--主体-->
         <div class="switch-inner"
@@ -35,7 +36,8 @@
             /**菜单颜色*/
             menu_background_color: { default: '#F7F7FA' },
             /**内容*/
-            switch_page_arr: { default: [] }
+            switch_page_arr: { default: [] },
+            /**是否有默认*/
         },
         methods: {
             /**切换菜单*/

@@ -11,13 +11,16 @@
              class="switch-menu-item"
              v-for="(item, index) in switch_page_arr"
              :key="index">
-            <text class="switch-menu-item-txt">{{item}}</text>
+            <text class="switch-menu-item-txt" :style="{color: nav_bar_item.checked ? '#58B7FF' : '#999999'}">{{item}}</text>
         </div>
     </div>
 </template>
 <script>
     export default {
-        props: [ 'switch_page_arr', 'menu_position', 'menu_height', 'menu_background_color', 'use_menu' ]
+        props: [ 'switch_page_arr', 'menu_position', 'menu_height', 'menu_background_color', 'use_menu' ],
+        created () {
+            console.log(this.use_menu)
+        }
     }
 </script>
 <style>

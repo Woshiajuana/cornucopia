@@ -5,7 +5,8 @@
         <switch-com
             menu_position="top"
             menu_background_color="#ffffff"
-            :switch_page_arr="switch_page_arr"></switch-com>
+            :switch_page_arr="switch_page_arr">
+        </switch-com>
     </view>
 </template>
 

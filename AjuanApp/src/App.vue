@@ -67,7 +67,6 @@
 
 <style scoped>
     .menu-content{
-        width: 750px;
         flex: 1;
     }
 </style>

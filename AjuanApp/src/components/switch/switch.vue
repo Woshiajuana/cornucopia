@@ -33,7 +33,7 @@
             /**菜单位置*/
             menu_position: { default: 'bottom' },
             /**菜单高度*/
-            menu_height: { default: 99 },
+            menu_height: { default: 100 },
             /**菜单颜色*/
             menu_background_color: { default: '#F7F7FA' },
             /**内容*/

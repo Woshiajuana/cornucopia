@@ -1,8 +1,8 @@
 <template>
     <div class="switch-menu-wrap"
          :style="{ height: menu_height,
-         top: menu_position ? 0 : 'auto',
-         bottom: menu_position ? 'auto' : 0,
+//         top: menu_position ? 0 : 'auto',
+//         bottom: menu_position ? 'auto' : 0,
          borderTopWidth: menu_position ? 0 : 1,
          borderBottomWidth: menu_position ? 1 : 0,
          backgroundColor: menu_background_color }">
@@ -33,6 +33,7 @@
     .switch-menu-wrap {
         position: absolute;
         left: 0;
+        bottom: 0;
         width: 750px;
         flex-direction: row;
         align-items: center;

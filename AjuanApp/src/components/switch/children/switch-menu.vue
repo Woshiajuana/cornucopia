@@ -7,7 +7,7 @@
          borderBottomWidth: menu_position ? 1 : 0,
          backgroundColor: menu_background_color }">
         <slot v-if="use_menu"></slot>
-        <div v-if="!use_menu"
+        <div
              class="switch-menu-item"
              v-for="(item, index) in switch_page_arr"
              @click="switchMenuHandle(item, index)"

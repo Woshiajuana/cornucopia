@@ -1,5 +1,6 @@
 <template>
     <switch-com
+        :use_menu="true"
         :switch_page_arr="switch_page_arr">
         <div slot="menu"  class="switch-menu-item" v-for="( nav_bar_item, nav_bar_index ) in switch_page_arr" :key="nav_bar_index" @click="switchMenuHandle(nav_bar_index)">
             <svg class="switch-menu-img">
@@ -40,8 +41,9 @@ C31.933,18.802,32.852,19.718,32.852,20.851z"/>
 </template>
 
 <script>
-    import SwitchCom from '../../components/switch/switch.vue'
-    import PageUrlConfig from './../../config/page_url_config'
+    import NavBar from './components/nav-bar.vue'
+    import PageUrlConfig from './config/page_url_config'
+    import SwitchCom from './components/switch/switch.vue'
     export default {
         data () {
             return {
@@ -91,12 +93,41 @@ C31.933,18.802,32.852,19.718,32.852,20.851z"/>
             }
         },
         components: {
+            NavBar,
             SwitchCom
         }
     }
 </script>
 
-<style>
+<style scoped>
+    .views-wrap{
+        flex: 1;
+    }
+    .views-inner{
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 100px;
+        width: 750px;
+    }
+    .view-content{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .nav-bar{
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 99px;
+        background-color: #F7F7FA;
+        border-top-width: 1px;
+        border-top-color: #c0bfc4;
+        border-top-style: solid;
+    }
     .switch-menu-item {
         flex: 1;
         justify-content: center;

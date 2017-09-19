@@ -15,32 +15,17 @@
     export default {
         data () {
             return {
-                switch_page_arr: [{
-                    txt: '首页',
-                    src: PageUrlConfig['home'],
-                    visibility: 'visible',
-                    img_icon_name: 'home-icon',
+                switch_page_arr: [
+                {
+                    txt: '好玩的',
+                    src: PageUrlConfig['message'],
+                    visibility: 'hidden',
                     checked: true
                 },
                 {
-                    txt: '发现',
-                    src: PageUrlConfig['find'],
-                    visibility: 'hidden',
-                    img_icon_name: 'find-icon',
-                    checked: false
-                },
-                {
-                    txt: '留言',
-                    src: PageUrlConfig['message'],
-                    visibility: 'hidden',
-                    img_icon_name: 'message-icon',
-                    checked: false
-                },
-                {
-                    txt: '关于',
+                    txt: '好吃的',
                     src: PageUrlConfig['about'],
                     visibility: 'hidden',
-                    img_icon_name: 'about-icon',
                     checked: false
                 }]
             }

@@ -7,7 +7,7 @@
          borderBottomWidth: menu_position ? 1 : 0,
          backgroundColor: menu_background_color }">
         <slot v-if="use_menu"></slot>
-        <div
+        <div v-if="!use_menu"
              class="switch-menu-item"
              v-for="(item, index) in switch_page_arr"
              @click="switchMenuHandle(item, index)"
@@ -23,6 +23,9 @@
             switchMenuHandle (item, index) {
                 this.$emit('switchMenu', item, index);
             }
+        },
+        created () {
+            console.log('菜单创建了')
         }
     }
 </script>

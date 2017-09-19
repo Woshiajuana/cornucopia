@@ -1,12 +1,13 @@
 <template>
     <div class="switch-wrap">
         <switch-menu
+            :use_menu="use_menu"
             :switch_page_arr="switch_page_arr"
             :menu_position="menu_position == 'top' ? true : false"
             :menu_height="menu_height"
             :menu_background_color="menu_background_color"
             @switchMenu="switchMenuHandle">
-            <slot name="menu"></slot>
+            <slot v-if="use_menu" name="menu"></slot>
         </switch-menu>
         <!--主体-->
         <div class="switch-inner"
@@ -38,6 +39,7 @@
             /**内容*/
             switch_page_arr: { default: [] },
             /**是否有默认*/
+            use_menu: { default: false }
         },
         methods: {
             /**切换菜单*/

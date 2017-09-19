@@ -43,17 +43,18 @@
         },
         methods: {
             /**切换菜单*/
-            switchMenuHandle (index) {
+            switchMenuHandle (item, index) {
                 for (var i = 0; i < this.switch_page_arr.length; i++) {
-                    var nav_item = this.switch_page_arr[i];
+                    var item = this.switch_page_arr[i];
                     if (i == index) {
-                        nav_item.visibility = 'visible';
-                        nav_item.checked = true;
+                        item.visibility = 'visible';
+                        item.checked = true;
                     } else {
-                        nav_item.visibility = 'hidden';
-                        nav_item.checked = false;
+                        item.visibility = 'hidden';
+                        item.checked = false;
                     }
                 }
+                this.$emit('switchMenu',item,index);
             }
         },
         components: {

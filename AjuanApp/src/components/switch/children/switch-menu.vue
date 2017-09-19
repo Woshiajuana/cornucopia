@@ -54,10 +54,4 @@
         justify-content: center;
         align-items: center;
     }
-    .switch-menu-img {
-        justify-content: center;
-        align-items: center;
-        width: 44px;
-        height: 44px;
-    }
 </style>

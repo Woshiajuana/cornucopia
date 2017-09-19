@@ -6,4 +6,5 @@ export default {
     'about': CONFIG.BASE_URL + 'about/About.js',
     'search': CONFIG.BASE_URL + 'search/Search.js',
     'webview': CONFIG.BASE_URL + 'webview/Webview.js',
+    'filter': CONFIG.BASE_URL + 'filter/Filter.js',
 }

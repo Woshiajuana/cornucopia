@@ -26,7 +26,7 @@ z"/>
                     </div>
                     <text class="home-header-top-date-txt">{{dateComputed}}</text>
                 </div>
-                <svg class="home-header-top-filter-btn">
+                <svg class="home-header-top-filter-btn" @click="filterHandle">
                     <path fill="#F7F7FA" d="M40.899,6.731L25.338,25.379v10.847c0,0.25-0.125,0.501-0.292,0.667l-5.006,4.088c-0.542,0.459-1.377,0.042-1.377-0.667
 V25.379L3.102,6.731C2.643,6.189,3.018,5.354,3.727,5.354h36.504C40.94,5.354,41.357,6.189,40.899,6.731L40.899,6.731z"/>
                 </svg>
@@ -86,6 +86,9 @@ V25.379L3.102,6.731C2.643,6.189,3.018,5.354,3.727,5.354h36.504C40.94,5.354,41.35
             },
             toSearchHandle () {
                 navigator.push({url: PageUrl['search']})
+            },
+            filterHandle () {
+                navigator.push({url: PageUrl['filter']})
             }
         },
         components: {

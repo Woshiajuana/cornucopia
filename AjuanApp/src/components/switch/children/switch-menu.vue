@@ -1,8 +1,7 @@
 <template>
     <div class="switch-menu-wrap"
+         :class="[menu_position ? 'top' : 'bottom']"
          :style="{ height: menu_height,
-//         top: menu_position ? 0 : 'auto',
-//         bottom: menu_position ? 'auto' : 0,
          borderTopWidth: menu_position ? 0 : 1,
          borderBottomWidth: menu_position ? 1 : 0,
          backgroundColor: menu_background_color }">
@@ -23,9 +22,6 @@
             switchMenuHandle (item, index) {
                 this.$emit('switchMenu', item, index);
             }
-        },
-        created () {
-            console.log('菜单创建了')
         }
     }
 </script>
@@ -33,7 +29,6 @@
     .switch-menu-wrap {
         position: absolute;
         left: 0;
-        bottom: 0;
         width: 750px;
         flex-direction: row;
         align-items: center;
@@ -42,6 +37,12 @@
         border-top-style: solid;
         border-bottom-color: #c0bfc4;
         border-bottom-style: solid;
+    }
+    .top {
+        top: 0;
+    }
+    .bottom {
+        bottom: 0;
     }
     .switch-menu-item {
         flex: 1;

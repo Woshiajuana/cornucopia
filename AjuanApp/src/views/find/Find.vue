@@ -104,7 +104,6 @@ C31.933,18.802,32.852,19.718,32.852,20.851z"/>
         flex: 1;
         justify-content: center;
         align-items: center;
-        background-color: red;
     }
     .switch-menu-item-txt {
         font-size: 22px;

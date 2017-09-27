@@ -1,7 +1,8 @@
 <template>
     <view
         center_item_title="发现"
-        left_item_img_src="">
+        right_item_title="筛选"
+        left_item_title="关闭">
         <switch-com
             menu_position="top"
             menu_background_color="#ffffff"

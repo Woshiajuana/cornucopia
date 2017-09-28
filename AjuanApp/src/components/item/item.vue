@@ -50,7 +50,6 @@
 </template>
 
 <script>
-    import source from '../../tool/source'
     export default {
         name: 'item',
         props: {
@@ -85,7 +84,7 @@
             /**边框宽度*/
             border_bottom_style: { default: 'solid' },
             /**是否是输入框*/
-            is_input: { default: true },
+            is_input: { default: false },
             /**输入框类型*/
             input_type: { default: 'text' },
             /**输入最大值*/
@@ -97,11 +96,11 @@
             /**是否需要右边icon*/
             is_arrow_color: { default: '#999999' },
             /**左边图片*/
-            left_img_src: { default: source('return-icon.png') },
+            left_img_src: { default: '' },
             /**左边图片宽*/
             left_img_width_and_height: { default: [40,40] },
             /**右边图片*/
-            right_img_src: { default: source('return-icon.png') },
+            right_img_src: { default: '' },
             /**右边图片宽*/
             right_img_width_and_height: { default: [40,40] }
         },

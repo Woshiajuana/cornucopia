@@ -15,7 +15,7 @@
             return {
                 switch_page_arr: [{
                     txt: '首页',
-                    src: PageUrlConfig['home'],
+                    src: PageUrlConfig['message'],
                     visibility: 'visible',
                     img_icon_name: 'home-icon',
                     checked: true
@@ -29,7 +29,7 @@
                 },
                 {
                     txt: '留言',
-                    src: PageUrlConfig['message'],
+                    src: PageUrlConfig['home'],
                     visibility: 'hidden',
                     img_icon_name: 'message-icon',
                     checked: false

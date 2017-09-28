@@ -10,11 +10,6 @@
         props: {
             type: { default: true }
         },
-        data () {
-            return {
-
-            }
-        },
         methods: {
             pressHandle () {
                 this.type && this.$emit('onPress', ()=>{

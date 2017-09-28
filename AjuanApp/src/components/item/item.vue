@@ -28,6 +28,8 @@
             <input class="item-text item-right"
                    :placeholder="is_placeholder"
                    v-if="is_input"
+                   v-model="input_value"
+                   @input="inputHandle"
                    :maxlength="input_max_length"
                    :style="{ width: left_width,
                    color: right_text_color,
@@ -85,7 +87,7 @@
             /**是否是输入框*/
             is_input: { default: true },
             /**输入框类型*/
-            input_type: { default: 'password' },
+            input_type: { default: 'text' },
             /**输入最大值*/
             input_max_length: { default: 11 },
             /**输入框提示预览*/
@@ -103,10 +105,21 @@
             /**右边图片宽*/
             right_img_width_and_height: { default: [40,40] }
         },
+        data () {
+            return {
+                input_value: ''
+            }
+        },
+        created () {
+            this.input_value = this.right_text;
+        },
         methods: {
             /**点击事件*/
             pressHandle (event) {
                 this.$emit('onPress',event);
+            },
+            inputHandle (){
+                this.$emit('inputChange', this.input_value);
             }
         }
     }
@@ -139,10 +152,9 @@
         margin-right: 10px;
     }
     .item-left{
-        background-color: #ccc;
+
     }
     .item-right{
         flex: 1;
-        background-color: #ddd;
     }
 </style>

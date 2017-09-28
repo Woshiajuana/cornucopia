@@ -16,7 +16,7 @@
             }
         },
         methods: {
-            pressHandle (event) {
+            pressHandle () {
                 this.type && this.$emit('onPress', ()=>{
                     this.type = true;
                 });
@@ -25,9 +25,3 @@
         }
     }
 </script>
-
-<style>
-    .btn{
-        background-color: red;
-    }
-</style>

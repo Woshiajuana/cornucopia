@@ -9,14 +9,46 @@
              borderBottomColor: border_bottom_color,
              borderBottomStyle: border_bottom_style,
              paddingRight: padding_left}">
-            <text :style="{ width: left_width, textAlign: left_text_align }" class="item-text item-left">{{left_text}}</text>
-            <text v-if="!is_input" :style="{ width: left_width, textAlign: right_text_align }" class="item-text item-right">{{right_text}}</text>
-            <input :placeholder="is_placeholder" v-if="is_input" class="item-text item-right" type="text"/>
+            <image class="item-left-img"
+                   v-if="left_img_src"
+                   :style="{width: left_img_width_and_height[0],
+                   height: left_img_width_and_height[1]}"
+                   :src="left_img_src"></image>
+            <text class="item-text item-left"
+                  :style="{ width: left_width,
+                  color: left_text_color,
+                  fontSize: left_text_size,
+                  textAlign: left_text_align }">{{left_text}}</text>
+            <text class="item-text item-right"
+                  v-if="!is_input"
+                  :style="{ width: left_width,
+                  color: right_text_color,
+                  fontSize: right_text_size,
+                  textAlign: right_text_align }">{{right_text}}</text>
+            <input class="item-text item-right"
+                   :placeholder="is_placeholder"
+                   v-if="is_input"
+                   :maxlength="input_max_length"
+                   :style="{ width: left_width,
+                   color: right_text_color,
+                   fontSize: right_text_size,
+                   textAlign: right_text_align }"
+                   :type="input_type"/>
+            <image class="item-right-img"
+                :style="{width: right_img_width_and_height[0],
+                height: right_img_width_and_height[1]}"
+                v-if="right_img_src"
+                :src="right_img_src"></image>
+            <div class="item-arrow"
+                 v-if="is_arrow"
+                 :style="{ borderTopColor: is_arrow_color,
+                 borderRightColor: is_arrow_color}"></div>
         </div>
     </div>
 </template>
 
 <script>
+    import source from '../../tool/source'
     export default {
         name: 'item',
         props: {
@@ -28,10 +60,18 @@
             left_text: { default: '左边' },
             /**左边文案对齐方式*/
             left_text_align: { default: 'left' },
+            /**左边文案颜色*/
+            left_text_color: { default: '#333' },
+            /**左边文案字体大小*/
+            left_text_size: { default: 28 },
             /**右边文案*/
             right_text: { default: '右边' },
+            /**右边文案颜色*/
+            right_text_color: { default: '#333' },
             /**右边文案对齐方式*/
             right_text_align: { default: 'right' },
+            /**右边文案字体大小*/
+            right_text_size: { default: 28 },
             /**距离左边宽度*/
             padding_left: { default: 20 },
             /**距离右边宽度*/
@@ -39,15 +79,29 @@
             /**边框宽度*/
             border_bottom_width: { default: 1 },
             /**边框颜色*/
-            border_bottom_color: { default: '#333333' },
+            border_bottom_color: { default: '#ddd' },
             /**边框宽度*/
             border_bottom_style: { default: 'solid' },
             /**是否是输入框*/
-            is_input: { default: false },
+            is_input: { default: true },
             /**输入框类型*/
-            input_type: { default: 'text' },
+            input_type: { default: 'password' },
+            /**输入最大值*/
+            input_max_length: { default: 11 },
             /**输入框提示预览*/
-            is_placeholder: { default: '请输入' }
+            is_placeholder: { default: '请输入' },
+            /**是否需要右边icon*/
+            is_arrow: { default: true },
+            /**是否需要右边icon*/
+            is_arrow_color: { default: '#999999' },
+            /**左边图片*/
+            left_img_src: { default: source('return-icon.png') },
+            /**左边图片宽*/
+            left_img_width_and_height: { default: [40,40] },
+            /**右边图片*/
+            right_img_src: { default: source('return-icon.png') },
+            /**右边图片宽*/
+            right_img_width_and_height: { default: [40,40] }
         },
         methods: {
             /**点击事件*/
@@ -60,24 +114,35 @@
 
 <style>
     .item-wrap{
-        background-color: #3494E6;
+        background-color: #ffffff;
     }
     .item-inner{
         flex: 1;
         flex-direction: row;
         align-items: center;
     }
-    .item-inner-arrow:after{
-        content: '';
-        width: 20px;
-        height: 20px;
-        background-color: red;
+    .item-arrow{
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+        margin-left: 10px;
+        border-top-width: 3px;
+        border-top-style: solid;
+        border-right-width: 3px;
+        border-right-style: solid;
+        transform: rotate(45deg);
+    }
+    .item-right-img{
+        margin-left: 10px;
+    }
+    .item-left-img{
+        margin-right: 10px;
     }
     .item-left{
-        background-color: #999999;
+        background-color: #ccc;
     }
     .item-right{
         flex: 1;
-        background-color: #3a3a3a;
+        background-color: #ddd;
     }
 </style>

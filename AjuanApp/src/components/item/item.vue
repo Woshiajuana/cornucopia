@@ -25,10 +25,11 @@
                   color: right_text_color,
                   fontSize: right_text_size,
                   textAlign: right_text_align }">{{right_text}}</text>
+
             <input class="item-text item-right"
                    :placeholder="is_placeholder"
                    v-if="is_input"
-                   v-model="input_value"
+                   :value="input_value"
                    @input="inputHandle"
                    :maxlength="input_max_length"
                    :style="{ width: left_width,

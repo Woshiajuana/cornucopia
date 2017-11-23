@@ -61,6 +61,8 @@
     }
     .nav-bar-txt {
         font-size: 22px;
+        height: 32px;
+        line-height: 32px;
         justify-content: center;
         align-items: center;
     }

@@ -1,20 +1,17 @@
 <template>
     <div id="app">
-        <!--主体内容视图-->
         <transition :name="animateName">
             <!--<keep-alive>-->
                 <router-view class="view-wrap"></router-view>
             <!--</keep-alive>-->
         </transition>
-        <!--/主体内容视图-->
-        <!--svg-->
         <svg-template></svg-template>
-        <!--/svg-->
     </div>
 </template>
 
 <script>
-    import SvgTemplate from 'src/components/svg-template.vue'
+    import SvgIcon from 'src/components/svg-icon'
+
     export default {
         name: 'app',
         computed: {
@@ -41,7 +38,7 @@
             },
         },
         components: {
-            SvgTemplate,
+            SvgIcon,
         }
     }
 </script>

@@ -1,9 +1,9 @@
 <template>
     <div class="suspension-panel">
 
-        <div class="suspension-item" title="微信">
+        <a class="suspension-item" title="微信" href="https://github.com/Woshiajuana" target="_blank">
             <span class="iconfont icon-github"></span>
-        </div>
+        </a>
 
         <div class="suspension-item">
             <span class="iconfont icon-weixin"></span>
@@ -12,77 +12,57 @@
             </div>
         </div>
 
-        <div class="suspension-item">
+        <a class="suspension-item" title="发送邮件" href="mailto:979703986@qq.com">
             <span class="iconfont icon-e-mail"></span>
-        </div>
+        </a>
 
-        <div class="suspension-item">
-            <span class="iconfont icon-lianjie"></span>
+        <div class="suspension-item" title="分享链接" id="copyUrl">
+            <span class="iconfont icon-lianjie" id="url"></span>
         </div>
-
-        <div class="suspension-item">
+        <div class="suspension-item"
+             @click="handleReturnTop"
+             v-show="scroll$.top > 500">
             <span class="iconfont icon-top02"></span>
         </div>
 
-
-        <div class="suspension-item"
-             @click="jumpPageOrFireFn(item)"
-             v-for="(item, index) in arrButton"
-             :title="item.title"
-             :key="index">
-            <span class="iconfont" :class="[item.icon]"></span>
-            <div v-if="item.image"
-                 class="suspension-image">
-                <img :src="item.image">
-            </div>
-        </div>
     </div>
 </template>
 
 <script>
     import ScrollMixin from 'src/mixins/scroll.mixin'
-    import JumpMixin from 'src/mixins/jump.mixin'
+    import Clipboard from 'clipboard'
+
+    let timer = '';
 
     export default {
         mixins: [
-            JumpMixin,
             ScrollMixin,
         ],
-        computed: {
-
-        },
-        data () {
-            return {
-                arrButton: [
-                    {
-                        title: 'GitHub',
-                        icon: 'icon-github',
-                        link: 'https://github.com/Woshiajuana',
-                    },
-                    {
-                        title: '微信',
-                        icon: 'icon-weixin',
-                        image: 'https://cdn.sunofbeaches.com/images/test/2.jpg',
-                    },
-                    {
-                        title: '发送邮件',
-                        icon: 'icon-e-mail',
-                    },
-                    {
-                        title: '分享链接',
-                        icon: 'icon-lianjie',
-                    },
-                    {
-                        title: '回到顶部',
-                        icon: 'icon-top02',
-                    },
-                ]
-            };
+        mounted () {
+           this.$nextTick(this.addClipboard.bind(this));
         },
         methods: {
-            scrollCallback (event) {
-                console.log('滚动事件 => ', this.scroll$.top);
-            }
+            addClipboard () {
+                new Clipboard('#copyUrl', {
+                    text: () => window.location.href,
+                }).on('success', (e) => {
+                    console.log('复制成功');
+                }).on('error', (e) => {
+                    console.log('复制失败，请双击文案选择复制');
+                });
+            },
+            handleReturnTop () {
+                timer && clearInterval(timer);
+                timer = setInterval(() => {
+                    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
+                    if (scrollTop <= 0) {
+                        return clearInterval(timer);
+                    }
+                    let dir = Math.floor(scrollTop / 1.1);
+                    document.documentElement.scrollTop = dir;
+                    document.body.scrollTop = dir;
+                }, 10);
+            },
         },
     }
 </script>
@@ -93,8 +73,7 @@
 
     .suspension-panel{
         @extend %pf;
-        @extend %t50;
-        @include tft(translate3d(0, -50%, 0));
+        top: j(240);
         z-index: 1;
         margin-left: j(-60);
         width: j(40);
@@ -117,6 +96,9 @@
                 @extend %df;
             }
         }
+    }
+    .suspension-href{
+        @extend %dn;
     }
     .suspension-image{
         @extend %dn;

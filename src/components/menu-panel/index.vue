@@ -1,15 +1,15 @@
 <template>
     <div class="menu-panel">
-
         <div class="classify">
+            <div class="classify-item classify-indicator" :style="{ top: numCurrent * 30 + 'px' }"></div>
             <div class="classify-item"
+                 @click="numCurrent = index"
                  :class="[numCurrent === index && 'active']"
                  v-for="(item, index) in arrClassify"
                  :key="index">
                 <span>{{item.label}}</span>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -49,22 +49,35 @@
         width: j(240);
     }
     .classify-item{
+        @extend %pr;
         @extend %c6;
         @extend %df;
         @extend %cp;
         @extend %aic;
-        border-left: j(4) solid transparent;
+        @include tst(all, 0.3s);
         padding-left: j(20);
         height: j(30);
         font-size: j(13);
+        background-color: transparent;
         &:hover{
             background-color: #ddd;
         }
         &.active{
             @extend %fwb;
-            border-left: j(4) solid $mainColor;
             color: $mainColor;
-            background-color: #fff;
+            &:hover{
+                background-color: transparent;
+            }
         }
+    }
+    .classify-indicator{
+        @extend %cp;
+        @extend %pa;
+        @extend %r0;
+        @extend %l0;
+        @extend %t0;
+        @include tst(all, 0.3s);
+        border-left: j(4) solid $mainColor;
+        background-color: #fff;
     }
 </style>

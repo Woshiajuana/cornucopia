@@ -42,7 +42,6 @@
     }
     .main{
         @extend %df1;
-        background-color: #999999;
     }
 
     @media screen and (max-width: 768px){

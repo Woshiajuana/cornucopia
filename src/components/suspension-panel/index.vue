@@ -30,7 +30,7 @@
                     },
                     {
                         title: '分享链接',
-                        icon: 'icon-fenxiang',
+                        icon: 'icon-lianjie',
                     },
                     {
                         title: '回到顶部',
@@ -55,7 +55,6 @@
         @include tft(translate3d(0, -50%, 0));
         z-index: 1;
         margin-left: j(-60);
-        /*background-color: #6f9384;*/
         width: j(40);
     }
     .suspension-item{

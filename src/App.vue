@@ -37,8 +37,8 @@
     .wrap{
         @extend %df;
         @extend %ma;
+        padding-top: j(70);
         max-width: j(960);
-        /*background-color: red;*/
     }
     .main{
         @extend %df1;

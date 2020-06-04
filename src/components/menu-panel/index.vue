@@ -42,7 +42,6 @@
     .menu-panel{
         width: j(240);
         margin-left: j(20);
-        /*background-color: #fff;*/
     }
     .classify{
         @extend %pf;

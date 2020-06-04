@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <nav-bar></nav-bar>
         <suspension-panel></suspension-panel>
         <router-view class="main"></router-view>
         <svg-icon></svg-icon>
@@ -9,10 +10,12 @@
 <script>
     import SvgIcon from 'src/components/svg-icon'
     import SuspensionPanel from 'src/components/suspension-panel'
+    import NavBar from 'src/components/nav-bar'
 
     export default {
         components: {
             SvgIcon,
+            NavBar,
             SuspensionPanel,
         }
     }
@@ -32,6 +35,6 @@
         }
     }
     .main{
-        
+
     }
 </style>

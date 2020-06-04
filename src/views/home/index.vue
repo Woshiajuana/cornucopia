@@ -1,17 +1,11 @@
 <template>
-    <div class="home-wrap">
-<!--        <navbar-view></navbar-view>-->
-        <!--主体内容视图-->
+    <div class="home-view-wrap">
         <transition :name="animateName">
-            <!--<keep-alive>-->
             <router-view class="home-inner"></router-view>
-            <!--</keep-alive>-->
         </transition>
     </div>
 </template>
 <script>
-    // import NavbarView from 'src/components/navbar-view'
-
     export default {
         name: 'home',
         computed: {
@@ -20,7 +14,7 @@
             },
         },
         components: {
-            // NavbarView,
+
         },
     }
 </script>

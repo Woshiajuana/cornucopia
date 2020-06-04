@@ -1,6 +1,5 @@
 <template>
     <div class="suspension-panel">
-        悬挂盘
     </div>
 </template>
 
@@ -14,4 +13,10 @@
 <style lang="scss" scoped>
     @import "~src/assets/scss/define";
 
+    .suspension-panel{
+        @extend %pf;
+        z-index: 1;
+        background-color: #6f9384;
+        width: j(20);
+    }
 </style>

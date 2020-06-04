@@ -1,18 +1,11 @@
 <template>
     <div class="home-view-wrap">
-        <transition :name="animateName">
-            <router-view class="home-inner"></router-view>
-        </transition>
+        首页内容
     </div>
 </template>
 <script>
     export default {
         name: 'home',
-        computed: {
-            animateName () {
-                return this.$store.state.animateName;
-            },
-        },
         components: {
 
         },

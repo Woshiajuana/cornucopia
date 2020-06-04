@@ -1,8 +1,6 @@
 <template>
-    <div class="nav-bar">
-        <div class="nav-bar-inner">
-
-        </div>
+    <div class="menu-panel">
+        菜单
     </div>
 </template>
 
@@ -15,10 +13,10 @@
 
 <style lang="scss" scoped>
     @import "~src/assets/scss/define";
-    .nav-bar{
-        
-    }
-    .nav-bar-inner{
 
+    .menu-panel{
+        width: j(240);
+        margin-left: j(20);
+        background-color: #2b3841;
     }
 </style>

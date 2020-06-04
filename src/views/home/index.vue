@@ -1,11 +1,10 @@
 <template>
     <div class="home-view-wrap">
-        首页内容
+        首页内容1
     </div>
 </template>
 <script>
     export default {
-        name: 'home',
         components: {
 
         },
@@ -13,8 +12,8 @@
 </script>
 <style lang="scss" scoped>
     @import "~src/assets/scss/define";
-    .home-wrap{
-        @extend %oh;
+    .home-view-wrap{
+        height: j(2000);
     }
     .home-inner{
         @extend %w100;

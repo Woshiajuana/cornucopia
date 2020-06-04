@@ -12,7 +12,12 @@
 </template>
 
 <script>
+    import ScrollMixin from 'src/mixins/scroll.mixin'
+
     export default {
+        mixins: [
+            ScrollMixin,
+        ],
         data () {
             return {
                 arrButton: [
@@ -40,7 +45,9 @@
             };
         },
         methods: {
-
+            scrollCallback (event) {
+                console.log('滚动事件 => ', this.scroll$.top);
+            }
         },
     }
 </script>
@@ -63,15 +70,14 @@
         @extend %aic;
         @extend %jcc;
         @extend %c6;
+        @include tst(all, 0.3s);
         width: j(40);
         height: j(40);
         font-size: j(24);
         &:hover{
+            font-size: j(28);
             color: $mainColor;
         }
-        /*background-color: red;*/
-        /*border: 1px solid #ddd;*/
-        /*border-radius: j(5);*/
     }
 
 </style>

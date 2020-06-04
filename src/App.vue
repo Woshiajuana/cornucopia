@@ -29,7 +29,7 @@
     @import "~src/assets/scss/_iconfont.scss";
 
     body{
-        background-color: #f2f2f2;
+        background-color: $bgColor;
     }
     #app{
 

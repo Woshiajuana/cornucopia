@@ -32,7 +32,7 @@
         @extend %pf;
         @extend %w100;
         @extend %t0;
-        background-color: #f2f2f2;
+        background-color: $bgColor;
     }
     .header-inner{
         @extend %ma;

@@ -1,8 +1,9 @@
 <template>
     <div class="suspension-panel">
 
-        <div class="suspension-item">
+        <div class="suspension-item" title="日期筛选">
             <span class="iconfont icon-calendar"></span>
+            <span class="suspension-date">{{strDay}}</span>
         </div>
 
         <a class="suspension-item" title="微信" href="https://github.com/Woshiajuana" target="_blank">
@@ -43,6 +44,11 @@
         mixins: [
             ScrollMixin,
         ],
+        data () {
+            return {
+                strDay: new Date().getDay(),
+            };
+        },
         mounted () {
            this.$nextTick(this.addClipboard.bind(this));
         },
@@ -93,6 +99,7 @@
         @include tst(all, 0.3s);
         width: j(40);
         height: j(40);
+        line-height: j(40);
         font-size: j(24);
         &:hover{
             font-size: j(28);
@@ -125,7 +132,11 @@
             height: j(80);
         }
     }
-
+    .suspension-date{
+        @extend %pa;
+        top: j(2);
+        font-size: j(12);
+    }
     @-webkit-keyframes scale {
         from {
             transform: scale(0);

@@ -1,6 +1,10 @@
 <template>
     <div class="suspension-panel">
 
+        <div class="suspension-item">
+            <span class="iconfont icon-calendar"></span>
+        </div>
+
         <a class="suspension-item" title="微信" href="https://github.com/Woshiajuana" target="_blank">
             <span class="iconfont icon-github"></span>
         </a>
@@ -19,6 +23,7 @@
         <div class="suspension-item" title="分享链接" id="copyUrl">
             <span class="iconfont icon-lianjie" id="url"></span>
         </div>
+
         <div class="suspension-item"
              @click="handleReturnTop"
              v-show="scroll$.top > 500">

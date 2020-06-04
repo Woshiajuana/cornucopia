@@ -38,7 +38,7 @@
         @extend %df;
         @extend %ma;
         max-width: j(960);
-        background-color: red;
+        /*background-color: red;*/
     }
     .main{
         @extend %df1;

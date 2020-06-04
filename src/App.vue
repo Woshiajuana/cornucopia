@@ -6,19 +6,16 @@
             <router-view class="main"></router-view>
             <menu-panel></menu-panel>
         </div>
-        <svg-icon></svg-icon>
     </div>
 </template>
 
 <script>
-    import SvgIcon from 'src/components/svg-icon'
     import HeaderPanel from 'src/components/header-panel'
     import SuspensionPanel from 'src/components/suspension-panel'
     import MenuPanel from 'src/components/menu-panel'
 
     export default {
         components: {
-            SvgIcon,
             MenuPanel,
             HeaderPanel,
             SuspensionPanel,
@@ -29,6 +26,7 @@
 <style lang="scss">
     @import "~src/assets/scss/reset";
     @import "~src/assets/scss/define";
+    @import "~src/assets/scss/_iconfont.scss";
 
     body{
         background-color: #f2f2f2;

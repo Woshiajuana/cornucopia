@@ -1,7 +1,7 @@
 <template>
     <div class="suspension-panel">
         <div class="suspension-item">
-            <span>icon</span>
+            <span class="iconfont icon-xingxing"></span>
         </div>
     </div>
 </template>

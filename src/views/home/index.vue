@@ -1,34 +1,21 @@
 <template>
     <div class="home-view-wrap">
-<!--        <div class="cell-title">2020/02/02 12:12:12</div>-->
-        <dl class="cell" v-for="(item, index) in 20" :key="index">
+        <div class="cell" v-for="(item, index) in 20" :key="index">
             <dt class="cell-dt">2020年{{index}}月</dt>
-            <dd class="cell-dd">
-                <h2>标题标标题标题标题标题标题标题标题标题标题标题标题标题题</h2>
-                <p>的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师</p>
-                <p>的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师</p>
-                <p>的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师</p>
-                <p>的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师</p>
-                <p>的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师</p>
-                <p>的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师</p>
-                <p>的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师</p>
-                <p>的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师</p>
-            </dd>
-            <dd class="cell-dd">
-                <h2>标题标标题标题标题标题标题标题标题标题标题标题标题标题题</h2>
-                <p>的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师</p>
-            </dd>
-            <dd class="cell-dd">
-                <h2>标题标标题标题标题标题标题标题标题标题标题标题标题标题题</h2>
-                <p>的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师</p>
-            </dd>
-        </dl>
+            <article-cell></article-cell>
+            <article-cell></article-cell>
+            <article-cell></article-cell>
+            <article-cell></article-cell>
+        </div>
     </div>
 </template>
 <script>
+
+    import ArticleCell from 'src/components/article-cell'
+
     export default {
         components: {
-
+            ArticleCell,
         },
     }
 </script>
@@ -36,16 +23,15 @@
     @import "~src/assets/scss/define";
     .home-view-wrap{
     }
-    .cell{
-        line-height: 1.5;
-        margin-bottom: j(20);
-    }
     .cell-dt{
         @extend %df;
         @extend %aic;
         @extend %c6;
         @extend %fwb;
-        margin-bottom: j(20);
+        position:sticky;
+        position: -webkit-sticky;
+        position: sticky;
+        top: j(50);
         padding-left: j(20);
         font-size: j(18);
         background-color: #f2f2f2;
@@ -53,13 +39,22 @@
     }
     .cell-dd{
         padding: j(20);
-        h2{
-            @extend %c3;
-            font-size: j(16);
+        border-bottom: 1px solid #ddd;
+    }
+    .title{
+        @extend %c3;
+        @extend %db;
+        @extend %fwb;
+        font-size: j(17);
+        line-height: j(27);
+        margin-bottom: j(4);
+        &:hover{
+            text-decoration: underline;
         }
-        p{
-            @extend %c9;
-            font-size: j(13);
-        }
+    }
+    .abstract{
+        @extend %c9;
+        line-height: j(24);
+        font-size: j(13);
     }
 </style>

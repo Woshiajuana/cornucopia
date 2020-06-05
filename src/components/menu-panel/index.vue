@@ -40,11 +40,13 @@
     @import "~src/assets/scss/define";
 
     .menu-panel{
+        @extend %oh;
         width: j(240);
         margin-left: j(20);
     }
     .classify{
         @extend %pf;
+        @extend %oh;
         width: j(240);
     }
     .classify-item{

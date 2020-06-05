@@ -32,6 +32,7 @@
         @extend %pf;
         @extend %w100;
         @extend %t0;
+        z-index: 9;
         background-color: $bgColor;
     }
     .header-inner{

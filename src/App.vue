@@ -3,7 +3,9 @@
         <header-panel></header-panel>
         <div class="wrap">
             <suspension-panel></suspension-panel>
-            <router-view class="main"></router-view>
+            <div class="main">
+                <router-view></router-view>
+            </div>
             <menu-panel></menu-panel>
         </div>
     </div>

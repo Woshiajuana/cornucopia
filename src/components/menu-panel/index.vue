@@ -1,15 +1,22 @@
 <template>
     <div class="menu-panel">
-        <div class="classify">
-            <div class="classify-item classify-indicator" :style="{ top: numCurrent * 30 + 'px' }"></div>
-            <div class="classify-item"
-                 @click="numCurrent = index"
-                 :class="[numCurrent === index && 'active']"
-                 v-for="(item, index) in arrClassify"
-                 :key="index">
-                <span>{{item.label}}</span>
-            </div>
-        </div>
+<!--        <div class="classify">-->
+<!--            classifyclassifyclassify-->
+<!--&lt;!&ndash;            <div class="classify-item classify-indicator" :style="{ top: numCurrent * 30 + 'px' }"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="classify-item"&ndash;&gt;-->
+<!--&lt;!&ndash;                 @click="numCurrent = index"&ndash;&gt;-->
+<!--&lt;!&ndash;                 :class="[numCurrent === index && 'active']"&ndash;&gt;-->
+<!--&lt;!&ndash;                 v-for="(item, index) in arrClassify"&ndash;&gt;-->
+<!--&lt;!&ndash;                 :key="index">&ndash;&gt;-->
+<!--&lt;!&ndash;                <span>{{item.label}}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--        </div>-->
+        <div class="dd">1</div>
+        <div class="dd">2</div>
+        <div class="classify">3</div>
+        <div class="dd">4</div>
+        <div class="classify">5</div>
+        <div class="dd">6</div>
     </div>
 </template>
 
@@ -40,14 +47,18 @@
     @import "~src/assets/scss/define";
 
     .menu-panel{
-        @extend %oh;
         width: j(240);
+        /*background-color: red;*/
         margin-left: j(20);
     }
     .classify{
-        @extend %pf;
-        @extend %oh;
+        @extend %ps;
+        top: j(50);
         width: j(240);
+    }
+    .dd{
+        @extend %ps;
+        top: j(70);
     }
     .classify-item{
         @extend %pr;

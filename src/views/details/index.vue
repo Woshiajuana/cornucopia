@@ -1,6 +1,41 @@
 <template>
     <div class="details-view-wrap">
         详情
+        <div class="cell">
+            <div class="classify">111</div>
+<!--            <div>A</div>-->
+<!--            <div>A</div>-->
+<!--            <div>A</div>-->
+<!--            <div>A</div>-->
+<!--            <div>A</div>-->
+        </div>
+        <div class="cell">
+            <div class="classify">222</div>
+<!--            <div>A</div>-->
+<!--            <div>A</div>-->
+<!--            <div>A</div>-->
+<!--            <div>A</div>-->
+<!--            <div>A</div>-->
+<!--        </div>-->
+<!--        <div class="cell">-->
+<!--            <div class="classify">333</div>-->
+<!--            <div>A</div>-->
+<!--            <div>A</div>-->
+<!--            <div>A</div>-->
+<!--            <div>A</div>-->
+<!--            <div>A</div>-->
+<!--        </div>-->
+<!--        <div class="cell">-->
+<!--            <div class="classify">333</div>-->
+<!--            <div>A</div>-->
+<!--            <div>A</div>-->
+<!--            <div>A</div>-->
+<!--            <div>A</div>-->
+            <div>A</div>
+            <div>A</div>
+            <div>A</div>
+            <div>A</div>
+        </div>
     </div>
 </template>
 <script>
@@ -22,5 +57,9 @@
     @import "~src/assets/scss/define";
     .details-view-wrap{
         height: j(2000);
+    }
+    .classify{
+        @extend %ps;
+        top: j(70);
     }
 </style>

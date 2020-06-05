@@ -14,6 +14,9 @@
 </template>
 <script>
     import marked from 'marked'
+    import hljs from 'highlight.js';
+    import 'highlight.js/styles/monokai-sublime.css';
+    // import 'highlight.js/styles/monokai.css';
 
     export default {
         data () {
@@ -31,14 +34,11 @@
         created () {
             this.$curl.get('static/test.md').then((res) => {
                 this.strContent = marked(res);
-                // hljs.init();
-                // console.log(hljs)
-                // hljs.highlightBlock(document.getElementById('article-content'));
-                // document.addEventListener('DOMContentLoaded', (event) => {
+                this.$nextTick(() => {
                     document.querySelectorAll('pre').forEach((block) => {
                         hljs.highlightBlock(block);
                     });
-                // });
+                })
             }).catch((err) => {
                 console.log(err);
             })
@@ -46,14 +46,13 @@
     }
 
 </script>
+
 <style lang="scss" scoped>
     @import "~src/assets/scss/define";
-    @import "~src/assets/scss/highlight";
-
     .details-view-wrap{
     }
     .article-header{
-        padding: j(50) 0;
+        padding: j(50) j(20);
         h1{
             @extend %c3;
             line-height: j(40);
@@ -69,7 +68,6 @@
     .tag{
         @extend %df;
         @extend %aic;
-        //@extend %jcc;
     }
     .tag-item{
         @extend %cfff;
@@ -84,5 +82,41 @@
         line-height: j(28);
         font-size: j(16);
         padding: j(20) j(20) j(100);
+    }
+</style>
+
+<style lang="scss">
+    @import "~src/assets/scss/define";
+    .article-content{
+        h2{
+            @extend %c3;
+            font-size: j(24);
+            margin: j(30) 0 j(30);
+        }
+        h3{
+            @extend %c3;
+            font-size: j(20);
+            margin: j(30) 0 j(30);
+        }
+        h4{
+            @extend %c3;
+            font-size: j(18);
+            margin: j(30) 0 j(30);
+        }
+        pre{
+            border-radius: j(5);
+            padding: j(10);
+            font-size: j(14);
+            line-height: 1.2;
+            background-color: #111;
+        }
+        blockquote{
+            margin: j(20);
+            padding: j(5) j(20);
+            font-size: j(14);
+            line-height: 1.5;
+            border-left: j(2) solid #999;
+            background-color: #f2f2f2;
+        }
     }
 </style>

@@ -12,6 +12,12 @@ const router = new Router({
             // redirect: '/index',
             component: () => import('src/views/home'),
         },
+        // 详情
+        {
+            path: '/details',
+            name: 'details',
+            component: () => import('src/views/details'),
+        },
         {
             path: '*',
             redirect: '/',

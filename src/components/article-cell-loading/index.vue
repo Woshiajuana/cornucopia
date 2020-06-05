@@ -1,19 +1,21 @@
 
 <template>
     <div class="article-cell-loading">
-        <div class="loading-inner">
+        <p class="loading-null" v-if="isComplete">没有更多了哦</p>
+        <div class="loading-inner" v-else>
             <div class="loading-bar"></div>
             <div class="loading-bar"></div>
             <div class="loading-bar"></div>
             <div class="loading-bar"></div>
         </div>
-        <p class="loading-null">没有更多了哦</p>
     </div>
 </template>
 
 <script>
     export default {
-
+        props: {
+            isComplete: { default: false }
+        }
     }
 </script>
 

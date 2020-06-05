@@ -4,7 +4,9 @@
         <div class="wrap">
             <suspension-panel></suspension-panel>
             <div class="main">
-                <router-view></router-view>
+                <keep-alive>
+                    <router-view></router-view>
+                </keep-alive>
             </div>
             <menu-panel></menu-panel>
         </div>

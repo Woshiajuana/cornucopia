@@ -27,7 +27,7 @@
 
         <div class="suspension-item"
              @click="handleReturnTop"
-             v-show="scroll$.top > 500">
+             v-show="scroll$.scrollTop > 500">
             <span class="iconfont icon-top02"></span>
         </div>
 

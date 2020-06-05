@@ -18,6 +18,9 @@
     .article-cell{
         padding: j(20);
         border-bottom: 1px solid #ddd;
+        &:last-child{
+            border-bottom: none;
+        }
     }
     .title{
         @extend %c3;

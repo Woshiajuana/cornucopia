@@ -1,7 +1,7 @@
 <template>
     <div class="header-section">
         <div class="header-inner">
-            <a class="logo" href="/">
+            <a class="logo" href="/#/">
                 <h1>AJUAN</h1>
             </a>
             <div class="search" :class="[strKeyword && 'active']">

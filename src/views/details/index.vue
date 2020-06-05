@@ -1,5 +1,9 @@
 <template>
     <div class="details-view-wrap">
+
+
+
+
         详情
     </div>
 </template>

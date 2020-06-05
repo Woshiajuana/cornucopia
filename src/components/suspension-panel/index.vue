@@ -1,6 +1,10 @@
 <template>
     <div class="suspension-panel">
 
+        <div class="suspension-item" title="返回" @click="$router.go(-1)">
+            <span class="iconfont icon-fanhui"></span>
+        </div>
+
         <div class="suspension-item" title="日期筛选">
             <span class="iconfont icon-calendar"></span>
             <span class="suspension-date">{{strDay}}</span>

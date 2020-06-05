@@ -11,12 +11,20 @@ const router = new Router({
             name: 'home',
             // redirect: '/index',
             component: () => import('src/views/home'),
+            meta: {
+                useClassify: true,
+                useCopyright: true,
+            }
         },
         // 详情
         {
             path: '/details',
             name: 'details',
             component: () => import('src/views/details'),
+            meta: {
+                useClassify: false,
+                useCatalog: true,
+            }
         },
         {
             path: '*',

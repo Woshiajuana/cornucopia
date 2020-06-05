@@ -1,9 +1,7 @@
 <template>
     <div class="header-section">
         <div class="header-inner">
-            <a class="logo" href="/#/">
-                <h1>AJUAN</h1>
-            </a>
+            <a class="logo" href="/#/">AJUAN</a>
             <div class="search" :class="[strKeyword && 'active']">
                 <div class="search-input">
                     <input v-model="strKeyword" type="text" placeholder="请输入关键字"/>

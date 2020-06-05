@@ -46,6 +46,7 @@
     }
     .main{
         @extend %df1;
+        max-width: j(700);
     }
 
     @media screen and (max-width: 768px){

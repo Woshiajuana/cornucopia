@@ -9,7 +9,7 @@
                 <span class="tag-item">JS</span>
             </div>
         </div>
-        <div class="article-content" v-html="strContent"></div>
+        <div class="article-content" id="article-content" v-html="strContent"></div>
     </div>
 </template>
 <script>
@@ -31,6 +31,16 @@
         created () {
             this.$curl.get('static/test.md').then((res) => {
                 this.strContent = marked(res);
+                // hljs.init();
+                // console.log(hljs)
+                // hljs.highlightBlock(document.getElementById('article-content'));
+                // document.addEventListener('DOMContentLoaded', (event) => {
+                    document.querySelectorAll('pre').forEach((block) => {
+                        hljs.highlightBlock(block);
+                    });
+                // });
+            }).catch((err) => {
+                console.log(err);
             })
         }
     }

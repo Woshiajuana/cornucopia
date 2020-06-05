@@ -5,6 +5,15 @@
 
 > Ajuan <979703986@qq.com>
 
+
+```js
+
+function f() {
+  console.log(1);
+}
+
+```
+
 ## 目录结构
 
 ```

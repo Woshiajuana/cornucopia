@@ -4,9 +4,16 @@
     </div>
 </template>
 <script>
-
     export default {
+        watch: {
+            //监听路由变化
+            $route( to, from ){
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+            }
+        },
         components: {
+
         },
     }
 
@@ -14,5 +21,6 @@
 <style lang="scss" scoped>
     @import "~src/assets/scss/define";
     .details-view-wrap{
+        height: j(2000);
     }
 </style>

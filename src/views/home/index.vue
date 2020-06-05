@@ -33,8 +33,7 @@
             scrollCallback () {
                 let { scrollTop, scrollHeight, clientHeight } = this.scroll$;
                 if (scrollTop + clientHeight > scrollHeight - 300) {
-                    console.log('可以加载更多了');
-                    this.loadingMore();
+                    if (this.$route.path === '/') this.loadingMore();
                 }
             },
             loadingMore () {

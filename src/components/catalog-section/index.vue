@@ -1,6 +1,6 @@
 <template>
-    <div class="catalog-section" v-if="computedCatalog.length">
-        <div class="catalog-indicator iconfont icon-biaoqian" :style="{ top: numCurrent * 30 + 'px' }"></div>
+    <div class="catalog-section" ref="catalog" v-if="computedCatalog.length">
+        <div class="catalog-indicator iconfont icon-biaoqian" :style="{ top: numIndicator + 'px' }"></div>
         <p class="catalog-title">目录</p>
         <catalog-cell
             @click="handleAnchor"
@@ -22,7 +22,7 @@
         ],
         data () {
             return {
-                numCurrent: 1,
+                numIndicator: 30,
             }
         },
         watch: {
@@ -31,10 +31,13 @@
                 if (!arrSourceCatalog) return;
                 arrSourceCatalog.forEach((item, i) => {
                     if (item.start <= v && v < item.end) {
-                        this.numCurrent = i + 1;
+                        this.numIndicator = (i + 1) * 30;
                     }
                 });
-            }
+                this.$nextTick(() => {
+                   this.fixCatalogScroll();
+                });
+            },
         },
         computed: {
             computedCatalog () {
@@ -44,6 +47,14 @@
         methods: {
             handleAnchor (item) {
                 this.$anchor.anchorPosition(item.id, 300, 70);
+            },
+            fixCatalogScroll () {
+                let { scrollHeight, clientHeight } = this.$refs.catalog;
+                if (clientHeight >= scrollHeight) return;
+                if (this.numIndicator === 30) {
+                    return this.$refs.catalog.scrollTop = 0;
+                }
+                this.$refs.catalog.scrollTop = this.numIndicator - clientHeight / 2;
             },
         },
         components: {

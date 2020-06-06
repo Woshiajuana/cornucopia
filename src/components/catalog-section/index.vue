@@ -3,6 +3,7 @@
         <div class="catalog-indicator" :style="{ top: numCurrent * 30 + 'px' }"></div>
         <p class="catalog-title">目录</p>
         <catalog-cell
+            @click="handleAnchor"
             v-for="(item, index) in computedCatalog"
             :data="item"
             :scroll-top="scroll$.scrollTop"
@@ -38,6 +39,12 @@
         computed: {
             computedCatalog () {
                 return this.$store.state.arrCatalog;
+            },
+        },
+        methods: {
+            handleAnchor (item) {
+                console.log(item);
+                // this.$anchor.anchorPosition();
             },
         },
         components: {

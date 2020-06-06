@@ -1,5 +1,6 @@
 <template>
     <div class="catalog-cell"
+         @click="$emit('click', data)"
          :class="[ data.start <= scrollTop && scrollTop < data.end && 'active']">
         <a class="catalog-cell-title" href="javascript:;">
             <i></i><span>{{data.title}}</span>

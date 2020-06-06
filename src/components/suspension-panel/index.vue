@@ -67,16 +67,17 @@
                 });
             },
             handleReturnTop () {
-                timer && clearInterval(timer);
-                timer = setInterval(() => {
-                    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
-                    if (scrollTop <= 0) {
-                        return clearInterval(timer);
-                    }
-                    let dir = Math.floor(scrollTop / 1.1);
-                    document.documentElement.scrollTop = dir;
-                    document.body.scrollTop = dir;
-                }, 10);
+                this.$anchor.returnTop();
+                // timer && clearInterval(timer);
+                // timer = setInterval(() => {
+                //     let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
+                //     if (scrollTop <= 0) {
+                //         return clearInterval(timer);
+                //     }
+                //     let dir = Math.floor(scrollTop / 1.1);
+                //     document.documentElement.scrollTop = dir;
+                //     document.body.scrollTop = dir;
+                // }, 10);
             },
         },
     }

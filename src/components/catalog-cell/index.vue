@@ -1,11 +1,13 @@
 <template>
     <div class="catalog-cell"
-         @click="$emit('click', data)"
          :class="[ data.start <= scrollTop && scrollTop < data.end && 'active']">
-        <a class="catalog-cell-title" href="javascript:;">
+        <a class="catalog-cell-title"
+           @click="$emit('click', data)"
+           href="javascript:;">
             <i></i><span>{{data.title}}</span>
         </a>
         <catalog-cell
+            @click="$emit('click', $event)"
             v-if="data.children"
             v-for="(item, index) in data.children"
             :key="index"

@@ -43,8 +43,7 @@
         },
         methods: {
             handleAnchor (item) {
-                console.log(item);
-                // this.$anchor.anchorPosition();
+                this.$anchor.anchorPosition(item.id, 300, 70);
             },
         },
         components: {

@@ -1,6 +1,7 @@
 <template>
     <div class="classify-section">
-        <div class="classify-item classify-indicator" :style="{ top: numCurrent * 30 + 'px' }"></div>
+        <div class="classify-indicator iconfont icon-biaoqian" :style="{ top: numCurrent * 30 + 'px' }">
+        </div>
         <div class="classify-item"
              @click="numCurrent = index"
              :class="[numCurrent === index && 'active']"
@@ -65,8 +66,14 @@
         @extend %r0;
         @extend %l0;
         @extend %t0;
+        @extend %df;
+        @extend %cp;
+        @extend %aic;
         @include tst(all, 0.3s);
-        border-left: j(4) solid $mainColor;
-        background-color: #fff;
+        height: j(30);
+        font-size: j(16);
+        color: $mainColor;
+        //border-left: j(4) solid $mainColor;
+        //background-color: #fff;
     }
 </style>

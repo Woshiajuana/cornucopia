@@ -10,11 +10,11 @@
             <span class="suspension-date">{{strDay}}</span>
         </div>
 
-        <a class="suspension-item" title="微信" href="https://github.com/Woshiajuana" target="_blank">
+        <a class="suspension-item" title="GitHub" href="https://github.com/Woshiajuana" target="_blank">
             <span class="iconfont icon-github"></span>
         </a>
 
-        <div class="suspension-item">
+        <div class="suspension-item" title="微信">
             <span class="iconfont icon-weixin"></span>
             <div class="suspension-image">
                 <img src="https://cdn.sunofbeaches.com/images/test/2.jpg">
@@ -30,7 +30,8 @@
         </div>
 
         <div class="suspension-item"
-             @click="handleReturnTop"
+             title="回到顶部"
+             @click="$anchor.returnTop()"
              v-show="scroll$.scrollTop > 500">
             <span class="iconfont icon-top02"></span>
         </div>
@@ -68,16 +69,6 @@
             },
             handleReturnTop () {
                 this.$anchor.returnTop();
-                // timer && clearInterval(timer);
-                // timer = setInterval(() => {
-                //     let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
-                //     if (scrollTop <= 0) {
-                //         return clearInterval(timer);
-                //     }
-                //     let dir = Math.floor(scrollTop / 1.1);
-                //     document.documentElement.scrollTop = dir;
-                //     document.body.scrollTop = dir;
-                // }, 10);
             },
         },
     }

@@ -43,6 +43,7 @@
         @extend %cp;
         @extend %aic;
         @extend %c6;
+        @include tst(all, 0.3s);
         padding: 0 j(20);
         font-size: j(14);
         height: j(30);

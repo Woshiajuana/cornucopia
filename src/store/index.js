@@ -38,7 +38,7 @@ const mutations = {
                     id,
                     level: objHLevel.indexOf(item.nodeName) + 1,
                     title: item.innerHTML,
-                    offsetTop: item.offsetTop,
+                    offsetTop: item.offsetTop - 70,
                 }
             }).reverse();
         let arrSourceCatalog = [...children].reverse();
@@ -46,6 +46,7 @@ const mutations = {
             item.start = index === 0 ? 0 : item.offsetTop;
             item.end = arrSourceCatalog.length === index + 1 ? Infinity : arrSourceCatalog[index + 1].offsetTop;
         });
+        state.arrSourceCatalog = arrSourceCatalog;
         let result = [], loop;
         (loop = (nodes) => {
             let node = nodes.splice(0, 1)[0];

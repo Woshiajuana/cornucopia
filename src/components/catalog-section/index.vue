@@ -1,6 +1,6 @@
 <template>
-    <div class="catalog-section">
-        <div class="catalog-indicator" :style="{ top: 1 * 30 + 'px' }"></div>
+    <div class="catalog-section" v-if="computedCatalog.length">
+        <div class="catalog-indicator" :style="{ top: numCurrent * 30 + 'px' }"></div>
         <p class="catalog-title">目录</p>
         <catalog-cell
             v-for="(item, index) in computedCatalog"
@@ -19,6 +19,22 @@
         mixins: [
             ScrollMixin,
         ],
+        data () {
+            return {
+                numCurrent: 1,
+            }
+        },
+        watch: {
+            'scroll$.scrollTop' (v) {
+                let { arrSourceCatalog } = this.$store.state;
+                if (!arrSourceCatalog) return;
+                arrSourceCatalog.forEach((item, i) => {
+                    if (item.start <= v && v < item.end) {
+                        this.numCurrent = i + 1;
+                    }
+                });
+            }
+        },
         computed: {
             computedCatalog () {
                 return this.$store.state.arrCatalog;

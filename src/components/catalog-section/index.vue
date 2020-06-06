@@ -3,7 +3,7 @@
         <div class="catalog-indicator" :style="{ top: numCurrent * 30 + 'px' }"></div>
         <p class="catalog-title">目录</p>
         <catalog-cell
-            v-for="(item, index) in arrCatalog"
+            v-for="(item, index) in computedCatalog"
             :num="1"
             :data="item"
             :key="index">
@@ -15,6 +15,11 @@
     import CatalogCell from 'src/components/catalog-cell'
 
     export default {
+        computed: {
+            computedCatalog () {
+                return this.$store.state.arrCatalog;
+            },
+        },
         data () {
             return {
                 numCurrent: 2,

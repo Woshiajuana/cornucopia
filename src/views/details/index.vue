@@ -9,19 +9,28 @@
                 <span class="tag-item">JS</span>
             </div>
         </div>
-        <div class="article-content" id="article-content" v-html="strContent"></div>
+        <div class="article-content" ref="article" id="article" v-html="strContent"></div>
     </div>
 </template>
 <script>
     import marked from 'marked'
     import hljs from 'highlight.js';
+    import AutocJs from 'autocjs/dist/autoc'
     import 'highlight.js/styles/monokai-sublime.css';
-    // import 'highlight.js/styles/monokai.css';
 
     export default {
         data () {
             return {
                 strContent: '',
+                objHLevel: {
+                    H1: 1,
+                    H2: 2,
+                    H3: 3,
+                    H4: 4,
+                    H5: 5,
+                    H6: 6,
+                    H7: 7,
+                }
             }
         },
         watch: {
@@ -32,17 +41,57 @@
             }
         },
         created () {
-            this.$curl.get('static/test.md').then((res) => {
-                this.strContent = marked(res);
-                this.$nextTick(() => {
-                    document.querySelectorAll('pre').forEach((block) => {
-                        hljs.highlightBlock(block);
-                    });
+            this.reqArticleContent();
+        },
+        methods: {
+            reqArticleContent () {
+                this.$curl.get('static/test.md').then((res) => {
+                    this.strContent = marked(res);
+                    this.$nextTick(() => {
+                        document.querySelectorAll('pre').forEach((block) => {
+                            hljs.highlightBlock(block);
+                        });
+                        this.$store.commit('SET_CATALOG', this.$refs.article);
+                        // let childrens = Array.from(this.$refs.article.children);
+                        // childrens = childrens
+                        //     .filter((item, index) => this.objHLevel[item.nodeName])
+                        //     .map((item, index) => {
+                        //         let id = `heading-${index + 1}`;
+                        //         item.id = `heading-${index + 1}`;
+                        //         return {
+                        //             id,
+                        //             level: this.objHLevel[item.nodeName],
+                        //             title: item.innerHTML,
+                        //             offsetTop: item.offsetTop,
+                        //         }
+                        //     }).reverse();
+                        // let result = [], loop;
+                        // (loop = (nodes) => {
+                        //     let node = nodes.splice(0, 1)[0];
+                        //     if (!node) return;
+                        //     for (let i = 0, len = nodes.length; i < len; i++) {
+                        //         let item = nodes[i];
+                        //         if (item.level < node.level) {
+                        //             node.parent = true;
+                        //             if (!item.children) {
+                        //                 item.children = [];
+                        //             }
+                        //             item.children.unshift(node);
+                        //             break;
+                        //         }
+                        //     }
+                        //     if (!node.parent) {
+                        //         result.unshift(node)
+                        //     }
+                        //     loop(nodes);
+                        // }) (childrens);
+                        // console.log(result);
+                    })
+                }).catch((err) => {
+                    console.log(err);
                 })
-            }).catch((err) => {
-                console.log(err);
-            })
-        }
+            },
+        },
     }
 
 </script>

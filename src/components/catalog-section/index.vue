@@ -5,8 +5,8 @@
         <catalog-cell
             v-for="(item, index) in computedCatalog"
             :data="item"
-            :start="item.offsetTop"
-            :end="computedCatalog[index + 1] ? computedCatalog[index + 1].scrollTop : scroll$.scrollHeight"
+            :start="index === 0 ? 0 : item.offsetTop"
+            :end="computedCatalog[index + 1] ? computedCatalog[index + 1].offsetTop : scroll$.scrollHeight"
             :max="scroll$.scrollHeight"
             :scroll-top="scroll$.scrollTop"
             :key="index">

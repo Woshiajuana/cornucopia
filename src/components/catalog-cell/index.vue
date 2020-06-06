@@ -1,7 +1,7 @@
 <template>
     <div class="catalog-cell" :class="[ start <= scrollTop && scrollTop < end && 'active']">
         <a class="catalog-cell-title" href="javascript:;">
-            <i></i><span>{{data.title}}</span>
+            <i></i><span>start: {{start}} end: {{end}}  {{data.title}}</span>
         </a>
         <catalog-cell
             v-if="data.children"
@@ -9,7 +9,7 @@
             :key="index"
             :data="item"
             :start="item.offsetTop"
-            :end="data.children[index + 1] ? data.children[index + 1].scrollTop : max"
+            :end="data.children[index + 1] ? data.children[index + 1].offsetTop : max"
             :max="max"
             :scroll-top="scrollTop"
         ></catalog-cell>
@@ -38,6 +38,7 @@
         }
         &.active{
             > .catalog-cell-title{
+                @extend %fwb;
                 color: $mainColor;
             }
         }

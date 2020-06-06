@@ -1,16 +1,14 @@
 <template>
-    <div class="catalog-cell" :class="[ start <= scrollTop && scrollTop < end && 'active']">
+    <div class="catalog-cell"
+         :class="[ data.start <= scrollTop && scrollTop < data.end && 'active']">
         <a class="catalog-cell-title" href="javascript:;">
-            <i></i><span>start: {{start}} end: {{end}}  {{data.title}}</span>
+            <i></i><span>{{data.title}}</span>
         </a>
         <catalog-cell
             v-if="data.children"
             v-for="(item, index) in data.children"
             :key="index"
             :data="item"
-            :start="item.offsetTop"
-            :end="data.children[index + 1] ? data.children[index + 1].offsetTop : max"
-            :max="max"
             :scroll-top="scrollTop"
         ></catalog-cell>
     </div>
@@ -21,9 +19,6 @@
         name: 'catalog-cell',
         props: {
             data: { default: '' },
-            start: { default: '' },
-            end: { default: '' },
-            max: { default: '' },
             scrollTop: { default: '' },
         },
     }

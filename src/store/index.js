@@ -11,6 +11,7 @@ Vue.use(Vuex);
 const state = {
     animateName: '',
     arrCatalog: [], // 目录
+    arrSourceCatalog: [], // 数据元目录
 };
 
 // 模块
@@ -40,6 +41,11 @@ const mutations = {
                     offsetTop: item.offsetTop,
                 }
             }).reverse();
+        let arrSourceCatalog = [...children].reverse();
+        arrSourceCatalog.forEach((item, index) => {
+            item.start = index === 0 ? 0 : item.offsetTop;
+            item.end = arrSourceCatalog.length === index + 1 ? Infinity : arrSourceCatalog[index + 1].offsetTop;
+        });
         let result = [], loop;
         (loop = (nodes) => {
             let node = nodes.splice(0, 1)[0];

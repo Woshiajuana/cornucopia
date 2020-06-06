@@ -73,7 +73,5 @@
         height: j(30);
         font-size: j(16);
         color: $mainColor;
-        //border-left: j(4) solid $mainColor;
-        //background-color: #fff;
     }
 </style>

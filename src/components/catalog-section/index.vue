@@ -1,6 +1,6 @@
 <template>
     <div class="catalog-section" v-if="computedCatalog.length">
-        <div class="catalog-indicator" :style="{ top: numCurrent * 30 + 'px' }"></div>
+        <div class="catalog-indicator iconfont icon-biaoqian" :style="{ top: numCurrent * 30 + 'px' }"></div>
         <p class="catalog-title">目录</p>
         <catalog-cell
             @click="handleAnchor"
@@ -81,7 +81,7 @@
         @extend %aic;
         @include tst(all, 0.3s);
         height: j(30);
-        border-left: j(4) solid $mainColor;
-        background-color: #fff;
+        font-size: j(16);
+        color: $mainColor;
     }
 </style>

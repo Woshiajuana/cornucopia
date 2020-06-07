@@ -85,23 +85,15 @@
             },
             loadingMore () {
                 if (this.isLoading)
-                    return console.log('正在加载中...');
+                    return;
                 if (this.numIndex * this.numSize >= this.numTotal)
-                    return console.log('没有更多了');
+                    return;
                 this.isLoading = true;
                 setTimeout(() => {
                     this.numIndex++;
                     this.isLoading = false;
                 }, 500);
             },
-            // assignmentData (v = this.$route.params) {
-            //     let index = 0;
-            //     this.arrClassify.forEach((item, i) => {
-            //         if (v.classify === item.title.toLocaleLowerCase()) index = i;
-            //     });
-            //     console.log('index => ', index)
-            //     this.numCurrent = index;
-            // }
         },
         components: {
             ArticleCell,

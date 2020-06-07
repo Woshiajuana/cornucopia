@@ -27,7 +27,6 @@
             //监听路由变化
             $route( to, from ){
                 if (['/details'].indexOf(this.$route.path) > -1 ) {
-                    console.log('详情页执行了 => this.reqArticleContent()');
                     document.documentElement.scrollTop = 0;
                     document.body.scrollTop = 0;
                     this.reqArticleContent();

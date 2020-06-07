@@ -37,11 +37,12 @@
                 });
             },
             handleSelect (item) {
-                let path = item.title;
-                if (path === '全部') {
-                    return this.$router.push('/');
+                let path = item.title === '全部' ? '/' : `/classify/${item.title.toLocaleLowerCase()}`;
+                if (this.$route.path !== path) {
+                    document.documentElement.scrollTop = 0;
+                    document.body.scrollTop = 0;
                 }
-                this.$router.push(`/classify/${path.toLocaleLowerCase()}`);
+                this.$router.push(path);
             },
             assignmentData (v = this.$route.params) {
                 let index = 0;

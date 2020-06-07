@@ -41,9 +41,8 @@
             }
         },
         watch: {
-            '$route.params' (v) {
+            '$route' (v, o) {
                 if (this.$route.path === '/' || this.$route.path.startsWith('/classify')) {
-                    console.log('首页执行了 => this.reqArticleList()');
                     this.reqArticleList();
                 }
             },

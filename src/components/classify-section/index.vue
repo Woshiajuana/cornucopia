@@ -38,8 +38,9 @@
             },
             handleSelect (item) {
                 let path = item.title;
-                if (path === '全部')
-                    path = '';
+                if (path === '全部') {
+                    return this.$router.push('/');
+                }
                 this.$router.push(`/classify/${path.toLocaleLowerCase()}`);
             },
             assignmentData (v = this.$route.params) {
@@ -47,7 +48,6 @@
                 this.arrClassify.forEach((item, i) => {
                     if (v.classify === item.title.toLocaleLowerCase()) index = i;
                 });
-                console.log('index => ', index)
                 this.numCurrent = index;
             }
         },

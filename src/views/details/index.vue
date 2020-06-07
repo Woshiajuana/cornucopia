@@ -26,9 +26,12 @@
         watch: {
             //监听路由变化
             $route( to, from ){
-                document.documentElement.scrollTop = 0;
-                document.body.scrollTop = 0;
-                this.reqArticleContent();
+                if (['/details'].indexOf(this.$route.path) > -1 ) {
+                    console.log('详情页执行了 => this.reqArticleContent()');
+                    document.documentElement.scrollTop = 0;
+                    document.body.scrollTop = 0;
+                    this.reqArticleContent();
+                }
             }
         },
         created () {
@@ -36,7 +39,6 @@
         },
         methods: {
             reqArticleContent () {
-                console.log('1')
                 let { classify, id } = this.$route.params;
                 this.$curl.get(`static/articles/${classify}/${id}`).then((res) => {
                     this.strContent = marked(res);

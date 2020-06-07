@@ -22,8 +22,6 @@
         computed: {
             computedArticles () {
                 let arr = this.arrData.slice(0, this.numIndex * this.numSize);
-
-                // 归组
                 let obj = {};
                 let fmt = [];
                 arr.forEach((item, index) => {
@@ -39,15 +37,15 @@
                     }
                     fmt[obj[group]].children.push(item);
                 });
-
-                console.log(fmt);
-
                 return fmt;
             }
         },
         watch: {
             '$route.params' (v) {
-                this.reqArticleList();
+                if (this.$route.path === '/' || this.$route.path.startsWith('/classify')) {
+                    console.log('首页执行了 => this.reqArticleList()');
+                    this.reqArticleList();
+                }
             },
         },
         data () {

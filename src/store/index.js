@@ -67,7 +67,6 @@ const mutations = {
             }
             loop(nodes);
         }) (children);
-        console.log('到这个 => ',result)
         state.arrCatalog = result;
     }
 };

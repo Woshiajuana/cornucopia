@@ -4,9 +4,9 @@
             <a class="logo" href="/#/">AJUAN</a>
             <div class="search" :class="[strKeyword && 'active']">
                 <div class="search-input">
-                    <input v-model="strKeyword" type="text" placeholder="请输入关键字"/>
+                    <input v-model="strKeyword" ref="input" @keyup.enter="handleSearch" type="text" placeholder="请输入关键字"/>
                 </div>
-                <div v-show="strKeyword" @click="strKeyword = ''" class="search-btn iconfont icon-close"></div>
+                <div v-show="strKeyword" @click="handleClear" class="search-btn iconfont icon-close"></div>
                 <div @click="handleSearch"  class="search-btn iconfont icon-search"></div>
             </div>
         </div>
@@ -20,14 +20,28 @@
                 strKeyword: '',
             };
         },
+        watch: {
+            '$route.query' (v, o) {
+                this.strKeyword = this.$route.query.search || '';
+            },
+        },
+        created () {
+        },
         methods: {
+            handleClear () {
+                this.strKeyword = '';
+                this.handleSearch();
+            },
             handleSearch () {
                 let query = {};
                 let path = this.$route.path;
                 if (this.strKeyword) {
                     query.search = this.strKeyword;
+                }
+                if (this.$route.path !== '/' && !this.$route.path.startsWith('/classify')) {
                     path = '/';
                 }
+                this.$refs.input && this.$refs.input.focus();
                 this.$router.push({ path, query });
             }
         }

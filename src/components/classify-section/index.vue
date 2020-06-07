@@ -42,7 +42,7 @@
                     document.documentElement.scrollTop = 0;
                     document.body.scrollTop = 0;
                 }
-                this.$router.push(path);
+                this.$router.push({ path, query: this.$route.query });
             },
             assignmentData (v = this.$route.params) {
                 let index = 0;

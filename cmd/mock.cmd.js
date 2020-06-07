@@ -3,6 +3,8 @@ const fs = require('fs-extra');
 const path = require('path');
 const output = require('wow-cmd').output;
 const cmdPath = process.cwd();
+const marked = require('marked');
+const cheerio = require('cheerio');
 
 const Handle = (options, data, next) => {
     let {
@@ -32,11 +34,18 @@ const Handle = (options, data, next) => {
                 if (fileStat.isFile() && ['.md'].indexOf(fileExtName) > -1) {
                     fileDirArr.shift();
                     let catalog = fileDirArr[0];
+
+                    const content = fs.readFileSync(fullPath).toString();
+                    const $ = cheerio.load(marked(content));
+
+                    console.log('标题 =>', $('h1').text())
+
                     jsonArticles.push({
                         id: `${fileDirArr.join('/')}`,
                         time: `${fileDirArr[1].replace('.md', '')}`,
                         catalog,
                     });
+
                     let [ objCatalog ] = jsonCatalog.filter((item) => item.title === catalog);
                     if (objCatalog) {
                         objCatalog.number++;

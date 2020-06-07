@@ -1,21 +1,25 @@
 <template>
     <div class="details-view-wrap">
-        <div class="article-header" v-if="strContent">
-            <h1>第一章好 i 哦对大时代萨蒂简欧</h1>
-            <p class="time">2020-09-09 12:12:12</p>
-            <div class="tag">
-                <span class="tag-item">HTML</span>
-                <span class="tag-item">CSS</span>
-                <span class="tag-item">JS</span>
+        <template v-if="strContent">
+            <div class="article-header">
+                <h1>第一章好 i 哦对大时代萨蒂简欧</h1>
+                <p class="time">2020-09-09 12:12:12</p>
+                <div class="tag">
+                    <span class="tag-item">HTML</span>
+                    <span class="tag-item">CSS</span>
+                    <span class="tag-item">JS</span>
+                </div>
             </div>
-        </div>
-        <div class="article-content" ref="article" id="article" v-html="strContent"></div>
+            <div class="article-content" ref="article" id="article" v-html="strContent"></div>
+        </template>
+        <article-cell-loading v-else></article-cell-loading>
     </div>
 </template>
 <script>
     import marked from 'marked'
-    import hljs from 'highlight.js';
-    import 'highlight.js/styles/monokai-sublime.css';
+    import hljs from 'highlight.js'
+    import ArticleCellLoading from 'src/components/article-cell-loading'
+    import 'highlight.js/styles/monokai-sublime.css'
 
     export default {
         data () {
@@ -25,7 +29,8 @@
         },
         watch: {
             //监听路由变化
-            $route( to, from ){
+            '$route.params' () {
+                console.log('执行执行值新思想家')
                 if (['/details'].indexOf(this.$route.path) > -1 ) {
                     document.documentElement.scrollTop = 0;
                     document.body.scrollTop = 0;
@@ -51,6 +56,9 @@
                     console.log(err);
                 })
             },
+        },
+        components: {
+            ArticleCellLoading,
         },
     }
 

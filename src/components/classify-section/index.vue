@@ -6,7 +6,7 @@
              :class="[numCurrent === index && 'active']"
              v-for="(item, index) in arrClassify"
              :key="index">
-            <span>{{item.title}}</span>
+            <span>{{item.title}} ({{item.number}})</span>
         </div>
     </div>
 </template>
@@ -26,9 +26,7 @@
             reqClassifyList () {
                 this.$curl.get('static/mocks/classify.json').then((res) => {
                     this.arrClassify = [{ title: '全部' }, ...res];
-                }).catch(() => {
-
-                })
+                });
             },
         },
     }

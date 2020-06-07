@@ -1,7 +1,7 @@
 
 <template>
     <div class="article-cell">
-        <a class="title" :href="'#/details/' + data.id">{{data.title}}</a>
+        <a class="title" :href="'#/details/' + data.id" v-html="computedTitle"></a>
         <p class="abstract">{{data.abstract}}</p>
         <div class="meta"></div>
     </div>
@@ -9,7 +9,18 @@
 
 <script>
     export default {
-        props: { data: { default: '' } }
+        props: { data: { default: '' } },
+        computed: {
+            computedTitle () {
+                let { search } = this.$route.query;
+                let { title } = this.data;
+                if (search) {
+                    const reg = new RegExp(search, 'ig');
+                    title = title.replace(reg, `<strong>${search}</strong>`);
+                }
+                return title;
+            },
+        }
     }
 </script>
 
@@ -20,6 +31,9 @@
         border-bottom: 1px solid #ddd;
         &:last-child{
             border-bottom: none;
+        }
+        strong{
+            color: red;
         }
     }
     .title{

@@ -69,6 +69,8 @@
                         arr = arr.filter((item) => item.classify.toLocaleLowerCase() === classify);
                     }
                     if (search) {
+                        console.log('search => ', search);
+                        console.log('arr => ', arr);
                         arr = arr.filter((item) => item.title.indexOf(search) > -1 || item.abstract.indexOf(search) > -1);
                     }
                     // 划分日期

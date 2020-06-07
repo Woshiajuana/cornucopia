@@ -55,6 +55,7 @@
             }
         },
         created () {
+            console.log('this.$route.params', this.$route.params)
             this.reqArticleList();
         },
         methods: {

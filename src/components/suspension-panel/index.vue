@@ -51,7 +51,7 @@
         ],
         data () {
             return {
-                strDay: new Date().getDay(),
+                strDay: new Date().getDate(),
             };
         },
         mounted () {

@@ -2,7 +2,7 @@
     <div class="classify-section">
         <div class="classify-indicator iconfont icon-biaoqian" :style="{ top: numCurrent * 30 + 'px' }"></div>
         <div class="classify-item"
-             @click="numCurrent = index"
+             @click="handleSelect(item)"
              :class="[numCurrent === index && 'active']"
              v-for="(item, index) in arrClassify"
              :key="index">
@@ -19,6 +19,11 @@
                 arrClassify: [],
             }
         },
+        watch: {
+            '$route.params' (v) {
+                this.assignmentData(v);
+            },
+        },
         created () {
             this.reqClassifyList();
         },
@@ -28,8 +33,23 @@
                     let number = 0;
                     res.forEach((item) => number += item.number);
                     this.arrClassify = [{ title: '全部', number, }, ...res];
+                    this.assignmentData();
                 });
             },
+            handleSelect (item) {
+                let path = item.title;
+                if (path === '全部')
+                    path = '';
+                this.$router.push(`/${path.toLocaleLowerCase()}`);
+            },
+            assignmentData (v = this.$route.params) {
+                let index = 0;
+                this.arrClassify.forEach((item, i) => {
+                    if (v.classify === item.title.toLocaleLowerCase()) index = i;
+                });
+                console.log('index => ', index)
+                this.numCurrent = index;
+            }
         },
     }
 </script>

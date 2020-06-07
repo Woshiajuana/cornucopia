@@ -27,6 +27,15 @@ const router = new Router({
             }
         },
         {
+            path: '/:classify',
+            // redirect: '/index',
+            component: () => import('src/views/home'),
+            meta: {
+                useClassify: true,
+                useCopyright: true,
+            }
+        },
+        {
             path: '*',
             redirect: '/',
         }

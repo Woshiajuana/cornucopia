@@ -45,6 +45,11 @@
                 return fmt;
             }
         },
+        watch: {
+            '$route.params' (v) {
+                this.reqArticleList();
+            },
+        },
         data () {
             return {
                 arrData: [],
@@ -55,13 +60,16 @@
             }
         },
         created () {
-            console.log('this.$route.params', this.$route.params)
             this.reqArticleList();
         },
         methods: {
             reqArticleList () {
                 this.$curl.get('static/mocks/articles.json').then((res) => {
                     let arr = res || [];
+                    let { classify } = this.$route.params;
+                    if (classify) {
+                        arr = arr.filter((item) => item.classify.toLocaleLowerCase() === classify);
+                    }
                     // 划分日期
                     arr.forEach((item, index) => {
                         let { time } = item;
@@ -89,6 +97,14 @@
                     this.isLoading = false;
                 }, 500);
             },
+            // assignmentData (v = this.$route.params) {
+            //     let index = 0;
+            //     this.arrClassify.forEach((item, i) => {
+            //         if (v.classify === item.title.toLocaleLowerCase()) index = i;
+            //     });
+            //     console.log('index => ', index)
+            //     this.numCurrent = index;
+            // }
         },
         components: {
             ArticleCell,

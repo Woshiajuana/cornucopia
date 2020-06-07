@@ -69,9 +69,10 @@
                         arr = arr.filter((item) => item.classify.toLocaleLowerCase() === classify);
                     }
                     if (search) {
-                        console.log('search => ', search);
-                        console.log('arr => ', arr);
-                        arr = arr.filter((item) => item.title.indexOf(search) > -1 || item.abstract.indexOf(search) > -1);
+                        arr = arr.filter((item) => {
+                            const reg = new RegExp(search, 'ig');
+                            return reg.test(item.title) || reg.test(item.abstract);
+                        });
                     }
                     // 划分日期
                     arr.forEach((item, index) => {

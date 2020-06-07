@@ -2,7 +2,7 @@
 <template>
     <div class="article-cell">
         <a class="title" :href="'#/details/' + data.id" v-html="computedTitle"></a>
-        <p class="abstract">{{data.abstract}}</p>
+        <p class="abstract" v-html="computedAbstract"></p>
         <div class="meta"></div>
     </div>
 </template>
@@ -19,6 +19,15 @@
                     title = title.replace(reg, `<strong>${search}</strong>`);
                 }
                 return title;
+            },
+            computedAbstract () {
+                let { search } = this.$route.query;
+                let { abstract } = this.data;
+                if (search) {
+                    const reg = new RegExp(search, 'ig');
+                    abstract = abstract.replace(reg, `<strong>${search}</strong>`);
+                }
+                return abstract;
             },
         }
     }

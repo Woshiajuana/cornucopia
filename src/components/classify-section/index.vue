@@ -40,7 +40,7 @@
                 let path = item.title;
                 if (path === '全部')
                     path = '';
-                this.$router.push(`/${path.toLocaleLowerCase()}`);
+                this.$router.push(`/classify/${path.toLocaleLowerCase()}`);
             },
             assignmentData (v = this.$route.params) {
                 let index = 0;

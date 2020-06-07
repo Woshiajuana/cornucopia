@@ -1,7 +1,7 @@
 
 <template>
     <div class="article-cell">
-        <a class="title" href="#/details">{{data.title}}</a>
+        <a class="title" :href="'#/details/' + data.id">{{data.title}}</a>
         <p class="abstract">{{data.abstract}}</p>
         <div class="meta"></div>
     </div>

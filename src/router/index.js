@@ -16,9 +16,17 @@ const router = new Router({
                 useCopyright: true,
             }
         },
+        {
+            path: '/classify/:classify',
+            component: () => import('src/views/home'),
+            meta: {
+                useClassify: true,
+                useCopyright: true,
+            }
+        },
         // 详情
         {
-            path: '/details',
+            path: '/details/:classify/:id',
             name: 'details',
             component: () => import('src/views/details'),
             meta: {
@@ -26,19 +34,10 @@ const router = new Router({
                 useCatalog: true,
             }
         },
-        {
-            path: '/:classify',
-            // redirect: '/index',
-            component: () => import('src/views/home'),
-            meta: {
-                useClassify: true,
-                useCopyright: true,
-            }
-        },
-        {
-            path: '*',
-            redirect: '/',
-        }
+        // {
+        //     path: '*',
+        //     redirect: '/',
+        // }
     ]
 });
 

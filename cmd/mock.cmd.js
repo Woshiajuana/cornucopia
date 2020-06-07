@@ -16,8 +16,8 @@ const Handle = (options, data, next) => {
         let [ entryDir, outputDir ] = params.split('::');
         entryDir = path.join(cmdPath, entryDir);
         outputDir = path.join(cmdPath, outputDir);
-        console.log('entryDir => ', entryDir);
-        console.log('outputDir => ', outputDir);
+        output.success('mock.cmd=>', `指定生成mock数据入口目录【${entryDir}】`);
+        output.success('mock.cmd=>', `指定生成mock数据出口目录【${outputDir}】`);
 
         const jsonCatalog = [];
         const jsonArticles = [];
@@ -30,17 +30,25 @@ const Handle = (options, data, next) => {
                 const fileLastDir = fileDirArr[fileDirArr.length - 1];
                 if (fileStat.isFile() && ['.md'].indexOf(fileExtName) > -1) {
                     fileDirArr.shift();
+                    let catalog = fileDirArr[0];
                     jsonArticles.push({
                         id: `${fileDirArr.join('/')}`,
-                        catalog: '',
-                    })
-                    // const name = Array.from(new Set([...fileDirArr])).join('_');
-                    // treeJson.resource[name] = { src: `${name}.js` };
-                    // oldTreeJson.resource[name] = `${name}.js`;
+                        catalog,
+                    });
+                    if (jsonCatalog.indexOf(catalog) === -1) {
+                        jsonCatalog.push(catalog);
+                    }
                 } else if (fileStat.isDirectory() && [].indexOf(fileLastDir) === -1) {
                     walk(fullPath);
                 }
             });
+
+            fs.ensureDirSync(outputDir);
+            // 生成文章 json
+            fs.writeFileSync(path.join(outputDir, 'articles.json'), JSON.stringify(jsonArticles, null, 4));
+            // 生成目录 json
+            fs.writeFileSync(path.join(outputDir, 'catalog.json'), JSON.stringify(jsonCatalog, null, 4));
+
         })(entryDir);
 
     } catch (e) {

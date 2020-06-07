@@ -7,7 +7,7 @@
                     <input v-model="strKeyword" type="text" placeholder="请输入关键字"/>
                 </div>
                 <div v-show="strKeyword" @click="strKeyword = ''" class="search-btn iconfont icon-close"></div>
-                <div class="search-btn iconfont icon-search"></div>
+                <div @click="handleSearch"  class="search-btn iconfont icon-search"></div>
             </div>
         </div>
     </div>
@@ -17,7 +17,18 @@
     export default {
         data () {
             return {
-                strKeyword: ''
+                strKeyword: '',
+            };
+        },
+        methods: {
+            handleSearch () {
+                let query = {};
+                let path = this.$route.path;
+                if (this.strKeyword) {
+                    query.search = this.strKeyword;
+                    path = '/';
+                }
+                this.$router.push({ path, query });
             }
         }
     }

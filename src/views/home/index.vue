@@ -64,8 +64,12 @@
                 this.$curl.get('static/mocks/articles.json').then((res) => {
                     let arr = res || [];
                     let { classify } = this.$route.params;
+                    let { search } = this.$route.query;
                     if (classify) {
                         arr = arr.filter((item) => item.classify.toLocaleLowerCase() === classify);
+                    }
+                    if (search) {
+                        arr = arr.filter((item) => item.title.indexOf(search) > -1 || item.abstract.indexOf(search) > -1);
                     }
                     // 划分日期
                     arr.forEach((item, index) => {

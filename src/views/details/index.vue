@@ -30,8 +30,8 @@
         watch: {
             //监听路由变化
             '$route.params' () {
-                console.log('执行执行值新思想家')
-                if (['/details'].indexOf(this.$route.path) > -1 ) {
+                if (this.$route.path.startsWith('/details')) {
+                    this.strContent = '';
                     document.documentElement.scrollTop = 0;
                     document.body.scrollTop = 0;
                     this.reqArticleContent();
@@ -45,13 +45,15 @@
             reqArticleContent () {
                 let { classify, id } = this.$route.params;
                 this.$curl.get(`static/articles/${classify}/${id}`).then((res) => {
-                    this.strContent = marked(res);
-                    this.$nextTick(() => {
-                        document.querySelectorAll('pre').forEach((block) => {
-                            hljs.highlightBlock(block);
-                        });
-                        this.$store.commit('SET_CATALOG', this.$refs.article);
-                    })
+                    setTimeout(() => {
+                        this.strContent = marked(res);
+                        this.$nextTick(() => {
+                            document.querySelectorAll('pre').forEach((block) => {
+                                hljs.highlightBlock(block);
+                            });
+                            this.$store.commit('SET_CATALOG', this.$refs.article);
+                        })
+                    }, 500);
                 }).catch((err) => {
                     console.log(err);
                 })

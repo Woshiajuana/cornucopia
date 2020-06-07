@@ -1,13 +1,12 @@
 <template>
     <div class="classify-section">
-        <div class="classify-indicator iconfont icon-biaoqian" :style="{ top: numCurrent * 30 + 'px' }">
-        </div>
+        <div class="classify-indicator iconfont icon-biaoqian" :style="{ top: numCurrent * 30 + 'px' }"></div>
         <div class="classify-item"
              @click="numCurrent = index"
              :class="[numCurrent === index && 'active']"
              v-for="(item, index) in arrClassify"
              :key="index">
-            <span>{{item.label}}</span>
+            <span>{{item.title}}</span>
         </div>
     </div>
 </template>
@@ -17,17 +16,20 @@
         data () {
             return {
                 numCurrent: 0,
-                arrClassify: [
-                    { label: '全部' },
-                    { label: 'HTML / CSS' },
-                    { label: 'Javascript / ES6' },
-                    { label: 'Android' },
-                    { label: 'iOS' },
-                    { label: 'Flutter' },
-                    { label: 'Nodejs' },
-                    { label: '其他' },
-                ]
+                arrClassify: [],
             }
+        },
+        created () {
+            this.reqClassifyList();
+        },
+        methods: {
+            reqClassifyList () {
+                this.$curl.get('static/mocks/classify.json').then((res) => {
+                    this.arrClassify = [{ title: '全部' }, ...res];
+                }).catch(() => {
+
+                })
+            },
         },
     }
 </script>

@@ -22,7 +22,7 @@ const Handle = (options, data, next) => {
         output.success('mock.cmd=>', `指定生成mock数据出口目录【${outputDir}】`);
 
         // 遍历
-        const jsonCatalog = [];
+        const jsonClassify = [];
         const jsonArticles = [];
         ;(function walk(directory) {
             fs.readdirSync(directory).forEach((file) => {
@@ -33,7 +33,7 @@ const Handle = (options, data, next) => {
                 const fileLastDir = fileDirArr[fileDirArr.length - 1];
                 if (fileStat.isFile() && ['.md'].indexOf(fileExtName) > -1) {
                     fileDirArr.shift();
-                    let catalog = fileDirArr[0];
+                    let classify = fileDirArr[0];
 
                     const content = fs.readFileSync(fullPath).toString();
                     const $ = cheerio.load(marked(content));
@@ -43,14 +43,14 @@ const Handle = (options, data, next) => {
                         title: $('h1').text() || '',
                         abstract: $('p').text().substring(0, 100) || '',
                         time: `${fileDirArr[1].replace('.md', '')}`,
-                        catalog,
+                        classify,
                     });
 
-                    let [ objCatalog ] = jsonCatalog.filter((item) => item.title === catalog);
-                    if (objCatalog) {
-                        objCatalog.number++;
+                    let [ objClassify ] = jsonClassify.filter((item) => item.title === classify);
+                    if (objClassify) {
+                        objClassify.number++;
                     } else {
-                        jsonCatalog.push({ title: catalog, number: 1 });
+                        jsonClassify.push({ title: classify, number: 1 });
                     }
                 } else if (fileStat.isDirectory() && [].indexOf(fileLastDir) === -1) {
                     walk(fullPath);
@@ -64,7 +64,7 @@ const Handle = (options, data, next) => {
         // 生产 json
         fs.ensureDirSync(outputDir);
         fs.writeFileSync(path.join(outputDir, 'articles.json'), JSON.stringify(jsonArticles, null, 4));
-        fs.writeFileSync(path.join(outputDir, 'catalog.json'), JSON.stringify(jsonCatalog, null, 4));
+        fs.writeFileSync(path.join(outputDir, 'classify.json'), JSON.stringify(jsonClassify, null, 4));
 
     } catch (e) {
         output.error('mock.cmd=>', `发布app错误：${e}`);

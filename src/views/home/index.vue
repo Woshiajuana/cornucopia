@@ -24,12 +24,15 @@
         ],
         data () {
             return {
-                arrData: 3,
+                arrData: [],
                 isLoading: false,
                 isComplete: false,
             }
         },
         methods: {
+            reqArticleList () {
+
+            },
             scrollCallback () {
                 let { scrollTop, scrollHeight, clientHeight } = this.scroll$;
                 if (scrollTop + clientHeight > scrollHeight - 300) {

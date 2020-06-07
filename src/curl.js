@@ -4,10 +4,10 @@ import axios from 'axios'
 const instance = axios.create({
     // baseURL: api.BASE_URL,
     timeout: 30 * 1000,
-    // responseType: 'json',
-    // headers: {
-    //     'Content-Type': 'application/json;charset=UTF-8',
-    // },
+    responseType: 'json',
+    headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+    },
 });
 
 instance.interceptors.request.use((config) => {

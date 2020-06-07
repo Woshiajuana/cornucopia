@@ -15,7 +15,6 @@
 <script>
     import marked from 'marked'
     import hljs from 'highlight.js';
-    import AutocJs from 'autocjs/dist/autoc'
     import 'highlight.js/styles/monokai-sublime.css';
 
     export default {

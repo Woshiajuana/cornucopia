@@ -7,7 +7,7 @@
                     <input v-model="strKeyword" ref="input" @keyup.enter="handleSearch" type="text" placeholder="请输入关键字"/>
                 </div>
                 <div v-show="strKeyword" @click="handleClear" class="search-btn iconfont icon-close"></div>
-                <div @click="handleSearch"  class="search-btn iconfont icon-search"></div>
+                <div @click="handleSearch" @mouseenter="$refs.input.focus()" class="search-btn iconfont icon-search"></div>
             </div>
         </div>
     </div>
@@ -25,8 +25,6 @@
                 this.strKeyword = this.$route.query.search || '';
             },
         },
-        created () {
-        },
         methods: {
             handleClear () {
                 this.strKeyword = '';
@@ -38,10 +36,12 @@
                 if (this.strKeyword) {
                     query.search = this.strKeyword;
                 }
+                this.$refs.input && this.$refs.input.focus();
                 if (this.$route.path !== '/' && !this.$route.path.startsWith('/classify')) {
                     path = '/';
+                    if (!this.strKeyword)
+                        return null;
                 }
-                this.$refs.input && this.$refs.input.focus();
                 this.$router.push({ path, query });
             }
         }

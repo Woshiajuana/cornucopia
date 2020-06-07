@@ -38,10 +38,10 @@ const Handle = (options, data, next) => {
                     const content = fs.readFileSync(fullPath).toString();
                     const $ = cheerio.load(marked(content));
 
-                    console.log('标题 =>', $('h1').text())
-
                     jsonArticles.push({
                         id: `${fileDirArr.join('/')}`,
+                        title: $('h1').text() || '',
+                        abstract: $('p').text().substring(0, 100) || '',
                         time: `${fileDirArr[1].replace('.md', '')}`,
                         catalog,
                     });

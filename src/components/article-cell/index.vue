@@ -1,15 +1,15 @@
 
 <template>
     <div class="article-cell">
-        <a class="title" href="#/details">标题标标题标题标题标题标题标题标题标题标题标题标题标题题</a>
-        <p class="abstract">的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师的撒的流量萨德拉屎的拉屎的打扫了大师；鲁大师</p>
+        <a class="title" href="#/details">{{data.title}}</a>
+        <p class="abstract">{{data.abstract}}</p>
         <div class="meta"></div>
     </div>
 </template>
 
 <script>
     export default {
-
+        props: { data: { default: '' } }
     }
 </script>
 

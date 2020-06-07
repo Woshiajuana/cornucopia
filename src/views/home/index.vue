@@ -1,10 +1,8 @@
 <template>
     <div class="home-view-wrap">
-        <div class="cell" v-for="(item, index) in computedArticles" :key="index">
-            <p class="cell-date">2020年{{index+1}}月</p>
-            <article-cell></article-cell>
-            <article-cell></article-cell>
-            <article-cell></article-cell>
+        <div class="cell" v-for="(group, gInd) in computedArticles" :key="gInd">
+            <p class="cell-date">{{group.name}}</p>
+            <article-cell v-for="(item, index) in group.children" :key="index" :data="item"></article-cell>
         </div>
         <article-cell-loading
             :is-complete="numTotal !== -1 && numIndex * numSize >= numTotal"
@@ -23,15 +21,35 @@
         ],
         computed: {
             computedArticles () {
-                console.log(this.arrData.slice(0, this.numIndex * this.numSize));
-                return this.arrData.slice(0, this.numIndex * this.numSize);
+                let arr = this.arrData.slice(0, this.numIndex * this.numSize);
+
+                // 归组
+                let obj = {};
+                let fmt = [];
+                arr.forEach((item, index) => {
+                    let { group } = item;
+                    if (obj[group] === undefined) {
+                        obj[group] = index;
+                    }
+                    if (!fmt[obj[group]]) {
+                        fmt[obj[group]] = {
+                            name: group,
+                            children: [],
+                        }
+                    }
+                    fmt[obj[group]].children.push(item);
+                });
+
+                console.log(fmt);
+
+                return fmt;
             }
         },
         data () {
             return {
                 arrData: [],
                 numTotal: -1,
-                numSize: 1,
+                numSize: 10,
                 numIndex: 1,
                 isLoading: false,
             }
@@ -42,7 +60,14 @@
         methods: {
             reqArticleList () {
                 this.$curl.get('static/mocks/articles.json').then((res) => {
-                    this.arrData = res || [];
+                    let arr = res || [];
+                    // 划分日期
+                    arr.forEach((item, index) => {
+                        let { time } = item;
+                        item.group = `${time.substring(0, 4)}-${time.substring(4, 6)}`;
+                        item.date = `${time.substring(0,4)}-${time.substring(4,6)}-${time.substring(6,8)} ${time.substring(8,10)}:${time.substring(10,12)}:${time.substring(12)}`;
+                    });
+                    this.arrData = arr;
                     this.numTotal = this.arrData.length;
                 });
             },

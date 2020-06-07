@@ -1,5 +1,6 @@
 
 import Vue from 'vue'
+// import hljs from 'highlight.js'
 
 import App from 'src/App'
 import router from 'src/router'
@@ -15,6 +16,14 @@ Vue.config.productionTip = false;
 Vue.prototype.$curl = curl;
 Vue.prototype.$anchor = new Anchor();
 Vue.prototype.$date = dateUtil;
+
+// 在main.js定义自定义指令
+// Vue.directive('highlight',function (el) {
+//     let blocks = el.querySelectorAll('pre code');
+//     blocks.forEach((block)=>{
+//         hljs.highlightBlock(block)
+//     })
+// });
 
 const vue = new Vue({
     el: '#app',

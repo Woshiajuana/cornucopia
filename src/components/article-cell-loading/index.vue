@@ -23,10 +23,7 @@
     @import "~src/assets/scss/define";
     .article-cell-loading{
         padding: j(20);
-        border-top: 1px solid #ddd;
-        &:last-child{
-            border-bottom: none;
-        }
+        /*border-top: 1px solid #ddd;*/
     }
     .loading-inner{
         background-color: #f3f3f3;

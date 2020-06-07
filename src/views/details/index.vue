@@ -1,5 +1,6 @@
 <template>
     <div class="details-view-wrap">
+        <article-cell-loading v-show="!strContent"></article-cell-loading>
         <template v-if="strContent">
             <div class="article-header">
                 <h1>第一章好 i 哦对大时代萨蒂简欧</h1>
@@ -12,7 +13,6 @@
             </div>
             <div class="article-content" ref="article" id="article" v-html="strContent"></div>
         </template>
-        <article-cell-loading v-else></article-cell-loading>
     </div>
 </template>
 <script>
@@ -34,9 +34,10 @@
                     this.strContent = '';
                     document.documentElement.scrollTop = 0;
                     document.body.scrollTop = 0;
+                    this.$store.commit('SET_CATALOG', { value: [] });
                     this.reqArticleContent();
                 }
-            }
+            },
         },
         created () {
             this.reqArticleContent();
@@ -48,10 +49,12 @@
                     setTimeout(() => {
                         this.strContent = marked(res);
                         this.$nextTick(() => {
-                            document.querySelectorAll('pre').forEach((block) => {
-                                hljs.highlightBlock(block);
+                            setTimeout(() => {
+                                document.querySelectorAll('pre').forEach((block) => {
+                                    hljs.highlightBlock(block);
+                                });
                             });
-                            this.$store.commit('SET_CATALOG', this.$refs.article);
+                            this.$store.commit('SET_CATALOG', { el:  this.$refs.article });
                         })
                     }, 500);
                 }).catch((err) => {

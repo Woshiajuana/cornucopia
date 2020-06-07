@@ -27,7 +27,10 @@ const mutations = {
     },
 
     // 生成
-    [ types.SET_CATALOG ] (state, el) {
+    [ types.SET_CATALOG ] (state, {el, value}) {
+        if (value) {
+            return state.arrCatalog = value;
+        }
         const objHLevel = [ 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7' ];
         let children = Array.from(el.children)
             .filter((item) => objHLevel.indexOf(item.nodeName) > -1)

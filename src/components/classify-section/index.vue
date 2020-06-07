@@ -25,7 +25,9 @@
         methods: {
             reqClassifyList () {
                 this.$curl.get('static/mocks/classify.json').then((res) => {
-                    this.arrClassify = [{ title: '全部' }, ...res];
+                    let number = 0;
+                    res.forEach((item) => number += item.number);
+                    this.arrClassify = [{ title: '全部', number, }, ...res];
                 });
             },
         },

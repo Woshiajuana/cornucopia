@@ -1,8 +1,9 @@
 
 import axios from 'axios'
+import constant from 'src/constant'
 
 const instance = axios.create({
-    baseURL: window.location.hostname.startsWith('1') ? '' : 'https://raw.githubusercontent.com/Woshiajuana/AjuanProject/master/',
+    baseURL: constant.BASE_URL,
     timeout: 30 * 1000,
     headers: {
         'Content-Type': 'application/json;charset=UTF-8',

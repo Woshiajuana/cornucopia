@@ -151,5 +151,15 @@
             border-left: j(2) solid #999;
             background-color: #f2f2f2;
         }
+        a{
+            color: #0681d0;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+        img{
+            max-width: 100%;
+            height: auto;
+        }
     }
 </style>

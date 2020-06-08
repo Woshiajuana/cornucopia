@@ -37,12 +37,14 @@ const Handle = (options, data, next) => {
 
                     const content = fs.readFileSync(fullPath).toString();
                     const $ = cheerio.load(marked(content));
-
+                    let time = fileDirArr[1].replace('.md', '');
                     jsonArticles.push({
                         id: `${fileDirArr.join('/')}`,
                         title: $('h1').text() || '',
+                        group: `${time.substring(0, 4)}-${time.substring(4, 6)}`,
+                        date: `${time.substring(0,4)}-${time.substring(4,6)}-${time.substring(6,8)} ${time.substring(8,10)}:${time.substring(10,12)}:${time.substring(12)}`,
                         abstract: $('p').text().substring(0, 100) || '',
-                        time: `${fileDirArr[1].replace('.md', '')}`,
+                        time,
                         classify,
                     });
 

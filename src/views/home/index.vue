@@ -75,11 +75,6 @@
                         });
                     }
                     // 划分日期
-                    arr.forEach((item, index) => {
-                        let { time } = item;
-                        item.group = `${time.substring(0, 4)}-${time.substring(4, 6)}`;
-                        item.date = `${time.substring(0,4)}-${time.substring(4,6)}-${time.substring(6,8)} ${time.substring(8,10)}:${time.substring(10,12)}:${time.substring(12)}`;
-                    });
                     this.arrData = arr;
                     this.numTotal = this.arrData.length;
                 });

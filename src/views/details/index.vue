@@ -3,12 +3,10 @@
         <article-cell-loading v-show="!strContent"></article-cell-loading>
         <template v-if="strContent">
             <div class="article-header">
-                <h1>第一章好 i 哦对大时代萨蒂简欧</h1>
-                <p class="time">2020-09-09 12:12:12</p>
+                <h1>{{objArticle.title}}</h1>
+                <p class="time">{{objArticle.date}}</p>
                 <div class="tag">
-                    <span class="tag-item">HTML</span>
-                    <span class="tag-item">CSS</span>
-                    <span class="tag-item">JS</span>
+                    <span class="tag-item">{{objArticle.classify}}</span>
                 </div>
             </div>
             <div class="article-content" ref="article" id="article" v-html="strContent"></div>
@@ -25,6 +23,7 @@
         data () {
             return {
                 strContent: '',
+                objArticle: '',
             };
         },
         watch: {
@@ -32,15 +31,18 @@
             '$route.params' () {
                 if (this.$route.path.startsWith('/details')) {
                     this.strContent = '';
+                    this.objArticle = '';
                     document.documentElement.scrollTop = 0;
                     document.body.scrollTop = 0;
                     this.$store.commit('SET_CATALOG', { value: [] });
                     this.reqArticleContent();
+                    this.reqArticleList();
                 }
             },
         },
         created () {
             this.reqArticleContent();
+            this.reqArticleList();
         },
         methods: {
             reqArticleContent () {
@@ -60,6 +62,13 @@
                 }).catch((err) => {
                     console.log(err);
                 })
+            },
+            reqArticleList () {
+                this.$curl.get('static/mocks/articles.json').then((res) => {
+                    let arr = res || [];
+                    let { classify, id } = this.$route.params;
+                    this.objArticle = arr.filter((item) => item.id === `${classify}/${id}`)[0];
+                });
             },
         },
         components: {
@@ -110,6 +119,9 @@
 <style lang="scss">
     @import "~src/assets/scss/define";
     .article-content{
+        h1{
+            @extend %dn;
+        }
         h2{
             @extend %c3;
             font-size: j(24);

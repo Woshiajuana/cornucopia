@@ -15,8 +15,8 @@
                 let { search } = this.$route.query;
                 let { title } = this.data;
                 if (search) {
-                    const reg = new RegExp(search, 'ig');
-                    title = title.replace(reg, `<strong>${search}</strong>`);
+                    const reg = new RegExp('(' + search + ')', 'ig');
+                    title = title.replace(reg, ('<strong>$1</strong>'));
                 }
                 return title;
             },
@@ -24,8 +24,8 @@
                 let { search } = this.$route.query;
                 let { abstract } = this.data;
                 if (search) {
-                    const reg = new RegExp(search, 'ig');
-                    abstract = abstract.replace(reg, `<strong>${search}</strong>`);
+                    const reg = new RegExp('(' + search + ')', 'ig');
+                    abstract = abstract.replace(reg, (`<strong>$1</strong>`));
                 }
                 return abstract;
             },

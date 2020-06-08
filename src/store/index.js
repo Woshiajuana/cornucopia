@@ -31,7 +31,7 @@ const mutations = {
         if (value) {
             return state.arrCatalog = value;
         }
-        const objHLevel = [ 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7' ];
+        const objHLevel = [ 'H2', 'H3', 'H4', 'H5', 'H6', 'H7' ];
         let children = Array.from(el.children)
             .filter((item) => objHLevel.indexOf(item.nodeName) > -1)
             .map((item, index) => {

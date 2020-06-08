@@ -41,6 +41,7 @@
             },
         },
         created () {
+            this.reqArticleContent();
             this.reqArticleList();
         },
         methods: {
@@ -49,14 +50,14 @@
                 this.$curl.get(`static/articles/${classify}/${id}`).then((res) => {
                     this.strContent = marked(res);
                     this.$nextTick(() => {
-                        // if (this.$const.BASE_URL) {
-                        //     document.querySelectorAll('img').forEach((img) => {
-                        //         let src = img.getAttribute('src');
-                        //         if (src.startsWith('http')) {
-                        //             img.setAttribute('src', `${this.$const.BASE_URL}/static/images/${src}`);
-                        //         }
-                        //     });
-                        // }
+                        if (this.$const.BASE_URL) {
+                            document.querySelectorAll('img').forEach((img) => {
+                                let src = img.getAttribute('src');
+                                if (!src.startsWith('http')) {
+                                    img.setAttribute('src', `${this.$const.BASE_URL}${src}`);
+                                }
+                            });
+                        }
                         setTimeout(() => {
                             document.querySelectorAll('pre').forEach((block) => {
                                 hljs.highlightBlock(block);
@@ -73,8 +74,6 @@
                     let arr = res || [];
                     let { classify, id } = this.$route.params;
                     this.objArticle = arr.filter((item) => item.id === `${classify}/${id}`)[0];
-                }).then(() => {
-                    this.reqArticleContent();
                 });
             },
         },

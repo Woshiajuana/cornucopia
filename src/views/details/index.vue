@@ -49,6 +49,14 @@
                 this.$curl.get(`static/articles/${classify}/${id}`).then((res) => {
                     this.strContent = marked(res);
                     this.$nextTick(() => {
+                        // if (this.$const.BASE_URL) {
+                        //     document.querySelectorAll('img').forEach((img) => {
+                        //         let src = img.getAttribute('src');
+                        //         if (src.startsWith('http')) {
+                        //             img.setAttribute('src', `${this.$const.BASE_URL}/static/images/${src}`);
+                        //         }
+                        //     });
+                        // }
                         setTimeout(() => {
                             document.querySelectorAll('pre').forEach((block) => {
                                 hljs.highlightBlock(block);

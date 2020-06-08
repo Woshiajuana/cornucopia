@@ -41,24 +41,21 @@
             },
         },
         created () {
-            this.reqArticleContent();
             this.reqArticleList();
         },
         methods: {
             reqArticleContent () {
                 let { classify, id } = this.$route.params;
                 this.$curl.get(`static/articles/${classify}/${id}`).then((res) => {
-                    setTimeout(() => {
-                        this.strContent = marked(res);
-                        this.$nextTick(() => {
-                            setTimeout(() => {
-                                document.querySelectorAll('pre').forEach((block) => {
-                                    hljs.highlightBlock(block);
-                                });
+                    this.strContent = marked(res);
+                    this.$nextTick(() => {
+                        setTimeout(() => {
+                            document.querySelectorAll('pre').forEach((block) => {
+                                hljs.highlightBlock(block);
                             });
-                            this.$store.commit('SET_CATALOG', { el:  this.$refs.article });
-                        })
-                    }, 500);
+                        });
+                        this.$store.commit('SET_CATALOG', { el:  this.$refs.article });
+                    })
                 }).catch((err) => {
                     console.log(err);
                 })
@@ -68,6 +65,8 @@
                     let arr = res || [];
                     let { classify, id } = this.$route.params;
                     this.objArticle = arr.filter((item) => item.id === `${classify}/${id}`)[0];
+                }).then(() => {
+                    this.reqArticleContent();
                 });
             },
         },

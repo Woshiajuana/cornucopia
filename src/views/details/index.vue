@@ -15,9 +15,8 @@
 </template>
 <script>
     import marked from 'marked'
-    import hljs from 'highlight.js'
+    import hljs from 'src/utils/highlight.pack'
     import ArticleCellLoading from 'src/components/article-cell-loading'
-    import 'highlight.js/styles/monokai-sublime.css'
 
     export default {
         data () {
@@ -124,6 +123,7 @@
 
 <style lang="scss">
     @import "~src/assets/scss/define";
+    @import "~src/assets/scss/highlight";
     .article-content{
         h1{
             @extend %dn;

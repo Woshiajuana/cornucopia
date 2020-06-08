@@ -70,7 +70,7 @@
                 })
             },
             reqArticleList () {
-                this.$curl.get('static/mocks/articles.json').then((res) => {
+                this.$curl.get(`static/mocks/articles.json?v=${new Date().getTime()}`).then((res) => {
                     let arr = res || [];
                     let { classify, id } = this.$route.params;
                     this.objArticle = arr.filter((item) => item.id === `${classify}/${id}`)[0];

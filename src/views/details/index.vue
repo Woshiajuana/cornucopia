@@ -47,7 +47,7 @@
         methods: {
             reqArticleContent () {
                 let { classify, id } = this.$route.params;
-                this.$curl.get(`static/articles/${classify}/${id}`).then((res) => {
+                this.$curl.get(`static/articles/${classify}/${id}?v=${new Date().getTime()}`).then((res) => {
                     this.strContent = marked(res);
                     this.$nextTick(() => {
                         if (this.$const.BASE_URL) {

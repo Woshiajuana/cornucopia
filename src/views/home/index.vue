@@ -26,7 +26,6 @@
                 arr.forEach((item, index) => {
                     let { group } = item;
                     let [ objGroup ] = fmt.filter((item) => {
-                        console.log('objGroupobjGroupobjGroupobjGroupobjGroup => ', item);
                         return item.name === group
                     });
                     if (!objGroup) {
@@ -35,7 +34,6 @@
                     }
                     objGroup.children.push(item);
                 });
-                console.log('computedArticles => ', fmt);
                 return fmt;
             }
         },

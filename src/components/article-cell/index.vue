@@ -27,7 +27,7 @@
                     const reg = new RegExp('(' + search + ')', 'ig');
                     abstract = abstract.replace(reg, (`<strong>$1</strong>`));
                 }
-                return abstract;
+                return `${abstract}...`;
             },
         }
     }

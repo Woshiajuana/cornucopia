@@ -22,21 +22,20 @@
         computed: {
             computedArticles () {
                 let arr = this.arrData.slice(0, this.numIndex * this.numSize);
-                let obj = {};
                 let fmt = [];
                 arr.forEach((item, index) => {
                     let { group } = item;
-                    if (obj[group] === undefined) {
-                        obj[group] = index;
+                    let [ objGroup ] = fmt.filter((item) => {
+                        console.log('objGroupobjGroupobjGroupobjGroupobjGroup => ', item);
+                        return item.name === group
+                    });
+                    if (!objGroup) {
+                        objGroup = { name: group, children: [] };
+                        fmt.push(objGroup);
                     }
-                    if (!fmt[obj[group]]) {
-                        fmt[obj[group]] = {
-                            name: group,
-                            children: [],
-                        }
-                    }
-                    fmt[obj[group]].children.push(item);
+                    objGroup.children.push(item);
                 });
+                console.log('computedArticles => ', fmt);
                 return fmt;
             }
         },

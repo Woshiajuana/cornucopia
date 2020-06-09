@@ -57,6 +57,15 @@
                                 }
                             });
                         }
+                        this.$refs.article.querySelectorAll('a').forEach((a) => {
+                            a.setAttribute('target', '_bank');
+                            if (this.$const.BASE_URL) {
+                                let href = a.getAttribute('href');
+                                if (!href.startsWith('http')) {
+                                    a.setAttribute('href', `${this.$const.BASE_URL}${href}`);
+                                }
+                            }
+                        });
                         setTimeout(() => {
                             document.querySelectorAll('pre').forEach((block) => {
                                 hljs.highlightBlock(block);

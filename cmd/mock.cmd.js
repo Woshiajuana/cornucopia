@@ -11,9 +11,11 @@ const Handle = (options, data, next) => {
         params,
     } = options;
     params = params ? params.toLocaleLowerCase() : '';
+    let arrFtpData = [];
+
     try {
         if (!params)
-            throw '未指定设置发布参数';
+            throw '未指定设置mock参数';
         output.success('mock.cmd=>', `指定生成mock数据【${params}】`);
         let [ entryDir, outputDir ] = params.split('::');
         entryDir = path.join(cmdPath, entryDir);
@@ -29,12 +31,12 @@ const Handle = (options, data, next) => {
                 const fullPath = path.join(directory, file);
                 const fileStat = fs.statSync(fullPath);
                 const fileExtName = path.extname(fullPath);
-                const fileDirArr = fullPath.replace(entryDir, '').replace(/\\/g, '/').split('\/');
+                const fileRelativePath = fullPath.replace(entryDir, '').replace(/\\/g, '/');
+                const fileDirArr = fileRelativePath.split('\/');
                 const fileLastDir = fileDirArr[fileDirArr.length - 1];
                 if (fileStat.isFile() && ['.md'].indexOf(fileExtName) > -1) {
                     fileDirArr.shift();
                     let classify = fileDirArr[0];
-
                     const content = fs.readFileSync(fullPath).toString();
                     const $ = cheerio.load(marked(content));
                     let time = fileDirArr[1].replace('.md', '');
@@ -46,8 +48,12 @@ const Handle = (options, data, next) => {
                         abstract: $('p').text().substring(0, 100) || '',
                         time,
                         classify,
+                        path: fileRelativePath,
                     });
-
+                    arrFtpData.push({
+                        input: fullPath,
+                        output: fileRelativePath,
+                    });
                     let [ objClassify ] = jsonClassify.filter((item) => item.title === classify);
                     if (objClassify) {
                         objClassify.number++;
@@ -71,7 +77,7 @@ const Handle = (options, data, next) => {
     } catch (e) {
         output.error('mock.cmd=>', `发布app错误：${e}`);
     } finally {
-        next();
+        next(arrFtpData);
     }
 };
 

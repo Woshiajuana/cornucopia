@@ -1,5 +1,5 @@
 <template>
-    <div class="classify-section">
+    <div class="classify-section" v-show="arrClassify.length">
         <div class="classify-indicator iconfont icon-biaoqian" :style="{ top: numCurrent * 30 + 'px' }"></div>
         <div class="classify-item"
              @click="handleSelect(item)"

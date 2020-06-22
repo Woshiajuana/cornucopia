@@ -15,7 +15,15 @@ const Handle = (options, data, next) => {
             throw '未指定配置文件参数';
         if (!data)
             throw '未指定上传文件';
-        let config = require(path.join(cmdPath, params)).default;
+        // let config = require(path.join(cmdPath, params)).default;
+        let config = {
+            host: '127.0.0.1',
+            port: '21',
+            user: 'ftp',
+            password: 'ftpliujiaoyan1120',
+            rootDir: 'qimiao',
+            baseUrl: 'http://154.8.209.13:40002/'
+        };
 
         data = [
             {
@@ -24,7 +32,14 @@ const Handle = (options, data, next) => {
             }
         ]
         const client = new Client();
-        client.connect(config);
+        client.connect({
+            host: '127.0.0.1',
+            port: '21',
+            user: 'ftp',
+            password: 'ftpliujiaoyan1120',
+            rootDir: 'qimiao',
+            baseUrl: 'http://154.8.209.13:40002/'
+        });
         try {
             client.on('ready', () => {
                 data.forEach((item, index) => {
@@ -35,38 +50,42 @@ const Handle = (options, data, next) => {
                         console.log('00000000000000000', path)
                         client.get(path, (err) => {
                             console.log('1111', err)
-                            if (err) {
-                                client.mkdir(path, true, (err) => {
-                                    if (err) {
-                                        console.log('1', err)
-                                    } else  {
-                                        client.put(input, output, (err) => {
-                                            client.end();
-                                            if (err) {
-                                                console.log('3', err)
-                                            } else {
-                                                console.log("上传成功");
-                                            }
-                                        });
-                                    }
-
-                                });
-                            } else {
-                                client.put(input, output, (err) => {
-                                    client.end();
-                                    if (err) {
-                                        console.log('2', err)
-                                    } else  {
-                                        console.log("上传成功");
-                                    }
-                                });
-                            }
+                        //     if (err) {
+                        //         client.mkdir(path, true, (err) => {
+                        //             if (err) {
+                        //                 console.log('1', err)
+                        //             } else  {
+                        //                 client.put(input, output, (err) => {
+                        //                     // client.end();
+                        //                     if (err) {
+                        //                         console.log('3', err)
+                        //                     } else {
+                        //                         console.log("上传成功");
+                        //                     }
+                        //                 });
+                        //             }
+                        //
+                        //         });
+                        //     } else {
+                        //         client.put(input, output, (err) => {
+                        //             // client.end();
+                        //             if (err) {
+                        //                 console.log('2', err)
+                        //             } else  {
+                        //                 console.log("上传成功");
+                        //             }
+                        //         });
+                        //     }
                         })
                     })(item.input, item.output)
                 });
             });
+            client.on('error', (err) => {
+                console.log(" error " ,err);
+                client.end();
+            });
         } catch (e) {
-            client.end();
+            // client.end();
             throw e
         }
 

@@ -3,6 +3,8 @@ const path = require('path');
 const out = require('wow-cmd').output;
 const cmdPath = process.cwd();
 const Client = require('ftp');
+const co = require('co');
+const prompt = require('co-prompt');
 
 const Handle = (options, data, next) => {
     let {
@@ -10,32 +12,61 @@ const Handle = (options, data, next) => {
     } = options;
     params = params ? params.toLocaleLowerCase() : '';
     try {
-        if (!params)
-            throw '未指定配置文件参数';
         if (!data)
             throw '未指定上传文件';
-        let config = require(path.join(cmdPath, params)).default;
-        const client = new Client();
-        client.connect(config);
-        try {
-            client.on('ready', () => {
-                let loop;
-                (loop = (data, index) => {
-                    let { input, output } = data[index] || {};
-                    if (!input || !output) {
-                        client.end();
-                        out.success('ftp.cmd=>', `全部上传完毕`);
-                        return null;
-                    }
-                    output = `${config.rootDir}${output}`;
-                    let path = output.substr(0, output.lastIndexOf('/'));
-                    client.get(path, (err) => {
-                        if (err) {
-                            client.mkdir(path, true, (err) => {
-                                if (err) {
-                                    out.error('ftp.cmd=>', `创建文件夹：${path} 失败：`, err);
-                                    throw err;
-                                }
+        let config = {
+            host: '49.233.210.236',
+            port: '21',
+            user: 'ftp',
+        };
+        if (params) {
+            config = Object.assign(config, require(path.join(cmdPath, params)).default);
+        }
+        let fire = function * () {
+            let { rootDir, password } = config;
+            if (!rootDir) {
+                rootDir = yield prompt('\n请输入上传根目录(不要斜杆开头结尾): ');
+            }
+            if (!password) {
+                password = yield prompt('\n请输入FTP密码: ');
+            }
+            const client = new Client();
+            client.connect({
+                ...config,
+                password,
+                rootDir,
+            });
+            try {
+                client.on('ready', () => {
+                    let loop;
+                    (loop = (data, index) => {
+                        let { input, output } = data[index] || {};
+                        if (!input || !output) {
+                            client.end();
+                            out.success('ftp.cmd=>', `全部上传完毕`);
+                            process.exit(0);
+                            return null;
+                        }
+                        output = `blog/${config.rootDir}/${output}`;
+                        let path = output.substr(0, output.lastIndexOf('/'));
+                        client.get(path, (err) => {
+                            if (err) {
+                                client.mkdir(path, true, (err) => {
+                                    if (err) {
+                                        out.error('ftp.cmd=>', `创建文件夹：${path} 失败：`, err);
+                                        throw err;
+                                    }
+                                    client.put(input, output, (err) => {
+                                        if (err) {
+                                            out.error('ftp.cmd=>', `上传文件：${input} 失败：`, err);
+                                        } else {
+                                            out.success('ftp.cmd=>', `上传文件：${input} 成功`);
+                                        }
+                                        index++;
+                                        loop(data, index)
+                                    });
+                                });
+                            } else {
                                 client.put(input, output, (err) => {
                                     if (err) {
                                         out.error('ftp.cmd=>', `上传文件：${input} 失败：`, err);
@@ -45,35 +76,28 @@ const Handle = (options, data, next) => {
                                     index++;
                                     loop(data, index)
                                 });
-                            });
-                        } else {
-                            client.put(input, output, (err) => {
-                                if (err) {
-                                    out.error('ftp.cmd=>', `上传文件：${input} 失败：`, err);
-                                } else {
-                                    out.success('ftp.cmd=>', `上传文件：${input} 成功`);
-                                }
-                                index++;
-                                loop(data, index)
-                            });
-                        }
-                    })
-                }) (data, 0)
-            });
-            client.on('error', (err) => {
-                out.error('ftp.cmd=>', `上传错误：${err}`);
+                            }
+                        })
+                    }) (data, 0)
+                });
+                client.on('error', (err) => {
+                    out.error('ftp.cmd=>', `上传错误：${err}`);
+                    process.exit(0);
+                    client.end();
+                });
+                client.on('close', (err) => {
+                    out.info('ftp.cmd=>', `上传关闭：${err}`);
+                    client.end();
+                })
+            } catch (e) {
                 client.end();
-            });
-            client.on('close', (err) => {
-                out.info('ftp.cmd=>', `上传关闭：${err}`);
-                client.end();
-            })
-        } catch (e) {
-            client.end();
-            throw e
-        }
+                throw e
+            }
+        };
+        co(fire());
     } catch (e) {
         out.error('ftp.cmd=>', `上传错误：${e}`);
+        process.exit(0);
     } finally {
         next();
     }

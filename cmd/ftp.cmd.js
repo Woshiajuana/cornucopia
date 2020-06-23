@@ -27,6 +27,10 @@ const Handle = (options, data, next) => {
             if (!rootDir) {
                 rootDir = yield prompt('\n请输入上传根目录(不要斜杆开头结尾): ');
             }
+            if (['ajuan', 'jianyi', 'tiaotiao'].indexOf(rootDir) === -1) {
+                out.error('ftp.cmd=>', `上传根目录错误`);
+                return process.exit(0);
+            }
             if (!password) {
                 password = yield prompt('\n请输入FTP密码: ');
             }
@@ -54,7 +58,7 @@ const Handle = (options, data, next) => {
                                 client.mkdir(path, true, (err) => {
                                     if (err) {
                                         out.error('ftp.cmd=>', `创建文件夹：${path} 失败：`, err);
-                                        throw err;
+                                        return null;
                                     }
                                     client.put(input, output, (err) => {
                                         if (err) {
@@ -82,8 +86,8 @@ const Handle = (options, data, next) => {
                 });
                 client.on('error', (err) => {
                     out.error('ftp.cmd=>', `上传错误：${err}`);
-                    process.exit(0);
                     client.end();
+                    process.exit(0);
                 });
                 client.on('close', (err) => {
                     out.info('ftp.cmd=>', `上传关闭：${err}`);
@@ -91,13 +95,12 @@ const Handle = (options, data, next) => {
                 })
             } catch (e) {
                 client.end();
-                throw e
+                process.exit(0);
             }
         };
         co(fire());
     } catch (e) {
         out.error('ftp.cmd=>', `上传错误：${e}`);
-        process.exit(0);
     } finally {
         next();
     }

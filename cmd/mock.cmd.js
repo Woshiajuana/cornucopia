@@ -12,12 +12,10 @@ const Handle = (options, data, next) => {
     } = options;
     params = params ? params.toLocaleLowerCase() : '';
     let arrFileData = [];
-
     try {
         if (!params)
             throw '未指定设置mock参数';
-        output.success('mock.cmd=>', `指定生成mock数据【${params}】`);
-        let [ entryDir, outputDir ] = params.split('::');
+        let { inputDir: entryDir, outputDir } = require(path.join(cmdPath, params)).default;
         entryDir = path.join(cmdPath, entryDir);
         outputDir = path.join(cmdPath, outputDir);
         output.success('mock.cmd=>', `指定生成mock数据入口目录【${entryDir}】`);

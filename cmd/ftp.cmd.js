@@ -74,7 +74,7 @@ const Handle = (options, data, next) => {
                             process.exit(0);
                             return null;
                         }
-                        output = `blog/${config.rootDir}/${output}`;
+                        output = `blog/${rootDir}/${output}`;
                         let path = output.substr(0, output.lastIndexOf('/'));
                         client.get(path, (err) => {
                             if (err) {

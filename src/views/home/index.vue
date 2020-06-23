@@ -58,7 +58,7 @@
         },
         methods: {
             reqArticleList () {
-                this.$curl.get(`static/mocks/articles.json?v=${new Date().getTime()}`).then((res) => {
+                this.$curl.get(`mocks/articles.json?v=${new Date().getTime()}`).then((res) => {
                     let arr = res || [];
                     let { classify } = this.$route.params;
                     let { search } = this.$route.query;

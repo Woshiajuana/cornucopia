@@ -29,7 +29,7 @@
         },
         methods: {
             reqClassifyList () {
-                this.$curl.get('static/mocks/classify.json').then((res) => {
+                this.$curl.get('mocks/classify.json').then((res) => {
                     let number = 0;
                     res.forEach((item) => number += item.number);
                     this.arrClassify = [{ title: '全部', number, }, ...res];

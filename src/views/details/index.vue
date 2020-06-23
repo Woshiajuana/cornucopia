@@ -46,7 +46,7 @@
         methods: {
             reqArticleContent () {
                 let { classify, id } = this.$route.params;
-                this.$curl.get(`static/articles/${classify}/${id}?v=${new Date().getTime()}`).then((res) => {
+                this.$curl.get(`articles/${classify}/${id}?v=${new Date().getTime()}`).then((res) => {
                     this.strContent = marked(res);
                     this.$nextTick(() => {
                         if (this.$const.BASE_URL) {
@@ -78,7 +78,7 @@
                 })
             },
             reqArticleList () {
-                this.$curl.get(`static/mocks/articles.json?v=${new Date().getTime()}`).then((res) => {
+                this.$curl.get(`mocks/articles.json?v=${new Date().getTime()}`).then((res) => {
                     let arr = res || [];
                     let { classify, id } = this.$route.params;
                     this.objArticle = arr.filter((item) => item.id === `${classify}/${id}`)[0];

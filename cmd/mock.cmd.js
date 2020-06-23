@@ -11,7 +11,7 @@ const Handle = (options, data, next) => {
         params,
     } = options;
     params = params ? params.toLocaleLowerCase() : '';
-    let arrFtpData = [];
+    let arrFileData = [];
 
     try {
         if (!params)
@@ -50,9 +50,9 @@ const Handle = (options, data, next) => {
                         classify,
                         path: fileRelativePath,
                     });
-                    arrFtpData.push({
+                    arrFileData.push({
                         input: fullPath,
-                        output: fileRelativePath,
+                        output: `articles${fileRelativePath}`,
                     });
                     let [ objClassify ] = jsonClassify.filter((item) => item.title === classify);
                     if (objClassify) {
@@ -69,6 +69,18 @@ const Handle = (options, data, next) => {
         // 排序
         jsonArticles.sort((x, y) => y.time - x.time);
 
+
+        arrFileData.push(
+            {
+                input: path.join(outputDir, 'articles.json'),
+                output: `mocks/articles.json`,
+            },
+            {
+                input: path.join(outputDir, 'classify.json'),
+                output: `mocks/classify.json`,
+            },
+        );
+
         // 生产 json
         fs.ensureDirSync(outputDir);
         fs.writeFileSync(path.join(outputDir, 'articles.json'), JSON.stringify(jsonArticles, null, 4));
@@ -77,7 +89,7 @@ const Handle = (options, data, next) => {
     } catch (e) {
         output.error('mock.cmd=>', `发布app错误：${e}`);
     } finally {
-        next(arrFtpData);
+        next(arrFileData);
     }
 };
 

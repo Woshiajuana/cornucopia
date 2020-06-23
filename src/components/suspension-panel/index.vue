@@ -10,18 +10,18 @@
             <span class="suspension-date">{{strDay}}</span>
         </div>
 
-        <a class="suspension-item" title="GitHub" href="https://github.com/Woshiajuana" target="_blank">
+        <a class="suspension-item" title="GitHub" :href="$const.GITHUB" target="_blank">
             <span class="iconfont icon-github"></span>
         </a>
 
-        <div class="suspension-item" title="微信">
-            <span class="iconfont icon-weixin"></span>
-            <div class="suspension-image">
-                <img src="https://cdn.sunofbeaches.com/images/test/2.jpg">
-            </div>
-        </div>
+<!--        <div class="suspension-item" title="微信">-->
+<!--            <span class="iconfont icon-weixin"></span>-->
+<!--            <div class="suspension-image">-->
+<!--                <img src="https://cdn.sunofbeaches.com/images/test/2.jpg">-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <a class="suspension-item" title="发送邮件" href="mailto:979703986@qq.com">
+        <a class="suspension-item" title="发送邮件" :href="'mailto:' + $const.EMAIL">
             <span class="iconfont icon-e-mail"></span>
         </a>
 

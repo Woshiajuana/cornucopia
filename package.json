@@ -8,7 +8,7 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "mock": "node cmd -m cmd/ftp.config.js -f cmd/ftp.config.js"
+    "mock": "node cmd -m cmd/config.js -f cmd/config.js"
   },
   "dependencies": {
     "axios": "^0.19.2",

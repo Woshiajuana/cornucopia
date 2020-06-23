@@ -34,9 +34,11 @@
                         this.numIndicator = (i + 1) * 30;
                     }
                 });
-                this.$nextTick(() => {
-                   this.fixCatalogScroll();
-                });
+                if (arrSourceCatalog.length) {
+                    this.$nextTick(() => {
+                        this.fixCatalogScroll();
+                    });
+                }
             },
         },
         computed: {

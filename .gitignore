@@ -7,3 +7,6 @@ yarn-error.log*
 .idea/
 ThePalestInk.iml
 cmd/ftp.config.js
+static/articles/
+static/images/
+static/mocks/

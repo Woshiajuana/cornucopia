@@ -177,5 +177,25 @@
             max-width: 100%;
             height: auto;
         }
+
+        table{
+            @extend %bsb;
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+            border: 1px solid #eee;
+            border-left: none;
+            word-break: break-word;
+            td,
+            th{
+                padding: 8px;
+                border: 1px solid #eee;
+                line-height: 20px;
+                vertical-align: middle;
+            }
+            tr:nth-child(2n){
+                background-color: hsla(0,0%,70.2%,.15);
+            }
+        }
     }
 </style>

@@ -100,8 +100,8 @@
         padding: j(50) j(20);
         h1{
             @extend %c3;
-            line-height: j(40);
             font-size: j(30);
+            line-height: 1.5;
         }
         .time{
             @extend %c9;
@@ -128,6 +128,14 @@
         font-size: j(16);
         padding: j(20) j(20) j(100);
     }
+
+    @media screen and (max-width: 768px){
+        .article-header{
+            h1{
+                font-size: j(26);
+            }
+        }
+    }
 </style>
 
 <style lang="scss">
@@ -140,24 +148,31 @@
         h2{
             @extend %c3;
             font-size: j(24);
-            margin: j(30) 0 j(30);
+            margin: j(30) 0;
         }
         h3{
             @extend %c3;
             font-size: j(20);
-            margin: j(30) 0 j(30);
+            margin: j(20) 0;
         }
         h4{
             @extend %c3;
             font-size: j(18);
-            margin: j(30) 0 j(30);
+            margin: j(10) 0;
+        }
+        h6,
+        h5{
+            @extend %c3;
+            font-size: j(14);
+            margin: j(5) 0;
         }
         pre{
             border-radius: j(5);
             padding: j(10);
-            font-size: j(14);
-            line-height: 1.2;
-            background-color: #111;
+            font-size: j(13);
+            line-height: 1.4;
+            font-weight: 400;
+            background-color: #2d2d2d;
         }
         blockquote{
             margin: j(20);

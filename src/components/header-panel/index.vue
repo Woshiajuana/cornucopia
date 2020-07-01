@@ -4,7 +4,7 @@
             <a class="logo" href="/#/">{{$const.USER_NAME}}</a>
             <div class="search" :class="[strKeyword && 'active']">
                 <div class="search-input">
-                    <input v-model="strKeyword" ref="input" @keyup.enter="handleSearch" type="text" placeholder="请输入关键字"/>
+                    <input v-model="strKeyword" ref="input" @input="handleInput" @keyup.enter="handleSearch" type="text" placeholder="请输入关键字"/>
                 </div>
                 <div v-show="strKeyword" @click="handleClear" class="search-btn iconfont icon-close"></div>
                 <div @click="handleSearch" @mouseenter="$refs.input.focus()" class="search-btn iconfont icon-search"></div>
@@ -26,6 +26,11 @@
             },
         },
         methods: {
+            handleInput () {
+                if (!this.strKeyword) {
+                    this.handleSearch();
+                }
+            },
             handleClear () {
                 this.strKeyword = '';
                 this.handleSearch();
@@ -54,6 +59,7 @@
     .header-section{
         @extend %pf;
         @extend %w100;
+        @extend %bsb;
         @extend %t0;
         z-index: 9;
         background-color: $bgColor;
@@ -79,10 +85,10 @@
         @extend %bsb;
         @include tst(all, 0.3s);
         padding-right: j(36);
-        height: j(36);
         background-color: #999;
         border-radius: j(20);
         width: j(36);
+        height: j(36);
         &.active,
         &:hover{
             width: j(240);
@@ -145,6 +151,12 @@
             @extend %r0;
             @include tst(all, 0.3s);
             border-radius: 50%;
+        }
+    }
+
+    @media screen and (max-width: 768px){
+        .header-section{
+            padding: 0 j(16);
         }
     }
 </style>

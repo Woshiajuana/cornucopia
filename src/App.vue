@@ -46,14 +46,11 @@
     }
     .main{
         @extend %df1;
+        @extend %w100;
         max-width: j(700);
     }
 
     @media screen and (max-width: 768px){
-        html,
-        body{
-            font-size: 37.5px !important;
-        }
     }
     /* 768 */
     @media screen and (min-width: 768px){

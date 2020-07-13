@@ -52,8 +52,6 @@ const Handle = (options, data, next) => {
             })(entryDir);
         }
 
-        console.log(objMd5);
-
         // 对比 md5 json
         let objMd5Json = {};
         try {

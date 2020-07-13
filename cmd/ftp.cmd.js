@@ -6,6 +6,7 @@ const cmdPath = process.cwd();
 const Client = require('ftp');
 const co = require('co');
 const prompt = require('co-prompt');
+const crypto = require('crypto');
 
 const Handle = (options, data, next) => {
     let {
@@ -21,6 +22,7 @@ const Handle = (options, data, next) => {
         if (params) {
             config = Object.assign(config, require(path.join(cmdPath, params)).default);
         }
+        let objMd5 = {};
         let { rootDir, password, entryDir } = config;
         if (entryDir) {
             entryDir = path.join(cmdPath, entryDir);
@@ -34,16 +36,36 @@ const Handle = (options, data, next) => {
                     const fileLastDir = fileDirArr[fileDirArr.length - 1];
                     if (fileStat.isFile()) {
                         fileDirArr.shift();
+                        let output = `${fileRelativePath.substring(1)}`;
+                        const file = fs.readFileSync(fullPath);
+                        const md5 = crypto.createHash('md5').update(file).digest('hex');
                         data.push({
                             input: fullPath,
-                            output: `${fileRelativePath.substring(1)}`,
+                            output,
+                            md5,
                         });
+                        objMd5[output] = md5;
                     } else if (fileStat.isDirectory() && [].indexOf(fileLastDir) === -1) {
                         walk(fullPath);
                     }
                 });
             })(entryDir);
         }
+
+        console.log(objMd5);
+
+        // 对比 md5 json
+        let objMd5Json = {};
+        try {
+            objMd5Json = require('./md5.json')
+        } catch (e) {
+
+        }
+        // 筛选
+        data = data.filter((item) => item.md5 !== objMd5Json[item.output]);
+        // 存储这次的 md5 json
+        fs.writeFileSync(`${cmdPath}/cmd/md5.json`, JSON.stringify(objMd5, null, 4));
+
         if (!data)
             throw '未指定上传文件';
         let fire = function * () {

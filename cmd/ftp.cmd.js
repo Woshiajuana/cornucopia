@@ -61,8 +61,6 @@ const Handle = (options, data, next) => {
         }
         // 筛选
         data = data.filter((item) => item.md5 !== objMd5Json[item.output]);
-        // 存储这次的 md5 json
-        fs.writeFileSync(`${cmdPath}/cmd/md5.json`, JSON.stringify(objMd5, null, 4));
 
         if (!data)
             throw '未指定上传文件';
@@ -88,8 +86,13 @@ const Handle = (options, data, next) => {
                     let loop;
                     (loop = (data, index) => {
                         let { input, output } = data[index] || {};
+                        let key = output
                         if (!input || !output) {
                             client.end();
+
+                            // 存储这次的 md5 json
+                            fs.writeFileSync(`${cmdPath}/cmd/md5.json`, JSON.stringify(objMd5, null, 4));
+
                             out.success('ftp.cmd=>', `全部上传完毕`);
                             process.exit(0);
                             return null;
@@ -105,6 +108,7 @@ const Handle = (options, data, next) => {
                                     }
                                     client.put(input, output, (err) => {
                                         if (err) {
+                                            delete objMd5[key];
                                             out.error('ftp.cmd=>', `上传文件：${input} 失败：`, err);
                                         } else {
                                             out.success('ftp.cmd=>', `上传文件：${input} 成功`);
@@ -116,6 +120,7 @@ const Handle = (options, data, next) => {
                             } else {
                                 client.put(input, output, (err) => {
                                     if (err) {
+                                        delete objMd5[key];
                                         out.error('ftp.cmd=>', `上传文件：${input} 失败：`, err);
                                     } else {
                                         out.success('ftp.cmd=>', `上传文件：${input} 成功`);

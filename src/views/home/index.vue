@@ -48,7 +48,7 @@
             return {
                 arrData: [],
                 numTotal: -1,
-                numSize: 10,
+                numSize: 20,
                 numIndex: 1,
                 isLoading: false,
             }

@@ -173,6 +173,9 @@
             line-height: 1.4;
             font-weight: 400;
             background-color: #2d2d2d;
+            code{
+                background-color: transparent;
+            }
         }
         blockquote{
             margin: j(20);
@@ -181,6 +184,9 @@
             line-height: 1.5;
             border-left: j(2) solid #999;
             background-color: #f2f2f2;
+            code{
+                background-color: transparent;
+            }
         }
         a{
             color: #0681d0;
@@ -211,6 +217,13 @@
             tr:nth-child(2n){
                 background-color: hsla(0,0%,70.2%,.15);
             }
+        }
+        code{
+            padding: j(2) j(5);
+            font-size: j(13);
+            color: #c7254e;
+            background-color: #f2f2f2;
+
         }
     }
 </style>

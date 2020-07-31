@@ -220,7 +220,7 @@
         h6,
         p,
         li {
-            code{
+            > code{
                 padding: j(2) j(5);
                 font-size: j(13);
                 color: #c7254e;

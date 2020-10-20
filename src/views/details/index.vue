@@ -69,7 +69,11 @@
                                 hljs.highlightBlock(block);
                             });
                         });
-                        this.$store.commit('SET_CATALOG', { el:  this.$refs.article });
+                        if (this.strContent && this.objArticle) {
+                            setTimeout(() => {
+                                this.$store.commit('SET_CATALOG', { el:  this.$refs.article });
+                            }, 200)
+                        }
                     });
                 }).catch((err) => {
                     console.log(err);
@@ -80,6 +84,11 @@
                     let arr = res || [];
                     let { classify, id } = this.$route.params;
                     this.objArticle = arr.filter((item) => item.id === `${classify}/${id}`)[0];
+                    if (this.strContent && this.objArticle) {
+                        setTimeout(() => {
+                            this.$store.commit('SET_CATALOG', { el:  this.$refs.article });
+                        }, 200)
+                    }
                 });
             },
         },

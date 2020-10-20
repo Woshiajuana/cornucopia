@@ -1,7 +1,7 @@
 <template>
     <div class="details-view-wrap">
-        <article-cell-loading v-show="!strContent"></article-cell-loading>
-        <template v-if="strContent">
+        <article-cell-loading v-if="!strContent || !objArticle"></article-cell-loading>
+        <template v-show="strContent && objArticle">
             <div class="article-header">
                 <h1>{{objArticle.title}}</h1>
                 <p class="time">{{objArticle.date}}</p>
@@ -72,7 +72,7 @@
                             });
                         });
                         this.$store.commit('SET_CATALOG', { el:  this.$refs.article });
-                    })
+                    });
                 }).catch((err) => {
                     console.log(err);
                 })
@@ -144,16 +144,18 @@
     .article-content{
         h1{
             @extend %dn;
+            margin: j(16) 0;
         }
         h2{
             @extend %c3;
             font-size: j(24);
-            margin: j(30) 0;
+            line-height: j(46);
+            margin: j(16) 0;
         }
         h3{
             @extend %c3;
+            margin: j(16) 0;
             font-size: j(20);
-            margin: j(20) 0;
         }
         h4{
             @extend %c3;
@@ -172,15 +174,16 @@
             font-size: j(13);
             line-height: 1.4;
             font-weight: 400;
+            margin: j(20) 0;
             background-color: #2d2d2d;
         }
         blockquote{
-            margin: j(20);
-            padding: j(5) j(20);
+            margin: j(10) 0;
+            padding: j(5) j(10);
             font-size: j(14);
             line-height: 1.5;
-            border-left: j(2) solid #999;
-            background-color: #f2f2f2;
+            border-left: j(5) solid #e6e6e6;
+            background-color: #fafafa;
         }
         a{
             color: #0681d0;
@@ -227,6 +230,9 @@
                 background-color: #f2f2f2;
 
             }
+        }
+        p{
+            margin-bottom: j(20);
         }
     }
 </style>

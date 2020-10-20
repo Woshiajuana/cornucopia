@@ -2,10 +2,10 @@
 let BASE_URL = '';
 let user = 'ajuan';
 let { hostname } = window.location;
-if (hostname.startsWith('1') || hostname.startsWith('localhost')) {
+if (hostname.startsWith('x1') || hostname.startsWith('xlocalhost')) {
     BASE_URL = 'static/'
 } else {
-    user = location.hostname.substring(0, location.hostname.indexOf('.'));
+    // user = location.hostname.substring(0, location.hostname.indexOf('.'));
     BASE_URL = `https://ftp.owulia.com/blog/${user}/`
 }
 

@@ -250,7 +250,11 @@
         ol,ul{
             padding-left: 0;
             line-height: j(30);
-            margin: 0 0 j(20) j(20)
+            margin: 0 0 j(20) j(20);
+            p:last-child{
+                margin: 0;
+            }
+
         }
     }
 </style>

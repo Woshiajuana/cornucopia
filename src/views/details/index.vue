@@ -254,7 +254,9 @@
             p:last-child{
                 margin: 0;
             }
-
+            ul, ol{
+                margin-bottom: 0;
+            }
         }
     }
 </style>

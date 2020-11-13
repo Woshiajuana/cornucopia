@@ -51,6 +51,7 @@
                 numSize: 20,
                 numIndex: 1,
                 isLoading: false,
+                arrSourceData: [],
             }
         },
         created () {
@@ -58,8 +59,8 @@
         },
         methods: {
             reqArticleList () {
-                this.$curl.get(`mocks/articles.json?v=${new Date().getTime()}`).then((res) => {
-                    let arr = res || [];
+                if (this.arrSourceData.length) {
+                    let arr = this.arrSourceData;
                     let { classify } = this.$route.params;
                     let { search } = this.$route.query;
                     if (classify) {
@@ -74,6 +75,11 @@
                     // 划分日期
                     this.arrData = arr;
                     this.numTotal = this.arrData.length;
+                    return null;
+                }
+                this.$curl.get(`mocks/articles.json?v=${new Date().getTime()}`).then((res) => {
+                    this.arrSourceData = res || [];
+                    this.reqArticleList();
                 });
             },
             scrollCallback () {

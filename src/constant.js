@@ -2,8 +2,8 @@
 let BASE_URL = '';
 let user = 'ajuan';
 let { hostname } = window.location;
-if (hostname.startsWith('1') || hostname.startsWith('localhost')) {
-    BASE_URL = 'static/'
+if (hostname.includes('1') || hostname.includes('localhost') || hostname.includes('daysnap')) {
+    BASE_URL = ''
 } else {
     user = location.hostname.substring(0, location.hostname.indexOf('.'));
     BASE_URL = `https://ftp.owulia.com/blog/${user}/`

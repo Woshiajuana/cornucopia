@@ -8,6 +8,16 @@
              :key="index">
             <span>{{item.title}} ({{item.number}})</span>
         </div>
+       <div class="copyright">
+           <a
+               href="https://beian.miit.gov.cn/"
+               rel="noreferrer"
+               target="_blank"
+           >
+               湘ICP备2022023602号-1
+           </a>
+           <p>Copyright © {{ new Date().getFullYear() }} daysnap.cn</p>
+       </div>
     </div>
 </template>
 
@@ -96,5 +106,18 @@
         height: j(30);
         font-size: j(16);
         color: $mainColor;
+    }
+    .copyright{
+        @extend %c6;
+        font-size: j(12);
+        padding-top: j(20);
+        padding-left: j(20);
+        a{
+            color: #666;
+            &:hover{
+                @extend %c3;
+                text-decoration: underline;
+            }
+        }
     }
 </style>

@@ -1,0 +1,22 @@
+@layer base {
+  html{
+    font-feature-settings: "ss04";
+    font-family: Montserrat, sans-serif, -apple-system;
+  }
+
+  :root{
+    --bee-primary-color: 16, 158, 255;
+  }
+
+  // light
+  [data-theme="light"] {
+    //
+  }
+
+  // dark
+  [data-theme="dark"] {
+    //
+  }
+}
+
+

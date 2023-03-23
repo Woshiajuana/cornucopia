@@ -28,6 +28,10 @@ export const curl = async <T>(
     body = JSON.stringify(params)
   }
 
+  const d = url.startsWith('http') ? url : `${BASE_URL}${url}`
+
+  console.log('d =》 ', d)
+
   const response = await fetch(
     url.startsWith('http') ? url : `${BASE_URL}${url}`,
     {
@@ -40,11 +44,13 @@ export const curl = async <T>(
     },
   )
 
+  console.log('1', url.endsWith('md'))
+
   // const { data, msg, code }: ResponseData<T> = await response.json()
   //
   // if (code !== RESPONSE_CODE.SUCCESS) {
   //   throw new Error(msg)
   // }
 
-  return await response.json()
+  return url.includes('.md') ? await response.text() : await response.json()
 }

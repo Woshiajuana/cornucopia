@@ -36,6 +36,7 @@ export default function ArticlePage(
 ) {
   const { article } = props
   const { query } = useRouter()
+  console.log(1)
 
   return (
     <>

@@ -1,6 +1,26 @@
 import Head from 'next/head'
+import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType } from 'next'
 
-export default function Home() {
+export interface HomePageProps {
+  //
+}
+
+export const getStaticProps: GetStaticProps<{
+  x: string
+}> = async (context) => {
+  const { params } = context
+  return {
+    props: { x: '1' },
+  }
+}
+
+
+export default function HomePage(
+  props: InferGetStaticPropsType<typeof getStaticProps>,
+) {
+  const { x } = props
+  console.log('home => ', props)
+
   return (
     <>
       <Head>

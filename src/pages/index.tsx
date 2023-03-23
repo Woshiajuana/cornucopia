@@ -1,10 +1,13 @@
 import Head from 'next/head'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { CategoryItem } from '@/types'
-import { reqCategoryList } from '@/curl'
+import { ArticleItem, CategoryItem } from '@/types'
+import { reqArticleList, reqCategoryList } from '@/curl'
+import { Category } from '@/components'
+import Link from 'next/link'
 
 export interface HomePageProps {
   categories: CategoryItem[]
+  articles: ArticleItem[]
 }
 
 export const getStaticProps: GetStaticProps<HomePageProps> = async (
@@ -14,29 +17,39 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async (
 
   console.log('params => ', params)
 
-  const categories = await reqCategoryList()
+  const [categories, articles] = await Promise.all([
+    reqCategoryList(),
+    reqArticleList(),
+  ])
 
   return {
-    props: { categories },
+    props: { categories, articles },
   }
 }
 
 export default function HomePage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
-  const { categories } = props
+  const { categories, articles } = props
 
   return (
     <>
       <Head>
         <title>首页 👏 - Bee Blog</title>
       </Head>
-      <h1 className="text-red-600">首页</h1>
-      <ul>
-        {categories.map((item) => (
-          <li key={item.title}>{item.title}</li>
-        ))}
-      </ul>
+      <main className="flex mx-auto max-w-[960px] items-start bg-red-300">
+        <div className="flex-1">
+          {articles.map((item) => (
+            <Link className="block" key={item.id} href={`/article/${item.id}`}>
+              {item.title}
+            </Link>
+          ))}
+        </div>
+        <Category
+          className="w-[240px] border-gray-400"
+          categories={categories}
+        />
+      </main>
     </>
   )
 }

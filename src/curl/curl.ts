@@ -28,14 +28,17 @@ export const curl = async <T>(
     body = JSON.stringify(params)
   }
 
-  const response = await fetch(`${BASE_URL}${url}`, {
-    body,
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    url.startsWith('http') ? url : `${BASE_URL}${url}`,
+    {
+      body,
+      headers: {
+        // Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      ...options,
     },
-    ...options,
-  })
+  )
 
   // const { data, msg, code }: ResponseData<T> = await response.json()
   //

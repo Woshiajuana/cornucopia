@@ -2,15 +2,12 @@ export interface CategoryItem {
   title: string
 }
 
-export interface ArticleInfo {
-  title: string
-  createTime: string
-  content: string
-}
-
 export interface ArticleItem {
+  id: string
   title: string
-  createTime: string
+  date: string
+  content: string
+  abstract: string
 }
 
 export interface ResponseData<T> {

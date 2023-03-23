@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { Header } from '@/components/Header'
 
 export interface LayoutProps {
   children?: ReactNode
@@ -7,9 +8,11 @@ export interface LayoutProps {
 
 export function Layout(props: LayoutProps) {
   const { children, className } = props
+
   return (
     <>
-      <main className={className}/>
+      <Header/>
+      <main className={className}>{children}</main>
     </>
   )
 }

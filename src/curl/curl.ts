@@ -5,7 +5,7 @@ import { RESPONSE_CODE, BASE_URL } from '@/constants'
 export const curl = async <T>(
   url: string,
   params: any = {},
-  options?: RequestInit
+  options?: RequestInit,
 ): Promise<T> => {
   // options
   options = Object.assign({ method: 'get' }, options)
@@ -37,11 +37,11 @@ export const curl = async <T>(
     ...options,
   })
 
-  const { data, msg, code }: ResponseData<T> = await response.json()
+  // const { data, msg, code }: ResponseData<T> = await response.json()
+  //
+  // if (code !== RESPONSE_CODE.SUCCESS) {
+  //   throw new Error(msg)
+  // }
 
-  if (code !== RESPONSE_CODE.SUCCESS) {
-    throw new Error(msg)
-  }
-
-  return data
+  return await response.json()
 }

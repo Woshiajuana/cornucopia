@@ -1,3 +1,3 @@
-export function Classify () {
+export function Classify() {
   return <nav>Classify</nav>
 }

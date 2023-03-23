@@ -7,7 +7,9 @@ export interface HomePageProps {
   categories: CategoryItem[]
 }
 
-export const getStaticProps: GetStaticProps<HomePageProps> = async (context) => {
+export const getStaticProps: GetStaticProps<HomePageProps> = async (
+  context,
+) => {
   const { params } = context
 
   console.log('params => ', params)
@@ -18,7 +20,6 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async (context) => 
     props: { categories },
   }
 }
-
 
 export default function HomePage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
@@ -31,11 +32,11 @@ export default function HomePage(
         <title>首页 👏 - Bee Blog</title>
       </Head>
       <h1 className="text-red-600">首页</h1>
-        <ul>
-          {categories.map(item => <li key={item.
-            title}>{item.title}</li
-          >)}
-        </ul>
+      <ul>
+        {categories.map((item) => (
+          <li key={item.title}>{item.title}</li>
+        ))}
+      </ul>
     </>
   )
 }

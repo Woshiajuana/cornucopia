@@ -1,3 +1,3 @@
 export * from './Catalog'
-export * from './Classify'
+export * from './Category'
 export * from './Header'

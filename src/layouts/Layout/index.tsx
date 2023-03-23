@@ -11,7 +11,7 @@ export function Layout(props: LayoutProps) {
 
   return (
     <>
-      <Header/>
+      <Header />
       <main className={className}>{children}</main>
     </>
   )

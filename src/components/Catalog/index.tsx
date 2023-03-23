@@ -1,3 +1,3 @@
-export function Catalog () {
+export function Catalog() {
   return <nav>Catalog</nav>
 }

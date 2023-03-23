@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:3000/api/'
+export const BASE_URL = 'https://blog.daysnap.cn/'
 
 export enum RESPONSE_CODE {
   SUCCESS = 'S00000',

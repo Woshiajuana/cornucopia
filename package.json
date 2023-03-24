@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@daysnap/define-sass": "^0.0.13",
+    "@types/react-syntax-highlighter": "^15.5.6",
     "autoprefixer": "^10.4.14",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",

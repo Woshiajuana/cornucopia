@@ -10,6 +10,6 @@ export const reqArticleList = () =>
 
 // 获取文章详情
 export const reqArticleInfo = (params: { path: string }) =>
-  curl<ArticleItem>(
+  curl<string>(
     `https://blog.daysnap.cn/articles/${params.path}?v=${Date.now()}`,
   )

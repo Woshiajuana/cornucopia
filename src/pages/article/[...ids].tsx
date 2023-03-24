@@ -3,9 +3,10 @@ import { useRouter } from 'next/router'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { reqArticleInfo, reqArticleList } from '@/curl'
 import { ArticleItem } from '@/types'
+import ReactMarkdown from 'react-markdown'
 
 export interface ArticlePageProps {
-  article: ArticleItem
+  markdownContent: string
 }
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
@@ -26,24 +27,26 @@ export const getStaticProps: GetStaticProps<
 > = async (context) => {
   const { params } = context
 
-  const article = await reqArticleInfo({ path: params?.ids.join('/') ?? '' })
+  const markdownContent = await reqArticleInfo({
+    path: params?.ids.join('/') ?? '',
+  })
 
-  return { props: { article } }
+  return { props: { markdownContent } }
 }
 
 export default function ArticlePage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
-  const { article } = props
+  const { markdownContent } = props
   const { query } = useRouter()
-  console.log(1)
 
   return (
     <>
       <Head>
-        <title>{article.title}</title>
+        <title>文章详情</title>
       </Head>
       <div>文章详情{JSON.stringify(query)}</div>
+      <ReactMarkdown>{markdownContent}</ReactMarkdown>
     </>
   )
 }

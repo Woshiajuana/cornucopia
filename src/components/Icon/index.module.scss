@@ -1,0 +1,11 @@
+.icon{
+  @apply relative inline-block text-inherit;
+  font: normal normal normal 16px/1 'bee-icon';
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  &:before {
+    @apply inline-block;
+  }
+}
+

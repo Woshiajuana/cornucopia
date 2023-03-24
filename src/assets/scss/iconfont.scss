@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "bee-icon"; /* Project id 3971130 */
+  src: url('iconfont.woff2?t=1679649032384') format('woff2'),
+       url('iconfont.woff?t=1679649032384') format('woff'),
+       url('iconfont.ttf?t=1679649032384') format('truetype');
+}
+
+.bee-icon {
+  font-family: "bee-icon" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bee-light:before {
+  content: "\e64b";
+}
+
+.bee-dark:before {
+  content: "\e6c2";
+}
+
+.bee-logo:before {
+  content: "\e60c";
+}
+

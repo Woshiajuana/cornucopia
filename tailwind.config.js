@@ -8,7 +8,11 @@ function withOpacity(cssVariable) {
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      maxWidth: {
+        main: '960px',
+      },
+    },
   },
   plugins: [require('@tailwindcss/typography')],
 }

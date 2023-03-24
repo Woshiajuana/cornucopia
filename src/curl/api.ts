@@ -11,7 +11,13 @@ export const reqArticleList = () =>
   curl<ArticleItem[]>(`mocks/articles.json?v=${Date.now()}`)
 
 // 获取文章详情
-export const reqArticleInfo = (params: { path: string }) =>
-  fetch(`${BASE_URL}mocks/${params.path}?v=${Date.now()}`).then((res) =>
-    res.text(),
-  )
+export const reqArticleInfo = async (params: { id: string }) => {
+  const data = await reqArticleList()
+
+  const article = data.find((item) => item.id === params.id)!
+  article.content = await fetch(
+    `${BASE_URL}mocks/${article.path}?v=${Date.now()}`,
+  ).then((res) => res.text())
+
+  return article
+}

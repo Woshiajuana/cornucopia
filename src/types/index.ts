@@ -8,6 +8,7 @@ export interface ArticleItem {
   date: string
   content: string
   abstract: string
+  path: string
 }
 
 export interface ResponseData<T> {

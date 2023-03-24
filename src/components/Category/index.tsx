@@ -9,7 +9,13 @@ export interface CategoryProps extends HTMLAttributes<HTMLUListElement> {
 export function Category(props: CategoryProps) {
   const { categories, className, ...rest } = props
   return (
-    <ul className={classNames(`sticky top-0`, className)} {...rest}>
+    <ul
+      className={classNames(
+        `sticky top-0 w-[240px] border-gray-400`,
+        className,
+      )}
+      {...rest}
+    >
       {categories.map((item) => (
         <li className="block" key={item.title}>
           {item.title}

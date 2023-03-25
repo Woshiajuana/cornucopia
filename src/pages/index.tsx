@@ -34,7 +34,7 @@ export default function HomePage(
       <Head>
         <title>首页 👏 - Bee Blog</title>
       </Head>
-      <main className="flex mx-auto max-w-[960px] items-start bg-red-300">
+      <main className="flex mx-auto max-w-[960px] items-start">
         <ArticleList articles={articles} />
         <Category categories={categories} />
       </main>

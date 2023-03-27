@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { reqArticleInfo, reqArticleList } from '@/curl'
 import MarkdownIt from 'markdown-it'
 import hljs from 'highlight.js'
+import { ArticleItem } from '@/types'
 
 const md = new MarkdownIt({
   highlight(str, lang) {
@@ -16,13 +17,13 @@ const md = new MarkdownIt({
 })
 
 export interface ArticlePageProps {
-  content: string
+  article: ArticleItem
 }
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
   const articles = await reqArticleList()
   const paths = articles.map((item) => {
-    return { params: { title: item.title, ids: item.id.split('/') } }
+    return { params: { id: item.id } }
   })
 
   return {
@@ -33,31 +34,31 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 
 export const getStaticProps: GetStaticProps<
   ArticlePageProps,
-  { ids: string[] }
+  { id: string }
 > = async (context) => {
   const { params } = context
 
-  const content = await reqArticleInfo({
-    path: params?.ids.join('/') ?? '',
+  const article = await reqArticleInfo({
+    id: params?.id ?? '',
   })
 
-  return { props: { content } }
+  return { props: { article } }
 }
 
 export default function ArticlePage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
-  const { content } = props
+  const { article } = props
 
   return (
     <>
       <Head>
-        <title>文章详情</title>
+        <title>{article.title}</title>
       </Head>
       <main className="max-w-[960px] m-auto prose prose-indigo">
         <div
           dangerouslySetInnerHTML={{
-            __html: md.render(content),
+            __html: md.render(article.content),
           }}
         />
       </main>

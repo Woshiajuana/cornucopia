@@ -1,3 +1,10 @@
+export interface CatalogItem {
+  title: string
+  start: number
+  end: number
+  children: CatalogItem[]
+}
+
 export interface CategoryItem {
   title: string
 }

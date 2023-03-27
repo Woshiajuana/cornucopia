@@ -10,11 +10,11 @@ export function ArticleCell(props: ArticleCellProps) {
   const { id, title, abstract, date } = article
 
   return (
-    <li className="mb-4">
+    <li className="mb-6">
       <Link className="block" href={`/article/${id}`}>
         <h2 className="text-lg">{title}</h2>
-        <p className="text-gray-600 mt-2">{abstract}</p>
-        <div className="mt-2 text-gray-500">
+        <p className="text-gray-600 mt-1">{abstract}</p>
+        <div className="mt-1 text-gray-500">
           <time>{date}</time>
         </div>
       </Link>

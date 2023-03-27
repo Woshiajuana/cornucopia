@@ -1,3 +1,3 @@
 export function Catalog() {
-  return <div className="w-[240px]">Catalog</div>
+  return <div className="sticky top-14 w-[240px] pl-8">Catalog</div>
 }

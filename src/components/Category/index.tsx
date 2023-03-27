@@ -11,7 +11,7 @@ export function Category(props: CategoryProps) {
   return (
     <ul
       className={classNames(
-        `sticky top-0 w-[240px] border-gray-400`,
+        `sticky top-14 w-[240px] border-gray-400 pl-8`,
         className,
       )}
       {...rest}

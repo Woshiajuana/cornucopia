@@ -3,7 +3,9 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { reqArticleInfo, reqArticleList } from '@/curl'
 import MarkdownIt from 'markdown-it'
 import hljs from 'highlight.js'
+import matter from 'gray-matter'
 import { ArticleItem } from '@/types'
+import { Catalog } from '@/components'
 
 const md = new MarkdownIt({
   highlight(str, lang) {
@@ -42,6 +44,11 @@ export const getStaticProps: GetStaticProps<
     id: params?.id ?? '',
   })
 
+  const { content } = matter(article.content)
+  Object.assign(article, {
+    content: md.render(content),
+  })
+
   return { props: { article } }
 }
 
@@ -53,14 +60,21 @@ export default function ArticlePage(
   return (
     <>
       <Head>
-        <title>{article.title}</title>
+        <title>{article.title} - Bee</title>
       </Head>
-      <main className="max-w-[960px] m-auto prose prose-indigo">
-        <div
-          dangerouslySetInnerHTML={{
-            __html: md.render(article.content),
-          }}
-        />
+      <main className="max-w-[960px] flex items-start m-auto">
+        <article className="prose prose-indigo flex-1">
+          <header>
+            <h1>{article.title}</h1>
+            <time>{article.date}</time>
+          </header>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: article.content,
+            }}
+          />
+        </article>
+        <Catalog />
       </main>
     </>
   )

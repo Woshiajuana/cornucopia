@@ -13,10 +13,10 @@ export function ArticleCell(props: ArticleCellProps) {
     <li className="mb-4">
       <Link className="block" href={`/article/${id}`}>
         <h2 className="text-lg">{title}</h2>
-        <p className="text-[15px]">{abstract}</p>
-        <small>
+        <p className="text-gray-600 mt-2">{abstract}</p>
+        <div className="mt-2 text-gray-500">
           <time>{date}</time>
-        </small>
+        </div>
       </Link>
     </li>
   )

@@ -1,3 +1,3 @@
 export function Catalog() {
-  return <nav>Catalog</nav>
+  return <div className="w-[240px]">Catalog</div>
 }

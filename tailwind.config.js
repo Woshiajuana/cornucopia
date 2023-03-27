@@ -9,6 +9,10 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      colors: {
+        primary: withOpacity('--bee-primary-color'),
+      },
+
       maxWidth: {
         main: '960px',
       },

@@ -1,0 +1,7 @@
+.cell{
+  &:hover{
+    h2{
+      @apply underline;
+    }
+  }
+}

@@ -62,20 +62,18 @@ export default function ArticlePage(
       <Head>
         <title>{article.title} - Bee</title>
       </Head>
-      <main className="max-w-[960px] flex items-start m-auto">
-        <article className="prose prose-indigo flex-1">
-          <header>
-            <h1>{article.title}</h1>
-            <time>{article.date}</time>
-          </header>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: article.content,
-            }}
-          />
-        </article>
-        <Catalog />
-      </main>
+      <article className="prose prose-indigo flex-1 pt-6">
+        <header>
+          <h1>{article.title}</h1>
+          <time>{article.date}</time>
+        </header>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: article.content,
+          }}
+        />
+      </article>
+      <Catalog />
     </>
   )
 }

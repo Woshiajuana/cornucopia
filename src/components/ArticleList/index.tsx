@@ -9,7 +9,7 @@ export function ArticleList(props: ArticleListProps) {
   const { articles } = props
 
   return (
-    <ul className="flex-1">
+    <ul className="flex-1 pt-6">
       {articles.map((item) => (
         <ArticleCell key={item.id} article={item} />
       ))}

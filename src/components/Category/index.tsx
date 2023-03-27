@@ -1,21 +1,13 @@
 import type { CategoryItem } from '@/types'
-import type { HTMLAttributes } from 'react'
-import classNames from 'classnames'
 
-export interface CategoryProps extends HTMLAttributes<HTMLUListElement> {
+export interface CategoryProps {
   categories: CategoryItem[]
 }
 
 export function Category(props: CategoryProps) {
-  const { categories, className, ...rest } = props
+  const { categories } = props
   return (
-    <ul
-      className={classNames(
-        `sticky top-14 w-[240px] border-gray-400 pl-8`,
-        className,
-      )}
-      {...rest}
-    >
+    <ul className="">
       {categories.map((item) => (
         <li className="block" key={item.title}>
           {item.title}

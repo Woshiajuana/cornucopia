@@ -1,19 +1,20 @@
 import type { ReactNode } from 'react'
-import { Header } from '@/components/Header'
+import { Header, Sidebar } from '@/components'
 
 export interface LayoutProps {
   children?: ReactNode
-  className?: string
 }
 
 export function Layout(props: LayoutProps) {
-  const { children, className } = props
+  const { children } = props
 
   return (
     <>
       <Header />
-      {children}
-      {/*<main className={className}>{children}</main>*/}
+      <main className="flex mx-auto max-w-[960px] items-start">
+        <Sidebar />
+        {children}
+      </main>
     </>
   )
 }

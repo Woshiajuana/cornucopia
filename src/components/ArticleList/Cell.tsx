@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { ArticleItem } from '@/types'
+import classes from './index.module.scss'
+import classnames from 'classnames'
 
 export interface ArticleCellProps {
   article: ArticleItem
@@ -10,9 +12,9 @@ export function ArticleCell(props: ArticleCellProps) {
   const { id, title, abstract, date } = article
 
   return (
-    <li className="mb-6">
+    <li className={classnames(`mb-6`, classes.cell)}>
       <Link className="block" href={`/article/${id}`}>
-        <h2 className="text-lg">{title}</h2>
+        <h2 className="text-lg text-primary">{title}</h2>
         <p className="text-gray-600 mt-1">{abstract}</p>
         <div className="mt-1 text-gray-500">
           <time>{date}</time>

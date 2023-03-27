@@ -3,6 +3,7 @@ import type { CatalogItem } from '@/types'
 import { parseHtml } from '@/utils'
 import { CatalogCell } from './Cell'
 import { Icon } from '@/components'
+import classes from './index.module.scss'
 
 export function Catalog() {
   const [catalogs, setCatalogs] = useState<CatalogItem[]>()
@@ -16,8 +17,8 @@ export function Catalog() {
   }
 
   return (
-    <div className="relative py-5 bg-red-300">
-      <div className="">
+    <div className={classes.catalog}>
+      <div className="pl-4">
         {catalogs.map((item, index) => (
           <CatalogCell catalogItem={item} key={index} />
         ))}

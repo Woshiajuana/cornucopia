@@ -11,7 +11,7 @@ export function Layout(props: LayoutProps) {
   return (
     <>
       <Header />
-      <main className="flex mx-auto max-w-[960px] items-start">
+      <main className="flex mx-auto max-w-[960px] items-start box-border px-4">
         <Sidebar />
         {children}
       </main>

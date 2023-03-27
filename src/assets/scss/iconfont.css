@@ -1,8 +1,8 @@
 @font-face {
   font-family: "bee-icon"; /* Project id 3971130 */
   src: url('iconfont.woff2?t=1679902844049') format('woff2'),
-  url('iconfont.woff?t=1679902844049') format('woff'),
-  url('iconfont.ttf?t=1679902844049') format('truetype');
+       url('iconfont.woff?t=1679902844049') format('woff'),
+       url('iconfont.ttf?t=1679902844049') format('truetype');
 }
 
 .bee-icon {

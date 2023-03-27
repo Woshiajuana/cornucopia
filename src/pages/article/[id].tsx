@@ -5,7 +5,7 @@ import MarkdownIt from 'markdown-it'
 import hljs from 'highlight.js'
 import matter from 'gray-matter'
 import { ArticleItem } from '@/types'
-import { Catalog } from '@/components'
+import { Aside, Catalog } from '@/components'
 
 const md = new MarkdownIt({
   highlight(str, lang) {
@@ -73,7 +73,9 @@ export default function ArticlePage(
           }}
         />
       </article>
-      <Catalog />
+      <Aside>
+        <Catalog />
+      </Aside>
     </>
   )
 }

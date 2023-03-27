@@ -8,7 +8,7 @@ export function Aside(props: AsideProps) {
 
   return (
     <aside
-      className={classnames(`sticky top-14 w-[240px] pl-8`, className)}
+      className={classnames(`sticky top-14 w-[240px] ml-4`, className)}
       {...rest}
     />
   )

@@ -13,6 +13,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.bee-arrow:before {
+  content: "\e627";
+}
+
 .bee-github:before {
   content: "\e600";
 }

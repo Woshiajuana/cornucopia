@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import type { CatalogItem } from '@/types'
-import { CatalogCell } from './Cell'
 import { parseHtml } from '@/utils'
+import { CatalogCell } from './Cell'
+import { Icon } from '@/components'
 
 export function Catalog() {
   const [catalogs, setCatalogs] = useState<CatalogItem[]>()
@@ -15,10 +16,15 @@ export function Catalog() {
   }
 
   return (
-    <div className="py-5">
-      {catalogs.map((item, index) => (
-        <CatalogCell catalogItem={item} key={index} />
-      ))}
+    <div className="relative py-5 bg-red-300">
+      <div className="">
+        {catalogs.map((item, index) => (
+          <CatalogCell catalogItem={item} key={index} />
+        ))}
+      </div>
+      <div className="flex items-center h-6 right-0 absolute left-0 top-0 pointer-events-none">
+        <Icon name="arrow" />
+      </div>
     </div>
   )
 }

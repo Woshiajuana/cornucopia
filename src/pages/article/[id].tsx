@@ -68,6 +68,7 @@ export default function ArticlePage(
           <time>{article.date}</time>
         </header>
         <div
+          id="bee-article-content"
           dangerouslySetInnerHTML={{
             __html: article.content,
           }}

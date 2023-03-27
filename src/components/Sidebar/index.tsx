@@ -1,15 +1,18 @@
 import { Icon } from '@/components'
+import { useRouter } from 'next/router'
 
 export function Sidebar() {
+  const router = useRouter()
+
   return (
     <div className="fixed -ml-14 top-52">
-      <a
+      <button
         title="返回"
-        href="javascript: history.go(-1)"
+        onClick={() => router.back()}
         className="w-10 h-10 flex items-center justify-center cursor-pointer transition-colors hover:bg-gray-100 text-gray-500 hover:text-gray-900 rounded"
       >
         <Icon size="24" name="return" />
-      </a>
+      </button>
       <a
         title="GitHub"
         href="https://github.com/Woshiajuana"

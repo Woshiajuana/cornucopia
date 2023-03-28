@@ -1,3 +1,4 @@
+export * from './useDocumentEle'
 export * from './useLazy'
 export * from './useScrolling'
 export * from './useScrollTo'

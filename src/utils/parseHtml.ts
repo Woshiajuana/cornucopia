@@ -18,17 +18,16 @@ export function parseHtml(el: HTMLElement) {
     })
     .reverse()
 
-  const arrSourceCatalog = [...children].reverse()
-  arrSourceCatalog.forEach((item, index) => {
+  const sourceCatalogs = [...children].reverse()
+  sourceCatalogs.forEach((item, index) => {
     item.start = index === 0 ? 0 : item.offsetTop
     item.end =
-      arrSourceCatalog.length === index + 1
+      sourceCatalogs.length === index + 1
         ? Infinity
-        : arrSourceCatalog[index + 1].offsetTop
+        : sourceCatalogs[index + 1].offsetTop
   })
 
-  // state.arrSourceCatalog = arrSourceCatalog
-  let result: CatalogItem[] = []
+  const catalogs: CatalogItem[] = []
   let loop: any
   ;(loop = (nodes: typeof children) => {
     const node = nodes.splice(0, 1)[0]
@@ -45,10 +44,10 @@ export function parseHtml(el: HTMLElement) {
       }
     }
     if (!node.parent) {
-      result.unshift(node)
+      catalogs.unshift(node)
     }
     loop(nodes)
   })(children)
 
-  return result
+  return { catalogs, sourceCatalogs }
 }

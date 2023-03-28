@@ -6,25 +6,35 @@ export function useScrollTo(
   const timerRef = useRef<number>()
 
   useEffect(() => {
-    const timer = timerRef.current
-    return () => window.clearInterval(timer)
+    return () => {
+      window.clearInterval(timerRef.current)
+    }
   }, [timerRef])
 
   return useCallback(
-    (position = 0) => {
+    (position = 0, duration = 300) => {
       window.clearInterval(timerRef.current)
-      if (ref.current) {
-        timerRef.current = window.setInterval(() => {
-          if (ref.current) {
-            if (ref.current.scrollTop <= position) {
-              ref.current.scrollTop = position
-              return window.clearInterval(timerRef.current)
-            }
-            ref.current.scrollTop = Math.floor(ref.current.scrollTop / 1.1)
-          }
-        }, 10)
+      if (!ref.current) {
+        return
       }
+      const { scrollTop } = ref.current
+      const zt = Date.now()
+      timerRef.current = window.setInterval(() => {
+        const t = Date.now()
+        const p = (t - zt) / duration
+        if (t >= duration + zt) {
+          window.clearInterval(timerRef.current)
+          ref.current?.scrollTo(0, position)
+        } else {
+          const t =
+            (-Math.cos(p * Math.PI) / 2 + 0.5) * (position - scrollTop) +
+            scrollTop
+
+          console.log('t => ', t)
+          ref.current?.scrollTo(0, t)
+        }
+      }, 13)
     },
-    [ref, timerRef],
+    [ref],
   )
 }

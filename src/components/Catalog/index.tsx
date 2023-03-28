@@ -5,6 +5,7 @@ import { Icon, useAsideContext } from '@/components'
 import { throttle } from '@daysnap/utils'
 import { CatalogCell } from './Cell'
 import classes from './index.module.scss'
+import { useDocumentEle, useScrollTo } from '@/hooks'
 
 const useCatalogInfo = () => {
   const [catalogInfo, setCatalogInfo] = useState<{
@@ -46,6 +47,9 @@ export function Catalog() {
     }
   }, [onScroll, sourceCatalogs])
 
+  const docRef = useDocumentEle()
+  const handleAnchor = useScrollTo(docRef)
+
   if (!catalogs) {
     return null
   }
@@ -54,7 +58,12 @@ export function Catalog() {
     <div className={classes.catalog}>
       <div className="pl-4">
         {catalogs.map((item, index) => (
-          <CatalogCell scrollTop={scrollTop} catalogItem={item} key={index} />
+          <CatalogCell
+            onAnchor={handleAnchor}
+            scrollTop={scrollTop}
+            catalogItem={item}
+            key={index}
+          />
         ))}
       </div>
       <div

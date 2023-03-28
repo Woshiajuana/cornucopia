@@ -62,7 +62,7 @@ export default function ArticlePage(
       <Head>
         <title>{article.title} - Bee</title>
       </Head>
-      <article className="prose prose-indigo flex-1 pt-6">
+      <div className="prose prose-indigo flex-1 pt-6 w-full">
         <header>
           <h1>{article.title}</h1>
           <time>{article.date}</time>
@@ -73,7 +73,7 @@ export default function ArticlePage(
             __html: article.content,
           }}
         />
-      </article>
+      </div>
       <Aside>
         <Catalog />
       </Aside>

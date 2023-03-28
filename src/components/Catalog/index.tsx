@@ -1,20 +1,48 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { CatalogItem } from '@/types'
 import { parseHtml } from '@/utils'
-import { CatalogCell } from './Cell'
 import { Icon } from '@/components'
+import { CatalogCell } from './Cell'
 import classes from './index.module.scss'
+import { useScrolling, useWindow } from '@/hooks'
 
-export function Catalog() {
+const useCatalog = () => {
   const [catalogs, setCatalogs] = useState<CatalogItem[]>()
 
   useEffect(() => {
     setCatalogs(parseHtml(document.getElementById('bee-article-content')!))
   }, [])
 
+  return catalogs
+}
+
+export function Catalog() {
+  const catalogs = useCatalog()
+  const windowRef = useWindow()
+
+  const target = useScrolling(windowRef)
+  const indicator = useMemo(() => {
+    let value = 0
+    if (!target || !catalogs || !catalogs.length) {
+      return value
+    }
+
+    const { scrollTop } = target
+    catalogs.find((item, index) => {
+      if (item.start <= scrollTop && scrollTop < item.end) {
+        value = (index + 1) * 24
+        return true
+      }
+    })
+
+    return value
+  }, [target, catalogs])
+
   if (!catalogs) {
     return null
   }
+
+  console.log('indicator => ', indicator)
 
   return (
     <div className={classes.catalog}>

@@ -1,4 +1,4 @@
 .catalog{
-  @apply relative bg-red-300 overflow-y-auto max-h-fit;
-  max-height: calc(100vh - 4rem);
+  @apply relative overflow-y-auto max-h-fit;
+  //max-height: calc(100vh - 4rem);
 }

@@ -1,12 +1,23 @@
 import { Icon } from '@/components'
 import { useRouter } from 'next/router'
-import { useDocumentEle, useScrollTo } from '@/hooks'
+import { useDocumentEle, useScrolling, useScrollTo, useWindow } from '@/hooks'
+import { useState } from 'react'
 
 export function Sidebar() {
   const router = useRouter()
 
   const documentEle = useDocumentEle()
   const handleReturn = useScrollTo(documentEle)
+
+  const windowRef = useWindow()
+  const [visible, setVisible] = useState(false)
+  useScrolling(windowRef, (event) => {
+    const { clientHeight, scrollTop } = event
+    const value = scrollTop > clientHeight
+    if (visible !== value) {
+      setVisible(value)
+    }
+  })
 
   return (
     <div className="fixed -ml-14 top-52">
@@ -38,14 +49,16 @@ export function Sidebar() {
       >
         <Icon size="24" name="link" />
       </div>
-      <button
-        onClick={() => handleReturn(1000)}
-        type="button"
-        title="回到顶部"
-        className="mt-1 w-10 h-10 flex items-center justify-center cursor-pointer transition-colors hover:bg-gray-100 text-gray-500 hover:text-gray-900 rounded"
-      >
-        <Icon size="24" name="top" />
-      </button>
+      {visible && (
+        <button
+          onClick={() => handleReturn(0)}
+          type="button"
+          title="回到顶部"
+          className="mt-1 w-10 h-10 flex items-center justify-center cursor-pointer transition-colors hover:bg-gray-100 text-gray-500 hover:text-gray-900 rounded"
+        >
+          <Icon size="24" name="top" />
+        </button>
+      )}
     </div>
   )
 }

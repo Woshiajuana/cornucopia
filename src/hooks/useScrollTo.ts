@@ -30,7 +30,6 @@ export function useScrollTo(
             (-Math.cos(p * Math.PI) / 2 + 0.5) * (position - scrollTop) +
             scrollTop
 
-          console.log('t => ', t)
           ref.current?.scrollTo(0, t)
         }
       }, 13)

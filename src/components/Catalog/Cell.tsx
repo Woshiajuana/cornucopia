@@ -1,5 +1,6 @@
 import type { CatalogItem } from '@/types'
 import classnames from 'classnames'
+import { motion } from 'framer-motion'
 
 export interface CatalogCellProps {
   catalogItem: CatalogItem
@@ -13,17 +14,30 @@ export function CatalogCell(props: CatalogCellProps) {
 
   return (
     <div className="pl-2">
-      <p
+      <div
         onClick={() => onAnchor?.(start)}
         className={classnames(
-          `flex items-center text-[0.8rem] h-6 text-gray-500 text-ellipsis whitespace-nowrap overflow-hidden cursor-pointer hover:text-primary`,
+          `relative flex items-center text-[0.8rem] h-7 text-gray-500 text-ellipsis whitespace-nowrap  cursor-pointer hover:text-primary`,
           {
             ['text-primary']: start <= scrollTop && scrollTop < end,
           },
         )}
       >
-        {title}
-      </p>
+        <span className="relative px-2.5 h-7 inline-flex items-center justify-center">
+          {title}
+          {start <= scrollTop && scrollTop < end ? (
+            <motion.div
+              className="absolute inset-0 bg-gray-300 dark:bg-neutral-800 rounded-md z-[-1]"
+              layoutId="sidebar"
+              transition={{
+                type: 'spring',
+                stiffness: 350,
+                damping: 30,
+              }}
+            />
+          ) : null}
+        </span>
+      </div>
       {children.map((item, index) => (
         <CatalogCell
           onAnchor={onAnchor}

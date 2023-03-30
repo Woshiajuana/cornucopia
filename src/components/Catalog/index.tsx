@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
+import { LayoutGroup, motion } from 'framer-motion'
 import type { CatalogItem } from '@/types'
 import { parseHtml } from '@/utils'
 import { Icon, useAsideContext } from '@/components'
 import { throttle } from '@daysnap/utils'
+import { useDocumentEle, useScrollTo } from '@/hooks'
 import { CatalogCell } from './Cell'
 import classes from './index.module.scss'
-import { useDocumentEle, useScrollTo } from '@/hooks'
 
 const useCatalogInfo = () => {
   const [catalogInfo, setCatalogInfo] = useState<{
@@ -66,12 +67,12 @@ export function Catalog() {
           />
         ))}
       </div>
-      <div
-        className="flex items-center h-6 right-0 absolute left-0 top-0 pointer-events-none transition-transform bg-amber-300/30"
-        style={{ transform: `translate3d(0, ${indicator}px, 0)` }}
-      >
-        <Icon name="arrow" />
-      </div>
+      {/*<div*/}
+      {/*  className="flex items-center h-6 right-0 absolute left-0 top-0 pointer-events-none transition-transform"*/}
+      {/*  style={{ transform: `translate3d(0, ${indicator}px, 0)` }}*/}
+      {/*>*/}
+      {/*  <Icon name="arrow" />*/}
+      {/*</div>*/}
     </div>
   )
 }

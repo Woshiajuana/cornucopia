@@ -27,7 +27,6 @@ const useCatalogInfo = () => {
 export function Catalog() {
   const { catalogs, sourceCatalogs } = useCatalogInfo()
   const { onScroll } = useAsideContext()
-  const [indicator, setIndicator] = useState(0)
   const [scrollTop, setScrollTop] = useState(0)
 
   useEffect(() => {
@@ -38,7 +37,6 @@ export function Catalog() {
       })
       const indicator = index * 1.5 * 18
       onScroll({ scrollTop, indicator })
-      setIndicator(indicator)
       setScrollTop(scrollTop)
     }, 100)
 
@@ -56,23 +54,15 @@ export function Catalog() {
   }
 
   return (
-    <div className={classes.catalog}>
-      <div className="pl-4">
-        {catalogs.map((item, index) => (
-          <CatalogCell
-            onAnchor={handleAnchor}
-            scrollTop={scrollTop}
-            catalogItem={item}
-            key={index}
-          />
-        ))}
-      </div>
-      {/*<div*/}
-      {/*  className="flex items-center h-6 right-0 absolute left-0 top-0 pointer-events-none transition-transform"*/}
-      {/*  style={{ transform: `translate3d(0, ${indicator}px, 0)` }}*/}
-      {/*>*/}
-      {/*  <Icon name="arrow" />*/}
-      {/*</div>*/}
+    <div className="">
+      {catalogs.map((item, index) => (
+        <CatalogCell
+          onAnchor={handleAnchor}
+          scrollTop={scrollTop}
+          catalogItem={item}
+          key={index}
+        />
+      ))}
     </div>
   )
 }

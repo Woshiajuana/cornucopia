@@ -13,7 +13,7 @@ export function CatalogCell(props: CatalogCellProps) {
   const { title, children, start, end } = catalogItem
 
   return (
-    <div className="pl-2">
+    <div className="pl-2.5">
       <div
         onClick={() => onAnchor?.(start)}
         className={classnames(

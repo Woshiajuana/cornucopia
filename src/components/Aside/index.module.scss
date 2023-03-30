@@ -1,5 +1,5 @@
 .aside{
   @apply sticky top-14 w-[240px] ml-4 overflow-y-auto flex-shrink-0;
-  //background-color: rgba(0, 0, 0, .1);
+  background-color: rgba(0, 0, 0, .1);
   max-height: calc(100vh - 4.5rem);
 }

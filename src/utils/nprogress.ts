@@ -9,7 +9,7 @@ np.configure({
 export const nprogress = np
 
 export function setupNprogress() {
-  //Binding events.
+  // Binding events.
   Router.events.on('routeChangeStart', () => nprogress.start())
   Router.events.on('routeChangeComplete', () => nprogress.done())
   Router.events.on('routeChangeError', () => nprogress.done())

@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
 import type { CatalogItem } from '@/types'
 import { parseHtml } from '@/utils'
-import { useAsideContext } from '@/components'
+import { useAsideContext, Tree } from '@/components'
 import { throttle } from '@daysnap/utils'
 import { useDocumentEle, useScrollTo } from '@/hooks'
-import { Tree } from '../Tree'
 
 const useCatalogInfo = () => {
   const [catalogInfo, setCatalogInfo] = useState<{

@@ -2,59 +2,59 @@
   "code": "S00000",
   "data": [
     {
-      "title": "Android",
+      "label": "Android",
       "number": 18
     },
     {
-      "title": "Flutter",
+      "label": "Flutter",
       "number": 1
     },
     {
-      "title": "HTML&CSS",
+      "label": "HTML&CSS",
       "number": 3
     },
     {
-      "title": "Javascript",
+      "label": "Javascript",
       "number": 13
     },
     {
-      "title": "Kotlin",
+      "label": "Kotlin",
       "number": 7
     },
     {
-      "title": "Linux",
+      "label": "Linux",
       "number": 3
     },
     {
-      "title": "Nodejs",
+      "label": "Nodejs",
       "number": 7
     },
     {
-      "title": "React",
+      "label": "React",
       "number": 6
     },
     {
-      "title": "TypeScript",
+      "label": "TypeScript",
       "number": 3
     },
     {
-      "title": "Vue",
+      "label": "Vue",
       "number": 3
     },
     {
-      "title": "其他",
+      "label": "其他",
       "number": 7
     },
     {
-      "title": "数据库",
+      "label": "数据库",
       "number": 3
     },
     {
-      "title": "算法",
+      "label": "算法",
       "number": 1
     },
     {
-      "title": "运维",
+      "label": "运维",
       "number": 6
     }
   ]

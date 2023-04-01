@@ -7,7 +7,7 @@ export interface CatalogItem {
 }
 
 export interface CategoryItem {
-  title: string
+  label: string
 }
 
 export interface ArticleItem {

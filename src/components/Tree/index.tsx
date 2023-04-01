@@ -2,12 +2,12 @@ import classnames from 'classnames'
 import { motion } from 'framer-motion'
 
 export type TreeDataItem<T = any> = {
-  key: string
   label: string
   children?: TreeDataItem<T>[]
 } & T
 
 export interface TreeProps<T = any> {
+  keyName?: string
   className?: string
   data: TreeDataItem<T>[]
   current?: string | number
@@ -15,12 +15,14 @@ export interface TreeProps<T = any> {
 }
 
 export function Tree<T = any>(props: TreeProps<T>) {
-  const { className, onSelect, data, current } = props
+  const { className, onSelect, data, current, keyName = 'key' } = props
 
   return (
     <ul className={classnames(``, className)}>
       {data.map((item) => {
-        const { key, children, label } = item
+        const { children, label } = item
+        const key = (item as any)[keyName] as string
+
         return (
           <li key={key}>
             <div
@@ -51,6 +53,7 @@ export function Tree<T = any>(props: TreeProps<T>) {
               <Tree
                 className="pl-2.5"
                 data={children}
+                keyName={keyName}
                 current={current}
                 onSelect={onSelect}
               />

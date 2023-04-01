@@ -1,7 +1,7 @@
 import { HTMLAttributes, useCallback, useRef } from 'react'
 import classnames from 'classnames'
-import classes from './index.module.scss'
 import { AsideContext, AsideContextValue } from './context'
+import classes from './index.module.scss'
 
 export * from './context'
 
@@ -12,13 +12,13 @@ export function Aside(props: AsideProps) {
 
   const asideRef = useRef<HTMLElement>(null)
   const onScroll = useCallback<AsideContextValue['onScroll']>(
-    ({ indicator }) => {
+    ({ scrollTop }) => {
       if (asideRef.current) {
         const { scrollHeight, clientHeight } = asideRef.current
         if (clientHeight >= scrollHeight) {
           return
         }
-        asideRef.current.scrollTop = indicator - clientHeight / 2
+        asideRef.current.scrollTop = scrollTop - clientHeight / 2
       }
     },
     [],

@@ -7,10 +7,11 @@ export function parseHtml(el: HTMLElement) {
     .filter((item) => objHLevel.indexOf(item.nodeName) > -1)
     .map((item, index) => {
       return {
+        key: `title-${index}`,
         start: 0,
         end: 0,
         level: objHLevel.indexOf(item.nodeName) + 1,
-        title: item.innerHTML,
+        label: item.innerHTML,
         offsetTop: (item as any).offsetTop - 70,
         parent: false,
         children: [],

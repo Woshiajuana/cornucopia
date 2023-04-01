@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
-import { LayoutGroup, motion } from 'framer-motion'
 import type { CatalogItem } from '@/types'
 import { parseHtml } from '@/utils'
-import { Icon, useAsideContext } from '@/components'
+import { useAsideContext } from '@/components'
 import { throttle } from '@daysnap/utils'
 import { useDocumentEle, useScrollTo } from '@/hooks'
-import { CatalogCell } from './Cell'
-import classes from './index.module.scss'
+import { Tree } from '../Tree'
 
 const useCatalogInfo = () => {
   const [catalogInfo, setCatalogInfo] = useState<{
@@ -27,7 +25,7 @@ const useCatalogInfo = () => {
 export function Catalog() {
   const { catalogs, sourceCatalogs } = useCatalogInfo()
   const { onScroll } = useAsideContext()
-  const [scrollTop, setScrollTop] = useState(0)
+  const [current, setCurrent] = useState('')
 
   useEffect(() => {
     const handler = throttle((event: Event) => {
@@ -35,9 +33,8 @@ export function Catalog() {
       const index = sourceCatalogs.findIndex((item) => {
         return item.start <= scrollTop && scrollTop < item.end
       })
-      const indicator = index * 1.5 * 18
-      onScroll({ scrollTop, indicator })
-      setScrollTop(scrollTop)
+      onScroll({ scrollTop: index * 1.75 * 18 })
+      setCurrent(sourceCatalogs[index].key)
     }, 100)
 
     window.addEventListener('scroll', handler)
@@ -47,22 +44,15 @@ export function Catalog() {
   }, [onScroll, sourceCatalogs])
 
   const docRef = useDocumentEle()
-  const handleAnchor = useScrollTo(docRef)
-
-  if (!catalogs) {
-    return null
-  }
+  const handleScrollTo = useScrollTo(docRef)
 
   return (
-    <div className="">
-      {catalogs.map((item, index) => (
-        <CatalogCell
-          onAnchor={handleAnchor}
-          scrollTop={scrollTop}
-          catalogItem={item}
-          key={index}
-        />
-      ))}
-    </div>
+    <Tree<CatalogItem>
+      current={current}
+      data={catalogs}
+      onSelect={(item) => {
+        handleScrollTo(item.start)
+      }}
+    />
   )
 }

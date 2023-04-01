@@ -1,5 +1,6 @@
 export interface CatalogItem {
-  title: string
+  key: string
+  label: string
   start: number
   end: number
   children: CatalogItem[]

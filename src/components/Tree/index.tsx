@@ -1,28 +1,28 @@
 import classnames from 'classnames'
 import { motion } from 'framer-motion'
 
-export interface TreeDataItem {
+export type TreeDataItem<T = any> = {
   key: string
   label: string
-  children?: TreeDataItem[]
-}
+  children?: TreeDataItem<T>[]
+} & T
 
-export interface TreeProps {
+export interface TreeProps<T = any> {
   className?: string
-  data: TreeDataItem[]
-  current: string | number
-  onSelect?: (item: TreeDataItem) => void
+  data: TreeDataItem<T>[]
+  current?: string | number
+  onSelect?: (item: TreeDataItem<T>) => void
 }
 
-export function Tree(props: TreeProps) {
+export function Tree<T = any>(props: TreeProps<T>) {
   const { className, onSelect, data, current } = props
 
   return (
-    <div className={classnames(``, className)}>
+    <ul className={classnames(``, className)}>
       {data.map((item) => {
         const { key, children, label } = item
         return (
-          <>
+          <li key={key}>
             <div
               onClick={() => onSelect?.(item)}
               className={classnames(
@@ -47,14 +47,17 @@ export function Tree(props: TreeProps) {
                 ) : null}
               </span>
             </div>
-            {children?.length && (
-              <div className="pl-2.5">
-                <Tree data={children} current={current} onSelect={onSelect} />
-              </div>
-            )}
-          </>
+            {!!children?.length ? (
+              <Tree
+                className="pl-2.5"
+                data={children}
+                current={current}
+                onSelect={onSelect}
+              />
+            ) : null}
+          </li>
         )
       })}
-    </div>
+    </ul>
   )
 }

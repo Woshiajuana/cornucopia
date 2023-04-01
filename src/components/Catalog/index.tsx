@@ -33,7 +33,10 @@ export function Catalog() {
         return item.start <= scrollTop && scrollTop < item.end
       })
       onScroll({ scrollTop: index * 1.75 * 18 })
-      setCurrent(sourceCatalogs[index].key)
+      const item = sourceCatalogs[index]
+      if (item) {
+        setCurrent(item.key)
+      }
     }, 100)
 
     if (sourceCatalogs.length) {

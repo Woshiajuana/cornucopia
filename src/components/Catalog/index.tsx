@@ -28,14 +28,18 @@ export function Catalog() {
   const [current, setCurrent] = useState('')
 
   useEffect(() => {
-    const handler = throttle((event: Event) => {
-      const { scrollTop } = (event.target as any).scrollingElement
+    const handler = throttle(() => {
+      const { scrollTop } = window.document.scrollingElement!!
       const index = sourceCatalogs.findIndex((item) => {
         return item.start <= scrollTop && scrollTop < item.end
       })
       onScroll({ scrollTop: index * 1.75 * 18 })
       setCurrent(sourceCatalogs[index].key)
     }, 100)
+
+    if (sourceCatalogs.length) {
+      handler()
+    }
 
     window.addEventListener('scroll', handler)
     return () => {

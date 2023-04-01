@@ -36,7 +36,7 @@ export function Tree<T = any>(props: TreeProps<T>) {
                 {label}
                 {key === current ? (
                   <motion.div
-                    className="absolute inset-0 bg-gray-300 dark:bg-neutral-800 rounded-md z-[-1]"
+                    className="absolute inset-0 bg-gray-200 dark:bg-neutral-800 rounded-md z-[-1]"
                     layoutId="sidebar"
                     transition={{
                       type: 'spring',

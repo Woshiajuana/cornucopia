@@ -1,5 +1,6 @@
 export * from './useDocumentEle'
 export * from './useLazy'
+export * from './useMounted'
 export * from './useScrolling'
 export * from './useScrollTo'
 export * from './useWindow'

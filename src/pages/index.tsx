@@ -2,7 +2,7 @@ import Head from 'next/head'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { ArticleItem, CategoryItem } from '@/types'
 import { reqArticleList, reqCategoryList } from '@/curl'
-import { ArticleList, Aside, Category } from '@/components'
+import { ArticleList, Aside, Category, Pagination } from '@/components'
 import { Copyright } from '@/components/Copyright'
 
 export interface HomePageProps {
@@ -35,7 +35,10 @@ export default function HomePage(
       <Head>
         <title>首页 👏 - Bee Blog</title>
       </Head>
-      <ArticleList articles={articles} />
+      <div className="flex-1 py-6">
+        <ArticleList articles={articles} />
+        <Pagination />
+      </div>
       <Aside>
         <Category categories={categories} />
         <Copyright />

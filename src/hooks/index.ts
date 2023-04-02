@@ -1,6 +1,7 @@
 export * from './useDocumentEle'
 export * from './useLazy'
 export * from './useMounted'
+export * from './useQuery'
 export * from './useScrolling'
 export * from './useScrollTo'
 export * from './useWindow'

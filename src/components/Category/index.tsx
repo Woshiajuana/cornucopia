@@ -18,7 +18,6 @@ export function Category(props: CategoryProps) {
   const { category = treeData[0].label } = useQuery<{
     category?: string
   }>()
-  const [current, setCurrent] = useState(category)
 
   const router = useRouter()
   const handleSelect: TreeProps['onSelect'] = (item) => {
@@ -26,18 +25,15 @@ export function Category(props: CategoryProps) {
     if (item.label !== treeData[0].label) {
       query.category = item.label
     }
-    setCurrent(query.category)
-    setTimeout(() => {
-      router.replace({ pathname: '/', query })
-    }, 400)
+    // fix
+    document.scrollingElement!.scrollTop = 0
+    router.replace({ pathname: '/', query })
   }
-
-  console.log('current => ', current)
 
   return (
     <Tree
       data={treeData}
-      current={current}
+      current={category}
       keyName="label"
       onSelect={handleSelect}
     />

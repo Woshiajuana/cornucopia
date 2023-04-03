@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { motion } from 'framer-motion'
+import { LayoutGroup, motion } from 'framer-motion'
 
 export type TreeDataItem<T = any> = {
   label: string
@@ -24,41 +24,43 @@ export function Tree<T = any>(props: TreeProps<T>) {
         const key = (item as any)[keyName] as string
 
         return (
-          <li key={key}>
-            <div
-              onClick={() => onSelect?.(item)}
-              className={classnames(
-                `relative flex items-center text-[0.8rem] h-7 text-gray-500 text-ellipsis whitespace-nowrap  cursor-pointer hover:text-primary`,
-                {
-                  ['text-primary']: key === current,
-                },
-              )}
-            >
-              <span className="relative px-2.5 h-7 inline-flex items-center justify-center">
-                {label}
-                {key === current ? (
-                  <motion.div
-                    className="absolute inset-0 bg-gray-200 dark:bg-neutral-800 rounded-md z-[-1]"
-                    layoutId="sidebar"
-                    transition={{
-                      type: 'spring',
-                      stiffness: 350,
-                      damping: 30,
-                    }}
-                  />
-                ) : null}
-              </span>
-            </div>
-            {!!children?.length ? (
-              <Tree
-                className="pl-2.5"
-                data={children}
-                keyName={keyName}
-                current={current}
-                onSelect={onSelect}
-              />
-            ) : null}
-          </li>
+          <LayoutGroup key={key}>
+            <li key={key}>
+              <div
+                onClick={() => onSelect?.(item)}
+                className={classnames(
+                  `relative flex items-center text-[0.8rem] h-7 text-gray-500 text-ellipsis whitespace-nowrap  cursor-pointer hover:text-primary`,
+                  {
+                    ['text-primary']: key === current,
+                  },
+                )}
+              >
+                <span className="relative px-2.5 h-7 inline-flex items-center justify-center">
+                  {label}
+                  {key === current ? (
+                    <motion.div
+                      className="absolute inset-0 bg-gray-200 dark:bg-neutral-800 rounded-md z-[-1]"
+                      layoutId="sidebar"
+                      transition={{
+                        type: 'spring',
+                        stiffness: 350,
+                        damping: 30,
+                      }}
+                    />
+                  ) : null}
+                </span>
+              </div>
+              {!!children?.length ? (
+                <Tree
+                  className="pl-2.5"
+                  data={children}
+                  keyName={keyName}
+                  current={current}
+                  onSelect={onSelect}
+                />
+              ) : null}
+            </li>
+          </LayoutGroup>
         )
       })}
     </ul>

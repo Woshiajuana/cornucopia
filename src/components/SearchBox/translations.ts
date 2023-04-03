@@ -3,26 +3,26 @@ import { DocSearchTranslations } from '@docsearch/react'
 export const translations: DocSearchTranslations = {
   button: {
     buttonText: '搜索',
-    buttonAriaLabel: 'Search',
+    buttonAriaLabel: '搜索',
   },
   modal: {
     searchBox: {
-      resetButtonTitle: '清除查询',
-      resetButtonAriaLabel: 'Clear the query',
+      resetButtonTitle: '清除查询条件',
+      resetButtonAriaLabel: '清除查询条件',
       cancelButtonText: '取消',
-      cancelButtonAriaLabel: 'Cancel',
+      cancelButtonAriaLabel: '取消',
     },
     startScreen: {
-      recentSearchesTitle: '最近的',
+      recentSearchesTitle: '搜索历史',
       noRecentSearchesText: '没有搜索历史',
-      saveRecentSearchButtonTitle: '保存此搜索',
-      removeRecentSearchButtonTitle: '从历史记录中删除此搜索',
+      saveRecentSearchButtonTitle: '保存至搜索历史',
+      removeRecentSearchButtonTitle: '从搜索历史中移除',
       favoriteSearchesTitle: '收藏',
-      removeFavoriteSearchButtonTitle: '从收藏夹中删除此搜索',
+      removeFavoriteSearchButtonTitle: '从收藏中移除',
     },
     errorScreen: {
       titleText: '无法获取结果',
-      helpText: '您可能需要检查网络连接.',
+      helpText: '你可能需要检查你的网络连接',
     },
     footer: {
       selectText: '选择',
@@ -36,9 +36,9 @@ export const translations: DocSearchTranslations = {
     },
     noResultsScreen: {
       noResultsText: '无法找到相关结果',
-      suggestedQueryText: '尝试搜索',
-      reportMissingResultsText: '相信这个查询应该返回结果吗？',
-      reportMissingResultsLinkText: '让我们知道.',
+      suggestedQueryText: '你可以尝试查询',
+      reportMissingResultsText: '你认为该查询应该有结果？',
+      reportMissingResultsLinkText: '点击反馈',
     },
   },
 }

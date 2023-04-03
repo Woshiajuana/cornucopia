@@ -7,8 +7,8 @@ DeployDirectoryPath=/web/blog
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
-npm run build
-cd ./packages/horn-site/dist
+npm run build && npm run export
+cd ./out
 zip -r ./dist.zip ./*
 ssh ${ServerAddress} "mkdir -p $DeployDirectoryPath"
 scp -r ./dist.zip ${ServerAddress}:${DeployDirectoryPath}

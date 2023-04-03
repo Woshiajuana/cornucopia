@@ -13,7 +13,7 @@ export interface ArticlePageProps {
 export const getStaticPaths: GetStaticPaths = async (context) => {
   const articles = await reqArticleList()
   const paths = articles.map((item) => {
-    return { params: { id: `${item.id}.html` } }
+    return { params: { id: item.id } }
   })
 
   return {

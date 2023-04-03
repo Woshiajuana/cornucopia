@@ -8,9 +8,6 @@ const nextConfig = {
     // https://github.com/vercel/next.js/issues/46672
     scrollRestoration: true,
   },
-
-  // 重定向
-  // redirects() {},
 }
 
 module.exports = nextConfig

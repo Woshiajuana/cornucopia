@@ -7,7 +7,6 @@ export function parseHtml(el: HTMLElement) {
     .filter((item) => objHLevel.indexOf(item.nodeName) > -1)
     .map((item, index) => {
       const label = (item as any).innerText
-      // item.id = label
       return {
         key: `title-${index}`,
         start: 0,

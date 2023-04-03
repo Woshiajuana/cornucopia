@@ -1,31 +1,10 @@
 import Head from 'next/head'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
-import { reqArticleInfo, reqArticleList } from '@/curl'
-import MarkdownIt from 'markdown-it'
-import anchor from 'markdown-it-anchor'
-import hljs from 'highlight.js'
-import uslug from 'uslug'
 import matter from 'gray-matter'
+import { reqArticleInfo, reqArticleList } from '@/curl'
 import { ArticleItem } from '@/types'
 import { Aside, Catalog } from '@/components'
-
-const uslugify = (s: string) => uslug(s)
-
-const md = new MarkdownIt({
-  highlight(str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      // https://github.com/highlightjs/highlight.js/issues/2277
-      return hljs.highlight(str, { language: lang, ignoreIllegals: true }).value
-    }
-
-    return ''
-  },
-}).use(anchor, {
-  slugify: uslugify,
-  permalink: true,
-  permalinkBefore: true,
-  permalinkSymbol: '#',
-})
+import { markdown } from '@/utils'
 
 export interface ArticlePageProps {
   article: ArticleItem
@@ -55,7 +34,7 @@ export const getStaticProps: GetStaticProps<
 
   const { content } = matter(article.content)
   Object.assign(article, {
-    content: md.render(content),
+    content: markdown.render(content),
   })
 
   return { props: { article } }

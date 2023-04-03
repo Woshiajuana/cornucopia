@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+       http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+>
+
+<url>
+ <loc>https://blog.daysnap.cn/article/20211221111700.html</loc>
+ <priority>0.3</priority>
+ <lastmod>2023-04-03</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+
+<url>
+ <loc>https://blog.daysnap.cn/article/20210627210000.html</loc>
+ <priority>0.3</priority>
+ <lastmod>2023-04-03</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+
+<url>
+ <loc>https://blog.daysnap.cn/article/555555555.html</loc>
+ <priority>0.3</priority>
+ <lastmod>2023-04-03</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+
+<url>
+ <loc>https://blog.daysnap.cn/article/2021062721000011.html</loc>
+ <priority>0.3</priority>
+ <lastmod>2023-04-03</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+
+<url>
+ <loc>https://blog.daysnap.cn/article/444444.html</loc>
+ <priority>0.3</priority>
+ <lastmod>2023-04-03</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+
+<url>
+ <loc>https://blog.daysnap.cn/article/3333.html</loc>
+ <priority>0.3</priority>
+ <lastmod>2023-04-03</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+
+<url>
+ <loc>https://blog.daysnap.cn/article/20210512221700.html</loc>
+ <priority>0.3</priority>
+ <lastmod>2023-04-03</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+
+<url>
+ <loc>https://blog.daysnap.cn/article/20210627210001011.html</loc>
+ <priority>0.3</priority>
+ <lastmod>2023-04-03</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+
+<url>
+ <loc>https://blog.daysnap.cn/</loc>
+ <priority>0.3</priority>
+ <lastmod>2023-04-03</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+
+</urlset>

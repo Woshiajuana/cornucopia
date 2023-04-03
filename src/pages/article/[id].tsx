@@ -25,8 +25,10 @@ export interface ArticlePageProps {
 export const getStaticPaths: GetStaticPaths = async (context) => {
   const articles = await reqArticleList()
   const paths = articles.map((item) => {
-    return { params: { id: item.id } }
+    return { params: { id: `${item.id}.html` } }
   })
+
+  console.log('11 => ', paths)
 
   return {
     paths,
@@ -39,6 +41,7 @@ export const getStaticProps: GetStaticProps<
   { id: string }
 > = async (context) => {
   const { params } = context
+  console.log('222')
 
   const article = await reqArticleInfo({
     id: params?.id ?? '',

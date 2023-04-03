@@ -14,7 +14,7 @@ export function ArticleCell(props: ArticleCellProps) {
 
   return (
     <li className={classnames(`mb-6`, classes.cell)}>
-      <Link className="block" href={`/article/${id}`}>
+      <Link className="block" href={`/article/${id}.html`}>
         <h2 className="text-lg text-primary">{title}</h2>
         <p className="text-gray-600 mt-1">{abstract}</p>
         <div className="mt-1 text-gray-500">

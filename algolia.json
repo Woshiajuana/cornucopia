@@ -4,16 +4,13 @@
   "rateLimit": 8,
   "maxDepth": 10,
   "selectors": {
-    "lvl0": {
-      "selector": "",
-      "defaultValue": "Documentation"
-    },
-    "lvl11": "main a",
+    "lvl0": "",
     "lvl1": "main h1",
     "lvl2": "main h2",
     "lvl3": "main h3",
     "lvl4": "main h4",
     "lvl5": "main h5",
+    "lvl6": "main a",
     "content": "main p, main li"
   }
 }

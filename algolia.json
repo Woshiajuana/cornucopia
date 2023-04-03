@@ -1,6 +1,6 @@
 {
   "index_name": "nextjs-blog",
-  "start_urls": ["https://blog.daysnap.cn"],
+  "start_urls": ["https://blog.daysnap.cn", "https://mingyuli97.github.io/blog/"],
   "rateLimit": 8,
   "maxDepth": 10,
   "selectors": {

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { SearchBox } from '@/components'
 
 export function Header() {
   return (
@@ -7,6 +8,8 @@ export function Header() {
         <Link scroll={false} href="/" className="flex items-center text-lg">
           Ajuan Blog
         </Link>
+
+        <SearchBox />
       </div>
     </header>
   )

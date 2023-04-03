@@ -13,8 +13,8 @@ export function Pagination() {
 
   return (
     <div className="flex items-center justify-center py-4 text-sm">
-      <Link href={{ pathname: '/', query: { category } }}>上一页</Link>
-      <Link href={{ pathname: '/', query: Object.assign({}) }}>上一页</Link>
+      {/*<Link href={{ pathname: '/', query: { category } }}>上一页</Link>*/}
+      {/*<Link href={{ pathname: '/', query: Object.assign({}) }}>上一页</Link>*/}
     </div>
   )
 }

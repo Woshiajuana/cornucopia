@@ -6,8 +6,8 @@ export function parseHtml(el: HTMLElement) {
   const children = Array.from(el.children)
     .filter((item) => objHLevel.indexOf(item.nodeName) > -1)
     .map((item, index) => {
-      const label = item.innerHTML
-      item.id = label
+      const label = (item as any).innerText
+      // item.id = label
       return {
         key: `title-${index}`,
         start: 0,

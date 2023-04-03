@@ -16,8 +16,6 @@ export const reqArticleInfo = async (params: { id: string }) => {
 
   const article = data.find((item) => `${item.id}.html` === params.id)!
 
-  console.log('article => ', article)
-
   article.content = await fetch(
     `${BASE_URL}mocks/${article.path}?v=${Date.now()}`,
   ).then((res) => res.text())

@@ -2,10 +2,14 @@ import Head from 'next/head'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { reqArticleInfo, reqArticleList } from '@/curl'
 import MarkdownIt from 'markdown-it'
+import anchor from 'markdown-it-anchor'
 import hljs from 'highlight.js'
+import uslug from 'uslug'
 import matter from 'gray-matter'
 import { ArticleItem } from '@/types'
 import { Aside, Catalog } from '@/components'
+
+const uslugify = (s: string) => uslug(s)
 
 const md = new MarkdownIt({
   highlight(str, lang) {
@@ -16,6 +20,11 @@ const md = new MarkdownIt({
 
     return ''
   },
+}).use(anchor, {
+  slugify: uslugify,
+  permalink: true,
+  permalinkBefore: true,
+  permalinkSymbol: '#',
 })
 
 export interface ArticlePageProps {
@@ -28,8 +37,6 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
     return { params: { id: `${item.id}.html` } }
   })
 
-  console.log('11 => ', paths)
-
   return {
     paths,
     fallback: false,
@@ -41,7 +48,6 @@ export const getStaticProps: GetStaticProps<
   { id: string }
 > = async (context) => {
   const { params } = context
-  console.log('222')
 
   const article = await reqArticleInfo({
     id: params?.id ?? '',

@@ -7,7 +7,7 @@ DeployDirectoryPath=/web/blog
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
-npm run build && npm run export
+#npm run build && npm run export
 cd ./out
 zip -r ./dist.zip ./*
 ssh ${ServerAddress} "mkdir -p $DeployDirectoryPath"

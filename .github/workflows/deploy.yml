@@ -5,8 +5,40 @@ on:
     branches: [ master ]
 
 jobs:
+#  if: "contains(github.event.head_commit.message, '[ci]')"
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
+    steps:
+      # 获取源码
+      - name: Checkout
+        uses: actions/checkout@v2
+      # 设置 node
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      # 安装依赖 打包
+      - name: Install and Build
+        run: |
+          node -v
+          npm install
+          npm run build
+          npm run export
+      # 发布到目标服务器
+      - name: Upload
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }} # 公网ip
+          username: ${{ secrets.REMOTE_USERNAME }} # 用户名
+          key: ${{ secrets.PRIVATE_KEY }} # 私钥
+          source: "./out/" # 发送文件
+          target: "/web/blog/" # 目标目录
+
   algolia:
-    if: "contains(github.event.head_commit.message, '[ci]')"
+    needs: deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

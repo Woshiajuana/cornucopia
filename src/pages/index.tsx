@@ -1,5 +1,9 @@
 import Head from 'next/head'
-import type { GetStaticProps, InferGetStaticPropsType } from 'next'
+import type {
+  GetStaticPaths,
+  GetStaticProps,
+  InferGetStaticPropsType,
+} from 'next'
 import { ArticleItem, CategoryItem } from '@/types'
 import { reqArticleList, reqCategoryList } from '@/curl'
 import { ArticleList, Aside, Category, Pagination } from '@/components'
@@ -8,6 +12,18 @@ import { Copyright } from '@/components/Copyright'
 export interface HomePageProps {
   categories: CategoryItem[]
   articles: ArticleItem[]
+  total: number
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [
+      { params: { page: '1' } },
+      { params: { page: '2' } },
+      { params: { page: '3' } },
+    ],
+    fallback: false,
+  }
 }
 
 export const getStaticProps: GetStaticProps<HomePageProps> = async (
@@ -21,7 +37,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async (
   ])
 
   return {
-    props: { categories, articles },
+    props: { categories, articles, total: articles.length },
   }
 }
 
@@ -37,7 +53,7 @@ export default function HomePage(
       </Head>
       <div className="flex-1 py-6">
         <ArticleList articles={articles} />
-        <Pagination />
+        <Pagination total={1} />
       </div>
       <Aside>
         <Category categories={categories} />

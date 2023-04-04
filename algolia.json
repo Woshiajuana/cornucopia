@@ -1,9 +1,6 @@
 {
   "index_name": "nextjs-blog",
-  "start_urls": ["https://blog.daysnap.cn"],
-  "sitemap_urls": [
-    "https://blog.daysnap.cn/sitemap.xml"
-  ],
+  "start_urls": ["https://blog.daysnap.cn/", "https://docsearch.algolia.com/docs/"],
   "rateLimit": 8,
   "maxDepth": 10,
   "selectors": {

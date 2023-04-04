@@ -1,6 +1,6 @@
 {
   "index_name": "nextjs-blog",
-  "start_urls": ["https://blog.daysnap.cn/", "https://docsearch.algolia.com/"],
+  "start_urls": ["https://blog.daysnap.cn/"],
   "rateLimit": 8,
   "maxDepth": 10,
   "selectors": {

@@ -8,6 +8,9 @@ const nextConfig = {
     // https://github.com/vercel/next.js/issues/46672
     scrollRestoration: true,
   },
+
+  // https://nextjs.org/docs/api-reference/next.config.js/trailing-slash
+  trailingSlash: true,
 }
 
 module.exports = nextConfig

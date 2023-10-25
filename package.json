@@ -21,7 +21,7 @@
     "highlight.js": "^11.7.0",
     "markdown-it": "^13.0.1",
     "markdown-it-anchor": "^8.6.7",
-    "next": "13.2.4",
+    "next": "13.5.0",
     "next-themes": "^0.2.1",
     "nprogress": "^0.2.0",
     "prismjs": "^1.29.0",
